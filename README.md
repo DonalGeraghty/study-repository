@@ -1,22 +1,41 @@
-# Study & Interview Preparation Repository
+# 🎓 Study & Interview Preparation Repository
 
-A collection of resources for technical learning, coding examples, and interview preparation.
+![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
+![AI Powered](https://img.shields.io/badge/Powered%20by-Gemini%20AI-blue.svg)
 
-## 📖 Contents
-
-### [Technical Study Guide](./Study%20List.md)
-A comprehensive guide covering technical topics including:
-*   **Java**: Core concepts, Collections Framework, and Garbage Collection.
-*   **Design Patterns**: Creational and structural patterns like Factory and POM.
-*   **SOLID Principles**: Detailed explanations and Java examples.
-*   **Git**: Branching strategies, CLI workflows, and history management.
-*   **REST**: HTTP methods and response codes.
-
-### [Interview Questions & Scenarios](./InterviewQuestions.md)
-Resources focused on behavioral interviews and soft skills:
-*   **STAR Method**: Real-world scenarios from past experiences (Equifax, Workday, Ding).
-*   **Soft Skills**: Communication, inclusivity, and teamwork questions.
-*   **Misc**: General interview questions and quant-style brainteasers.
+A centralized hub for technical learning, coding architecture, and professional interview preparation. This repository is designed to help engineers master core Java concepts, refine their software design skills, and prepare for high-level behavioral interviews.
 
 ---
-*Powered by Gemini AI*
+
+## 🏛️ Essential Documentation
+
+Explore the primary guides designed for deep-dive learning:
+
+*   **[Technical Study Guide](./Documents/1%20-%20Study%20List.md)**: The "Source of Truth" for technical theory, focusing on Design Patterns and SOLID architecture.
+*   **[Interview Preparation](./Documents/3%20-%20InterviewQuestions.md)**: A structured collection of STAR method scenarios from real-world experiences.
+
+---
+
+## 📂 Learning Pathways
+
+Quickly navigate to specific topics using the structured breakdown below:
+
+| Category | Deep Dive | Key Concepts Covered |
+| :--- | :--- | :--- |
+| **☕ Java** | [Learn More](./Documents/7%20-%20Java.md) | Garbage Collection, Statics, Collections Framework. |
+| **📐 Architecture** | [Learn More](./Documents/1%20-%20Study%20List.md#solid) | SOLID Principles, Factory Pattern, Page Object Model (POM). |
+| **🌿 Git** | [Learn More](./Documents/2%20-%20Git.md) | Branching Strategies (GitFlow, GitHub Flow), Rebase vs Merge. |
+| **🧪 Testing** | [Learn More](./Documents/6%20-%20Testing.md) | STLC Phases, Core Principles, Auth vs Auth. |
+| **🌐 REST API** | [Learn More](./Documents/5%20-%20RestAPI.md) | CRUD Operations, HTTP Status Codes, Idempotency. |
+| **🕵️ Code Review** | [Learn More](./Documents/4%20-%20CodeReview.md) | Best Practices, Performance Audit, Logical Integrity. |
+
+---
+
+## 🚀 How to Use This Repo
+
+1.  **Technical Refresh**: Start with the [Java](./Documents/7%20-%20Java.md) and [Architecture](./Documents/1%20-%20Study%20List.md) guides to solidify your foundation.
+2.  **Process Review**: Check the [Git](./Documents/2%20-%20Git.md) and [Testing](./Documents/6%20-%20Testing.md) docs to understand enterprise workflows.
+3.  **Interview Prep**: Use the [Interview Questions](./Documents/3%20-%20InterviewQuestions.md) to practice articulating your experiences using the STAR method.
+
+---
+*Created and maintained with the help of Antigravity AI*
