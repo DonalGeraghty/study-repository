@@ -312,6 +312,7 @@ Observability assertions can be valuable, but avoid tests coupled to incidental 
 
 ## Related Guides
 
+- [Android App Signing and Upload Keys](./android-app-signing.md)
 - [Testing](../quality-engineering/testing.md)
 - [Java](../programming/java/README.md)
 - [Software Design](../software-design/README.md)
