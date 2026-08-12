@@ -4,8 +4,8 @@ This section contains application frameworks and libraries built on top of the r
 
 ## Guides
 
-- [Spring](./spring/README.md) — Java dependency injection, Spring Boot, web APIs, data access, configuration, and testing.
-- [React](./react/README.md) — JavaScript and TypeScript components, state, application structure, accessibility, and testing.
+- [Spring](./spring.md) — Java dependency injection, Spring Boot, web APIs, data access, configuration, and testing.
+- [React](./react.md) — JavaScript and TypeScript components, state, application structure, accessibility, and testing.
 
 ## Suggested Use
 

@@ -19,7 +19,7 @@ This root README is the repository landing page. It explains the purpose of the 
 | --- | --- | --- |
 | Career | [Explore](./docs/career/README.md) | SDET growth, interviews, communication, leadership, and professional skills |
 | Engineering Foundations | [Explore](./docs/engineering-foundations/README.md) | Git, code review, technology-stack decisions, and data protection concepts |
-| Programming | [Explore](./docs/programming/README.md) | Java, Kotlin, Python, R, C#, JavaScript, TypeScript, SQL, Android, web foundations, and frameworks |
+| Programming | [Explore](./docs/programming/README.md) | Languages, Android, web foundations, frameworks, LeetCode, and Codewars |
 | Software Design | [Explore](./docs/software-design/README.md) | OOP, SOLID, design patterns, and Domain-Driven Design |
 | Quality Engineering | [Explore](./docs/quality-engineering/README.md) | Risk-based testing, REST APIs, Playwright, Selenium, Cypress, and non-functional quality |
 | Platform Engineering | [Explore](./docs/platform-engineering/README.md) | Docker, Kubernetes, AWS, GCP, Jenkins, deployment, and operations |

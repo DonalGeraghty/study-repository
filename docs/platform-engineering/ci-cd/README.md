@@ -4,7 +4,7 @@ This section contains delivery-automation platforms and the practices used to bu
 
 ## Guides
 
-- [Jenkins](./jenkins/README.md) — pipelines, agents, credentials, plugins, testing, artifacts, deployment, and operations.
+- [Jenkins](./jenkins.md) — pipelines, agents, credentials, plugins, testing, artifacts, deployment, and operations.
 
 ## Topics to Capture Across Tools
 

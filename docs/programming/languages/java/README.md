@@ -20,7 +20,7 @@ Object-oriented design, SOLID, and design patterns are covered in the [Software 
 
 ## Frameworks
 
-- [Spring](../../frameworks/spring/README.md) — dependency injection, Spring Boot, web APIs, data access, configuration, and testing.
+- [Spring](../../frameworks/spring.md) — dependency injection, Spring Boot, web APIs, data access, configuration, and testing.
 
 ## Language, Runtime, and Platform
 
