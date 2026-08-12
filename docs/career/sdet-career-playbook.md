@@ -303,7 +303,7 @@ You should be able to:
 3. [Code Review](../engineering-foundations/code-review.md)
 4. [REST API](../quality-engineering/rest-api.md)
 5. [Testing](../quality-engineering/testing.md)
-6. [Java](../programming/java/README.md)
+6. [Java](../programming/languages/java/README.md)
 7. [Software Design](../software-design/README.md)
 8. [Technology Stack](../engineering-foundations/technology-stack.md)
 9. [Professional and Interpersonal Skills](./professional-skills.md)

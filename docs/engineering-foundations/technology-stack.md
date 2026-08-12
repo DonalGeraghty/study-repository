@@ -54,7 +54,7 @@ Build a small proof of concept for the riskiest unknowns. A feature checklist ra
 
 Java is common in backend services, enterprise systems, Android-related ecosystems, and test automation. Its JVM ecosystem includes mature build, testing, profiling, and observability support.
 
-Relevant tools include Maven or Gradle, JUnit Jupiter or TestNG, Spring Boot, Selenium, Playwright for Java, REST Assured, and Testcontainers. Use the repository's [Java guide](../programming/java/README.md) for language and JVM fundamentals.
+Relevant tools include Maven or Gradle, JUnit Jupiter or TestNG, Spring Boot, Selenium, Playwright for Java, REST Assured, and Testcontainers. Use the repository's [Java guide](../programming/languages/java/README.md) for language and JVM fundamentals.
 
 ### C# and .NET
 
@@ -312,9 +312,11 @@ Observability assertions can be valuable, but avoid tests coupled to incidental 
 
 ## Related Guides
 
-- [Android App Signing and Upload Keys](./android-app-signing.md)
+- [Encoding](./encoding.md)
+- [Encryption](./encryption.md)
+- [Hashing](./hashing.md)
 - [Testing](../quality-engineering/testing.md)
-- [Java](../programming/java/README.md)
+- [Java](../programming/languages/java/README.md)
 - [Software Design](../software-design/README.md)
 - [Docker](../platform-engineering/docker.md)
 - [Kubernetes](../platform-engineering/kubernetes.md)

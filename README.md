@@ -3,7 +3,7 @@
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 ![AI Powered](https://img.shields.io/badge/Powered%20by-Gemini%20AI-blue.svg)
 
-A centralized hub for technical learning, coding architecture, and professional interview preparation. This repository is designed to help engineers master core Java concepts, refine their software design skills, and prepare for high-level behavioral interviews.
+A centralized hub for technical learning, coding architecture, and professional interview preparation. This repository is designed to help engineers develop across multiple programming ecosystems, refine their software design and quality-engineering skills, and prepare for high-level behavioral interviews.
 
 This root README is the repository landing page. It explains the purpose of the project, highlights the main entry points, and provides a recommended learning path. For the canonical subject catalogue, use the [Documentation Library](./docs/README.md).
 
@@ -18,17 +18,17 @@ This root README is the repository landing page. It explains the purpose of the 
 | Subject | Index | Key concepts |
 | --- | --- | --- |
 | Career | [Explore](./docs/career/README.md) | SDET growth, interviews, communication, leadership, and professional skills |
-| Engineering Foundations | [Explore](./docs/engineering-foundations/README.md) | Git, code review, and technology-stack decisions |
-| Programming | [Explore](./docs/programming/README.md) | Java, JVM fundamentals, collections, streams, concurrency, and modern language features |
+| Engineering Foundations | [Explore](./docs/engineering-foundations/README.md) | Git, code review, technology-stack decisions, and data protection concepts |
+| Programming | [Explore](./docs/programming/README.md) | Java, Kotlin, Python, R, C#, JavaScript, TypeScript, SQL, Android, web foundations, and frameworks |
 | Software Design | [Explore](./docs/software-design/README.md) | OOP, SOLID, design patterns, and Domain-Driven Design |
-| Quality Engineering | [Explore](./docs/quality-engineering/README.md) | Risk-based testing, automation, HTTP, REST APIs, and non-functional quality |
-| Platform Engineering | [Explore](./docs/platform-engineering/README.md) | Docker, Kubernetes, containers, deployment, configuration, and operations |
+| Quality Engineering | [Explore](./docs/quality-engineering/README.md) | Risk-based testing, REST APIs, Playwright, Selenium, Cypress, and non-functional quality |
+| Platform Engineering | [Explore](./docs/platform-engineering/README.md) | Docker, Kubernetes, AWS, GCP, Jenkins, deployment, and operations |
 
 ## 🧭 Recommended Learning Path
 
 The files are organised by subject rather than chapter number. A useful study sequence is:
 
-1. [Java](./docs/programming/java/README.md)
+1. [Java](./docs/programming/languages/java/README.md)
 2. [Software Design](./docs/software-design/README.md)
 3. [Software Testing](./docs/quality-engineering/testing.md)
 4. [REST API](./docs/quality-engineering/rest-api.md)

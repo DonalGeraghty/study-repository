@@ -126,7 +126,7 @@ The quality of the explanation matters more than the number of boxes in the diag
 
 ## Related Guides
 
-- [Java](../programming/java/README.md)
+- [Java](../programming/languages/java/README.md)
 - [Testing](../quality-engineering/testing.md)
 - [Code Review](../engineering-foundations/code-review.md)
 - [REST API](../quality-engineering/rest-api.md)

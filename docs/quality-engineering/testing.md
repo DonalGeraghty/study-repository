@@ -799,7 +799,7 @@ You should be able to:
 
 - [Code Review](../engineering-foundations/code-review.md)
 - [REST APIs and HTTP Testing](./rest-api.md)
-- [Java](../programming/java/README.md)
+- [Java](../programming/languages/java/README.md)
 - [Software Design](../software-design/README.md)
 - [Docker](../platform-engineering/docker.md)
 - [Kubernetes](../platform-engineering/kubernetes.md)

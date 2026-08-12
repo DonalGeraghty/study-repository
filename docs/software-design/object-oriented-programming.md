@@ -254,4 +254,4 @@ Explain why each class exists and what change it contains.
 - [SOLID Principles](./solid-principles.md)
 - [Design Patterns](./design-patterns.md)
 - [Domain-Driven Design](./domain-driven-design.md)
-- [Java](../programming/java/README.md)
+- [Java](../programming/languages/java/README.md)

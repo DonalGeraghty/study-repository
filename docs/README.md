@@ -8,10 +8,10 @@ This README is the canonical documentation catalogue. The repository is organise
 | --- | --- |
 | [Career](./career/README.md) | SDET career development, interviews, communication, and leadership |
 | [Engineering Foundations](./engineering-foundations/README.md) | Git, code review, and technology-stack decisions |
-| [Programming](./programming/README.md) | Programming languages and runtime fundamentals |
+| [Programming](./programming/README.md) | Programming languages, runtimes, application platforms, web foundations, and frameworks |
 | [Software Design](./software-design/README.md) | OOP, SOLID, design patterns, and Domain-Driven Design |
-| [Quality Engineering](./quality-engineering/README.md) | Testing strategy, automation, and REST APIs |
-| [Platform Engineering](./platform-engineering/README.md) | Containers, deployment, and Kubernetes operations |
+| [Quality Engineering](./quality-engineering/README.md) | Testing strategy, automation tools, and REST APIs |
+| [Platform Engineering](./platform-engineering/README.md) | Containers, cloud platforms, CI/CD, deployment, and operations |
 
 ## How to Browse
 

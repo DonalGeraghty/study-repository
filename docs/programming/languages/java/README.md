@@ -16,7 +16,11 @@ This pathway covers the Java language and core library knowledge expected in app
 10. [Concurrency](./concurrency.md)
 11. [Modern Java](./modern-java.md)
 
-Object-oriented design, SOLID, and design patterns are covered in the [Software Design](../../software-design/README.md) subject.
+Object-oriented design, SOLID, and design patterns are covered in the [Software Design](../../../software-design/README.md) subject.
+
+## Frameworks
+
+- [Spring](../../frameworks/spring/README.md) — dependency injection, Spring Boot, web APIs, data access, configuration, and testing.
 
 ## Language, Runtime, and Platform
 
