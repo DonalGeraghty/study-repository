@@ -51,4 +51,4 @@ The files are organised by subject rather than chapter number. A useful study se
 
 ---
 
-*Created and maintained with the help of Antigravity AI*
+*Created and maintained with the help of Antigravity AI, ChatGPT, and Mistral Vibe*
