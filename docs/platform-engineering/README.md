@@ -14,6 +14,7 @@ These guides cover application packaging, container orchestration, cloud platfor
 - [Publish/Subscribe](./pub-sub.md) — the pub/sub messaging model, topics, publishers, subscribers, and event-driven communication.
 - [RabbitMQ](./rabbitmq.md) — message brokering with exchanges, queues, bindings, and asynchronous consumers.
 - [Amazon SNS](./amazon-sns.md) — AWS's managed pub/sub service and how it differs from SQS and EventBridge.
+- [Amazon SQS](./amazon-sqs.md) — AWS's managed message queue service for durable asynchronous work, buffering, and decoupling services.
 
 ## Cloud and Delivery
 
