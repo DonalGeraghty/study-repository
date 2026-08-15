@@ -14,7 +14,6 @@ The material is organised by subject rather than by a single fixed curriculum. E
 | Find a particular technology | [Complete documentation catalogue](./docs/README.md#complete-catalogue) |
 | Rebuild core engineering knowledge | [Engineering Foundations](./docs/engineering-foundations/README.md) |
 | Refresh a language or framework | [Programming](./docs/programming/README.md) |
-| Prepare for an SDET interview | [SDET Career Playbook](./docs/career/sdet-career-playbook.md) |
 | Review testing strategy and tools | [Quality Engineering](./docs/quality-engineering/README.md) |
 | Review delivery and runtime systems | [Platform Engineering](./docs/platform-engineering/README.md) |
 
@@ -47,7 +46,6 @@ Active recall matters more than rereading. A useful session ends with an explana
 
 | Subject | What it covers |
 | --- | --- |
-| [Career](./docs/career/README.md) | SDET growth, interviews, communication, leadership, and story preparation |
 | [Engineering Foundations](./docs/engineering-foundations/README.md) | Git, code review, stack decisions, and core data-protection concepts |
 | [Programming](./docs/programming/README.md) | Languages, frameworks, platforms, browser foundations, tooling, integrations, and coding practice |
 | [Software Design](./docs/software-design/README.md) | OOP, SOLID, design patterns, and Domain-Driven Design |
@@ -75,15 +73,6 @@ Active recall matters more than rereading. A useful session ends with an explana
 5. [Publish/Subscribe](./docs/platform-engineering/pub-sub.md)
 6. [Cloud Platforms](./docs/platform-engineering/cloud/README.md)
 7. [Kubernetes](./docs/platform-engineering/kubernetes.md)
-
-### SDET interview path
-
-1. [SDET Career Playbook](./docs/career/sdet-career-playbook.md)
-2. [Software Testing](./docs/quality-engineering/testing.md)
-3. [Test Automation Tools](./docs/quality-engineering/test-automation/README.md)
-4. [REST APIs](./docs/quality-engineering/rest-api.md)
-5. [Professional and Interpersonal Skills](./docs/career/professional-skills.md)
-6. [Interview Story Workbook](./docs/career/interview-questions.md)
 
 ## Reading Conventions
 

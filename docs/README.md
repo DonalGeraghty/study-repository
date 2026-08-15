@@ -6,7 +6,6 @@ This is the canonical table of contents for the handbook. Use the subject indexe
 
 | Subject | Focus |
 | --- | --- |
-| [Career](./career/README.md) | SDET development, interviews, communication, and leadership |
 | [Engineering Foundations](./engineering-foundations/README.md) | Collaborative engineering practices and foundational data concepts |
 | [Programming](./programming/README.md) | Languages, frameworks, platforms, browser APIs, tooling, and integrations |
 | [Software Design](./software-design/README.md) | Code structure, dependency design, patterns, and domain modelling |
@@ -14,12 +13,6 @@ This is the canonical table of contents for the handbook. Use the subject indexe
 | [Platform Engineering](./platform-engineering/README.md) | Runtime, data, messaging, cloud, and delivery systems |
 
 ## Complete Catalogue
-
-### Career
-
-1. [SDET Career Playbook and Interview Roadmap](./career/sdet-career-playbook.md)
-2. [Professional and Interpersonal Skills](./career/professional-skills.md)
-3. [Interview Story Workbook](./career/interview-questions.md)
 
 ### Engineering Foundations
 
