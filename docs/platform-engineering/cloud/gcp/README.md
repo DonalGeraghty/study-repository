@@ -5,10 +5,12 @@ Google Cloud Platform provides infrastructure and managed services organised aro
 ## Service Guides
 
 - [Cloud Run](./cloud-run.md) — managed container services and jobs, revisions, scaling, identity, networking, and delivery.
+- [App Engine](./app-engine.md) — managed application versions, runtimes, scaling, identity, traffic, and operations.
 - [Cloud Build](./cloud-build.md) — containerised build steps, triggers, artifacts, service accounts, and supply-chain security.
 - [Cloud Storage](./cloud-storage.md) — buckets, objects, locations, storage classes, lifecycle rules, access, and recovery.
 - [Firestore](./firestore.md) — document modelling, queries, indexes, transactions, security, and operational trade-offs.
 - [Identity and Access Management](./iam.md) — principals, roles, policies, inheritance, service accounts, and least privilege.
+- [Application Services](./application-services.md) — Artifact Registry, Cloud KMS, Cloud Scheduler, and Firebase Admin responsibilities.
 
 ## Resource Hierarchy
 

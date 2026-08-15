@@ -6,6 +6,11 @@ These guides cover application packaging, container orchestration, cloud platfor
 
 - [Docker](./docker.md) — images, containers, Dockerfiles, storage, networking, Compose, registries, and runtime security.
 - [Kubernetes](./kubernetes.md) — cluster architecture, workloads, Services, configuration, scaling, security, and operations.
+- [Nginx](./nginx.md) — static frontend serving, SPA fallback, caching, headers, health, and container operation.
+
+## Data Platforms
+
+- [MySQL](./mysql.md) — relational integrity, parameterised access, transactions, indexing, connections, and recovery.
 
 ## Caching and Messaging
 

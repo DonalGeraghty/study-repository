@@ -11,6 +11,7 @@ This section contains language and runtime learning material across application 
 - [C# and .NET](./csharp.md) — C# language features, .NET runtime and tooling, application development, and automation.
 - [JavaScript and TypeScript](./javascript-typescript.md) — browser and server-side JavaScript, static typing, and asynchronous programming.
 - [SQL](./sql.md) — relational queries, data modification, transactions, indexing, and database testing.
+- [PowerShell](./powershell.md) — object pipelines, repository automation, data validation, error handling, and CI scripting.
 
 HTML and CSS are organised separately under [Web Foundations](../web/README.md) because they structure and style web content rather than act as general-purpose programming languages.
 

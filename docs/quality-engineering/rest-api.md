@@ -419,6 +419,12 @@ Security tests should include:
 
 Use TLS for credentials and sensitive data. Never put bearer tokens in query parameters. Do not treat CORS as a server-to-server security control.
 
+### JSON Web Tokens
+
+A JSON Web Token (JWT) is a compact signed claims format, not an authorisation policy and not encryption. A service accepting a JWT must restrict allowed algorithms and validate the signature, issuer, audience, expiry, not-before time, and any application-required claims. Key selection and rotation also need an explicit trust model.
+
+Keep claims minimal because bearer tokens can appear in clients and operational tooling. Revocation, logout, credential reset, and account deletion require a strategy beyond waiting for a long-lived token to expire. After token validation, still check the current user, tenant, role, and resource ownership for the requested operation.
+
 ## Retries and Resilience
 
 Clients should retry only when method semantics and the application contract make repetition safe.

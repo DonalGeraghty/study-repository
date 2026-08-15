@@ -5,6 +5,7 @@ This section contains delivery-automation platforms and the practices used to bu
 ## Guides
 
 - [Jenkins](./jenkins.md) — pipelines, agents, credentials, plugins, testing, artifacts, deployment, and operations.
+- [GitHub Actions](./github-actions.md) — workflow execution, permissions, identity, artifacts, CI checks, and deployments.
 
 ## Topics to Capture Across Tools
 
