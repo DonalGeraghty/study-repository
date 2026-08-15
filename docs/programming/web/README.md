@@ -21,4 +21,4 @@ Related material:
 - [JavaScript and TypeScript](../languages/javascript-typescript.md)
 - [React](../frameworks/react.md)
 
-Return to the [Programming](../README.md) guide.
+Return to [Programming](../README.md).

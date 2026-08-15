@@ -71,3 +71,5 @@ photo bytes -> Base64 text -> email transport -> photo bytes
 ```
 
 Anyone who obtains the Base64 text can decode the photo. Encoding makes the data compatible with the transport; it does not keep the photo secret.
+
+Return to [Engineering Foundations](./README.md).

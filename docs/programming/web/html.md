@@ -128,4 +128,4 @@ You should be able to:
 - [HTML accessibility](https://developer.mozilla.org/docs/Learn_web_development/Core/Accessibility/HTML)
 - [Web Content Accessibility Guidelines](https://www.w3.org/WAI/standards-guidelines/wcag/)
 
-Return to the [Web Foundations](./README.md) guide.
+Return to [Web Foundations](./README.md).

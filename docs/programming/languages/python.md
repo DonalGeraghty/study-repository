@@ -125,4 +125,4 @@ You should be able to:
 - [Python typing documentation](https://docs.python.org/3/library/typing.html)
 - [Python packaging guide](https://packaging.python.org/)
 
-Return to the [Programming Languages](./README.md) guide.
+Return to [Programming Languages](./README.md).

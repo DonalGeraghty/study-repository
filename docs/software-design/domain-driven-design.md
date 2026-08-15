@@ -370,3 +370,5 @@ Revise the model when a scenario feels awkward; that friction is useful feedback
 - [SOLID Principles](./solid-principles.md)
 - [Design Patterns](./design-patterns.md)
 - [REST API](../quality-engineering/rest-api.md)
+
+Return to [Software Design](./README.md).

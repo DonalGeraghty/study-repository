@@ -214,3 +214,5 @@ You should be able to explain:
 - [`StrictMath` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StrictMath.html)
 - [`RandomGenerator` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/random/RandomGenerator.html)
 - [`SecureRandom` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/security/SecureRandom.html)
+
+Return to the [Java Study Guide](./README.md).

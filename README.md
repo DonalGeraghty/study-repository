@@ -1,54 +1,100 @@
-# 🎓 Study and Interview Preparation Repository
+# Technical Study and Interview Handbook
 
-![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
-![AI Powered](https://img.shields.io/badge/Powered%20by-Gemini%20AI-blue.svg)
+This repository is a personal technical handbook for two kinds of learning:
 
-A centralized hub for technical learning, coding architecture, and professional interview preparation. This repository is designed to help engineers develop across multiple programming ecosystems, refine their software design and quality-engineering skills, and prepare for high-level behavioral interviews.
+- **quick refreshes** when a technology has not been used for a while;
+- **deliberate practice** for engineering work and technical interviews.
 
-This root README is the repository landing page. It explains the purpose of the project, highlights the main entry points, and provides a recommended learning path. For the canonical subject catalogue, use the [Documentation Library](./docs/README.md).
+The material is organised by subject rather than by a single fixed curriculum. Each subject has an index, each guide links back to its parent, and the [Documentation Library](./docs/README.md) bookmarks every study page.
 
-## 🏛️ Essential Documentation
+## Start Here
 
-- **[SDET Career Playbook and Interview Roadmap](./docs/career/sdet-career-playbook.md):** The main roadmap for SDET career growth, technical preparation, framework architecture, and interview planning.
-- **[Interview Preparation](./docs/career/interview-questions.md):** A structured collection of STAR scenarios from real-world experience.
-- **[Documentation Library](./docs/README.md):** The complete subject-based catalogue.
+| Goal | Best starting point |
+| --- | --- |
+| Find a particular technology | [Complete documentation catalogue](./docs/README.md#complete-catalogue) |
+| Rebuild core engineering knowledge | [Engineering Foundations](./docs/engineering-foundations/README.md) |
+| Refresh a language or framework | [Programming](./docs/programming/README.md) |
+| Prepare for an SDET interview | [SDET Career Playbook](./docs/career/sdet-career-playbook.md) |
+| Review testing strategy and tools | [Quality Engineering](./docs/quality-engineering/README.md) |
+| Review delivery and runtime systems | [Platform Engineering](./docs/platform-engineering/README.md) |
 
-## 📚 Browse by Subject
+## Choose a Study Session
 
-| Subject | Index | Key concepts |
-| --- | --- | --- |
-| Career | [Explore](./docs/career/README.md) | SDET growth, interviews, communication, leadership, and professional skills |
-| Engineering Foundations | [Explore](./docs/engineering-foundations/README.md) | Git, code review, technology-stack decisions, and data protection concepts |
-| Programming | [Explore](./docs/programming/README.md) | Languages, Android, web foundations, frameworks, LeetCode, and Codewars |
-| Software Design | [Explore](./docs/software-design/README.md) | OOP, SOLID, design patterns, and Domain-Driven Design |
-| Quality Engineering | [Explore](./docs/quality-engineering/README.md) | Risk-based testing, REST APIs, Playwright, Selenium, Cypress, and non-functional quality |
-| Platform Engineering | [Explore](./docs/platform-engineering/README.md) | Docker, Kubernetes, AWS, GCP, Jenkins, deployment, and operations |
+### Five-minute recall
 
-## 🧭 Recommended Learning Path
+1. Read the guide's opening definition and mental model.
+2. Explain the topic aloud without looking at the page.
+3. Check the common failure modes or readiness checklist.
+4. Write down one fact that did not come back immediately.
 
-The files are organised by subject rather than chapter number. A useful study sequence is:
+### Fifteen-minute refresh
 
-1. [Java](./docs/programming/languages/java/README.md)
-2. [Software Design](./docs/software-design/README.md)
-3. [Software Testing](./docs/quality-engineering/testing.md)
-4. [REST API](./docs/quality-engineering/rest-api.md)
-5. [Git](./docs/engineering-foundations/git.md)
+1. Skim the headings to recover the map of the topic.
+2. Trace one worked example line by line.
+3. Change an input, constraint, or failure condition and predict the result.
+4. Answer two practice questions from memory.
+
+### Thirty-to-sixty-minute practice
+
+1. Read one guide in order.
+2. Run or re-create an example in a scratch project.
+3. Complete a practice exercise without copying the solution.
+4. Compare the result with the guide and record what changed in your understanding.
+
+Active recall matters more than rereading. A useful session ends with an explanation, prediction, small implementation, or decision—not merely a completed page.
+
+## Browse by Subject
+
+| Subject | What it covers |
+| --- | --- |
+| [Career](./docs/career/README.md) | SDET growth, interviews, communication, leadership, and story preparation |
+| [Engineering Foundations](./docs/engineering-foundations/README.md) | Git, code review, stack decisions, and core data-protection concepts |
+| [Programming](./docs/programming/README.md) | Languages, frameworks, platforms, browser foundations, tooling, integrations, and coding practice |
+| [Software Design](./docs/software-design/README.md) | OOP, SOLID, design patterns, and Domain-Driven Design |
+| [Quality Engineering](./docs/quality-engineering/README.md) | Testing strategy, REST APIs, test runners, and browser automation |
+| [Platform Engineering](./docs/platform-engineering/README.md) | Containers, orchestration, data platforms, messaging, cloud, and CI/CD |
+
+## Suggested Learning Paths
+
+### Core engineering path
+
+1. [Git](./docs/engineering-foundations/git.md)
+2. [Programming Languages](./docs/programming/languages/README.md)
+3. [Software Design](./docs/software-design/README.md)
+4. [Software Testing](./docs/quality-engineering/testing.md)
+5. [REST APIs](./docs/quality-engineering/rest-api.md)
 6. [Code Review](./docs/engineering-foundations/code-review.md)
 7. [Technology Stack](./docs/engineering-foundations/technology-stack.md)
-8. [Docker](./docs/platform-engineering/docker.md)
-9. [Kubernetes](./docs/platform-engineering/kubernetes.md)
-10. [SDET Career Playbook](./docs/career/sdet-career-playbook.md)
-11. [Professional and Interpersonal Skills](./docs/career/professional-skills.md)
-12. [Interview Questions](./docs/career/interview-questions.md)
 
-## 🚀 How to Use This Repository
+### Delivery and platform path
 
-1. **Technical refresh:** Start with the Java and Software Design guides to strengthen programming and design foundations.
-2. **Quality engineering:** Study Testing and REST APIs to connect technical implementation with product risk and reliable feedback.
-3. **Engineering workflow:** Use the Git, Code Review, and Technology Stack guides to understand collaborative delivery.
-4. **Platform knowledge:** Learn Docker before Kubernetes so image, process, storage, and network concepts are already familiar.
-5. **Interview preparation:** Use the career roadmap, professional-skills workbook, and interview-question collection to practise explaining your experience.
+1. [Node.js and npm](./docs/programming/tooling/nodejs-and-npm.md) or [Maven and Gradle](./docs/programming/tooling/jvm-build-tools.md)
+2. [Docker](./docs/platform-engineering/docker.md)
+3. [Continuous Integration and Delivery](./docs/platform-engineering/ci-cd/README.md)
+4. [Caching](./docs/platform-engineering/caching.md)
+5. [Publish/Subscribe](./docs/platform-engineering/pub-sub.md)
+6. [Cloud Platforms](./docs/platform-engineering/cloud/README.md)
+7. [Kubernetes](./docs/platform-engineering/kubernetes.md)
+
+### SDET interview path
+
+1. [SDET Career Playbook](./docs/career/sdet-career-playbook.md)
+2. [Software Testing](./docs/quality-engineering/testing.md)
+3. [Test Automation Tools](./docs/quality-engineering/test-automation/README.md)
+4. [REST APIs](./docs/quality-engineering/rest-api.md)
+5. [Professional and Interpersonal Skills](./docs/career/professional-skills.md)
+6. [Interview Story Workbook](./docs/career/interview-questions.md)
+
+## Reading Conventions
+
+- Code blocks are examples to inspect, run, and alter; they are not production-ready templates for every context.
+- Diagrams show a mental model, not every implementation detail.
+- **Common failure modes** explain where an apparently correct approach breaks down.
+- **Practice** and **readiness** sections turn recognition into recall.
+- **Related guides** connect a topic to its language, design, testing, and operational context.
+
+For the full table of contents, go to the [Documentation Library](./docs/README.md).
 
 ---
 
-*Created and maintained with the help of Antigravity AI, ChatGPT, and Mistral Vibe*
+Created and maintained with assistance from Antigravity AI, ChatGPT, and Mistral Vibe.

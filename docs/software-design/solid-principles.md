@@ -362,3 +362,5 @@ A strong answer discusses context and trade-offs rather than merely naming each 
 - [Design Patterns](./design-patterns.md)
 - [Domain-Driven Design](./domain-driven-design.md)
 - [Testing](../quality-engineering/testing.md)
+
+Return to [Software Design](./README.md).

@@ -28,4 +28,4 @@ Do not choose solely from syntax preference. Build a short proof using represent
 - Retain enough failure evidence to diagnose CI without immediate reruns.
 - Use retries to expose and classify flakiness, not redefine an unstable suite as healthy.
 
-Return to the [Quality Engineering](../README.md) guide.
+Return to [Quality Engineering](../README.md).

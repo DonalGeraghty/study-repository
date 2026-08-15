@@ -128,4 +128,4 @@ You should be able to:
 - [Spring Data](https://spring.io/projects/spring-data)
 - [Testing Spring Boot applications](https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html)
 
-Return to the [Java](../languages/java/README.md) guide.
+Return to [Frameworks and Libraries](./README.md).

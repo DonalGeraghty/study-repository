@@ -112,4 +112,4 @@ You should be able to:
 - [Cloud Build security](https://cloud.google.com/build/docs/securing-builds/overview)
 - [Use a user-specified service account](https://cloud.google.com/build/docs/securing-builds/configure-user-specified-service-accounts)
 
-Return to the [Google Cloud Platform](./README.md) guide.
+Return to [Google Cloud Platform](./README.md).

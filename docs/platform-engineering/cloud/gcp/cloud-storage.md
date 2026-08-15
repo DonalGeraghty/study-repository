@@ -97,4 +97,4 @@ You should be able to:
 - [Access control overview](https://cloud.google.com/storage/docs/access-control)
 - [Data protection and recovery](https://cloud.google.com/storage/docs/protection-backup-recovery-overview)
 
-Return to the [Google Cloud Platform](./README.md) guide.
+Return to [Google Cloud Platform](./README.md).

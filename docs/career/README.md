@@ -6,7 +6,7 @@ These guides cover SDET career development, behavioural interviews, communicatio
 
 1. [SDET Career Playbook and Interview Roadmap](./sdet-career-playbook.md) — role expectations, technical preparation, framework design, CVs, and interview planning.
 2. [Professional and Interpersonal Skills](./professional-skills.md) — communication, problem solving, influence, execution, and reusable interview-story preparation.
-3. [Interview Questions](./interview-questions.md) — personal scenarios and working answers for interview practice.
+3. [Interview Story Workbook](./interview-questions.md) — reusable personal scenarios, evidence gaps, and working answers for interview practice.
 
 ## Suggested Use
 

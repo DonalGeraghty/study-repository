@@ -15,4 +15,4 @@ This section contains application frameworks and libraries built on top of the r
 
 Study the relevant language first, then capture how the framework applies that language to application architecture, delivery, and testing.
 
-Return to the [Programming](../README.md) guide.
+Return to [Programming](../README.md).

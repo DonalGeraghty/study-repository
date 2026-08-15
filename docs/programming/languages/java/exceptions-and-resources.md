@@ -308,3 +308,5 @@ You should be able to explain:
 - [Java Language Specification: Exceptions](https://docs.oracle.com/javase/specs/jls/se25/html/jls-11.html)
 - [`Throwable` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Throwable.html)
 - [`AutoCloseable` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/AutoCloseable.html)
+
+Return to the [Java Study Guide](./README.md).

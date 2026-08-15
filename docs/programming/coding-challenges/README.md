@@ -21,4 +21,4 @@ For each problem, capture:
 
 Avoid copying full copyrighted problem statements. Link to the original problem and summarise only the details needed to understand the solution.
 
-Return to the [Programming](../README.md) guide.
+Return to [Programming](../README.md).

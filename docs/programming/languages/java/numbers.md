@@ -252,3 +252,5 @@ You should be able to explain:
 - [`BigDecimal` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/math/BigDecimal.html)
 - [`BigInteger` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/math/BigInteger.html)
 - [`Math` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Math.html)
+
+Return to the [Java Study Guide](./README.md).

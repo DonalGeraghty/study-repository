@@ -328,3 +328,5 @@ You should be able to explain:
 - [`java.util.concurrent` package](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/package-summary.html)
 - [Virtual threads](https://docs.oracle.com/en/java/javase/25/core/virtual-threads.html)
 - [`CompletableFuture` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/CompletableFuture.html)
+
+Return to the [Java Study Guide](./README.md).

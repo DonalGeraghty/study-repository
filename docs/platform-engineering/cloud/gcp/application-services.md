@@ -2,6 +2,24 @@
 
 Several projects combine Cloud Run with supporting Google Cloud services. Each service solves a different delivery or runtime concern and should use a dedicated identity, lifecycle, and access policy.
 
+## Reference Flow
+
+```text
+source -> Cloud Build identity -> Artifact Registry
+                                      |
+deployment identity ------------------+
+                                      v
+                              Cloud Run revision
+                                      |
+                            runtime service account
+                            /         |          \
+                         KMS      Firestore   external APIs
+
+Cloud Scheduler identity --authenticated request--> Cloud Run endpoint
+```
+
+The build identity writes artifacts, the deployment identity selects what runs, and the runtime identity accesses application dependencies. Keeping those permissions separate prevents a compromised runtime from silently publishing its own replacement image.
+
 ## Artifact Registry
 
 Artifact Registry stores versioned packages and container images. Use immutable release identifiers such as a commit digest, retain provenance and vulnerability information, and promote a tested image instead of rebuilding it for each environment.
@@ -22,9 +40,33 @@ Cloud Scheduler invokes an HTTP target or publishes a message on a schedule. Del
 
 Authenticate scheduled calls with a platform identity where possible. If a shared secret is retained, rotate it, compare it safely, avoid logging it, and restrict the target endpoint. Monitor both scheduler delivery and the downstream job outcome.
 
+### Idempotent Scheduled Operation
+
+A daily reminder endpoint can derive an operation key such as `reminders:2026-08-15`. It records completion under that key before acknowledging success. A retry for the same schedule checks the record and does not notify users twice.
+
+```text
+authenticated request
+    -> validate schedule and date
+    -> begin transaction
+    -> insert unique operation key
+    -> enqueue per-user reminder work
+    -> commit
+```
+
+If one request cannot atomically create all work, store progress and make each per-user reminder idempotent as well.
+
 ## Firebase Admin SDK
 
 The Firebase Admin SDK gives trusted server code administrative access to Firebase services such as Firestore. Server SDK calls commonly use IAM and can bypass client security rules, so the application must enforce user ownership and authorisation itself.
+
+## Common Failure Modes
+
+- giving the runtime account build or deployment permissions;
+- tagging an image only as `latest` and losing release provenance;
+- encrypting a value with KMS but writing its plaintext to logs;
+- assuming Cloud Scheduler calls only once;
+- treating Firebase client security rules as authorisation for Admin SDK code;
+- deleting artifacts still required by an active revision or rollback.
 
 ## Project Connections
 

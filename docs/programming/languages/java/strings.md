@@ -272,3 +272,5 @@ You should be able to explain:
 - [`StringBuilder` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StringBuilder.html)
 - [`Character` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Character.html)
 - [`Normalizer` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/text/Normalizer.html)
+
+Return to the [Java Study Guide](./README.md).

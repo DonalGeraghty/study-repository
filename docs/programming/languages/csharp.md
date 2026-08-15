@@ -125,4 +125,4 @@ You should be able to:
 - [.NET CLI overview](https://learn.microsoft.com/dotnet/core/tools/)
 - [Asynchronous programming](https://learn.microsoft.com/dotnet/csharp/asynchronous-programming/)
 
-Return to the [Programming Languages](./README.md) guide.
+Return to [Programming Languages](./README.md).

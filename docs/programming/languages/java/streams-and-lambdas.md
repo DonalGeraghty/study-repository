@@ -328,3 +328,5 @@ You should be able to explain:
 - [`Collectors` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/stream/Collectors.html)
 - [`java.util.function` package](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/package-summary.html)
 - [`Optional` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html)
+
+Return to the [Java Study Guide](./README.md).

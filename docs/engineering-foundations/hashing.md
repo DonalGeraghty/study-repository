@@ -92,3 +92,5 @@ candidate hash == stored hash -> password matches
 ```
 
 The website can verify that you entered the same password without recovering it from the stored value. If the password database is stolen, an attacker must still guess passwords individually to find matching hashes.
+
+Return to [Engineering Foundations](./README.md).

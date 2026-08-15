@@ -94,3 +94,5 @@ browser data -> encrypt -> unreadable network traffic -> decrypt -> website
 ```
 
 Someone monitoring the connection may see that traffic exists, but should not be able to read its protected contents.
+
+Return to [Engineering Foundations](./README.md).

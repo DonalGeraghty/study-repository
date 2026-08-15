@@ -104,4 +104,4 @@ You should be able to:
 - [Retry-ability](https://docs.cypress.io/app/core-concepts/retry-ability)
 - [Best practices](https://docs.cypress.io/app/core-concepts/best-practices)
 
-Return to the [Test Automation Tools](./README.md) guide.
+Return to [Test Automation Tools](./README.md).

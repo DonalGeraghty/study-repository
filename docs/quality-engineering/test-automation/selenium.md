@@ -110,4 +110,4 @@ You should be able to:
 - [Waiting strategies](https://www.selenium.dev/documentation/webdriver/waits/)
 - [Selenium Grid](https://www.selenium.dev/documentation/grid/)
 
-Return to the [Test Automation Tools](./README.md) guide.
+Return to [Test Automation Tools](./README.md).

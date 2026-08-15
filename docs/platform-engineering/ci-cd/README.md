@@ -16,4 +16,4 @@ This section contains delivery-automation platforms and the practices used to bu
 - Notifications, diagnostics, observability, and maintenance
 - Reliability, execution time, and cost
 
-Return to the [Platform Engineering](../README.md) guide.
+Return to [Platform Engineering](../README.md).

@@ -588,3 +588,5 @@ You should be able to:
 - [`git reset` documentation](https://git-scm.com/docs/git-reset)
 - [`git reflog` documentation](https://git-scm.com/docs/git-reflog)
 - [GitHub Flow](https://docs.github.com/en/get-started/using-github/github-flow)
+
+Return to [Engineering Foundations](./README.md).

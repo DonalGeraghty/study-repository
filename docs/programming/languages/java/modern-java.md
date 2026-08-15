@@ -317,3 +317,5 @@ You should be able to explain:
 - [Sealed classes and interfaces](https://docs.oracle.com/en/java/javase/25/language/sealed-classes-and-interfaces.html)
 - [`java.time` package](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/package-summary.html)
 - [Java HTTP client](https://docs.oracle.com/en/java/javase/25/docs/api/java.net.http/java/net/http/HttpClient.html)
+
+Return to the [Java Study Guide](./README.md).

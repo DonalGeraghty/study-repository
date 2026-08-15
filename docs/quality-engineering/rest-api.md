@@ -665,3 +665,5 @@ You should be able to:
 - [RFC 10008: The HTTP QUERY Method](https://www.rfc-editor.org/rfc/rfc10008.html)
 - [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
 - [OWASP API Security Project](https://owasp.org/www-project-api-security/)
+
+Return to [Quality Engineering](./README.md).

@@ -117,4 +117,4 @@ You should be able to:
 - [TypeScript handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
 - [Node.js documentation](https://nodejs.org/docs/latest/api/)
 
-Return to the [Programming Languages](./README.md) guide.
+Return to [Programming Languages](./README.md).

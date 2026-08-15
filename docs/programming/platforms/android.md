@@ -142,4 +142,4 @@ You should be able to:
 - [Test apps on Android](https://developer.android.com/training/testing)
 - [Configure the Android build](https://developer.android.com/build)
 
-Return to the [Application Platforms](./README.md) guide.
+Return to [Application Platforms](./README.md).

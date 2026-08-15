@@ -135,4 +135,4 @@ You should be able to:
 - [SQLite SQL language](https://www.sqlite.org/lang.html)
 - [SQL Server documentation](https://learn.microsoft.com/sql/)
 
-Return to the [Programming Languages](./README.md) guide.
+Return to [Programming Languages](./README.md).

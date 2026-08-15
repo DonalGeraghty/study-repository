@@ -135,4 +135,4 @@ You should be able to:
 - [Service accounts](https://cloud.google.com/iam/docs/service-account-overview)
 - [Deny policies](https://cloud.google.com/iam/docs/deny-overview)
 
-Return to the [Google Cloud Platform](./README.md) guide.
+Return to [Google Cloud Platform](./README.md).

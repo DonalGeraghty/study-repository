@@ -227,3 +227,5 @@ You should be able to explain:
 - [Introduction to garbage collection tuning](https://docs.oracle.com/en/java/javase/25/gctuning/introduction-garbage-collection-tuning.html)
 - [Troubleshooting memory leaks](https://docs.oracle.com/en/java/javase/25/troubleshoot/troubleshooting-memory-leaks.html)
 - [Java Virtual Machine Specification: Runtime Data Areas](https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-2.html#jvms-2.5)
+
+Return to the [Java Study Guide](./README.md).

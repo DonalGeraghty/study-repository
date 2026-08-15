@@ -137,4 +137,4 @@ You should be able to:
 - [Enterprise foundations blueprint](https://cloud.google.com/architecture/security-foundations)
 - [IAM documentation](https://cloud.google.com/iam/docs)
 
-Return to the [Cloud Platforms](../README.md) guide.
+Return to [Cloud Platforms](../README.md).

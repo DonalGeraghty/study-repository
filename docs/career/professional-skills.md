@@ -416,7 +416,9 @@ Use the rubric to improve the story, not to memorise a script.
 ## Related Guides
 
 - [SDET Career Playbook and Interview Roadmap](./sdet-career-playbook.md)
-- [Interview Questions](./interview-questions.md)
+- [Interview Story Workbook](./interview-questions.md)
 - [Code Review](../engineering-foundations/code-review.md)
 - [Testing](../quality-engineering/testing.md)
 - [Technology Stack](../engineering-foundations/technology-stack.md)
+
+Return to [Career](./README.md).

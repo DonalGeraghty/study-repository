@@ -142,4 +142,4 @@ You should be able to:
 - [Securing Jenkins](https://www.jenkins.io/doc/book/security/)
 - [Shared Libraries](https://www.jenkins.io/doc/book/pipeline/shared-libraries/)
 
-Return to the [Continuous Integration and Delivery](./README.md) guide.
+Return to [Continuous Integration and Delivery](./README.md).

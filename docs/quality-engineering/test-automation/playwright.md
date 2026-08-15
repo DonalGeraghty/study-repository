@@ -112,4 +112,4 @@ You should be able to:
 - [Test fixtures](https://playwright.dev/docs/test-fixtures)
 - [Trace viewer](https://playwright.dev/docs/trace-viewer)
 
-Return to the [Test Automation Tools](./README.md) guide.
+Return to [Test Automation Tools](./README.md).

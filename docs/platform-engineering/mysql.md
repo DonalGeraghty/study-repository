@@ -24,6 +24,82 @@ Use a bounded connection pool, release connections in every path, and configure 
 
 Test constraints and transactions against a representative MySQL version. Define backup, restore, retention, encryption, patching, and credential-rotation procedures before data becomes important.
 
+## Worked Example: Reserve Stock
+
+Let the database enforce invariants that must survive every application path:
+
+```sql
+CREATE TABLE product (
+    id BIGINT PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
+    stock INT NOT NULL,
+    CONSTRAINT product_stock_non_negative CHECK (stock >= 0)
+);
+
+CREATE TABLE reservation (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    request_id VARCHAR(64) NOT NULL UNIQUE,
+    product_id BIGINT NOT NULL,
+    quantity INT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT reservation_quantity_positive CHECK (quantity > 0),
+    CONSTRAINT reservation_product_fk
+        FOREIGN KEY (product_id) REFERENCES product(id)
+);
+```
+
+A transaction can lock the product row, verify stock, and make the related changes together:
+
+```sql
+START TRANSACTION;
+
+SELECT stock
+FROM product
+WHERE id = ?
+FOR UPDATE;
+
+UPDATE product
+SET stock = stock - ?
+WHERE id = ? AND stock >= ?;
+
+INSERT INTO reservation (request_id, product_id, quantity)
+VALUES (?, ?, ?);
+
+COMMIT;
+```
+
+The application must check that the conditional update changed one row. The unique `request_id` makes a repeated request detectable, and the constraints protect the database even if another code path forgets validation. Roll back on every failed path.
+
+Concurrent transactions can deadlock even when both are individually correct. Access rows in a consistent order and retry a transaction only when its full operation is safe to repeat.
+
+## Index Example
+
+An index should follow a demonstrated query shape:
+
+```sql
+CREATE INDEX reservation_product_created
+    ON reservation (product_id, created_at);
+
+EXPLAIN
+SELECT id, quantity, created_at
+FROM reservation
+WHERE product_id = ?
+  AND created_at >= ?
+ORDER BY created_at DESC;
+```
+
+The leading index columns should support filtering and ordering used by the query. More indexes are not free: they consume storage and add work to inserts and updates. Inspect the actual execution plan and representative data distribution.
+
+## Common Failure Modes
+
+- relying only on application validation instead of durable constraints;
+- using floating-point columns for exact money values;
+- holding a transaction open during an HTTP call;
+- adding indexes without measuring read and write impact;
+- using a connection pool with no acquisition timeout or upper bound;
+- retrying a partially completed non-idempotent operation;
+- creating backups without testing a restore.
+
 ## Project Connections
 
 `tododos-express-api` uses the Node.js `mysql` and `promise-mysql` packages behind an Express API.

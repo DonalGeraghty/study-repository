@@ -27,4 +27,4 @@ This section covers public-cloud infrastructure, managed services, identity, net
 
 Avoid translating architectures service-for-service between providers. Compare capabilities from the workload’s consistency, latency, availability, security, operational, and cost requirements.
 
-Return to the [Platform Engineering](../README.md) guide.
+Return to [Platform Engineering](../README.md).

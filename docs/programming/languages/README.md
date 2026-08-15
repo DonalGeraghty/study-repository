@@ -17,4 +17,4 @@ HTML and CSS are organised separately under [Web Foundations](../web/README.md) 
 
 Language-specific application ecosystems such as Android are organised under [Application Platforms](../platforms/README.md).
 
-Return to the [Programming](../README.md) guide.
+Return to [Programming](../README.md).

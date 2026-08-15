@@ -20,6 +20,39 @@ Use the runner already established in a repository unless a migration has a clea
 
 Assertions should explain the contract under test. Compare complete objects only when every field matters; otherwise make the important fields explicit. Failed assertions need enough expected and actual context to diagnose the problem without exposing secrets.
 
+## Worked Parameterised Test
+
+```python
+import pytest
+
+
+def shipping_cost(order_total):
+    if order_total < 0:
+        raise ValueError("order total cannot be negative")
+    return 0 if order_total >= 50 else 5
+
+
+@pytest.mark.parametrize(
+    ("order_total", "expected_cost"),
+    [
+        (0, 5),
+        (49.99, 5),
+        (50, 0),
+        (100, 0),
+    ],
+    ids=["zero", "below-boundary", "at-boundary", "above-boundary"],
+)
+def test_shipping_cost_boundaries(order_total, expected_cost):
+    assert shipping_cost(order_total) == expected_cost
+
+
+def test_shipping_cost_rejects_negative_total():
+    with pytest.raises(ValueError, match="cannot be negative"):
+        shipping_cost(-0.01)
+```
+
+Parameterisation makes the boundary cases visible without hiding the assertion in a loop. Descriptive IDs improve CI output. The separate exception test verifies both the failure type and the useful part of its contract.
+
 ## Isolation and Fixtures
 
 - Each test must be able to run alone and in any order.
@@ -32,6 +65,16 @@ Assertions should explain the contract under test. Compare complete objects only
 ## CI Behaviour
 
 Pin runner and plugin versions, emit machine-readable results where the CI platform benefits, and return a failing exit status for test failures or collection errors. Treat retries as diagnostic evidence, not a way to redefine an unreliable test as passing.
+
+## Common Failure Modes
+
+- a shared fixture that makes tests pass only in one order;
+- asserting every field of a response when only a stable subset is the contract;
+- catching an exception inside the test and forgetting to fail when none is raised;
+- using sleeps to coordinate asynchronous behaviour;
+- enabling parallelism before isolating data and ports;
+- marking tests as retriable without retaining first-attempt evidence;
+- returning a zero process status after collection or setup failed.
 
 ## Project Connections
 

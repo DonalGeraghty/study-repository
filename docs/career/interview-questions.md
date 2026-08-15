@@ -1,291 +1,245 @@
-# Soft Skills {#soft-skills}
+# Interview Story Workbook
 
-## **Misc** {#misc}
+This workbook turns real experience into reusable behavioural and technical interview stories. It contains personal notes rather than polished scripts: keep the facts accurate, add measurements that can be defended, and speak naturally instead of memorising every sentence.
 
-Have you ever had to communicate to non-technical personal, discuss.
+> **Privacy note:** company, colleague, customer, system, and production details may be confidential. Replace identifying or sensitive information before sharing this file or using a story publicly.
 
-## **Testing Questions** {#testing-questions}
+## How to Use This Workbook
 
-Starting from a blank slate, design for me an automation
+For each story, prepare five parts:
 
-Starting from a blank slate, how would you design a testing pipeline?
+- **Situation:** enough context to understand the problem;
+- **Task:** your responsibility, constraint, or decision;
+- **Action:** what you personally did and why;
+- **Result:** the observable outcome, preferably with a defensible measure;
+- **Learning:** what you would repeat, change, or apply elsewhere.
 
-## **Fun Questions** {#fun-questions}
+Aim for a two-minute core answer. Prepare more technical and stakeholder detail for follow-up questions. Where this workbook says “evidence to add,” verify the number or example before using it.
 
-Quant role: you have a football stadium, in the middle is a drop of water, every minute it doubles, it keeps going until the stadium is filled, the stadium is filled after 60 minutes. When is the stadium one quarter full.
+## Quick Questions
 
-How do you do reporting on tests, and presentations?
+### Communication and Testing
 
-## **Scenarios to Remember** {#scenarios-to-remember}
+- Explain a complex technical concept to non-technical personnel.
+- Starting from a blank repository, design a test-automation framework.
+- Starting from a blank delivery system, design a testing pipeline.
+- Explain how you report test results to engineers, product stakeholders, and leadership.
 
-**WORKDAY WORKING ON PAYROLL SETUP**
+For the framework and pipeline questions, begin with risks and feedback needs. Then cover boundaries, test levels, data, environments, parallelism, reporting, failure evidence, ownership, and maintenance. A tool list without those decisions is not a design.
 
-**WORKDAY AUTOMATORS REORG**
+### Estimation Exercise
 
-**EQUIFAX DATA FABRIC CODE REFACTOR**
+**Question:** A drop of water doubles in volume every minute. It fills a stadium at minute 60. When is the stadium one-quarter full?
 
-**EQUIFAX AWS MIGRATION**
+**Answer:** Minute 58. It is one-quarter full at minute 58, half full at minute 59, and full at minute 60.
 
-**EQUIFAX SLOW NON-INDEPENDENT TESTS**
+Explain the reasoning rather than giving only the answer; the exercise tests recognition of exponential growth.
 
-**DING DATA WAREHOUSE AGILE STORY**
+## Story Inventory
 
-**DING REMOVE ALL MANUAL TESTING**
+| Story | Strongest competencies | Evidence to verify or add |
+| --- | --- | --- |
+| Workday payroll setup | problem solving, adaptability, collaboration | setup complexity, time saved, later reuse by others |
+| Workday automator reorganisation | candid communication, change | concern raised, decision clarified, effect on the role |
+| Equifax data-fabric refactor | influence, technical communication, execution | new-test effort reduced from about eight to three hours |
+| Equifax AWS migration | root-cause analysis, ownership | before/after reliability and runtime data |
+| Equifax independent-test refactor | initiative, execution, scalability | before/after suite duration and flake rate |
+| Ding agile adoption | change leadership, audience awareness | adoption signal and team outcome |
+| Ding release-testing change | influence, quality strategy, automation | two-day regression removed; deployment frequency |
 
-## **People Excellence** {#people-excellence}
+One story can answer several questions, but tailor the opening, action detail, and learning to the competency being assessed.
 
-### **Interview Questions: Candid Communication** {#interview-questions:-candid-communication}
+## People Excellence
 
-* **Tell me about a time when you had to explain something complex to someone who did not have your knowledge or subject-matter expertise. What was the information or concept you needed to communicate, and who did you need to communicate this to?**
+### Candid Communication
 
-**EQUIFAX DATA FABRIC CODE REFACTOR**
+#### Explaining Technical Debt to Different Audiences
 
-S \- I was working in Equifax, the tests were taking a long time to write as there was lots of technical debt.
+**Possible question:** Tell me about a time you explained a complex subject to someone without your subject-matter expertise.
 
-T \- I wanted to stop progress on feature work and in one sprint tackle the debt.
+**Story:** Equifax data-fabric code refactor
 
-A \- I had a technical meeting with the lead dev, showed him the code. He understood from that. I then had a separate meeting with the PO and explained the gains to him and we had a good working relationship so he listened.
+- **Situation:** New automated tests took about eight hours to implement because accumulated technical debt made the suite difficult to extend.
+- **Task:** Make the case for pausing feature work for one sprint so the highest-cost design problems could be refactored.
+- **Action:** Walked the lead developer through the code and technical constraints. In a separate discussion with the product owner, translated the same problem into delivery time and future feature cost.
+- **Result:** Received a two-week sprint for the refactor. The average effort to add a test fell from roughly eight hours to three.
+- **Learning to add:** Which change produced most of the improvement, and how was regression risk controlled during the refactor?
 
-R \- I was given a 2 week sprint to refactor what I saw fit. The benefit was instead of taking on average 8 hours to write a new test, we took it down to about 3\.
+#### Tailoring a Quality Proposal to Stakeholders
 
-* **Tell me about a time when you had to communicate a message or explain a concept to different audiences which required you to tailor your approach to each audience. First, what was the message or concept you were communicating, and who were the different audiences you needed to communicate it to?**
+**Possible question:** Tell me about a message you adapted for audiences with different needs.
 
-S \- During my time at [ding.com](http://ding.com) I was tasked with reducing the manual step using [screener.io](http://screener.io) (now sauce labs)
+**Story:** Ding visual-regression automation
 
-T \- I needed to communicate my approach to the dev team, the qa team, and management.
+- **Situation:** The release process contained a large manual visual-regression step.
+- **Task:** Introduce visual automation and build confidence among management, developers, and QA.
+- **Action:** Showed management the historical visual-defect rate, correction effort, and expected cost benefit. Walked developers through the technical integration. Gave QA a hands-on demonstration focused on use, investigation, and trust.
+- **Result:** The team adopted the tool and removed the separate manual pre-release regression step from the delivery pipeline.
+- **Evidence to add:** Defect detection, false-positive rate, time saved, and the controls retained for exploratory testing.
 
-A \- I showed management the historical visual bugs rate, and the time taken to fix them as this was a paid product I wanted to show the cost benefit. I showed the developers the tool and walked through any technical implementations with them. And I showed the QA tool and gave them a more hands on with the tool.
+#### Raising a Concern During Reorganisation
 
-R \- The result is we were able to use the tool, and completely remove pre-release testing and fully automate our pipeline with trust.
+**Possible question:** Tell me about a time you raised a concern about the direction of a team or project.
 
-* **Tell me about a time when you decided to share your concerns about the direction your team, or a project you were a part of, was going in. What was the project or initiative, and what concerns did you have about the direction it was taking?**
+**Story:** Workday automator reorganisation
 
-**WORKDAY AUTOMATORS REORG**
+- **Situation:** After a reorganisation, developers were expected to perform more day-to-day automation. I was concerned that automation specialists would lose regular implementation experience.
+- **Task:** Raise the risk constructively and understand the intended future role.
+- **Action:** Explained the skill-retention concern during an open meeting and asked how responsibility would be divided.
+- **Result:** Leadership clarified that automation specialists would still own complex setup and act as consultants rather than leaving automation entirely.
+- **Learning to add:** What follow-up action ensured the clarified model worked in practice?
 
-S \- In workday after a company reorg, I was concerned about the new role of automators. The bulk of automation was going to be done by developers.
+### Inclusivity
 
-T \- We had an open meeting
+These prompts still need real stories. Do not invent an answer; start with a specific decision where another person's perspective changed the work.
 
-A \- I expressed some concern about the role and how losing day to day automation could negatively affect our skillsets
+- Tell me about a time you took deliberate steps to create an inclusive team environment.
+- Tell me about a project that benefited from people with different skills or perspectives.
+- Tell me about working with someone whose approach differed from yours.
+- Tell me about a proposal that needed diverse perspectives to be safe or effective.
 
-R \- The result was that they reassured me that developers would not be taking over completely, but instead automators would move to write setup and not the day to day tests, we would be consultants.
+Useful evidence includes who was not being heard, how participation was changed, which perspective altered the decision, and what outcome improved. Avoid reducing demographic groups to assumed preferences.
 
-### **Interview Questions: Inclusivity** {#interview-questions:-inclusivity}
+## Strategic Excellence
 
-* **Tell me about a time where you took steps to create an inclusive environment with a team or group you were working with. What was the team or group working on together?**
+### Problem Solving
 
-S \-
+#### Reconstructing a Complex Test Setup
 
-T \-
+**Possible question:** Describe a recent project in which you demonstrated strong problem-solving skills.
 
-A \-
+**Story:** Workday payroll test-data setup
 
-R \-
+- **Situation:** A payroll scenario required complex setup that was not documented end to end.
+- **Task:** Build the test automation and its data setup from scratch.
+- **Action:** Treated the missing knowledge as an investigation. Gathered different pieces from a developer, QA, a manager, customer training material, documentation, and existing test logs; then combined and verified them in the working setup.
+- **Result:** Completed the automated setup and became a point of contact for the process.
+- **Evidence to add:** The specific technical obstacle, how correctness was verified, and how the recovered knowledge was documented for the next person.
 
-* **Tell me about a time where you worked on a project with others that had diverse perspectives and/or skill sets. How did you ensure all of the diverse perspectives or skill sets were incorporated into the work?**
+#### Making Tests Independent and Parallel
 
-S \-
+**Possible question:** Tell me about a problem you identified and took responsibility for solving.
 
-T \-
+**Story:** Equifax slow, interdependent tests
 
-A \-
+- **Situation:** Data-fabric tests were slow and depended on shared state, which prevented reliable parallel execution.
+- **Task:** Demonstrate that isolating the tests would improve feedback time and reliability.
+- **Action:** Ran a focused spike, untangled a representative set of tests, executed them in parallel, and compared the before/after timing. Presented the result and proposed repository-wide work to the team and product owner.
+- **Result:** Received time to extend the change across the suite and improved execution speed.
+- **Evidence to add:** Baseline and final duration, worker count, flake rate, and the data-isolation technique.
 
-R \-
+#### Investigating Infrastructure-Related Flakiness
 
-* **Tell me about a time when you were working with someone that had a different perspective or approach than you. What were you working on with this person, and at what point did you realized the two of you had different perspectives or approaches?**
+**Possible question:** Tell me about a time root-cause investigation changed your proposed solution.
 
-S \-
+**Story:** Equifax AWS migration
 
-T \-
+- **Situation:** The automated suite produced frequent intermittent failures.
+- **Task:** Find evidence for the failure source and propose a sustainable change.
+- **Action:** Reproduced the failures, reviewed the test code, and investigated the execution infrastructure. The existing US-hosted server's capacity or location appeared to be a significant factor. Prepared a cloud migration proposal and obtained budget approval.
+- **Result:** Moved execution to AWS infrastructure and achieved a more reliable suite.
+- **Evidence to add:** Measurements that separated network distance, machine capacity, test design, and environment stability; before/after failure rates; cost and operational ownership.
 
-A \-
+#### Multi-Stakeholder Decision
 
-R \-
+**Prompt still to complete:** Tell me about a decision involving several stakeholders. Show how their goals conflicted, how you collected evidence, what trade-off you selected, and how the decision was communicated.
 
-* **Tell me about a time when you were working on a project where it was important that you understood and incorporated diverse perspectives into the proposal or solution you created. What was the project you were working on, and why was it important to incorporate diverse perspectives?**
+### Creativity
 
-S \-
+These prompts need a concrete story and should demonstrate more than adopting a fashionable tool:
 
-T \-
+- an original or unusually effective solution you designed;
+- a constraint that required an approach outside the normal process;
+- a time you helped a group generate and compare ideas;
+- a time you supported someone else's unconventional idea.
 
-A \-
+For each, explain the constraint, alternatives considered, experiment or prototype, risk control, and measurable value.
 
-R \-
+### Change Leadership
 
+#### Replacing a Two-Day Pre-release Regression
 
+**Fits questions about:** selling a new way of working; leading a significant change; overcoming resistance.
 
-## **Strategic Excellence** {#strategic-excellence}
+**Story:** Ding release-testing change
 
-### **Interview Questions: Problem Solving** {#interview-questions:-problem-solving}
+- **Situation:** Each release included about two days of manual pre-release regression.
+- **Task:** Improve automated coverage and evidence enough that the team could remove this separate release gate with confidence.
+- **Action:** Added visual automation, made coverage and results visible, and explained the risk controls to stakeholders rather than asking for trust in the tool alone.
+- **Result:** The separate two-day regression was removed and the team could deploy to production several times per day.
+- **Evidence to add:** Scope retained for human exploration, production safety signals, defect escape rate, false positives, and rollback controls.
 
+#### Helping a Team Adopt Agile Working Practices
 
+**Fits questions about:** tailoring change to affected groups; leading a resistant team through a new process.
 
-* **Tell me about a recent project you worked on where you demonstrated strong problem-solving skills. What were your responsibilities with this project, and what was the challenge or problem you needed to address?**
+**Story:** Ding data-warehouse agile adoption
 
-**WORKDAY WORKING ON PAYROLL SETUP**
+- **Situation:** After an organisation-wide agile transition, one data-warehouse team had not adopted the new working practices.
+- **Task:** Support adoption while continuing QA responsibilities.
+- **Action:** Acted as the team's Scrum Master, organised the ceremonies, and varied the evidence used to explain progress. Some team members engaged more through retrospectives; others responded to delivery metrics and burndown information.
+- **Result:** The team adopted the agreed process.
+- **Evidence to add:** Avoid age-based generalisations. Describe needs in terms of role, experience, or preferred evidence, and add a delivery or collaboration measure that showed adoption was useful rather than merely compliant.
 
-S \- I was working on test data setup, in workday a very complex process, and I needed to set it up from scratch.
+## Operational Excellence
 
-T \- I needed to setup the auto.
+### Accountability
 
-A \- Most of the knowledge lives in peoples heads, so I talked to developer for one piece, QA for another piece, my manager for another piece, documentation, and also test logs. It’s about knowing who knows what, and piecing the information together.
+Prepare one story for each shape:
 
-R \- The automation setup was complete.
+- a complex project where you personally protected the outcome;
+- an unforeseen challenge that put the goal at risk;
+- evidence that caused you to adjust course;
+- an ambiguous project where you created the first plan.
 
-* **Tell me about a time when you identified a problem at work and took responsibility for solving it. Describe what you were working on and the challenge you identified and needed to solve.**
+The test-independence refactor can support the first or fourth prompt if the answer makes ownership, checkpoints, and outcome explicit.
 
-**EQUIFAX SLOW NON-INDEPENDENT TESTS**
+### Execution
 
-S \- The auto tests at equifax for data fabric were slow, and not independent.
+Prepare evidence for:
 
-T \- I tasked myself with fixing this and running them in parallel
+- reprioritising work to improve the likelihood of achieving a goal;
+- reducing unnecessary complexity;
+- exceeding an agreed expectation;
+- ensuring product quality;
+- verifying the accuracy of an important report or presentation.
 
-A \- I did a spike and unwound some tests, and ran them in parallel. I timed them before and after, showed this to my team and PO. showed the benefits. And I was allotted time to complete the full repo.
+The Equifax refactor suits complexity reduction, and the Ding release story suits quality strategy. Do not reuse the same story repeatedly in one interview unless the interviewer explicitly asks for a different angle.
 
-R \- The suite ran faster.
+### Adaptability
 
-* **Tell me about a time where it was important for you to investigate the root cause of a problem in order to come up with the best solution. What was the problem you were trying to solve, and how did you go about exploring the root cause?**
+#### Learning an Unfamiliar Payroll Domain
 
-**EQUIFAX AWS MIGRATION**
+**Fits questions about:** changing approach after new information; mastering evolving content; learning a new skill or business area.
 
-S \- we were getting a lot of flakey tests.
+**Story:** Workday payroll setup for a worker with two roles
 
-T \- my task was to investigate the root cause of the flakeyness and propose a solution.
+- **Situation:** While new to a complex payroll project, I was automating a payslip scenario for a worker who held two roles. The required setup was not working and no single person held the complete answer.
+- **Task:** Diagnose the setup and learn enough of the domain to produce reliable automation.
+- **Action:** Consulted developers, a manager, QA, customer training material, and existing technical evidence. Combined the partial knowledge, tested each assumption, and iterated on the setup.
+- **Result:** Completed the automation and later became a knowledge source for similar setup work.
+- **Learning to add:** How the knowledge was captured, which initial assumption changed, and what would make the next investigation faster.
 
-A \- I ran the tests and looked at the code, it seemed ok. I looked at the infra, and saw that the tests were just running on a server in the US, so I migrated to AWS to more powerful machines. I talked to my manager about this, for budget and it was approved.
+Still prepare a separate setback story. A good failure answer owns a decision, explains impact without defensiveness, and shows a concrete change in later behaviour.
 
-R \- the result was reliable tests.
+## Final Story Checklist
 
-* **Tell me about a time when you had to make a decision that involved multiple stakeholders. How did you approach understanding the needs and perspectives of all of the stakeholders involved?**
+Before using a story, confirm:
 
-S \-
+- [ ] I answered the exact competency in the question.
+- [ ] My own task and actions are distinct from the team's work.
+- [ ] The sequence is easy to follow and contains no confidential detail.
+- [ ] Every number is accurate enough to defend in follow-up questions.
+- [ ] The result describes user, delivery, quality, cost, or team impact.
+- [ ] I can explain the technical decision one level deeper.
+- [ ] I included a genuine learning or later change.
+- [ ] The core answer fits in about two minutes.
 
-T \-
+## Related Guides
 
-A \-
+- [Professional and Interpersonal Skills](./professional-skills.md)
+- [SDET Career Playbook](./sdet-career-playbook.md)
+- [Software Testing](../quality-engineering/testing.md)
+- [Technology Stack](../engineering-foundations/technology-stack.md)
 
-R \-
-
-### **Interview Questions: Creativity** {#interview-questions:-creativity}
-
-* **Tell me about a time when you identified or designed an innovative solution at work. What was the situation, and what was the innovative solution you came up with?**
-
-S \-
-
-T \-
-
-A \-
-
-R \-
-
-* **Tell me about a time when you were working on a project that required you to think outside of the box. What were you working on, and how did you go about coming up with new and creative ideas?**
-
-S \-
-
-T \-
-
-A \-
-
-R \-
-
-* **Tell me about a time when you led a group or team to think creatively. What was the group or team working on, and what were some of the steps you took to support their creative thinking?**
-
-S \-
-
-T \-
-
-A \-
-
-R \-
-
-* **Tell me about a time when someone you were working with proposed an out of the box idea to a project you were a part of. What was your role in this project, and how did you respond to the idea they proposed?**
-
-S \-
-
-T \-
-
-A \-
-
-R \-
-
-### **Interview Questions: Change Making** {#interview-questions:-change-making}
-
-* **Tell me about a time when you had to sell an idea, solution, or way of working that required others to think or operate in a new way. What was the new idea or way of operating that you needed others to adopt?**
-
-**DING REMOVE ALL MANUAL TESTING**
-
-S \- we were doing 2 days of manual testing before each release. This seemed inefficient so I wanted to improve the automation such that we could with confidence, remove this.
-
-T \- It was my task to improve the auto
-
-A \- I added visual automation, I also showed stakeholders the automation coverage so they would have confidence in the auto.
-
-R \- The result was we go to a place where we could deploy directly to prod several times a day.
-
-* **Tell me about the most significant change you have led a group, team or organization through. Briefly summarize the change you needed the group, team or organization to adopt, and which roles or personas needed to adopt this change.**
-
-**DING REMOVE ALL MANUAL TESTING**
-
-S \- we were doing 2 days of manual testing before each release. This seemed inefficient so I wanted to improve the automation such that we could with confidence, remove this.
-
-T \- It was my task to improve the auto
-
-A \- I added visual automation, I also showed stakeholders the automation coverage so they would have confidence in the auto.
-
-R \- The result was we go to a place where we could deploy directly to prod several times a day.
-
-* **Tell me about a time when you had to promote a new strategy or way of operating in your organization that required you to identify and tailor your approach to different groups impacted by the change. Briefly describe the change you were promoting and the groups impacted.**
-
-**DING DATA WAREHOUSE AGILE STORY**
-
-S \- In Ding, the company had done a transition to agile. We all did trainings and did the transformation. My team did a good job in this. One team didn’t adopt the new processes. The different groups here were young employees and older employees.
-
-T \- It was my task, to join the team and help them make the change.
-
-A \- I acted as their scrum master alongside my QA duties, I organised all the meetings, and scrum ceremonies.Young employees were happier with the retro’s, older employees wanted to see the burndown charts and metrics.
-
-R \- The result was they fully adopted the new process
-
-* **Tell me about a time when you needed to lead a group to adopt a new strategy, policy, or way of operating that they were going to be resistant to. What was the change you needed them to adopt, and why was this group resistant to it?**
-
-**DING DATA WAREHOUSE AGILE STORY**
-
-S \- In Ding, the company had done a transition to agile. We all did trainings and did the transformation. My team did a good job in this. One team didn’t adopt the new processes.
-
-T \- It was my task, to join the team and help them make the change.
-
-A \- I acted as their scrum master alongside my QA duties, I organised all the meetings, and scrum ceremonies.
-
-R \- The result was they fully adopted the new process
-
-## **Operational Excellence** {#operational-excellence}
-
-### **Interview Questions: Accountability** {#interview-questions:-accountability}
-
-* **Tell me about a complex project you worked on where you demonstrated strong accountability to ensure you achieved the project goals. What was the project and outcome you were working towards, and what was your specific role?**
-* **Tell me about a recent project where you ran into unforeseeable challenges that put your ability to achieve the project goals at risk. What was the project and the outcomes you were working towards, and what were the biggest challenges you encountered?**
-* **Tell me about a project you were working on where you realized you needed to adjust course in order to achieve the project goals. What was the goal of the project you were working on, and what made you realize you needed to adjust course?**
-* **Tell me about a project you worked on where it was unclear how to get started. What were the desired outcomes of the project, and why was it unclear how to get started?**
-
-### **Interview Questions: Execution** {#interview-questions:-execution}
-
-* **Tell me about a time when you adjusted your strategy or priorities so that you were more likely to achieve your individual or team goals. What goals were you pursuing, and how did you adjust your strategy or priorities to set you up to achieve those goals?**
-* **Tell me about a time when you identified an opportunity to reduce complexity in a workstream or project you were a part of. What was the workstream or project, and where did you see an opportunity to reduce complexity?**
-* **Tell me about a time where you exceeded the expectations set out for you and achieved significant results. What were you working on, and what specifically did you do to exceed expectations?**
-* **Tell me about a recent project you worked on where you took steps to ensure the quality of the product or program. What was the product or program you were designing, and what steps did you take to ensure it met a high level of quality?**
-* **Tell me about a program or presentation you worked on where it was essential that the information you shared was accurate. Describe what you were working on and the steps you took to ensure accuracy in what you delivered.**
-
-### **Interview Questions: Adaptability** {#interview-questions:-adaptability}
-
-* **Tell me about a project you were working on where new information arose that caused you to adjust your initial strategy or approach. What was the project, and what new information came up that led you to adjust your strategy or approach?**
-* **Tell me about a recent project you worked on where you had to master and maintain a body of rapidly evolving content. What was the project, and how did you stay up to date with the evolving content?**
-* **Tell me about a time when you learned something meaningful from a failure or setback you experienced. What was the failure or setback you experienced, and what did you learn from it?**
-* **Tell me about a time when you had to learn a new skill or understand a new aspect of the business to be successful. What were you working on, and what caused you to recognize you needed to build this new knowledge or skill?**
-
-S \- Working on payroll at workday, new to this project. It is a highly complex application to configure. I was testing payslips for workers with 2 roles within a company. Working on the test setup data. The feature was not functioning.
-
-T \- I needed to figure out the issue..
-
-A \- I reached out to devs. I reached out to my manager. I reached out to a QA. I also looked through some workday customer training material. Nobody knew everything, but each had a piece of the issue. So communicating with them all was how I approached it.
-
-R \- This was something nobody fully knew, but the result of this is I had fully working automation, and then in future people would come to me as a repository for knowledge on this.
+Return to [Career](./README.md).

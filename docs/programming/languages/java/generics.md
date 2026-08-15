@@ -278,3 +278,5 @@ You should be able to explain:
 - [Java Language Specification: Type Variables](https://docs.oracle.com/javase/specs/jls/se25/html/jls-4.html#jls-4.4)
 - [Java Language Specification: Parameterized Types](https://docs.oracle.com/javase/specs/jls/se25/html/jls-4.html#jls-4.5)
 - [Java tutorials: Generics](https://dev.java/learn/generics/)
+
+Return to the [Java Study Guide](./README.md).

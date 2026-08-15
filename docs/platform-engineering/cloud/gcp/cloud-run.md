@@ -113,4 +113,4 @@ You should be able to:
 - [Configure Cloud Run services](https://cloud.google.com/run/docs/configuring)
 - [Cloud Run security](https://cloud.google.com/run/docs/securing/security)
 
-Return to the [Google Cloud Platform](./README.md) guide.
+Return to [Google Cloud Platform](./README.md).

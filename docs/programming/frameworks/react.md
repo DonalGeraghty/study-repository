@@ -126,4 +126,4 @@ You should be able to:
 - [Managing state](https://react.dev/learn/managing-state)
 - [Synchronizing with effects](https://react.dev/learn/synchronizing-with-effects)
 
-Return to the [JavaScript and TypeScript](../languages/javascript-typescript.md) guide.
+Return to [Frameworks and Libraries](./README.md).

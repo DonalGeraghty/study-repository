@@ -282,3 +282,5 @@ Design checkout support for several payment providers:
 - [SOLID Principles](./solid-principles.md)
 - [Domain-Driven Design](./domain-driven-design.md)
 - [Testing](../quality-engineering/testing.md)
+
+Return to [Software Design](./README.md).

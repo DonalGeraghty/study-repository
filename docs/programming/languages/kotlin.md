@@ -107,4 +107,4 @@ You should be able to:
 - [Coroutines guide](https://kotlinlang.org/docs/coroutines-guide.html)
 - [Java interoperability](https://kotlinlang.org/docs/java-interop.html)
 
-Return to the [Programming Languages](./README.md) guide.
+Return to [Programming Languages](./README.md).

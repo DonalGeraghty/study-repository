@@ -347,3 +347,5 @@ You should be able to explain:
 - [`Collection` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Collection.html)
 - [`Map` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html)
 - [Concurrent collections](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/package-summary.html)
+
+Return to the [Java Study Guide](./README.md).

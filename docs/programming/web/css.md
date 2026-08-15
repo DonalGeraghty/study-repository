@@ -132,4 +132,4 @@ You should be able to:
 - [Cascade and inheritance](https://developer.mozilla.org/docs/Web/CSS/Guides/Cascade)
 - [CSS Grid layout](https://developer.mozilla.org/docs/Web/CSS/Guides/Grid_layout)
 
-Return to the [Web Foundations](./README.md) guide.
+Return to [Web Foundations](./README.md).

@@ -122,4 +122,4 @@ You should be able to:
 - [Transactions and batched writes](https://cloud.google.com/firestore/docs/manage-data/transactions)
 - [Firestore Security Rules](https://firebase.google.com/docs/firestore/security/get-started)
 
-Return to the [Google Cloud Platform](./README.md) guide.
+Return to [Google Cloud Platform](./README.md).

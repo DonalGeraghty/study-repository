@@ -113,4 +113,4 @@ You should be able to:
 - [R language definition](https://cran.r-project.org/doc/manuals/r-release/R-lang.html)
 - [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html)
 
-Return to the [Programming Languages](./README.md) guide.
+Return to [Programming Languages](./README.md).

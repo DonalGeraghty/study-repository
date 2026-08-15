@@ -826,3 +826,5 @@ Despite its name, `kubectl get all` does not return every resource type. Query i
 - [Docker](./docker.md)
 - [Technology Stack](../engineering-foundations/technology-stack.md)
 - [Testing](../quality-engineering/testing.md)
+
+Return to [Platform Engineering](./README.md).

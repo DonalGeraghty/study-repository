@@ -120,4 +120,4 @@ You should be able to:
 - [IAM best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)
 - [AWS Architecture Center](https://aws.amazon.com/architecture/)
 
-Return to the [Cloud Platforms](./README.md) guide.
+Return to [Cloud Platforms](./README.md).
