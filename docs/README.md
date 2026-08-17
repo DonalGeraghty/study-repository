@@ -10,6 +10,7 @@ This is the canonical table of contents for the handbook. Use the subject indexe
 | [Programming](./programming/README.md) | Languages, frameworks, platforms, browser APIs, tooling, and integrations |
 | [Software Design](./software-design/README.md) | Code structure, dependency design, patterns, and domain modelling |
 | [Quality Engineering](./quality-engineering/README.md) | Quality strategy, interfaces, runners, and automation tools |
+| [System Design](./system-design/README.md) | Requirements, architecture, scale, reliability, and distributed-system trade-offs |
 | [Platform Engineering](./platform-engineering/README.md) | Runtime, data, messaging, cloud, and delivery systems |
 
 ## Complete Catalogue
@@ -101,6 +102,10 @@ This is the canonical table of contents for the handbook. Use the subject indexe
    - [Playwright](./quality-engineering/test-automation/playwright.md)
    - [Selenium](./quality-engineering/test-automation/selenium.md)
    - [Cypress](./quality-engineering/test-automation/cypress.md)
+
+### System Design
+
+1. [System Design Study Guide](./system-design/README.md)
 
 ### Platform Engineering
 
