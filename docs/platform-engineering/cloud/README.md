@@ -1,3 +1,9 @@
+---
+tags:
+  - platform-engineering/cloud
+  - moc
+---
+
 # Cloud Platforms
 
 This section covers public-cloud infrastructure, managed services, identity, networking, data, reliability, security, operations, and cost. Provider vocabulary differs, but sound architecture begins with workload requirements and explicit failure and trust boundaries.

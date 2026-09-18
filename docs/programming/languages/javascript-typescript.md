@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/languages
+---
+
 # JavaScript and TypeScript
 
 JavaScript is a dynamic language implemented by browsers and server-side runtimes such as Node.js. TypeScript adds static analysis and type syntax, then emits JavaScript for a target runtime. Understanding JavaScript runtime behaviour remains essential because TypeScript’s types do not exist as runtime validation.
@@ -55,6 +60,21 @@ async function loadUser(id: string, signal: AbortSignal): Promise<User> {
 }
 ```
 
+```mermaid
+sequenceDiagram
+    participant Caller
+    participant Fn as async function
+    participant EL as Event loop
+    participant Net as Network
+    Caller->>Fn: loadUser(id)
+    Fn->>Net: fetch(url)
+    Fn-->>EL: suspend at await, yield control
+    EL->>EL: run other work
+    Net-->>Fn: response resolves
+    EL->>Fn: resume after await
+    Fn-->>Caller: return parsed User
+```
+
 Start independent work before awaiting it when concurrency is intended, but bound large fan-out. Handle rejection, cancellation, timeouts, and cleanup. A successful HTTP request still needs application-level status and data validation.
 
 ## TypeScript’s Type System
@@ -94,17 +114,14 @@ npm test
 npm run build
 ```
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- explain primitives, references, scope, closures, prototypes, and equality;
-- reason about the event loop, promises, errors, and cancellation;
-- distinguish JavaScript runtime behaviour from TypeScript analysis;
-- model alternatives with unions and narrow `unknown` safely;
-- configure modules and dependencies for the target runtime;
-- validate external data at system boundaries;
-- test and debug browser or server-side code with appropriate tools.
+> [!question] Interview Questions
+> - Why doesn't `await` block the JavaScript event loop, and what happens while a promise is pending?
+> - What's the difference between JavaScript's runtime behaviour and what TypeScript's type system checks?
+> - Why is `unknown` safer than `any` for untrusted values, and how would you narrow it?
+> - Why don't TypeScript's static types protect you from malformed JSON or DOM input at runtime?
+> - What's the difference between a shallow copy from spread syntax and a deep copy, and when does that distinction bite you?
 
 ## Frameworks and Libraries
 

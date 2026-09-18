@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/languages/java
+---
+
 # Java Memory Management
 
 Java provides automatic memory management, but developers still need to understand object reachability, resource ownership, allocation pressure, and diagnostic evidence.
@@ -68,6 +73,17 @@ void allocate() {
 ```
 
 The local variable `temporary` disappears after the method returns, but the array remains reachable through `retained`. Garbage collection cannot reclaim an object that the application still references.
+
+```mermaid
+flowchart TD
+    R1[Live thread/stack references] --> G[GC Roots]
+    R2[Static references] --> G
+    R3[JNI references] --> G
+    G --> T[Trace reachability graph]
+    T --> A{Object reachable?}
+    A -->|Yes| K[Retained]
+    A -->|No| C[Reclaimed]
+```
 
 Setting a variable to `null` does not force collection. It can remove one reference, but the object is eligible for reclamation only when no relevant reachability path remains.
 
@@ -174,6 +190,16 @@ Different `OutOfMemoryError` messages point to different areas, such as Java hea
 
 ## Diagnostic Workflow
 
+```mermaid
+flowchart TD
+    A[Reproduce or observe the problem] --> B[Confirm pressure area: heap, Metaspace, native, threads, allocation rate]
+    B --> C[Correlate with workload, deployment, config changes]
+    C --> D[Capture GC logs, JFR, histograms, heap dumps]
+    D --> E[Compare retained-object paths and dominators]
+    E --> F[Fix ownership or lifecycle behaviour]
+    F --> A
+```
+
 1. Reproduce or observe the problem with the least intrusive tooling available.
 2. Confirm whether the pressure is heap, Metaspace, native memory, threads, or allocation rate.
 3. Correlate memory behaviour with workload, deployment, and configuration changes.
@@ -209,17 +235,15 @@ Flag availability and syntax can vary by JDK; verify against the runtime in use.
 - **“Static values live in Metaspace.”** Metaspace holds HotSpot class metadata; static references can retain ordinary objects.
 - **“ZGC or G1 eliminates all pauses.”** Concurrent collectors reduce specific pauses but cannot remove every safepoint or latency source.
 
-## Interview Checklist
+## Interview Questions
 
-You should be able to explain:
-
-- heap, JVM stacks, Metaspace, and native memory without oversimplifying;
-- GC roots and reachability;
-- why a reachable object can still represent a leak;
-- generational collection as a strategy rather than a language guarantee;
-- throughput versus pause-time collector goals;
-- why try-with-resources is unrelated to object reclamation;
-- how you would gather evidence for a suspected memory leak.
+> [!question] Interview Questions
+> - Why can a reachable object still represent a memory leak?
+> - What are GC roots, and how do they determine what survives a collection?
+> - Why doesn't calling `System.gc()` guarantee anything happens?
+> - Why is try-with-resources unrelated to garbage collection?
+> - What's the difference between a throughput-oriented and a pause-time-oriented garbage collector, and how would you choose?
+> - How would you gather evidence for a suspected memory leak in production?
 
 ## Further Reading
 

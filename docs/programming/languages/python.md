@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/languages
+---
+
 # Python
 
 Python is a dynamically typed, general-purpose language used for automation, web services, data processing, testing, and command-line tools. Its concise syntax makes small programs quick to write, but maintainable Python still depends on explicit boundaries, clear data models, tests, and controlled environments.
@@ -105,18 +110,14 @@ python -m unittest
 
 Projects commonly add `pytest`, a formatter, a linter, and a type checker. Pin their configuration in the repository so local and CI results agree.
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- explain name binding, identity, equality, mutability, and scope;
-- choose appropriate built-in collections and use iteration lazily;
-- write typed functions with clear inputs, outputs, and error behaviour;
-- manage resources with context managers;
-- isolate dependencies and package a repeatable project;
-- distinguish threads, processes, and asynchronous I/O;
-- test business logic without unnecessary external dependencies;
-- diagnose failures from tracebacks, logs, tests, and debugger state.
+> [!question] Interview Questions
+> - What's the difference between `is` and `==` in Python, and when does that distinction actually matter?
+> - Why does a mutable default argument cause a common and hard-to-spot bug?
+> - How does a context manager guarantee a resource is released, even if the block raises?
+> - What's the difference between a thread, a process, and asynchronous I/O in Python, and how does the GIL affect that choice?
+> - How would you isolate a project's dependencies to make a build reproducible across machines?
 
 ## Official References
 

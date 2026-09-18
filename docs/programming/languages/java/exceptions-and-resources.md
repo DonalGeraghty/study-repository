@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/languages/java
+---
+
 # Java Exceptions and Resources
 
 Exceptions represent abnormal conditions that interrupt normal control flow. Good exception design preserves meaning, failure context, and resource safety without hiding defects.
@@ -166,6 +171,20 @@ try {
 }
 ```
 
+```mermaid
+sequenceDiagram
+    participant Body as try body
+    participant O as output (opened 2nd)
+    participant I as input (opened 1st)
+    Body->>Body: input.transferTo(output)
+    Body--xBody: body throws IOException
+    Body->>O: close() (reverse order)
+    O--xBody: close() also throws (suppressed)
+    Body->>I: close()
+    I-->>Body: closes normally
+    Note over Body: Body exception is primary;<br/>output's close exception is attached as suppressed
+```
+
 This preserves more evidence than a hand-written `finally` that accidentally replaces the original exception.
 
 An effectively final resource created earlier can also be used:
@@ -290,18 +309,14 @@ Avoid asserting an entire incidental stack trace or message that is not contract
 - Using assertions for production validation.
 - Exposing internal implementation or sensitive values in messages.
 
-## Interview Checklist
+## Interview Questions
 
-You should be able to explain:
-
-- checked versus unchecked exceptions and `Error`;
-- `throw` versus `throws`;
-- when to catch, translate, or propagate;
-- cause chains and suppressed exceptions;
-- `finally` and try-with-resources;
-- deterministic cleanup versus garbage collection;
-- interruption handling;
-- how to test exceptional behaviour.
+> [!question] Interview Questions
+> - What's the practical difference between a checked and an unchecked exception, and how do you decide which to use for a new API?
+> - Why does wrapping an exception without preserving its cause make debugging harder?
+> - Why does try-with-resources close resources in reverse declaration order, and what happens to a suppressed exception when both the body and `close` throw?
+> - Why shouldn't you return from inside a `finally` block?
+> - How would you handle `InterruptedException` correctly instead of swallowing it?
 
 ## Further Reading
 

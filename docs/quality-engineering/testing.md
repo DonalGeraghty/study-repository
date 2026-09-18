@@ -1,3 +1,8 @@
+---
+tags:
+  - quality-engineering
+---
+
 # Software Testing
 
 Software testing evaluates software and related work products to discover defects, reduce risk, and provide information for decisions. It includes more than executing test cases: requirements analysis, design review, exploratory work, automation, observability, and production learning all contribute to confidence.
@@ -184,20 +189,15 @@ Regression scope should follow dependency and risk analysis. â€œRun everythingâ€
 
 Testing activities overlap and repeat throughout iterative, agile, and DevOps delivery. They should not be treated as a one-way hand-off owned only by a QA team.
 
-```text
-Plan and monitor
-       |
-Analyse risk and test basis
-       |
-Design tests and required coverage
-       |
-Implement tests, data, tools, and environments
-       |
-Execute, explore, investigate, and report
-       |
-Evaluate results and complete the test activity
-       |
-Learn and adjust continuously
+```mermaid
+flowchart TD
+    A[Plan and monitor] --> B[Analyse risk and test basis]
+    B --> C[Design tests and required coverage]
+    C --> D[Implement tests, data, tools, and environments]
+    D --> E[Execute, explore, investigate, and report]
+    E --> F[Evaluate results and complete the test activity]
+    F --> G[Learn and adjust continuously]
+    G --> A
 ```
 
 ### Test Planning
@@ -353,11 +353,17 @@ Mark impossible or irrelevant combinations explicitly.
 
 Model valid and invalid events from each state.
 
-```text
-Pending -> Paid -> Shipped -> Delivered
-   |         |
-   v         v
-Cancelled  Refunded
+```mermaid
+stateDiagram-v2
+    [*] --> Pending
+    Pending --> Paid
+    Paid --> Shipped
+    Shipped --> Delivered
+    Pending --> Cancelled
+    Paid --> Refunded
+    Delivered --> [*]
+    Cancelled --> [*]
+    Refunded --> [*]
 ```
 
 Test valid transitions, forbidden transitions, repeated events, and behaviour after terminal states.
@@ -753,47 +759,17 @@ This risk-to-evidence mapping is more useful than listing tools before understan
 - Reporting findings without impact, context, or reproduction evidence.
 - Keeping obsolete tests because they once found a defect.
 
-## Interview Approach
+## Interview Questions
 
-When asked how you would test a feature:
-
-1. Clarify users, objectives, architecture, constraints, and failure impact.
-2. Identify product risks and rank them.
-3. Model inputs, boundaries, states, rules, dependencies, and trust boundaries.
-4. Select test techniques and the lowest useful test levels.
-5. Cover functional, security, performance, accessibility, and reliability concerns proportionately.
-6. Explain data, environments, isolation, and observability.
-7. Decide what to automate and where it runs in delivery.
-8. State limitations, residual risks, and the evidence needed for a decision.
-
-Strong answers show prioritisation. Do not respond with an unbounded list of test cases before understanding the risk.
-
-## Practice Exercises
-
-1. Build an equivalence and boundary table for a password-reset token with a 15-minute lifetime.
-2. Create a decision table for discounts based on customer type, basket value, and promotion eligibility.
-3. Draw a state model for an order including cancellation, payment failure, and refund.
-4. Write an exploratory charter for a flaky asynchronous notification workflow.
-5. Design a test portfolio for an API without defaulting every case to end-to-end tests.
-6. Diagnose a suite that fails only during parallel CI execution.
-7. Create a risk-based release report from incomplete and conflicting test evidence.
-
-## Readiness Checklist
-
-You should be able to:
-
-- explain the seven testing principles without treating them as slogans;
-- distinguish verification, validation, testing, and debugging;
-- select useful test levels and types from system risk;
-- apply equivalence, boundary, decision-table, and state-transition techniques;
-- plan and execute an exploratory session;
-- design a maintainable automation portfolio;
-- control data, environments, time, and dependencies;
-- investigate flaky tests systematically;
-- test authentication separately from authorisation;
-- reason about security, performance, accessibility, and resilience;
-- design layered CI/CD feedback;
-- communicate evidence, limitations, and residual risk clearly.
+> [!question] Interview Questions
+> - How would you approach testing a feature you've just been handed, before writing a single test case?
+> - How do you decide what to automate versus what stays exploratory or manual?
+> - How would you build a decision table for discounts based on customer type, basket value, and promotion eligibility?
+> - How would you draw a state model for an order that includes cancellation, payment failure, and refund?
+> - How would you diagnose a test suite that only fails during parallel CI execution?
+> - What's the difference between verification and validation, and why does it matter?
+> - Why do "tests wear out," and how would you refresh a regression suite that's stopped finding new defects?
+> - How would you write a risk-based release report from incomplete or conflicting test evidence?
 
 ## Related Guides
 

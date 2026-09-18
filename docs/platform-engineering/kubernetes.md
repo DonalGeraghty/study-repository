@@ -1,3 +1,8 @@
+---
+tags:
+  - platform-engineering
+---
+
 # Kubernetes
 
 Kubernetes is a platform for deploying and managing containerised applications across a cluster of machines. It does not build container images. Instead, it pulls existing images and keeps the resulting workloads aligned with a declared desired state.
@@ -21,13 +26,14 @@ Typical capabilities include:
 
 A Kubernetes cluster consists of a **control plane** and one or more **worker nodes**.
 
-```text
-kubectl -> API server -> desired state stored in etcd
-                         |              |
-                         |              -> controllers reconcile state
-                         -> scheduler assigns Pods to Nodes
-                                            |
-                                            -> kubelet starts containers
+```mermaid
+flowchart TD
+    K[kubectl] --> A[API server]
+    A --> E[etcd: desired state]
+    A --> CTRL[Controllers reconcile state]
+    A --> S[Scheduler]
+    S -->|assigns Pods to Nodes| N[kubelet]
+    N --> C[Containers]
 ```
 
 ### Control Plane
@@ -466,6 +472,25 @@ If the release is unhealthy, roll it back:
 kubectl rollout undo deployment/hello-app -n docker-study
 ```
 
+```mermaid
+sequenceDiagram
+    participant U as kubectl
+    participant D as Deployment
+    participant RS as New ReplicaSet
+    participant OLD as Old ReplicaSet
+    U->>D: kubectl set image ... :1.1
+    D->>RS: create new ReplicaSet
+    RS->>RS: start new Pods (respecting maxSurge)
+    D->>OLD: scale down old Pods (respecting maxUnavailable)
+    U->>D: kubectl rollout status
+    alt Rollout healthy
+        D-->>U: rollout complete
+    else Rollout unhealthy
+        U->>D: kubectl rollout undo
+        D->>OLD: restore previous ReplicaSet
+    end
+```
+
 Deployment rollback restores an earlier Pod template revision. It does not automatically revert a ConfigMap, Secret, Service, database migration, or external dependency. Design releases so application, configuration, and data changes remain compatible with the rollback plan.
 
 Prefer unique, immutable image tags for releases. Reusing a tag makes it difficult to determine exactly which image is running and can produce inconsistent pulls.
@@ -791,22 +816,16 @@ Namespace deletion can also delete PersistentVolumeClaims. Whether backing stora
 
 Despite its name, `kubectl get all` does not return every resource type. Query important resources such as ConfigMaps, Secrets, NetworkPolicies, Ingresses or Gateways, PersistentVolumeClaims, and RBAC objects explicitly.
 
-## Review Checklist
+## Interview Questions
 
-- [ ] The active context and Namespace are confirmed before every change.
-- [ ] Manifests pass local, server-side, policy, and rendered-output validation.
-- [ ] Images use intentional immutable tags or digests and are available for every node architecture.
-- [ ] Requests and limits come from observed behaviour.
-- [ ] Startup, readiness, and liveness probes represent different failure decisions.
-- [ ] Rolling-update and graceful-termination settings protect in-flight work.
-- [ ] Replicas are spread across the failure domains required for availability.
-- [ ] HPA, GitOps, and deployment tooling have non-conflicting field ownership.
-- [ ] Pods run with least privilege and do not receive unnecessary API tokens.
-- [ ] RBAC, Secrets, and network access follow least privilege.
-- [ ] Persistent-data retention and backup behaviour are understood.
-- [ ] Logs, metrics, traces, events, and rollout metadata support diagnosis.
-- [ ] API deprecations and cluster/client version compatibility are checked before upgrades.
-- [ ] Rollback includes compatible configuration and data changes, not only an older image.
+> [!question] Interview Questions
+> - Why do startup, readiness, and liveness probes each protect against a different failure, and what happens if you conflate them?
+> - How would you decide resource requests and limits for a workload you don't have production data for yet?
+> - Why doesn't two replicas guarantee high availability, and what would you add to actually get it?
+> - What's the difference between a PodDisruptionBudget and a rolling-update strategy, and what does neither protect against?
+> - How would you diagnose a Deployment stuck in a rollout that never completes?
+> - Why should an HPA and a GitOps controller not both own `spec.replicas`?
+> - What's the blast radius of deleting a Namespace, and how would you avoid it in a shared environment?
 
 ## Official Documentation
 

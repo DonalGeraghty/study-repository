@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/frameworks
+---
+
 # Express
 
 Express is a minimal web framework for Node.js. An application is a sequence of middleware and route handlers that receive a request, produce a response, or delegate to the next stage.
@@ -67,6 +72,32 @@ export function createApp(resultService) {
 }
 ```
 
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant R as Route handler
+    participant S as resultService
+    participant E as Error middleware
+    C->>R: GET /results/:id
+    R->>R: validate id
+    alt Invalid id
+        R-->>C: 400 invalid-result-id
+    else Valid id
+        R->>S: find(id)
+        alt Found
+            S-->>R: result
+            R-->>C: 200 result
+        else Not found
+            S-->>R: null
+            R-->>C: 404 result-not-found
+        else Throws
+            S--xR: error
+            R->>E: next(error)
+            E-->>C: 500 internal-error
+        end
+    end
+```
+
 The route translates HTTP input and output while `resultService` owns application behaviour. The response does not expose the caught exception. A real service would add central schema validation, correlation, authentication, and an intentional error vocabulary.
 
 ## Testing
@@ -86,6 +117,15 @@ Test service logic directly, exercise the HTTP boundary with a representative se
 ## Project Connections
 
 `tododos-express-api` uses Express with CORS middleware and MySQL, packaged in a Node.js Docker image.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why does middleware order matter, and what breaks if error middleware is installed before the routes?
+> - Why must a rejected promise inside a route handler be passed to `next(error)` instead of left to reject silently?
+> - Why isn't CORS a substitute for authentication?
+> - What's the risk of accepting an unbounded JSON request body?
+> - How would you shut an Express server down cleanly without dropping in-flight requests or leaving pools open?
 
 ## Related Guides
 

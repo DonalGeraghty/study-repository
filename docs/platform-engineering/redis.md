@@ -1,3 +1,8 @@
+---
+tags:
+  - platform-engineering
+---
+
 # Redis
 
 Redis is an in-memory data store with purpose-built data structures and atomic operations. It is commonly used for caches, sessions, counters, rate limits, leaderboards, and streams. Its speed does not remove the need to design data lifetime, memory bounds, durability, and failure behaviour.
@@ -108,9 +113,14 @@ Avoid broad key scans in application request paths. Prefer `SCAN` for controlled
 - sharing one Redis deployment between unrelated workloads with incompatible eviction or latency needs;
 - retrying non-idempotent operations without understanding whether they ran.
 
-## Practice
+## Interview Questions
 
-Design Redis keys for a login session, a five-minute product cache, a per-user API rate limit, and a leaderboard. For each, state the data type, TTL, atomic operation, failure behaviour, and whether losing the value is acceptable.
+> [!question] Interview Questions
+> - How would you design Redis keys for a login session, a five-minute product cache, a per-user rate limit, and a leaderboard?
+> - Which data type and TTL would you choose for each, and why?
+> - Which of those four would be genuinely dangerous to lose, versus just inconvenient?
+> - Why is `KEYS *` unsafe against a busy production instance, and what would you use instead?
+> - What makes a distributed lock unsafe if you don't handle ownership on release?
 
 ## Official References
 

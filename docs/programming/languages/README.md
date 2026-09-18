@@ -1,3 +1,9 @@
+---
+tags:
+  - programming/languages
+  - moc
+---
+
 # Programming Languages
 
 This section contains language and runtime learning material across application development, automation, data analysis, and database work.

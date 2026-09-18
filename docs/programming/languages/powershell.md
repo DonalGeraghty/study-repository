@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/languages
+---
+
 # PowerShell
 
 PowerShell is a cross-platform automation shell and scripting language built around structured objects rather than plain-text pipelines. It is useful for repository checks, administration, CI tasks, and Windows-oriented workflows.
@@ -10,6 +15,12 @@ Commands emit objects whose properties can be filtered, grouped, sorted, and pas
 Get-ChildItem -File |
     Where-Object Extension -eq '.csv' |
     Select-Object Name, Length
+```
+
+```mermaid
+flowchart LR
+    A["Get-ChildItem -File"] --> B["Where-Object Extension -eq '.csv'"]
+    B --> C["Select-Object Name, Length"]
 ```
 
 Prefer object properties to parsing formatted display text. Formatting commands belong at the output boundary because they turn objects into presentation data.
@@ -75,6 +86,21 @@ catch {
 }
 ```
 
+```mermaid
+flowchart TD
+    A[Resolve path] --> B{Rows exist?}
+    B -->|No| E1[Throw: no data rows]
+    B -->|Yes| C{Required columns present?}
+    C -->|No| E2[Throw: missing columns]
+    C -->|Yes| D[For each row]
+    D --> F{Date valid?}
+    F -->|No| E3[Throw: invalid date]
+    F -->|Yes| G{Value valid?}
+    G -->|No| E4[Throw: invalid value]
+    G -->|Yes| D
+    D --> H[Validation passed]
+```
+
 The array wrappers preserve a predictable collection when the CSV has zero or one row. Diagnostics report CSV line numbers rather than zero-based indexes. For portable data, parse dates and decimals with an explicit invariant format rather than the current machine's culture.
 
 ## Common Failure Modes
@@ -89,6 +115,15 @@ The array wrappers preserve a predictable collection when the CSV has zero or on
 ## Project Connections
 
 `health-os` uses a PowerShell script and GitHub Actions to validate yearly CSV filenames, schemas, dates, and duplicate rows.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why is it a mistake to parse a command's formatted console text instead of using its object properties directly?
+> - Why can a one-row pipeline result silently stop being an array, and how would you guard against that?
+> - Why would you resolve paths with `$PSScriptRoot` instead of the current working directory?
+> - What's the risk of letting a non-terminating error pass through a CI step unnoticed?
+> - Why does parsing dates or decimals with the current machine's culture make a script unreliable across environments?
 
 ## Related Guides
 

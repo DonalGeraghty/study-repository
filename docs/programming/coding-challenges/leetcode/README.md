@@ -1,3 +1,9 @@
+---
+tags:
+  - programming/coding-challenges/leetcode
+  - moc
+---
+
 # LeetCode
 
 This page records LeetCode problems after they have been completed as deliberate practice.

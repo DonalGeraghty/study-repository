@@ -1,3 +1,9 @@
+---
+tags:
+  - engineering-foundations
+  - moc
+---
+
 # Engineering Foundations
 
 These guides cover everyday engineering practices and the decisions that support maintainable delivery.
@@ -15,10 +21,5 @@ These guides cover everyday engineering practices and the decisions that support
 ## Suggested Use
 
 Learn enough Git to work safely, use code review to improve shared ownership, evaluate technology choices from product and operational constraints, and distinguish the core data transformations used in secure systems.
-
-## Reference Diagrams
-
-- [GitHub Flow diagram](./assets/github-flow.png)
-- [GitFlow diagram](./assets/git-flow.png)
 
 Return to the [documentation library](../README.md).

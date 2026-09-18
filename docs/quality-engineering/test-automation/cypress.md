@@ -1,3 +1,8 @@
+---
+tags:
+  - quality-engineering/test-automation
+---
+
 # Cypress
 
 Cypress is a JavaScript and TypeScript testing tool for browser end-to-end and component tests. Its command queue, automatic retry behaviour, application iframe, network control, and interactive runner create a different mental model from direct WebDriver-style automation.
@@ -60,6 +65,19 @@ cy.findByRole("button", { name: "Place order" }).click();
 cy.wait("@createOrder").its("response.statusCode").should("eq", 201);
 ```
 
+```mermaid
+sequenceDiagram
+    participant T as Test
+    participant C as Cypress
+    participant A as App
+    T->>C: cy.intercept("POST", "/api/orders").as("createOrder")
+    T->>A: click "Place order"
+    A->>C: POST /api/orders
+    C-->>A: response
+    T->>C: cy.wait("@createOrder")
+    C-->>T: aliased response (status, body)
+```
+
 Register an intercept before triggering the request. Stub failures or edge cases when control adds value, but retain integration coverage against real services for the contracts the system depends on.
 
 ## End-to-End and Component Testing
@@ -85,17 +103,14 @@ npx cypress run
 
 Start the application outside the Cypress test process, wait for a readiness endpoint, and stop it after the run. Pin the Cypress binary and dependencies through the project’s package and CI image strategy.
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- explain the command queue and why commands do not return immediate values;
-- distinguish queries, actions, assertions, and their retry behaviour;
-- select elements from accessibility or stable test contracts;
-- isolate browser and server state for independent tests;
-- use programmatic authentication and sessions safely;
-- decide when to observe, wait for, or stub network traffic;
-- diagnose failures using the command log and retained CI artifacts.
+> [!question] Interview Questions
+> - Why don't Cypress commands return values synchronously, and how does that change how you write assertions?
+> - What's the difference between a query, an action, and an assertion in Cypress's retry model?
+> - How would you isolate browser and server state so tests can run independently and in parallel?
+> - When would you use `cy.intercept()` to observe traffic versus stub it, and what's the risk of over-stubbing?
+> - How would you diagnose a flaky Cypress test using the command log and CI artifacts?
 
 ## Official References
 

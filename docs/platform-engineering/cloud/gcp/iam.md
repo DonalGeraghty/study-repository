@@ -1,3 +1,8 @@
+---
+tags:
+  - platform-engineering/cloud/gcp
+---
+
 # Identity and Access Management
 
 Google Cloud Identity and Access Management controls which principals may perform which actions on which resources. IAM is an authorisation system; authentication establishes the principal, while IAM policies determine permitted access.
@@ -23,14 +28,12 @@ IAM does not normally grant access directly through individual permissions; perm
 
 Allow policies can be attached at the organisation, folder, project, or supported resource level. Descendants inherit access granted by ancestors.
 
-```text
-organisation policy
-      v
-folder policy
-      v
-project policy
-      v
-service resource policy
+```mermaid
+flowchart TD
+    A[Organisation policy] --> B[Folder policy]
+    B --> C[Project policy]
+    C --> D[Service resource policy]
+    C --> E[Another service resource policy]
 ```
 
 A project-level grant can reach many resources, including ones created later. Grant at the narrowest stable boundary that matches the responsibility. Do not assume a resource’s local policy shows all effective access; inherited bindings also matter.
@@ -115,17 +118,14 @@ Manage IAM through reviewed code where practical. Avoid authoritative policy res
 
 Test positive and negative access: prove that required work succeeds and forbidden work fails. Validate policy changes in a non-production hierarchy, inspect the plan for membership removal or privilege expansion, and preserve an emergency recovery path.
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- distinguish authentication, principals, permissions, roles, and policies;
-- trace inherited access through the resource hierarchy;
-- select predefined roles and govern custom roles;
-- use groups for people and service accounts for workloads;
-- avoid long-lived keys through impersonation or federation;
-- explain conditions, deny precedence, and indirect privilege escalation;
-- diagnose a denial without applying an unnecessarily broad grant.
+> [!question] Interview Questions
+> - How does access inherited through the resource hierarchy affect what you see in a single resource's local policy?
+> - When would you choose a predefined role over a custom one, and what's the maintenance cost of custom roles?
+> - Why would you use impersonation or workload identity federation instead of a long-lived service-account key?
+> - How could a combination of roles create an indirect privilege-escalation path that no single grant looks dangerous on its own?
+> - How would you diagnose an access denial without immediately granting a broader role to make the error go away?
 
 ## Official References
 

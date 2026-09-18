@@ -1,21 +1,23 @@
+---
+tags:
+  - platform-engineering/cloud/gcp
+---
+
 # Google Cloud Application Services
 
 Several projects combine Cloud Run with supporting Google Cloud services. Each service solves a different delivery or runtime concern and should use a dedicated identity, lifecycle, and access policy.
 
 ## Reference Flow
 
-```text
-source -> Cloud Build identity -> Artifact Registry
-                                      |
-deployment identity ------------------+
-                                      v
-                              Cloud Run revision
-                                      |
-                            runtime service account
-                            /         |          \
-                         KMS      Firestore   external APIs
-
-Cloud Scheduler identity --authenticated request--> Cloud Run endpoint
+```mermaid
+flowchart TD
+    A[Source] -->|Cloud Build identity| B[Artifact Registry]
+    B -->|deployment identity| C[Cloud Run revision]
+    C --> D[Runtime service account]
+    D --> E[KMS]
+    D --> F[Firestore]
+    D --> G[External APIs]
+    H[Cloud Scheduler identity] -->|authenticated request| C
 ```
 
 The build identity writes artifacts, the deployment identity selects what runs, and the runtime identity accesses application dependencies. Keeping those permissions separate prevents a compromised runtime from silently publishing its own replacement image.
@@ -71,6 +73,15 @@ The Firebase Admin SDK gives trusted server code administrative access to Fireba
 ## Project Connections
 
 Nyx and Aether publish images to Artifact Registry. The Janus APIs use Cloud KMS for provider credentials, Firebase Admin for Firestore access, and Cloud Scheduler for push-reminder requests.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why should the build, deployment, and runtime identities in this flow each have different permissions?
+> - What does Cloud KMS actually protect, and what can it not protect once data leaves it as plaintext?
+> - Why must a Cloud Scheduler-triggered endpoint be idempotent, and how would you design the operation key for a daily job?
+> - Why can server code using the Firebase Admin SDK bypass client security rules, and what does that mean for where authorisation must be enforced?
+> - What goes wrong if the runtime service account is also granted deployment permissions?
 
 ## Related Guides
 

@@ -1,3 +1,8 @@
+---
+tags:
+  - platform-engineering/cloud/gcp
+---
+
 # Cloud Storage
 
 Cloud Storage is managed object storage. It stores immutable object data and metadata inside buckets. It is suited to artifacts, media, backups, exports, data lakes, and static assets; it is not a mounted block device or a relational database.
@@ -78,17 +83,14 @@ Major cost drivers include stored bytes, storage class, operation volume, retrie
 
 Test permissions, signed URL expiry, uploads, checksum failure, concurrent updates, lifecycle rules, retention, object restore, and regional dependencies. A backup bucket in the same administrative and credential boundary may not protect against account compromise or mistaken policy changes.
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- distinguish object storage from file and block storage;
-- choose bucket location and storage class from workload requirements;
-- design IAM, uniform access, signed URLs, and public access prevention;
-- distinguish versioning, soft delete, retention, and lifecycle rules;
-- protect concurrent writes with generations and preconditions;
-- process events idempotently;
-- estimate and monitor storage, operation, retrieval, and transfer cost.
+> [!question] Interview Questions
+> - What's the practical difference between object storage and block or file storage, and when does that distinction matter?
+> - How would you prevent two concurrent writers from silently overwriting each other's object?
+> - What's the difference between versioning, soft delete, and a lifecycle rule, and when would you rely on each?
+> - Why must an event handler that processes storage notifications be idempotent?
+> - How would you estimate and monitor the cost drivers for a storage-heavy workload before they dominate the bill?
 
 ## Official References
 

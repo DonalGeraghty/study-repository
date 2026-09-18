@@ -1,0 +1,9 @@
+# Obsidian local/workspace state (per-device, not shared)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/workspace-mobile.json.bak
+.obsidian/cache
+
+# OS cruft
+.DS_Store
+Thumbs.db

@@ -1,3 +1,8 @@
+---
+tags:
+  - engineering-foundations
+---
+
 # Git
 
 Git is a distributed version-control system. It records snapshots of a project, supports parallel development, and gives teams tools for reviewing, integrating, releasing, and recovering changes.
@@ -228,6 +233,21 @@ A branching strategy is a team convention rather than a Git requirement. Choose 
 GitHub Flow is a lightweight, branch-based workflow centred on a deployable default branch.
 
 ```mermaid
+gitGraph
+   commit id: "init"
+   commit id: "update main"
+   branch feature/login
+   checkout feature/login
+   commit id: "add form"
+   commit id: "add validation"
+   checkout main
+   merge feature/login id: "PR merged"
+   commit id: "deploy"
+```
+
+One default branch stays deployable; every change is a short-lived branch that rejoins it through a reviewed pull request.
+
+```mermaid
 flowchart LR
     A[Update main] --> B[Create short-lived branch]
     B --> C[Make focused commits]
@@ -270,6 +290,39 @@ Incomplete behaviour is often separated from release using feature flags, branch
 ### GitFlow
 
 GitFlow separates feature integration, release preparation, production history, and emergency fixes using multiple branch types.
+
+```mermaid
+gitGraph
+   commit id: "v1.0" tag: "v1.0"
+   branch develop
+   checkout develop
+   commit id: "start next cycle"
+   branch feature/search
+   checkout feature/search
+   commit id: "search UI"
+   commit id: "search API"
+   checkout develop
+   merge feature/search
+   branch release/1.1
+   checkout release/1.1
+   commit id: "stabilise release"
+   checkout main
+   merge release/1.1
+   commit id: "v1.1" tag: "v1.1"
+   checkout develop
+   merge release/1.1
+   checkout main
+   branch hotfix/1.1.1
+   checkout hotfix/1.1.1
+   commit id: "critical fix"
+   checkout main
+   merge hotfix/1.1.1
+   commit id: "v1.1.1" tag: "v1.1.1"
+   checkout develop
+   merge hotfix/1.1.1
+```
+
+Four branch roles interact over time: `develop` absorbs finished features, `release/*` stabilises a cut without blocking new feature work, and `hotfix/*` patches production without waiting for the next release.
 
 ```mermaid
 flowchart LR
@@ -537,30 +590,17 @@ A tag identifies a specific commit. A hosted-platform release may add notes and 
 - Use `git bisect` with a reliable automated test to locate regressions efficiently.
 - Protect release branches and require appropriate review and status checks.
 
-## Practice Exercises
+## Interview Questions
 
-1. Initialise a repository and create three focused commits.
-2. Stage only part of a modified file using `git add --patch`.
-3. Create two branches that edit the same line, then resolve the merge conflict.
-4. Rebase a private feature branch onto an updated `origin/main` and explain which commit IDs changed.
-5. Undo a published commit with `git revert`.
-6. Recover a deliberately reset local commit using `git reflog`.
-7. Use `git bisect` to locate a commit that makes a test fail.
-8. Draw the team's current branching and release workflow and identify its integration risks.
-
-## Readiness Checklist
-
-You should be able to:
-
-- explain the working tree, staging area, local history, and remote-tracking references;
-- build focused commits and inspect exactly what each contains;
-- distinguish fetch, pull, merge, rebase, and push;
-- resolve and abort merge and rebase conflicts;
-- choose safely between restore, revert, reset, amend, and reflog;
-- explain fast-forward, merge-commit, rebase, and squash outcomes;
-- compare GitHub Flow, trunk-based development, and GitFlow;
-- diagnose a regression using repository history;
-- protect secrets and avoid overwriting collaborators' work.
+> [!question] Interview Questions
+> - What's the difference between the working tree, staging area, local history, and remote-tracking references?
+> - When would you choose rebase instead of merge, and what changes about the resulting history?
+> - How would you resolve a merge conflict where two branches edited the same line — and how would you abort if it goes wrong?
+> - What's the difference between `restore`, `revert`, `reset`, and `commit --amend`, and when is each safe on shared history?
+> - How would you recover a commit after an accidental `git reset --hard`?
+> - How would you use `git bisect` to find the commit that introduced a regression?
+> - How do GitHub Flow, trunk-based development, and GitFlow differ, and when would you choose each?
+> - Why is `--force-with-lease` safer than `--force` when rewriting a branch someone else may have pulled?
 
 ## Quick Command Reference
 

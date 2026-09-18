@@ -1,3 +1,9 @@
+---
+tags:
+  - platform-engineering/cloud/gcp
+  - moc
+---
+
 # Google Cloud Platform
 
 Google Cloud Platform provides infrastructure and managed services organised around resource hierarchy, projects, identities, regions, and zones. Sound GCP design starts from workload boundaries, trust, data, reliability, and operations before selecting individual products.

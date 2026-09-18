@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/frameworks
+---
+
 # Spring and Spring Boot
 
 Spring is a Java application framework centred on dependency injection and composable infrastructure. Spring Boot builds on Spring with dependency starters, auto-configuration, executable applications, production features, and opinionated defaults.
@@ -65,11 +70,43 @@ class ResultController {
 }
 ```
 
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant Ctrl as ResultController
+    participant S as Service
+    participant R as Repository
+    participant DB as Database
+    C->>Ctrl: GET /results/{id}
+    Ctrl->>S: find(id)
+    S->>R: findById(id)
+    R->>DB: SELECT ...
+    DB-->>R: row
+    R-->>S: entity
+    S-->>Ctrl: ResultResponse
+    Ctrl-->>C: 200 ResultResponse
+```
+
 Keep transport DTOs separate from persistence entities where their contracts evolve differently. Validate request data, map errors consistently, enforce authorisation at the correct boundary, and avoid leaking implementation exceptions to clients.
 
 ## Persistence and Transactions
 
 Spring Data can reduce repository boilerplate, but database semantics still matter. Understand generated queries, fetch strategies, transaction boundaries, locks, indexes, and the number of round trips.
+
+```mermaid
+sequenceDiagram
+    participant Caller
+    participant Proxy as Spring proxy
+    participant Bean as Target bean
+    Caller->>Proxy: call transactionalMethod()
+    Proxy->>Proxy: begin transaction
+    Proxy->>Bean: transactionalMethod()
+    Bean-->>Proxy: result
+    Proxy->>Proxy: commit/rollback
+    Proxy-->>Caller: result
+    Note over Bean: Self-invocation bypasses the proxy
+    Bean->>Bean: this.transactionalMethod() (no proxy, no transaction)
+```
 
 `@Transactional` is commonly applied through proxies. Self-invocation and calls outside the managed proxy can therefore bypass advice. Keep transactions short, avoid remote calls inside them, and verify rollback rules for checked and unchecked failures.
 
@@ -109,17 +146,15 @@ Context caching makes repeated compatible configurations cheaper. Excessive mock
 - loading the full context for every test;
 - retrying non-idempotent operations without a safety model.
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- explain beans, scopes, dependency injection, proxies, and auto-configuration;
-- bind and validate external configuration safely;
-- design stable HTTP boundaries and error responses;
-- place transaction boundaries deliberately and diagnose query behaviour;
-- select a focused test scope rather than always loading the application;
-- expose health and diagnostics without leaking sensitive data;
-- diagnose startup and runtime problems from conditions, logs, metrics, and traces.
+> [!question] Interview Questions
+> - Why does Spring prefer constructor injection over field injection?
+> - Why doesn't singleton-scoped mean thread-safe, and what's the risk of shared mutable state in a service bean?
+> - Why does self-invocation bypass a `@Transactional` proxy, and what breaks as a result?
+> - How would you choose the narrowest test scope for a given behaviour instead of always loading the full Spring context?
+> - Why shouldn't Actuator endpoints be exposed without restriction?
+> - How would you diagnose unexpected auto-configuration behaviour in a running application?
 
 ## Official References
 

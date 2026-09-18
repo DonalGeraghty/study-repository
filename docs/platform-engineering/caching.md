@@ -1,3 +1,8 @@
+---
+tags:
+  - platform-engineering
+---
+
 # Caching
 
 Caching stores data in a faster temporary location so repeated work can be avoided. A cache can reduce latency and load, but it introduces a second copy of data whose freshness, capacity, and failure behaviour must be designed deliberately.
@@ -53,6 +58,17 @@ def get_product(product_id, cache, repository):
 
     cache.set(key, json.dumps(product), ex=PRODUCT_TTL_SECONDS)
     return product
+```
+
+```mermaid
+flowchart TD
+    A[Request product] --> B{In cache?}
+    B -->|Hit| C[Return cached value]
+    B -->|Miss| D[Read from repository]
+    D --> E{Found?}
+    E -->|Yes| F[Store in cache with TTL]
+    F --> C
+    E -->|No| G[Return not found]
 ```
 
 The cache key includes a schema version so an incompatible representation can be rolled out without interpreting old values. The source of truth is still the repository. If the cache is unavailable, the application may choose to read the repository directly, subject to a timeout and protection against overloading it.
@@ -119,17 +135,14 @@ A high hit ratio is not success if stale data is harming users or one miss takes
 - assuming deletion and a database write are one atomic operation;
 - letting a cache outage become a database outage through unrestricted fallback.
 
-## Practice
+## Interview Questions
 
-For a product endpoint, decide how you would cache the product details, current stock, price, and a personalised discount. They do not necessarily share a TTL or even belong in the same cached object.
-
-Explain:
-
-1. the source of truth for each value;
-2. the acceptable staleness;
-3. the key and invalidation event;
-4. behaviour during cache failure;
-5. the measurements that would show whether caching helped.
+> [!question] Interview Questions
+> - For a product page showing details, stock, price, and a personalised discount, would you cache all four the same way? Why or why not?
+> - How would you decide the acceptable staleness for each of those values?
+> - How would the cache key and invalidation event differ for stock versus a product description?
+> - What should happen to a request if the cache is unavailable — and does that answer change per value?
+> - What would tell you that caching actually helped, beyond a raw hit ratio?
 
 ## Related Guides
 

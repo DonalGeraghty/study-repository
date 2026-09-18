@@ -1,3 +1,9 @@
+---
+tags:
+  - programming/frameworks
+  - moc
+---
+
 # Frameworks and Libraries
 
 This section contains application frameworks and libraries built on top of the repository's programming-language foundations.

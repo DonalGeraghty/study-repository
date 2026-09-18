@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/web
+---
+
 # CSS
 
 CSS describes how structured documents are presented. It is a rule system influenced by the cascade, inheritance, layout algorithms, content, viewport, user preferences, and browser support—not a sequence of drawing commands.
@@ -11,6 +16,15 @@ A rule selects elements and assigns property values:
   border-inline-start: 0.25rem solid var(--accent-color);
   padding: 1rem;
 }
+```
+
+```mermaid
+flowchart TD
+    A[Origin and importance] --> B[Cascade layers]
+    B --> C[Selector specificity]
+    C --> D[Scoping proximity, where applicable]
+    D --> E[Source order]
+    E --> F[Winning declaration]
 ```
 
 When declarations conflict, the cascade considers origin and importance, cascade layers, selector specificity, scoping proximity where applicable, and source order. Prefer low-specificity classes and an intentional layer structure over escalating selectors or routine `!important`.
@@ -113,17 +127,15 @@ Test:
 - long content, empty states, errors, and loading states;
 - zoom and text scaling.
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- explain why a declaration wins in the cascade;
-- reason about box sizing, normal flow, containing blocks, and overflow;
-- choose Flexbox or Grid from layout requirements;
-- build responsive components around content constraints;
-- structure tokens and component styles without specificity escalation;
-- preserve focus, contrast, zoom, and motion accessibility;
-- diagnose rendering with computed styles and layout tools.
+> [!question] Interview Questions
+> - What determines which declaration wins when two rules target the same element?
+> - Why does `box-sizing: border-box` change how you reason about an element's declared width?
+> - How would you decide between Flexbox and Grid for a given layout?
+> - Why does escalating specificity or reaching for `!important` usually make a stylesheet harder to maintain?
+> - How would you verify a component still works with zoom, high contrast, and reduced motion?
+> - How would you diagnose why a rule you wrote isn't winning, using the browser's computed styles?
 
 ## Official References
 

@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/tooling
+---
+
 # Node.js and npm
 
 Node.js is a JavaScript runtime outside the browser. npm installs packages and runs repository-defined scripts from `package.json`.
@@ -85,6 +90,15 @@ The caller owns the timeout or cancellation policy and handles the rejected prom
 ## Project Connections
 
 Nyx and Aether use npm to build React applications with Vite. `shtormscsgo` uses Vue CLI, Cypress uses its Node package, and `tododos-express-api` runs an Express server on Node.js.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why can CPU-heavy synchronous code block every concurrent request in a Node.js process, even though I/O is asynchronous?
+> - Why does `npm ci` behave differently from `npm install` in a CI pipeline?
+> - Why is it dangerous to put a server secret in a frontend build variable?
+> - What happens to an unhandled rejected promise that no request, job, or shutdown boundary observes?
+> - Why should a runtime dependency never end up in `devDependencies`?
 
 ## Related Guides
 

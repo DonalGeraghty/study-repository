@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/tooling
+---
+
 # Data Analysis and Visualisation Libraries
 
 The projects use focused Python and R libraries to clean tabular data, calculate results, and produce charts or maps. Libraries accelerate implementation, but data meaning, validation, and statistical assumptions remain application responsibilities.
@@ -48,6 +53,15 @@ def revenue_by_category(orders, products):
     )
 ```
 
+```mermaid
+flowchart LR
+    A[orders] --> C[merge on product_id]
+    B[products] --> C
+    C --> D[assign revenue = quantity * unit_price]
+    D --> E[groupby category, sum revenue]
+    E --> F[sort by revenue descending]
+```
+
 `validate="many_to_one"` turns an accidental duplicate product key into an error instead of silently multiplying order rows. The merge indicator detects missing reference data. Tests should also fix the numeric type and rounding policy if `unit_price` represents exact money.
 
 ## ggplot2
@@ -75,6 +89,15 @@ Interactive PCA, clustering, and regression controls should constrain invalid va
 ## Project Connections
 
 The crawler uses pandas for daily CSV comparison. Weathercraft's asset-cleaning helper uses Pillow and NumPy. The R Shiny projects use ggplot2 and a set of Leaflet and spatial mapping packages.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why would a join silently multiply rows, and how would `validate="many_to_one"` catch that before it ships?
+> - Why is replacing missing data with zero often worse than leaving it missing?
+> - Why can correlation, clusters, or principal components be misleading if presented as causal explanations?
+> - Why does mutating a raw data frame in place make an analysis harder to trust or reproduce?
+> - Why is testing a chart's screenshot not the same as testing the calculation behind it?
 
 ## Related Guides
 

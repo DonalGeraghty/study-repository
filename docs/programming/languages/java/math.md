@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/languages/java
+---
+
 # Java Math and Randomness
 
 The `java.lang.Math` class provides static numeric operations and constants. It is imported automatically with `java.lang`.
@@ -197,16 +202,15 @@ Property-based testing is useful for invariants such as commutativity, bounds, r
 - Assuming a random distribution from a few observed samples.
 - Comparing floating-point results without a domain-aware tolerance.
 
-## Interview Checklist
+## Interview Questions
 
-You should be able to explain:
-
-- wrapping arithmetic versus `Math.*Exact`;
-- rounding and truncation for negative values;
-- special floating-point results;
-- inclusive origin and exclusive bound conventions;
-- reproducible pseudorandomness versus security randomness;
-- when `BigDecimal` is more appropriate than `Math` operations.
+> [!question] Interview Questions
+> - What's the difference between wrapping arithmetic and `Math.*Exact`, and when would you want an exception instead of silent overflow?
+> - Why do `Math.floorDiv`/`Math.floorMod` behave differently from plain division and `%` for negative numbers?
+> - What are `NaN`, infinity, and signed zero, and why does `NaN == NaN` return false?
+> - Why do many random-range APIs use an inclusive origin and exclusive bound, and why does that matter for boundary testing?
+> - Why is `java.util.Random` unsuitable for anything security-sensitive?
+> - When would you reach for `BigDecimal` instead of `Math` operations on primitives?
 
 ## Further Reading
 

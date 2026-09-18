@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/integrations
+---
+
 # Generative AI APIs
 
 Applications can integrate model providers through HTTP APIs or provider SDKs. The Janus services support OpenAI, Mistral AI, and Anthropic behind one application-owned contract.
@@ -47,6 +52,31 @@ class PlanService:
         if len(plan.activities) != request.days:
             raise ValueError("provider returned the wrong activity count")
         return plan
+```
+
+```mermaid
+classDiagram
+    class PlanProvider {
+        <<interface>>
+        +generate(PlanRequest) Plan
+    }
+    class OpenAiPlanProvider {
+        +generate(PlanRequest) Plan
+    }
+    class MistralPlanProvider {
+        +generate(PlanRequest) Plan
+    }
+    class AnthropicPlanProvider {
+        +generate(PlanRequest) Plan
+    }
+    class PlanService {
+        -provider PlanProvider
+        +create(PlanRequest) Plan
+    }
+    PlanProvider <|.. OpenAiPlanProvider
+    PlanProvider <|.. MistralPlanProvider
+    PlanProvider <|.. AnthropicPlanProvider
+    PlanService o-- PlanProvider
 ```
 
 An OpenAI, Mistral, or Anthropic adapter translates its provider response into `Plan`. The service does not branch on provider names and enforces domain rules after model output has been parsed.
@@ -104,6 +134,15 @@ Use provider-specific contract tests to prove each adapter maps valid, refused, 
 ## Project Connections
 
 The Janus APIs use the OpenAI, Mistral AI, and Anthropic Python SDKs and validate structured nutrition and workout results with Pydantic. Nyx and Aether expose user settings but send requests through Janus rather than directly to providers.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why should provider-specific clients and exceptions stay behind an adapter instead of leaking into domain code?
+> - Why is validating a model's output against a strict schema not enough on its own — what else must the application still enforce?
+> - Why is it dangerous to let generated text become a SQL query, shell command, or authorisation decision directly?
+> - Why does switching providers silently risk more than just a different response format?
+> - Why shouldn't your normal test suite call live, billable models?
 
 ## Related Guides
 

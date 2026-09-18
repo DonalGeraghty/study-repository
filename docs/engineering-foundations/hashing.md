@@ -1,3 +1,8 @@
+---
+tags:
+  - engineering-foundations
+---
+
 # Hashing
 
 A cryptographic hash function maps input of any size to a fixed-size value called a **hash**, **digest**, or **fingerprint**.
@@ -39,11 +44,15 @@ Password hashing deliberately uses significant time and memory so that each pass
 
 A unique random **salt** is generated for each password and stored alongside the derived hash:
 
-```text
-password + unique salt -- password-hashing function --> stored hash
-
-login attempt + stored salt -- same function --> candidate hash
-candidate hash == stored hash -> password matches
+```mermaid
+flowchart TD
+    A[Password] -->|+ unique salt| B[Password-hashing function]
+    B --> C[Stored hash]
+    D[Login attempt] -->|+ stored salt| E[Same function]
+    E --> F[Candidate hash]
+    F --> G{Candidate hash == stored hash?}
+    G -->|Yes| H[Password matches]
+    G -->|No| I[Password rejected]
 ```
 
 The salt is not secret. It prevents identical passwords from producing identical stored values and makes precomputed lookup tables far less useful. It does not make weak passwords strong, so rate limiting, multi-factor authentication, breached-password screening, and sensible password policy remain important.
@@ -61,6 +70,21 @@ message + secret key -- HMAC --> authentication tag
 ```
 
 A recipient with the same secret can recalculate and compare the tag. An attacker who changes the message but lacks the key cannot create a valid replacement tag. Use a standard construction such as HMAC rather than inventing combinations like `hash(key + message)`.
+
+```mermaid
+sequenceDiagram
+    participant A as Sender
+    participant B as Recipient
+    Note over A,B: Both hold the same secret key
+    A->>A: Compute tag = HMAC(secret key, message)
+    A->>B: Message + tag
+    B->>B: Recompute tag = HMAC(secret key, message)
+    alt Tags match
+        B->>B: Accept: integrity and origin verified
+    else Tags differ
+        B->>B: Reject: message altered or wrong key
+    end
+```
 
 ## Choosing a Hashing Tool
 
@@ -92,5 +116,15 @@ candidate hash == stored hash -> password matches
 ```
 
 The website can verify that you entered the same password without recovering it from the stored value. If the password database is stolen, an attacker must still guess passwords individually to find matching hashes.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why can't a cryptographic hash be "decrypted" back to its original input?
+> - Why is SHA-256 a poor choice for hashing passwords, even though it's a secure general-purpose hash?
+> - What problem does a salt actually solve, and why doesn't it need to be secret?
+> - How does a MAC like HMAC differ from a plain hash, and what does it protect against that a plain hash doesn't?
+> - If collisions must exist mathematically for any hash function, why do we still call SHA-256 "collision-resistant"?
+> - Why are MD5 and SHA-1 no longer acceptable for security-sensitive integrity checks?
 
 Return to [Engineering Foundations](./README.md).

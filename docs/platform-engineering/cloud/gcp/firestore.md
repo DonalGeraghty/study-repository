@@ -1,3 +1,8 @@
+---
+tags:
+  - platform-engineering/cloud/gcp
+---
+
 # Firestore
 
 Firestore is a managed document database. Data is stored as documents containing fields, organised into collections. It supports indexed queries, transactions, real-time listeners, offline-capable client SDKs, and server-side libraries.
@@ -65,9 +70,10 @@ Mobile and web clients can connect directly through Firebase SDKs. Security Rule
 
 Server client libraries use IAM and bypass Firestore Security Rules. A trusted server must implement application-level authorisation itself.
 
-```text
-mobile or web client -> Firebase authentication + Security Rules -> Firestore
-trusted server       -> IAM service identity + application checks -> Firestore
+```mermaid
+flowchart LR
+    A[Mobile or web client] -->|Firebase authentication + Security Rules| C[Firestore]
+    B[Trusted server] -->|IAM service identity + application checks| C
 ```
 
 Test rules with authorised, unauthorised, missing, malformed, and cross-tenant requests. A query must be compatible with what the rules can prove; rules are not post-query filters.
@@ -102,17 +108,14 @@ Monitor:
 
 Use the emulator for rapid local tests where appropriate, but retain integration coverage against the selected production edition and configuration. Test queries and indexes, transactions under contention, rules, offline behaviour, schema migration, retry safety, and restore.
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- model documents, collections, subcollections, and stable paths;
-- design data around known queries without unbounded documents;
-- explain indexes, cursors, transactions, and batched writes;
-- distinguish Security Rules from server-side IAM access;
-- design listeners and offline behaviour explicitly;
-- identify hot-document and read-amplification risks;
-- test authorisation, contention, migration, and recovery.
+> [!question] Interview Questions
+> - How would you model documents and collections around the queries you actually need, rather than around the data's natural shape?
+> - What's the risk of an unbounded document or collection, and how would you avoid it?
+> - How do Firestore Security Rules differ from server-side IAM access, and when does each apply?
+> - What's a hot-document risk, and how would you design around it?
+> - How would you test authorisation rules against unauthorised, missing, and cross-tenant requests?
 
 ## Official References
 

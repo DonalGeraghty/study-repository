@@ -1,3 +1,8 @@
+---
+tags:
+  - platform-engineering/cloud/gcp
+---
+
 # Cloud Build
 
 Cloud Build executes build steps on managed Google Cloud infrastructure. It can retrieve source, run tests and analysis, build packages or container images, publish artifacts, and trigger deployments.
@@ -6,12 +11,14 @@ Cloud Build executes build steps on managed Google Cloud infrastructure. It can 
 
 A build consists of ordered or explicitly dependent steps. Each step runs in a container image and shares the build workspace with other steps.
 
-```text
-source event -> build trigger -> ephemeral build environment
-                              ├── compile
-                              ├── test
-                              ├── scan
-                              └── publish artifact
+```mermaid
+flowchart LR
+    A[Source event] --> B[Build trigger]
+    B --> C[Ephemeral build environment]
+    C --> D[Compile]
+    C --> E[Test]
+    C --> F[Scan]
+    C --> G[Publish artifact]
 ```
 
 Build configuration is commonly stored as YAML or JSON in source control. Keep meaningful build logic reviewable and reproducible rather than configuring release behaviour only through the console.
@@ -93,17 +100,14 @@ For failures, retain:
 - service-account and permission-denial context;
 - private-pool capacity and network evidence where relevant.
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- model a build as containerised steps with explicit dependencies;
-- distinguish trigger, build, and deployment identities;
-- isolate untrusted changes from privileged credentials;
-- decide between managed workers and private pools;
-- publish immutable artifacts with traceable provenance;
-- use caches without making clean builds impossible;
-- diagnose step, permission, network, quota, and capacity failures.
+> [!question] Interview Questions
+> - Why should the build, deployment, and runtime identities in a CI/CD pipeline be kept separate?
+> - How would you isolate an untrusted pull-request build from privileged credentials?
+> - How would you make a build's artifact provenance traceable back to the exact source and steps that produced it?
+> - What's the risk of caching build steps, and how would you avoid making clean builds impossible?
+> - How would you diagnose a build that fails only in CI but not locally?
 
 ## Official References
 

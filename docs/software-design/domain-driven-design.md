@@ -1,3 +1,8 @@
+---
+tags:
+  - software-design
+---
+
 # Domain-Driven Design
 
 Domain-Driven Design (DDD) is an approach for building software around a complex business domain. It combines close collaboration with domain experts, precise language, explicit model boundaries, and implementation patterns that protect business rules.
@@ -52,6 +57,18 @@ A context map records important relationships between bounded contexts:
 - whether an anti-corruption layer protects one model from another.
 
 An **anti-corruption layer** translates an external model into local concepts so that provider terminology and assumptions do not spread through the domain.
+
+```mermaid
+flowchart LR
+    subgraph Upstream Context
+        A[Upstream model]
+    end
+    subgraph Downstream Context
+        C[Local model]
+    end
+    A -->|external contract| B[Anti-corruption layer]
+    B -->|translated concepts| C
+```
 
 ## Tactical Building Blocks
 
@@ -232,20 +249,12 @@ Do not wrap every primitive automatically. A type earns its place when it carrie
 
 A common dependency arrangement is:
 
-```text
-HTTP / message adapter
-        |
-        v
-application use case
-        |
-        v
-domain model
-        ^
-        |
-repository and gateway interfaces
-        ^
-        |
-database / provider adapters
+```mermaid
+flowchart TD
+    A[HTTP / message adapter] --> B[Application use case]
+    B --> C[Domain model]
+    E[Database / provider adapters] --> D[Repository and gateway interfaces]
+    D --> C
 ```
 
 - **Application services** coordinate a use case, transactions, repositories, and external ports.
@@ -324,44 +333,16 @@ Bounded contexts can inform later service boundaries because they clarify owners
 - Wrapping every primitive without adding meaning.
 - Splitting contexts into network services by default.
 
-## Review Checklist
+## Interview Questions
 
-### Language and Boundaries
-
-- [ ] Do code and tests use terms recognised by domain experts?
-- [ ] Are ambiguous terms scoped to a bounded context?
-- [ ] Are context relationships and translations explicit?
-- [ ] Is the core domain receiving the most modelling effort?
-
-### Model
-
-- [ ] Are identity and value represented deliberately?
-- [ ] Do value objects validate themselves and remain immutable?
-- [ ] Does each aggregate protect a real consistency boundary?
-- [ ] Can changes occur only through the aggregate root?
-- [ ] Are repositories defined around aggregates and domain needs?
-- [ ] Are primitive values wrapped where rules or ambiguity justify it?
-
-### Operation
-
-- [ ] Are transaction boundaries explicit?
-- [ ] Are event delivery, duplication, ordering, and versioning addressed?
-- [ ] Are external models translated at the boundary?
-- [ ] Is a service boundary justified independently of the model boundary?
-
-## Practice Exercise
-
-Model a lending system:
-
-1. Build a shared language for member, copy, loan, reservation, and fine.
-2. Identify the core, supporting, and generic subdomains.
-3. Propose bounded contexts and explain one term that differs between them.
-4. Identify entities, value objects, aggregates, and invariants.
-5. Replace meaningful primitives such as ISBN, Member ID, and Money.
-6. Walk through borrowing, returning, and overdue scenarios.
-7. Explain transaction and event-delivery choices.
-
-Revise the model when a scenario feels awkward; that friction is useful feedback.
+> [!question] Interview Questions
+> - How would you build a ubiquitous language for a lending system involving members, copies, loans, reservations, and fines?
+> - How would you decide which subdomains are core versus supporting versus generic?
+> - What makes an aggregate boundary correct, and what goes wrong when it's too large or too small?
+> - Why must changes to an aggregate go only through its root, and what breaks if that's bypassed?
+> - How would you translate an external model at a bounded-context boundary, and why does that matter?
+> - What transaction and event-delivery decisions would you need to make for a "borrow a copy" use case?
+> - How do you decide when a service boundary is justified independently of a model boundary?
 
 ## Related Guides
 

@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/languages/java
+---
+
 # Java Variables and Data Types
 
 Java is statically and strongly typed. A variable has a compile-time type that determines which values it can hold and which operations are available.
@@ -255,18 +260,15 @@ Generic collections are usually safer and more expressive for variable-size appl
 - Treating `var` as dynamic typing.
 - Assuming one `char` always represents one user-perceived character.
 
-## Interview Checklist
+## Interview Questions
 
-You should be able to explain:
-
-- all eight primitive types;
-- primitive values versus reference values;
-- identity versus logical equality;
-- field defaults versus local definite assignment;
-- scope, lifetime, `final`, and `static`;
-- widening, narrowing, boxing, and unboxing;
-- why Java is pass-by-value;
-- why Java memory cannot be reduced to “primitives on stack, objects on heap.”
+> [!question] Interview Questions
+> - What's the difference between a primitive value and a reference value in Java?
+> - Why do local variables need definite assignment while fields get default values?
+> - Why is Java "pass-by-value" even when you pass an object — what's actually being copied?
+> - What's the risk of an implicit narrowing conversion versus an explicit one?
+> - Why is "primitives on the stack, objects on the heap" an oversimplification of how Java actually manages memory?
+> - Why is a `static` mutable field a form of hidden global state?
 
 ## Further Reading
 

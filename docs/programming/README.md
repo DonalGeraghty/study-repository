@@ -1,3 +1,9 @@
+---
+tags:
+  - programming
+  - moc
+---
+
 # Programming
 
 This subject separates programming languages from frameworks, application platforms, and web foundations so each technology has a clear conceptual home.

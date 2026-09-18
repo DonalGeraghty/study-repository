@@ -1,3 +1,8 @@
+---
+tags:
+  - software-design
+---
+
 # Object-Oriented Programming
 
 Object-oriented programming (OOP) models a system as objects that collaborate through methods. Its main benefit is not syntax or code reuse; it is keeping related state, behaviour, and rules together behind clear boundaries.
@@ -91,6 +96,23 @@ public final class PercentageDiscount implements DiscountPolicy {
         return order.subtotal().percentage(percentage);
     }
 }
+```
+
+```mermaid
+classDiagram
+    class DiscountPolicy {
+        <<interface>>
+        +discountFor(Order) Money
+    }
+    class NoDiscount {
+        +discountFor(Order) Money
+    }
+    class PercentageDiscount {
+        -percentage int
+        +discountFor(Order) Money
+    }
+    DiscountPolicy <|.. NoDiscount
+    DiscountPolicy <|.. PercentageDiscount
 ```
 
 The caller invokes the contract without branching on implementation type.
@@ -228,26 +250,16 @@ Testability is usually a consequence of explicit responsibilities, not a reason 
 - Are dependencies explicit and narrow?
 - Can the behaviour be tested without a database or network?
 
-## Practice Exercise
+## Interview Questions
 
-Model a library loan:
-
-1. Identify entities and value objects.
-2. Put borrowing and return rules on the object that owns them.
-3. Represent notification and persistence as interfaces.
-4. Add a second fine-calculation policy through composition.
-5. Write tests for successful borrowing and rule violations.
-
-Explain why each class exists and what change it contains.
-
-## Completion Checklist
-
-- [ ] I can explain encapsulation as protection of invariants.
-- [ ] I can distinguish abstraction, inheritance, composition, and polymorphism.
-- [ ] I can choose between an interface and an abstract class.
-- [ ] I understand identity-based and value-based equality.
-- [ ] I can recognise low cohesion and excessive coupling.
-- [ ] I can design an object around behaviour rather than public data.
+> [!question] Interview Questions
+> - How would you model a library loan — which entities and value objects would you identify, and who owns the borrowing and return rules?
+> - How would composition let you add a second fine-calculation policy without changing existing code?
+> - How do you explain encapsulation as protection of invariants rather than just "private fields"?
+> - What's the practical difference between an interface and an abstract class, and how do you choose?
+> - What's the difference between identity-based and value-based equality, and where does each apply?
+> - How would you recognise low cohesion or excessive coupling in a class you're reviewing?
+> - Can you design an object around behaviour rather than public data — what would that look like for an order?
 
 ## Related Guides
 

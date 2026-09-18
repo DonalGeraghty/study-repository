@@ -1,3 +1,9 @@
+---
+tags:
+  - platform-engineering/ci-cd
+  - moc
+---
+
 # Continuous Integration and Delivery
 
 This section contains delivery-automation platforms and the practices used to build, test, release, and deploy software safely.

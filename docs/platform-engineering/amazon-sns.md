@@ -1,3 +1,8 @@
+---
+tags:
+  - platform-engineering
+---
+
 # Amazon SNS
 
 Amazon Simple Notification Service (SNS) is AWS's managed publish/subscribe service. A publisher sends one message to a topic, and SNS attempts delivery to each matching subscription. Common destinations include SQS queues, Lambda functions, HTTP/S endpoints, email, SMS, and mobile push.
@@ -106,9 +111,14 @@ An SNS dead-letter queue captures a failure to deliver to the subscribed endpoin
 - monitoring successful publishes but not per-subscription delivery failures;
 - treating a notification sent to a user as proof that the user received or acted on it.
 
-## Practice
+## Interview Questions
 
-Design an `account.security-alert.v1` topic with subscriptions for email delivery, an audit queue, and fraud analysis. Decide which subscriptions require a durable queue, which attributes may be filtered, what data must not enter the message, and where delivery versus processing failures are dead-lettered.
+> [!question] Interview Questions
+> - For an `account.security-alert.v1` topic with email, audit, and fraud-analysis subscriptions, which of those would you back with a durable SQS queue, and which could tolerate a simpler destination?
+> - What data should never enter the message body or attributes for this topic?
+> - How would you use a filter policy so fraud analysis only receives the alert types it cares about?
+> - What's the difference between an SNS dead-letter queue and an SQS redrive policy here, and which failure does each catch?
+> - How would you verify that every expected subscription still exists after an infrastructure change?
 
 ## Official References
 
@@ -121,6 +131,7 @@ Design an `account.security-alert.v1` topic with subscriptions for email deliver
 
 - [Amazon SQS](./amazon-sqs.md)
 - [Publish/Subscribe](./pub-sub.md)
+- [Apache Kafka](./kafka.md)
 - [Amazon Web Services](./cloud/aws.md)
 - [Encryption](../engineering-foundations/encryption.md)
 

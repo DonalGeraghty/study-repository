@@ -1,3 +1,8 @@
+---
+tags:
+  - platform-engineering
+---
+
 # Docker
 
 Docker packages an application and its runtime dependencies into a portable **image**. That image can be started as one or more isolated **containers**, giving the application a consistent environment across development, testing, and deployment.
@@ -58,6 +63,16 @@ Docker CLI -> Docker Engine -> images, containers, networks, and volumes
 Access to the Docker daemon is highly privileged. Do not expose its API or mount the Docker socket into a container without understanding that this can effectively grant control of the host.
 
 ## How a Container Starts
+
+```mermaid
+flowchart TD
+    A[Find image locally or pull from registry] --> B[Add writable container layer]
+    B --> C[Configure networking, environment, and mounts]
+    C --> D[Start ENTRYPOINT / CMD]
+    D --> E{Main process PID 1 running?}
+    E -->|Yes| E
+    E -->|Exits| F[Container stops]
+```
 
 1. Docker finds the requested image locally or pulls it from a registry.
 2. It adds a writable container layer on top of the read-only image layers.
@@ -211,6 +226,18 @@ COPY --from=build --chown=10001:10001 /workspace/target/application.jar app.jar
 USER 10001:10001
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+```
+
+```mermaid
+flowchart LR
+    subgraph Build Stage
+        A[Maven + JDK + source] --> B[mvn verify]
+        B --> C[target/application.jar]
+    end
+    subgraph Runtime Stage
+        D[JRE base image] --> E[Final runtime image]
+    end
+    C -->|COPY --from=build| E
 ```
 
 The build stage contains Maven, a JDK, source, and test dependencies. The final stage contains only a JRE and the application artifact. Configure a deterministic artifact name in the Maven project rather than depending on an uncontrolled wildcard.
@@ -625,20 +652,16 @@ Do not use `localhost` to reach another container: inside a container, `localhos
 | Start Compose project | `docker compose up --build --detach` |
 | Stop Compose project | `docker compose down` |
 
-## Review Checklist
+## Interview Questions
 
-- [ ] The build context excludes credentials, generated files, and unnecessary content.
-- [ ] The base image is trusted, appropriately pinned, and regularly rebuilt.
-- [ ] Build and runtime secrets are supplied through appropriate secret mechanisms.
-- [ ] The final image contains only runtime requirements.
-- [ ] The process runs as a non-root user and handles termination correctly.
-- [ ] Only required ports are published, on intentional host interfaces.
-- [ ] Persistent, temporary, and host-shared data use the correct mount type.
-- [ ] Health checks test useful readiness without causing side effects.
-- [ ] CPU, memory, filesystem, and capability restrictions have been considered.
-- [ ] Logs, exit codes, and failure diagnostics are usable.
-- [ ] The image is tested and scanned before registry promotion.
-- [ ] Deployment uses an intentional tag or digest and supports rollback.
+> [!question] Interview Questions
+> - How would you make sure a build context never leaks credentials into an image layer?
+> - Why does a multi-stage build produce a safer, smaller final image than a single-stage one?
+> - Why should a container run as a non-root user, and what does that actually protect against?
+> - How would you decide between a volume, a bind mount, and a `tmpfs` mount for a given piece of data?
+> - What's the difference between a health check reporting unhealthy and Docker actually restarting the container?
+> - How would you diagnose a container that exits immediately after starting?
+> - Why is a mutable tag like `latest` risky for a production deployment, and what would you use instead?
 
 ## Official Documentation
 

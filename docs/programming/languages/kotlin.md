@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/languages
+---
+
 # Kotlin
 
 Kotlin is a statically typed language designed for concise, interoperable application development. It is widely used on the JVM and Android, while Kotlin Multiplatform can share selected code across platforms.
@@ -58,6 +63,19 @@ suspend fun loadProfile(client: ProfileClient, id: String): Profile =
     client.fetch(id)
 ```
 
+```mermaid
+sequenceDiagram
+    participant P as Parent scope
+    participant C1 as Child coroutine 1
+    participant C2 as Child coroutine 2
+    P->>C1: launch
+    P->>C2: launch
+    Note over P,C2: Parent suspends until children complete
+    C1-->>P: completes
+    P->>C2: cancel() if scope is cancelled
+    C2-->>P: cancellation propagated
+```
+
 Structured concurrency ties child work to a scope so completion, cancellation, and failure have an owner. Avoid unscoped background work, propagate cancellation, choose dispatchers according to workload, and test with coroutine-aware test utilities.
 
 ## Error and Resource Handling
@@ -83,17 +101,14 @@ Useful build tasks vary by project but commonly include:
 
 Use compiler warnings, static analysis, formatting, IDE inspections, stack traces, and debugger state as complementary feedback.
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- explain `val`, `var`, nullability, smart casts, and equality;
-- model state with data classes and closed outcomes with sealed types;
-- choose collection or sequence operations deliberately;
-- use extensions and scope functions without obscuring behaviour;
-- explain suspension, dispatchers, structured concurrency, and cancellation;
-- interoperate safely with Java platform types;
-- test Kotlin and coroutine code deterministically.
+> [!question] Interview Questions
+> - Why doesn't `val` make a referenced object immutable, only the reference itself?
+> - What's the risk of using `!!` instead of a safe call or explicit null check?
+> - How does structured concurrency tie a coroutine's cancellation to its parent scope?
+> - Why are Kotlin collection operations eager by default, and when would a sequence change that?
+> - What's a platform type, and why can't Kotlin prove its nullability when calling into Java?
 
 ## Related Guides
 

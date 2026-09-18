@@ -1,3 +1,8 @@
+---
+tags:
+  - platform-engineering
+---
+
 # Publish/Subscribe
 
 Publish/subscribe is a messaging pattern in which producers publish events without naming the consumers. Subscribers express interest in a topic or routing rule and process their own copy. This decouples deployment and timing, but it moves complexity into contracts, delivery guarantees, retries, and operations.
@@ -121,13 +126,19 @@ Test:
 
 Monitor publish failures, delivery latency, oldest unprocessed age, retry count, dead-letter volume, consumer throughput, and end-to-end correlation. A low queue depth can hide a stuck message if age is not measured.
 
-## Practice
+## Interview Questions
 
-Model an `invoice.paid` event consumed by fulfilment, email, and analytics. Decide the event contract, privacy boundary, subscription ownership, idempotency key, retry policy, ordering requirement, and replay procedure for each consumer.
+> [!question] Interview Questions
+> - For an `invoice.paid` event consumed by fulfilment, email, and analytics, how would you design the event contract and its privacy boundary?
+> - Who owns each subscription's backlog, and what happens if one consumer falls behind or goes offline?
+> - What idempotency key would you use, and why does at-least-once delivery make it necessary?
+> - Does this event need ordering relative to other events for the same invoice — and if so, how would you achieve it without serialising unrelated invoices?
+> - How would you replay this event for one consumer after a bug fix, without affecting the others?
 
 ## Related Guides
 
 - [RabbitMQ](./rabbitmq.md)
+- [Apache Kafka](./kafka.md)
 - [Amazon SNS](./amazon-sns.md)
 - [Amazon SQS](./amazon-sqs.md)
 - [Google Cloud Platform](./cloud/gcp/README.md)

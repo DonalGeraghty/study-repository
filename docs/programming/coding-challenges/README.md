@@ -1,3 +1,9 @@
+---
+tags:
+  - programming/coding-challenges
+  - moc
+---
+
 # Coding Challenges
 
 This section records solved programming problems, reasoning approaches, complexity analysis, and lessons that transfer beyond an individual exercise.

@@ -1,3 +1,8 @@
+---
+tags:
+  - engineering-foundations
+---
+
 # Project Technology Inventory
 
 This inventory maps the coding and development repositories in the parent GitHub workspace to learning guides. It is a point-in-time coverage check based on source files, manifests, imports, build configuration, container files, and CI workflows.
@@ -37,5 +42,13 @@ The inventory excludes `Achilles`, `Cookbook`, `elephant-routine`, and `hindi-le
 ## Maintenance
 
 Repeat this check when projects are added or substantially reworked. Prefer evidence from active imports and configuration, add a focused section to an existing guide when concepts belong together, and create a dedicated guide when a technology has its own development or operational model.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - What counts as evidence that a repository actually uses a technology, versus a false positive like a transitive dependency?
+> - Why would you exclude a repository from a technology inventory even though it lives in the same workspace?
+> - How would you decide between adding a section to an existing guide and creating a brand-new one for a technology?
+> - Why is a technology inventory a point-in-time snapshot rather than a permanent record, and how would you keep it trustworthy over time?
 
 Return to [Engineering Foundations](./README.md).

@@ -1,3 +1,8 @@
+---
+tags:
+  - platform-engineering
+---
+
 # MySQL
 
 MySQL is a relational database management system. Applications communicate using SQL, but reliable use also requires schema design, constraints, transactions, indexes, connection management, backup, and operational ownership.
@@ -68,6 +73,20 @@ VALUES (?, ?, ?);
 COMMIT;
 ```
 
+```mermaid
+sequenceDiagram
+    participant App
+    participant DB as Database
+    App->>DB: START TRANSACTION
+    App->>DB: SELECT stock FOR UPDATE
+    DB-->>App: locked row
+    App->>App: check stock >= requested quantity
+    App->>DB: UPDATE product SET stock = stock - ? WHERE stock >= ?
+    App->>DB: INSERT INTO reservation (...)
+    App->>DB: COMMIT
+    Note over DB: Row lock held from SELECT FOR UPDATE until COMMIT
+```
+
 The application must check that the conditional update changed one row. The unique `request_id` makes a repeated request detectable, and the constraints protect the database even if another code path forgets validation. Roll back on every failed path.
 
 Concurrent transactions can deadlock even when both are individually correct. Access rows in a consistent order and retry a transaction only when its full operation is safe to repeat.
@@ -103,6 +122,16 @@ The leading index columns should support filtering and ordering used by the quer
 ## Project Connections
 
 `tododos-express-api` uses the Node.js `mysql` and `promise-mysql` packages behind an Express API.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why should you use `SELECT ... FOR UPDATE` instead of a plain `SELECT` when reserving stock inside a transaction?
+> - Why is a `CHECK` constraint on the database a stronger guarantee than validating stock in the application layer alone?
+> - Why can two individually correct transactions still deadlock, and how would you reduce that risk?
+> - Why would you avoid a floating-point column for exact money values?
+> - How would you decide whether a new index is worth its cost to inserts and updates?
+> - What's the risk of holding a database transaction open during an outbound HTTP call?
 
 ## Related Guides
 

@@ -1,3 +1,8 @@
+---
+tags:
+  - engineering-foundations
+---
+
 # Code Review
 
 Code review is a structured examination of a proposed change by someone other than its author. Its purpose is to improve the codebase and reduce delivery risk through shared technical judgment—not to demonstrate that the reviewer could have written the code differently.
@@ -84,6 +89,15 @@ Start with context:
 If the purpose cannot be understood from the pull-request description and linked material, ask the author to improve the context before spending significant time on line-level review.
 
 ## A Practical Review Workflow
+
+Each pass has a different focus, and skipping ahead to implementation detail before scope and design are understood is a common source of wasted review effort.
+
+```mermaid
+flowchart LR
+    A[Pass 1: Scope and Shape] --> B[Pass 2: Behaviour and Design]
+    B --> C[Pass 3: Implementation and Tests]
+    C --> D[Pass 4: Delivery and Operations]
+```
 
 ### Pass 1: Understand Scope and Shape
 
@@ -378,6 +392,15 @@ Avoid comments such as “This is wrong,” “Why would you do this?”, or “
 
 ## Handling Disagreement
 
+```mermaid
+flowchart LR
+    A[Clarify the issue type] --> B[Cite requirements or evidence]
+    B --> C[Compare trade-offs]
+    C --> D[Move to a conversation]
+    D --> E[Record the decision]
+    E --> F[Escalate if unresolved]
+```
+
 1. Clarify whether the issue is blocking, optional, or a question.
 2. Refer to requirements, measured evidence, established standards, or documented architectural decisions.
 3. Compare concrete trade-offs rather than defending personal preference.
@@ -411,23 +434,9 @@ How can the change be disabled or reversed safely?
 
 Adapt the template to the risk of the repository. A one-line documentation correction should not require the same ceremony as a payment migration.
 
-## Interview Approach
-
-When asked to review code during an interview, explain your process before listing defects:
-
-1. Clarify the requirement, inputs, outputs, and constraints.
-2. Trace the success path and important edge cases.
-3. Identify correctness or security failures first.
-4. Evaluate design, readability, tests, performance, and operations.
-5. Prioritise findings by impact and confidence.
-6. Suggest a concrete improvement and explain the trade-off.
-7. Mention what you would verify with tests, measurement, or additional context.
-
 A strong answer separates verified defects from hypotheses. For example:
 
 > This query appears inside a loop, so it may produce one database round trip per item. I would confirm the expected collection size and inspect query metrics. If the path is large or frequent, I would batch the lookup or fetch the required records in one query.
-
-## Practice Exercise
 
 Review this method:
 
@@ -455,40 +464,16 @@ Potential findings include:
 
 The correct redesign depends on the surrounding API contract. The reviewer should ask for or infer that context before prescribing a specific exception or return type.
 
-## Quick Review Checklist
+## Interview Questions
 
-### Context
-
-- Is the problem and intended behaviour clear?
-- Is the scope focused and the correct reviewers involved?
-
-### Behaviour
-
-- Are success, boundary, failure, retry, and recovery paths correct?
-- Are concurrency and distributed-system assumptions safe?
-
-### Design
-
-- Is the solution proportionate, cohesive, and consistent with the architecture?
-- Are dependencies and state ownership clear?
-
-### Tests
-
-- Do the tests prove meaningful behaviour at the right level?
-- Are they deterministic, isolated, and diagnosable?
-
-### Security
-
-- Are trust boundaries, access controls, secrets, and sensitive data handled safely?
-
-### Delivery
-
-- Are compatibility, migrations, telemetry, rollout, and rollback covered?
-
-### Communication
-
-- Are blocking issues distinguished from suggestions and nits?
-- Does every comment explain its concern clearly and respectfully?
+> [!question] Interview Questions
+> - Before listing defects, how would you structure your review process end-to-end?
+> - In `loadUser` above, what would you flag first, and why?
+> - Why does returning `null` here lose more information than a more specific exception would preserve?
+> - What's the risk of catching `Exception` instead of a narrower, specific type?
+> - How do you decide whether a review comment is blocking, a suggestion, or a question?
+> - How would you check whether the tests actually prove meaningful behaviour rather than just asserting no exception was thrown?
+> - What would make you escalate a disagreement instead of resolving it through review comments alone?
 
 ## Further Reading
 

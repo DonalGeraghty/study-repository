@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/platforms
+---
+
 # Android
 
 Android is an application platform spanning an operating system, runtime, SDK, application-component model, device ecosystem, build system, and distribution channels. Android applications must tolerate lifecycle changes, constrained resources, unreliable networks, varied screens, and operating-system restrictions.
@@ -30,6 +35,20 @@ Intents request an action from a component. Explicit intents identify the target
 ## Lifecycle and State
 
 The operating system owns component lifecycle. An activity may be stopped, destroyed, and recreated for configuration changes or resource pressure. A process may be killed after the app leaves the foreground.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Created
+    Created --> Started
+    Started --> Resumed
+    Resumed --> Paused
+    Paused --> Resumed
+    Paused --> Stopped
+    Stopped --> Started: brought back to foreground
+    Stopped --> Destroyed
+    Destroyed --> Created: recreated (e.g. configuration change)
+    Destroyed --> [*]
+```
 
 Separate state by required lifetime:
 
@@ -117,17 +136,15 @@ Android App Bundles allow a store to generate optimised APKs for device configur
 ./gradlew bundleRelease
 ```
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- explain modules, manifests, resources, APKs, bundles, and variants;
-- reason about components, intents, lifecycle, recreation, and process death;
-- model unidirectional UI state in Compose or views;
-- separate UI, business rules, data, and external sources deliberately;
-- select lifecycle-aware foreground and background work mechanisms;
-- apply least privilege to permissions and exported surfaces;
-- test across lifecycle, device, accessibility, and release risks.
+> [!question] Interview Questions
+> - Why can an Activity be destroyed and recreated even when the user hasn't left the screen?
+> - What state should survive process death, and where would you put it — Composable state, a `ViewModel`, or saved instance state?
+> - Why is an in-memory singleton not durable storage on Android?
+> - How would you separate UI, business rules, and data sources so a configuration change doesn't lose in-flight work?
+> - Why should an app request the narrowest permission and exported-surface scope it actually needs?
+> - How would you test a screen across lifecycle recreation, not just its happy-path rendering?
 
 ## Related Languages
 

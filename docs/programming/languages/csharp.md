@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/languages
+---
+
 # C# and .NET
 
 C# is a statically typed language for the .NET platform. It supports object-oriented, generic, functional, and asynchronous programming across web services, desktop applications, cloud workloads, and test automation.
@@ -106,17 +111,14 @@ dotnet test --configuration Release
 
 Use structured logs, exception stack traces, the debugger, dumps, traces, and runtime counters according to the failure being investigated.
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- explain value types, reference types, generics, equality, and nullability;
-- model behaviour with classes, records, and focused interfaces;
-- reason about LINQ translation, deferred execution, and materialisation;
-- manage disposable resources and exception boundaries;
-- write cancellable asynchronous operations without sync-over-async;
-- structure SDK projects and control NuGet dependencies;
-- test application logic and diagnose managed-runtime failures.
+> [!question] Interview Questions
+> - What's the difference between a value type and a reference type in C#, and why does that matter for equality and mutation?
+> - What does LINQ's deferred execution actually defer, and when does a query get materialised?
+> - Why is sync-over-async a problem, and how would you write a cancellable asynchronous operation instead?
+> - How would you manage a disposable resource so it's released even when an exception is thrown?
+> - How do nullable reference types change what the compiler can catch versus what still needs a runtime check?
 
 ## Official References
 

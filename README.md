@@ -1,3 +1,8 @@
+---
+tags:
+  - moc
+---
+
 # Technical Study and Interview Handbook
 
 This repository is a personal technical handbook for two kinds of learning:

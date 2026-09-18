@@ -1,3 +1,8 @@
+---
+tags:
+  - platform-engineering/ci-cd
+---
+
 # GitHub Actions
 
 GitHub Actions runs repository automation described by YAML workflows. Events trigger workflows, jobs run on selected runners, and steps invoke actions or shell commands.
@@ -73,18 +78,15 @@ Caches improve speed but are not authoritative build inputs. Artifacts are expli
 
 ## Deployment Shape
 
-```text
-pull request: lint + test + build
-                    |
-                    v
-main:        build immutable artifact
-                    |
-             protected environment
-                    |
-                    v
-             deploy same artifact
-                    |
-             smoke check + rollback signal
+```mermaid
+flowchart TD
+    A[Pull request] --> B[Lint + test + build]
+    C[Push to main] --> D[Build immutable artifact]
+    D --> E[Protected environment gate]
+    E --> F[Deploy same artifact]
+    F --> G{Smoke check}
+    G -->|Pass| H[Release complete]
+    G -->|Fail| I[Rollback signal]
 ```
 
 Use a separate deployment job with `needs` so quality gates are explicit. Attach only the cloud identity and environment secrets required by that job. Prefer workload identity federation so the job receives a short-lived credential rather than storing a long-lived cloud key.
@@ -103,6 +105,15 @@ Use a separate deployment job with `needs` so quality gates are explicit. Attach
 ## Project Connections
 
 The repositories use GitHub Actions to test and deploy Flask and React services to Cloud Run, build and sign Android artifacts, and validate health-data CSV storage with PowerShell.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why should a workflow's `permissions` block default to the minimum required rather than broad write access?
+> - What's the risk of exposing deployment credentials to a pull-request-triggered job?
+> - Why is pinning a third-party action to a reviewed commit digest safer than pinning to a mutable version tag?
+> - Why shouldn't a dependency cache be treated as a release artifact?
+> - What's the danger of interpolating untrusted branch names or issue text directly into a shell command?
 
 ## Official References
 

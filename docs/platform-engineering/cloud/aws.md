@@ -1,3 +1,8 @@
+---
+tags:
+  - platform-engineering/cloud
+---
+
 # Amazon Web Services
 
 Amazon Web Services provides infrastructure and managed services across regional data centres. Effective AWS design begins with workload requirements, failure boundaries, identity, network paths, data ownership, and operational responsibility—not a list of service names.
@@ -8,12 +13,12 @@ An AWS account is a strong boundary for identity, billing, quotas, and service c
 
 Regions are separate geographic areas. Availability Zones are distinct infrastructure locations within a Region. Some services are global, some regional, and some zonal; verify the scope of every resource because it affects availability, naming, recovery, and cost.
 
-```text
-organisation
-└── organisational units
-    ├── production account
-    ├── non-production account
-    └── security or shared-services account
+```mermaid
+flowchart TD
+    A[Organisation] --> B[Organisational units]
+    B --> C[Production account]
+    B --> D[Non-production account]
+    B --> E[Security or shared-services account]
 ```
 
 Separate production from experimentation and centralise audit or security capabilities without creating one account that every workload can modify.
@@ -101,17 +106,14 @@ Cost is an architectural signal. Tag or otherwise attribute ownership, set budge
 
 Validate infrastructure code, policy, configuration, and deployment behaviour before production. Use ephemeral or representative environments where possible, test permission failures, and exercise rollback and regional or zonal failure scenarios proportional to risk.
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- explain accounts, Regions, Availability Zones, and resource scope;
-- design temporary-role access and evaluate least privilege;
-- trace VPC routing, filtering, ingress, egress, and DNS;
-- choose compute and storage from workload properties;
-- deliver reviewed infrastructure code and detect drift;
-- define telemetry, availability, backup, restore, and disaster recovery;
-- connect architecture decisions to security responsibility and cost.
+> [!question] Interview Questions
+> - How would you design temporary-role access instead of long-lived credentials, and what does that protect against?
+> - Why would you put production and non-production workloads in separate accounts rather than one shared account?
+> - How would you choose between compute options for a given workload's operational needs?
+> - How do you detect drift between deployed infrastructure and the reviewed infrastructure-as-code that describes it?
+> - Why is cost itself an architectural signal, not just a finance concern?
 
 ## Official References
 

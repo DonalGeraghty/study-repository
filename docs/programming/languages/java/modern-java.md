@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/languages/java
+---
+
 # Modern Java
 
 Modern Java includes language and library features that improve domain modelling, readability, safety, and concurrency. Use features supported by the project's chosen JDK baseline, and distinguish permanent features from preview features.
@@ -65,6 +70,28 @@ record Declined(String reason)
 record Failed(Throwable cause)
         implements PaymentResult {
 }
+```
+
+```mermaid
+classDiagram
+    class PaymentResult {
+        <<sealed interface>>
+    }
+    class Approved {
+        <<record>>
+        +authorisationId String
+    }
+    class Declined {
+        <<record>>
+        +reason String
+    }
+    class Failed {
+        <<record>>
+        +cause Throwable
+    }
+    PaymentResult <|.. Approved
+    PaymentResult <|.. Declined
+    PaymentResult <|.. Failed
 ```
 
 Permitted subtypes must be `final`, `sealed`, or `non-sealed` as required by the hierarchy rules.
@@ -296,19 +323,15 @@ Never copy a preview example into a project without checking the exact JDK relea
 - Using text blocks to concatenate untrusted SQL.
 - Enabling a preview feature without planning future upgrades.
 
-## Interview Checklist
+## Interview Questions
 
-You should be able to explain:
-
-- records and shallow immutability;
-- sealed hierarchies and exhaustive switches;
-- pattern matching and switch expressions;
-- appropriate use of `var` and `Optional`;
-- `Instant` versus local, offset, and zoned time;
-- deterministic time through `Clock`;
-- unmodifiable collection factories;
-- standard HTTP client basics;
-- modules and preview-feature trade-offs.
+> [!question] Interview Questions
+> - Why is a record only shallowly immutable, and what could go wrong if you don't defensively copy a mutable component?
+> - What does an exhaustive sealed hierarchy let the compiler catch that a plain interface can't?
+> - Why is `var` not the same thing as dynamic typing?
+> - Why shouldn't you store an `Instant` in a `LocalDateTime` when the domain needs an unambiguous moment in time?
+> - Why is calling `Optional.get()` without checking presence just as risky as a null-pointer dereference?
+> - Why would you hesitate to enable a preview feature in production code?
 
 ## Further Reading
 

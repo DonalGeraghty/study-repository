@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/languages
+---
+
 # SQL
 
 SQL is a declarative language for defining, querying, and changing relational data. You describe the required result; the database optimiser chooses an execution plan. Correct SQL therefore depends on data meaning, keys, cardinality, transaction boundaries, and the behaviour of the selected database—not syntax alone.
@@ -49,6 +54,13 @@ Choose a join from the relationship required:
 - `CROSS JOIN` forms combinations deliberately.
 
 Before joining, state whether each side is one-to-one, one-to-many, or many-to-many. Unexpected duplicates are often a cardinality problem, not something to hide with `DISTINCT`.
+
+```mermaid
+erDiagram
+    test_run ||--o{ test_failure : has
+```
+
+Each `test_run` can have zero or more `test_failure` rows; a `LEFT JOIN` keeps a run even when it has none.
 
 ```sql
 SELECT r.id, COUNT(f.id) AS failure_count
@@ -116,17 +128,14 @@ Always bind untrusted values as parameters. String concatenation creates injecti
 
 Test migrations forward and, where supported, recovery or rollback procedures. Verify constraints, transaction behaviour, permissions, indexes, and queries against the actual database engine because SQL dialects and concurrency semantics differ.
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- model identifiers, relationships, constraints, and nullability;
-- predict how filters, joins, grouping, and ordering affect rows;
-- distinguish aggregation from window calculations;
-- define transaction boundaries and reason about concurrent access;
-- interpret an execution plan before tuning a query;
-- use parameters and least-privilege database accounts;
-- test schema changes and queries with realistic data volumes.
+> [!question] Interview Questions
+> - Why does string concatenation for building a query create an injection risk even if you "trust" the input?
+> - How would you predict what a `LEFT JOIN` does to your row count compared to an `INNER JOIN` on the same tables?
+> - What's the difference between an aggregate function and a window function?
+> - How would you read an execution plan to decide whether a new index would actually help a slow query?
+> - Why should an application connect with a least-privilege database account rather than an administrative one?
 
 ## Official References
 

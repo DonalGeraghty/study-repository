@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/tooling
+---
+
 # Vite and Frontend Tooling
 
 Vite provides a development server and an optimised production build for modern web projects. Framework plugins transform source such as React JSX while the build emits static assets for a browser or static web server.
@@ -72,6 +77,15 @@ npm run preview -- --host 127.0.0.1
 ## Project Connections
 
 Nyx and Aether use Vite with React plugins. Nyx integrates Vitest and Testing Library; Aether uses ESLint and Node's built-in test runner. Both produce static frontend assets, while Aether serves them from Nginx in a multi-stage Docker image.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why doesn't a working development server prove the production build will work?
+> - Why must `VITE_*` variables never contain a secret?
+> - What breaks if the deployed `base` path doesn't match the one the build was configured with?
+> - Why should the HTML entry point be revalidated while fingerprinted assets are cached long-term?
+> - Why should the production build run in CI rather than only locally before merging?
 
 ## Related Guides
 

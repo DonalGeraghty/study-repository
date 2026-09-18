@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/frameworks
+---
+
 # Vue
 
 Vue is a JavaScript framework for component-based user interfaces. Single-file components commonly keep a component's template, behaviour, and scoped styles together while the application entry point mounts a root component.
@@ -76,6 +81,15 @@ Test pure functions without mounting UI. Use component tests for rendered behavi
 ## Project Connections
 
 The `shtormscsgo` project uses Vue 3, Vue Router, Vue CLI, Babel, ESLint, and BootstrapVue-style components.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why should a derived value like a filtered list be `computed` rather than maintained by a watcher?
+> - Why is mutating a prop directly a mistake, and what should a component do instead?
+> - Why do array indexes make unstable keys for a reorderable list?
+> - What's the risk of putting server state and unrelated page state into one global store?
+> - Why isn't a client-side route guard a substitute for server-side authorisation?
 
 ## Related Guides
 

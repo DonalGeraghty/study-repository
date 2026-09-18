@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/languages/java
+---
+
 # Java Streams and Lambdas
 
 Lambdas express behaviour as values. Streams describe pipelines that transform or aggregate data. They can make data processing concise, but hidden side effects or inappropriate parallelism can make code harder to reason about.
@@ -81,6 +86,14 @@ A pipeline has:
 1. a source;
 2. zero or more intermediate operations;
 3. a terminal operation.
+
+```mermaid
+flowchart LR
+    A[Source] --> B[Intermediate op 1: lazy]
+    B --> C[Intermediate op 2: lazy]
+    C --> D[Terminal operation]
+    D -->|triggers| E[Pipeline executes end-to-end]
+```
 
 Intermediate operations are lazy. Work normally begins when a terminal operation is invoked.
 
@@ -308,19 +321,15 @@ Test:
 - Treating `Optional` as a universal null replacement.
 - Forcing complicated logic into a pipeline when a loop is clearer.
 
-## Interview Checklist
+## Interview Questions
 
-You should be able to explain:
-
-- functional interfaces and lambda capture;
-- lazy intermediate and eager terminal operations;
-- `map` versus `flatMap`;
-- collectors and reductions;
-- primitive streams;
-- Optional usage and eager fallback;
-- side effects and non-interference;
-- encounter order;
-- when parallel streams help or harm.
+> [!question] Interview Questions
+> - Why can a lambda only capture local variables that are final or effectively final?
+> - Why don't intermediate stream operations do any work until a terminal operation runs?
+> - What's the difference between `map` and `flatMap`, and when do you need the second one?
+> - Why is mutating shared state from inside a stream pipeline dangerous, especially with `parallelStream`?
+> - Why does `orElse` evaluate its argument eagerly, and when does that matter?
+> - When would a parallel stream actually help, and when would it just add overhead or risk?
 
 ## Further Reading
 

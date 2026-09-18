@@ -1,3 +1,9 @@
+---
+tags:
+  - programming/integrations
+  - moc
+---
+
 # External Integrations
 
 These guides cover application boundaries with external services and protocols.

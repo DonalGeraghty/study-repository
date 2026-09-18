@@ -1,3 +1,8 @@
+---
+tags:
+  - platform-engineering/cloud/gcp
+---
+
 # App Engine
 
 App Engine is a managed Google Cloud application platform. The standard environment runs supported language runtimes in a constrained, automatically managed service model; the flexible environment uses a more customisable container-based model.
@@ -65,6 +70,15 @@ Test runtime-version compatibility, request limits, timeouts, health, permission
 ## Project Connections
 
 `penguin-spring-api` contains an App Engine standard `app.yaml` for a Java 11 Spring service and uses Google Cloud Pub/Sub.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why can't you rely on the instance filesystem or in-memory state to hold durable data on App Engine?
+> - How would you release a new version without immediately sending it production traffic?
+> - Why doesn't a traffic rollback undo an incompatible database migration, and how would you plan around that?
+> - Where should secrets live instead of `app.yaml`, and why?
+> - Why would you keep the previous version available for a while after promoting a new one?
 
 ## Official References
 

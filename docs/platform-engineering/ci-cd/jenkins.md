@@ -1,3 +1,8 @@
+---
+tags:
+  - platform-engineering/ci-cd
+---
+
 # Jenkins
 
 Jenkins is an extensible automation server commonly used for continuous integration and delivery. Its flexibility comes from Pipeline, distributed agents, credentials, and plugins; those same capabilities require deliberate security, lifecycle management, and operational ownership.
@@ -46,10 +51,18 @@ Declarative Pipeline provides a structured model with directives for agents, sta
 
 A pipeline should make feedback and promotion visible:
 
-```text
-checkout -> compile -> fast tests -> package -> scan
-         -> integration tests -> publish immutable artifact
-         -> deploy -> verify -> promote or roll back
+```mermaid
+flowchart LR
+    A[Checkout] --> B[Compile]
+    B --> C[Fast tests]
+    C --> D[Package]
+    D --> E[Scan]
+    E --> F[Integration tests]
+    F --> G[Publish immutable artifact]
+    G --> H[Deploy]
+    H --> I[Verify]
+    I -->|Pass| J[Promote]
+    I -->|Fail| K[Roll back]
 ```
 
 Build once and promote the same immutable artifact. Separate artifact creation from environment deployment. Use timeouts, concurrency controls, approvals, and rollback according to risk. A green deployment command is not proof that users can use the release; add health and outcome verification.
@@ -122,17 +135,14 @@ Authenticate users through an organisational identity provider and grant least p
 
 Monitor queue time, executor utilisation, agent provisioning, build duration, controller resource use, disk growth, failed jobs, and plugin health. Capacity problems are often visible first as queue delays or widespread timeouts.
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- explain controller, agent, executor, node, workspace, stage, and step;
-- write a reviewed declarative pipeline with clear artifact flow;
-- isolate untrusted change builds from privileged credentials and agents;
-- scope credentials and explain the limits of log masking;
-- design and govern a small versioned shared library;
-- manage plugins, upgrades, backups, and restoration;
-- diagnose queue, agent, pipeline, test, and product failures separately.
+> [!question] Interview Questions
+> - Why shouldn't ordinary builds run on the Jenkins controller itself?
+> - How would you isolate an untrusted pull-request pipeline from privileged credentials and production agents?
+> - Why doesn't credential masking in logs count as a complete security boundary?
+> - What risk does a trusted shared library introduce, and how would you govern changes to it?
+> - How would you separate a queue delay, an agent failure, a pipeline defect, and a genuine product failure when a build goes red?
 
 ## Official References
 

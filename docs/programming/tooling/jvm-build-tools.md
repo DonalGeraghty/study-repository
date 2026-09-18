@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/tooling
+---
+
 # Maven and Gradle
 
 Maven and Gradle resolve JVM dependencies, compile source, run tests, package applications, and coordinate plugins. A build file is executable delivery configuration: review it with the same care as application code.
@@ -106,6 +111,15 @@ Build-time tools such as Lombok generate or transform Java members during compil
 ## Project Connections
 
 The Java puzzle and API-test repositories use Maven. The Spring API uses the Maven Wrapper and Spring Boot plugin. Aurelius uses Gradle Kotlin DSL with the Android Gradle Plugin and CI-supplied release-signing values.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why would `mvn verify` catch something `mvn test` misses?
+> - Why should a project commit the Maven or Gradle wrapper instead of relying on a globally installed version?
+> - What's the risk of allowing dynamic dependency versions in a build that's supposed to be reproducible?
+> - Why should the same artifact be built once and promoted, rather than rebuilt for each environment?
+> - Why is caching build outputs without a key based on their real inputs dangerous?
 
 ## Related Guides
 

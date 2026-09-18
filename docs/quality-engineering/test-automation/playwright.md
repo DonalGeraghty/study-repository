@@ -1,3 +1,8 @@
+---
+tags:
+  - quality-engineering/test-automation
+---
+
 # Playwright
 
 Playwright is a browser-automation library with an integrated test runner for modern web applications. Its browser contexts, locators, actionability checks, fixtures, tracing, and parallel execution support reliable end-to-end and component-oriented workflows when tests also control data and environment state.
@@ -6,12 +11,12 @@ Playwright is a browser-automation library with an integrated test runner for mo
 
 A browser process can contain multiple isolated browser contexts. Each test receives a fresh context and page by default in Playwright Test, providing cookie, storage, and session isolation without launching a new browser process for every test.
 
-```text
-browser
-├── context for test A
-│   └── page
-└── context for test B
-    └── page
+```mermaid
+flowchart TD
+    B[Browser process] --> C1[Context: Test A]
+    B --> C2[Context: Test B]
+    C1 --> P1[Page]
+    C2 --> P2[Page]
 ```
 
 Tests must still isolate server-side data. Unique test identities, API setup, database seeding, and deterministic cleanup prevent workers from colliding.
@@ -93,17 +98,15 @@ npx playwright show-report
 
 Pin Playwright and browser versions through the dependency and container strategy. Start the application before the suite, use a readiness signal, and terminate it after execution.
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- explain browsers, contexts, pages, workers, and projects;
-- select resilient locators based on the intended contract;
-- rely on actionability and web-first assertions instead of sleeps;
-- isolate authentication and server-side data under parallel execution;
-- decide when to use UI, API, or network interception;
-- design fixtures and abstractions with explicit ownership;
-- diagnose failures from traces and treat retries as evidence.
+> [!question] Interview Questions
+> - What's the difference between a browser, a context, and a page in Playwright, and why does that matter for test isolation?
+> - How would you choose a locator strategy, and when would a test ID be more appropriate than a role-based locator?
+> - Why should you rely on Playwright's web-first assertions instead of fixed sleeps?
+> - How would you isolate authentication and server-side data when tests run in parallel?
+> - What would make you reach for network interception instead of testing against a real API?
+> - How would you use trace-viewer output to diagnose a failure, and why does a passed retry still need investigation?
 
 ## Official References
 

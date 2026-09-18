@@ -1,3 +1,9 @@
+---
+tags:
+  - programming/web
+  - moc
+---
+
 # Web Foundations
 
 This section covers the foundational technologies used to structure and style web pages. HTML supplies meaning and document structure; CSS controls presentation and layout. JavaScript and application frameworks build behaviour on top of that foundation.

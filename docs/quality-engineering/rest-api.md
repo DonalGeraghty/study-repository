@@ -1,3 +1,8 @@
+---
+tags:
+  - quality-engineering
+---
+
 # REST APIs and HTTP Testing
 
 REST, or **Representational State Transfer**, is an architectural style for networked systems. It is not a synonym for CRUD and it does not define the HTTP methods. HTTP supplies protocol semantics; a REST-style API applies those semantics to resources and representations.
@@ -363,6 +368,21 @@ HTTP/1.1 304 Not Modified
 ETag: "order-42-v3"
 ```
 
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as Server
+    C->>S: GET /orders/42
+    S-->>C: 200 OK, ETag: "order-42-v3"
+    Note over C: Cache the response with its ETag
+    C->>S: GET /orders/42, If-None-Match: "order-42-v3"
+    alt Unchanged
+        S-->>C: 304 Not Modified
+    else Changed
+        S-->>C: 200 OK, new ETag + representation
+    end
+```
+
 Test cache directives carefully for authenticated or sensitive data. Shared caches must not receive reusable private responses accidentally, and representation variants need correct `Vary` behaviour.
 
 ## Optimistic Concurrency Control
@@ -395,6 +415,16 @@ Content-Type: application/json
   "id": "op-123",
   "status": "pending"
 }
+```
+
+```mermaid
+stateDiagram-v2
+    [*] --> Pending: 202 Accepted
+    Pending --> Pending: poll (still processing)
+    Pending --> Succeeded
+    Pending --> Failed
+    Succeeded --> [*]
+    Failed --> [*]
 ```
 
 The operation resource should define terminal success and failure states, progress if available, expiry, cancellation behaviour, and whether polling is safe. Test duplicated submissions, retry behaviour, worker failure, eventual completion, and access control on operation status.
@@ -626,37 +656,16 @@ Test at the lowest level that proves the behaviour reliably. A small number of e
 - Generating random data without recording it in failure output.
 - Running destructive tests against an uncontrolled environment.
 
-## Interview Approach
+## Interview Questions
 
-When asked how you would test an endpoint:
-
-1. Clarify the resource, operation, users, and business risk.
-2. Define the success contract: status, headers, representation, persistence, and side effects.
-3. Partition inputs and identify boundaries.
-4. Cover authentication, authorisation, tenant, and field-level access.
-5. Test state transitions, idempotency, concurrency, retries, and failure paths.
-6. Consider dependencies, asynchronous processing, caching, and observability.
-7. Select suitable test levels and explain what to automate.
-8. Describe test data, isolation, cleanup, and diagnostic evidence.
-
-A strong answer prioritises risks instead of producing an unstructured list of status codes.
-
-## Quick Checklist
-
-You should be able to:
-
-- distinguish REST constraints from HTTP and CRUD;
-- explain safe and idempotent method semantics;
-- choose appropriate methods and status codes;
-- validate headers, media types, representations, and side effects;
-- design stable resource URIs and collection operations;
-- model consistent machine-readable errors;
-- test caching and optimistic concurrency with validators;
-- test authentication separately from authorisation;
-- reason about retries, duplication, and asynchronous completion;
-- assess schema compatibility and API evolution;
-- design a layered, risk-based API test strategy;
-- use cURL or an HTTP client to diagnose a real exchange.
+> [!question] Interview Questions
+> - How would you approach testing an endpoint you've never seen before, before writing a single test case?
+> - How do you decide which status code is correct when more than one seems plausible?
+> - Why does testing authentication separately from authorisation matter, and what's an example of a bug that slips through if you don't?
+> - How would you test optimistic concurrency using ETags or `If-Match`, and what would a false pass look like?
+> - What's the difference between a safe method and an idempotent one, and why does that distinction matter for retries?
+> - How would you design a risk-based test strategy for an API instead of defaulting to end-to-end tests for everything?
+> - How would you assess whether a schema change is backward compatible before it ships?
 
 ## Further Reading
 

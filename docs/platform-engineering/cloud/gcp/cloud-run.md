@@ -1,3 +1,8 @@
+---
+tags:
+  - platform-engineering/cloud/gcp
+---
+
 # Cloud Run
 
 Cloud Run is a managed application platform for running code in containers without administering a cluster. It supports request-driven services, run-to-completion jobs, and worker pools for always-on pull-based workloads.
@@ -79,11 +84,14 @@ Document:
 
 A typical delivery flow is:
 
-```text
-source -> Cloud Build -> tested image in Artifact Registry
-       -> deploy revision with no or limited traffic
-       -> verify health and user outcomes
-       -> increase traffic or roll back
+```mermaid
+flowchart TD
+    A[Source] --> B[Cloud Build]
+    B --> C[Tested image in Artifact Registry]
+    C --> D[Deploy revision with no or limited traffic]
+    D --> E[Verify health and user outcomes]
+    E -->|Healthy| F[Increase traffic]
+    E -->|Unhealthy| G[Roll back]
 ```
 
 Send structured logs to standard output and error. Monitor request count, latency, status codes, container startup, instance count, CPU, memory, and downstream failures. Alerts should indicate user impact or exhausted capacity rather than every instance change.
@@ -94,17 +102,14 @@ Test the container locally and in a representative Cloud Run environment. Verify
 
 For jobs, test retry safety, task partitioning, partial failure, exit codes, and resumability.
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- choose between a service, job, and worker pool;
-- satisfy the container runtime contract;
-- tune concurrency, minimum instances, and maximum instances from constraints;
-- separate deployment, invocation, and runtime identities;
-- design ingress, egress, configuration, and secret handling;
-- deliver revisions progressively and roll back safely;
-- diagnose cold starts, resource limits, and downstream saturation.
+> [!question] Interview Questions
+> - How would you choose between a Cloud Run service, job, and worker pool for a given workload?
+> - How would you tune concurrency and instance limits from load characteristics rather than guesswork?
+> - Why should deployment, invocation, and runtime identities be separated?
+> - How would you deliver a new revision progressively and roll back safely if it's unhealthy?
+> - What causes a cold start, and how would you diagnose one versus a genuine resource limit?
 
 ## Official References
 

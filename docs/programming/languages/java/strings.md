@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/languages/java
+---
+
 # Java Strings and Text
 
 `String` is an immutable sequence of UTF-16 code units. Text handling requires attention to equality, nullability, Unicode, locale, performance, and security—not only concatenation.
@@ -253,18 +258,15 @@ This reduces one retention risk but does not guarantee that no copies exist in i
 - Recompiling a complex regex repeatedly.
 - Keeping credentials in strings or logging sensitive text.
 
-## Interview Checklist
+## Interview Questions
 
-You should be able to explain:
-
-- immutability and the string pool;
-- identity versus content equality;
-- empty, blank, and null values;
-- compiler concatenation versus `StringBuilder`;
-- why `StringBuffer` is not a general concurrency solution;
-- UTF-16 code units, code points, and grapheme limitations;
-- locale and normalisation concerns;
-- text blocks, formatting, and regex reuse.
+> [!question] Interview Questions
+> - Why does string immutability make the string pool safe to share across the JVM?
+> - What's the difference between `==` and `.equals()` for strings, and why does the pool make this a common source of confusion?
+> - Why is `StringBuilder` preferred over repeated `+` concatenation in a loop?
+> - Why isn't `StringBuffer` a general concurrency solution just because it's synchronized?
+> - Why can splitting a string at a fixed character index corrupt a surrogate pair or emoji?
+> - Why is recompiling the same regex repeatedly wasteful, and how would you avoid it?
 
 ## Further Reading
 

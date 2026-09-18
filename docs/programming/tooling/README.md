@@ -1,3 +1,9 @@
+---
+tags:
+  - programming/tooling
+  - moc
+---
+
 # Development Tooling
 
 These guides cover runtimes, package managers, build systems, and focused libraries that support the repository's applications.

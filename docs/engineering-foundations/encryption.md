@@ -1,3 +1,8 @@
+---
+tags:
+  - engineering-foundations
+---
+
 # Encryption
 
 Encryption transforms plaintext into ciphertext using an algorithm and a key. Its purpose is to keep data confidential from anyone who does not have the appropriate key.
@@ -39,6 +44,19 @@ symmetric encryption protects the conversation efficiently
 
 This hybrid approach is used by protocols such as TLS. The full security of such a protocol also depends on certificate validation, secure configuration, and correct endpoint identity—not merely on encryption being present.
 
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as Server
+    C->>S: Client Hello
+    S->>C: Server Hello + certificate (public key)
+    C->>C: Verify certificate
+    C->>S: Encrypt session key with server's public key
+    Note over C,S: Both sides now hold the same symmetric session key
+    C->>S: Encrypted application data (symmetric)
+    S->>C: Encrypted application data (symmetric)
+```
+
 ## Key Management
 
 Strong encryption cannot compensate for exposed or unavailable keys. A secure design considers:
@@ -56,10 +74,15 @@ Hard-coding a key beside the ciphertext usually defeats the intended protection.
 
 Digital signatures use asymmetric cryptography and [hashing](./hashing.md) to provide integrity and evidence that the signer controlled a particular private key.
 
-```text
-message -- hash --> digest -- sign with private key --> signature
-
-message + signature -- verify with public key --> valid or invalid
+```mermaid
+flowchart LR
+    subgraph Signer
+        A[Message] -->|hash| B[Digest]
+        B -->|sign with private key| C[Signature]
+    end
+    subgraph Verifier
+        D[Message + Signature] -->|verify with public key| E{Valid?}
+    end
 ```
 
 Unlike a message authentication code, a signature can be verified using a public key without sharing the signing key. A valid signature does not automatically identify a person or organisation; that trust depends on how the public key is associated with an identity, such as through a certificate or a trusted registration process.
@@ -94,5 +117,15 @@ browser data -> encrypt -> unreadable network traffic -> decrypt -> website
 ```
 
 Someone monitoring the connection may see that traffic exists, but should not be able to read its protected contents.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - What's the difference between symmetric and asymmetric encryption, and why do protocols like TLS use both together?
+> - Why is authenticated encryption preferred over plain encryption?
+> - If a public key must be shared to be useful, what actually needs to stay secret in asymmetric cryptography?
+> - How does a digital signature differ from encryption, and what does a valid signature actually prove?
+> - What happens to your data's confidentiality if a private key is exposed, and how would you contain the damage?
+> - Why doesn't encrypting a message also guarantee no one tampered with it?
 
 Return to [Engineering Foundations](./README.md).

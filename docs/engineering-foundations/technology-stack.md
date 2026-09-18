@@ -1,3 +1,8 @@
+---
+tags:
+  - engineering-foundations
+---
+
 # Technology Stack
 
 A technology stack is the collection of languages, runtimes, frameworks, libraries, data stores, test tools, delivery systems, and operational services used to build and run a product.
@@ -165,26 +170,14 @@ Keep browser abstractions expressed as user-facing tasks and reusable components
 
 ## Reference Delivery Flow
 
-```text
-developer change
-      |
-      v
-format + static analysis + unit tests
-      |
-      v
-component and focused integration tests
-      |
-      v
-build immutable artifact or container image
-      |
-      v
-deploy to a production-like environment
-      |
-      v
-targeted end-to-end, contract, and non-functional checks
-      |
-      v
-progressive release + production observation
+```mermaid
+flowchart TD
+    A[Developer change] --> B[Format + static analysis + unit tests]
+    B --> C[Component and focused integration tests]
+    C --> D[Build immutable artifact or container image]
+    D --> E[Deploy to a production-like environment]
+    E --> F[Targeted end-to-end, contract, and non-functional checks]
+    F --> G[Progressive release + production observation]
 ```
 
 The exact gates should reflect risk and feedback time.
@@ -271,30 +264,18 @@ Observability assertions can be valuable, but avoid tests coupled to incidental 
 - Buying a reporting platform before deciding who needs which information.
 - Optimising developer convenience while ignoring production operation.
 
-## Explaining a Stack in an Interview
-
-1. State the product, users, architecture, and main risks.
-2. Describe the selected stack by layer.
-3. Explain two or three important choices and their constraints.
-4. Describe the test feedback provided before and after deployment.
-5. Explain diagnostics, test data, and environment management.
-6. Name an alternative and why it was not selected.
-7. Share evidence such as execution time, defect detection, stability, or operational cost.
-
 “We used Playwright because it is modern” is weak. “We selected it after a proof of concept showed reliable multi-browser execution, useful traces for CI failures, and good TypeScript alignment” is a defensible engineering explanation.
 
-## Review Checklist
+## Interview Questions
 
-- [ ] Every tool has a clear responsibility and owner.
-- [ ] The stack supports the product's highest risks.
-- [ ] Local and CI execution are reproducible.
-- [ ] Fast feedback is separated from expensive coverage.
-- [ ] Test data and state are isolated.
-- [ ] Failure diagnostics are retained and accessible.
-- [ ] Dependencies, runtimes, and images have upgrade policies.
-- [ ] Security and secret management are built into delivery.
-- [ ] Operational complexity is justified.
-- [ ] Important choices and rejected alternatives are documented.
+> [!question] Interview Questions
+> - How would you explain a stack decision in an interview, from product context down to supporting evidence?
+> - Can you name a stack choice you'd defend, and one alternative you deliberately rejected — why?
+> - How do you know whether local and CI execution are actually reproducible?
+> - Why should fast feedback be kept separate from expensive coverage in a delivery pipeline?
+> - How would you justify operational complexity, such as choosing Kubernetes for a given workload?
+> - What evidence would convince you a stack decision was correct after the fact?
+> - How do you keep dependency, runtime, and image upgrades from being ignored until something breaks?
 
 ## Official Starting Points
 

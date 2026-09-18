@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/languages/java
+---
+
 # Java Collections Framework
 
 The Java Collections Framework provides interfaces, implementations, algorithms, and interoperability conventions for groups of objects.
@@ -327,19 +332,15 @@ Hash collisions, resizing, cache locality, allocation, comparator cost, and work
 - Catching `ConcurrentModificationException` instead of fixing unsafe mutation.
 - Returning mutable internal collections directly.
 
-## Interview Checklist
+## Interview Questions
 
-You should be able to explain:
-
-- the `Collection` hierarchy and why `Map` is separate;
-- ordering, duplicates, nulls, and mutability contracts;
-- `ArrayList` versus `LinkedList` with real access patterns;
-- hashing and the `equals`/`hashCode` contract;
-- natural ordering and comparators;
-- queues, deques, and priority queues;
-- unmodifiable factories, views, and copies;
-- concurrent collections and atomic compound operations;
-- asymptotic complexity versus measured performance.
+> [!question] Interview Questions
+> - Why is `Map` not part of the `Collection` hierarchy, even though it's a core collection type?
+> - How would you choose between `ArrayList` and `LinkedList` for a given access pattern?
+> - Why must `hashCode` be consistent with `equals`, and what breaks if it isn't?
+> - What's the risk of a check-then-act sequence on a concurrent collection, even one that's individually thread-safe?
+> - Why is returning a mutable internal collection directly a design mistake?
+> - When would an unmodifiable view or copy matter more than raw performance?
 
 ## Further Reading
 

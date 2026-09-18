@@ -1,3 +1,8 @@
+---
+tags:
+  - platform-engineering
+---
+
 # Nginx
 
 Nginx is a web server and reverse proxy. In the frontend projects it serves compiled static assets from a small container and provides single-page application route fallback.
@@ -34,6 +39,15 @@ Compression, media types, character encoding, and security headers must match th
 ## Project Connections
 
 Aether builds React assets in a Node stage and serves them from Nginx on Cloud Run. Nyx's deployment workflow creates a similar Nginx image dynamically.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why should a missing asset return `404` instead of falling back to `index.html` for a single-page application?
+> - Why would you cache fingerprinted asset files aggressively but keep the HTML entry point short-lived or revalidated?
+> - Why does a multi-stage build matter for an Nginx image serving a frontend app?
+> - What would a lightweight health endpoint need to avoid depending on, and why?
+> - Why is it risky to assume a copied Nginx configuration's headers are correct for a new application?
 
 ## Related Guides
 

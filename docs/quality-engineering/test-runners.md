@@ -1,3 +1,8 @@
+---
+tags:
+  - quality-engineering
+---
+
 # Test Runners and Assertion Libraries
 
 A test runner discovers tests, prepares their lifecycle, executes them, records results, and returns a process status to local tooling or CI. Automation libraries drive a system; runners organise and report the tests that use them.
@@ -79,6 +84,15 @@ Pin runner and plugin versions, emit machine-readable results where the CI platf
 ## Project Connections
 
 The repositories use every runner in the table: Java puzzle and browser projects use JUnit, an older API suite uses TestNG, the Flask APIs use `unittest`, Python browser suites use pytest, Nyx uses Vitest and Testing Library, and Aether uses Node's test runner.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why shouldn't you casually mix lifecycle models between test runners in one suite?
+> - How would you design a parameterised test so boundary cases are visible instead of hidden inside a loop?
+> - Why does asserting an entire response object often make a test more fragile than asserting the fields that matter?
+> - How would you make a suite's setup safe for parallel execution when tests currently depend on running in a fixed order?
+> - What's wrong with treating retries as a way to make an unreliable test "pass," and how would you tell a flaky test from a real regression?
 
 ## Related Guides
 

@@ -1,3 +1,8 @@
+---
+tags:
+  - engineering-foundations
+---
+
 # Encoding
 
 Encoding converts data from one representation into another so that a system can store, transmit, or interpret it correctly.
@@ -36,20 +41,11 @@ These are categories of operations, not interchangeable levels of security. Data
 
 For example, a service sending a sensitive structured message might use this flow:
 
-```text
-structured data
-      |
-      | encode into a defined byte representation
-      v
-plaintext bytes
-      |
-      | authenticated encryption with a secret key
-      v
-ciphertext bytes
-      |
-      | Base64 encode for a text-only transport
-      v
-transport-safe text
+```mermaid
+flowchart TD
+    A[Structured data] -->|encode into a defined byte representation| B[Plaintext bytes]
+    B -->|authenticated encryption with a secret key| C[Ciphertext bytes]
+    C -->|Base64 encode for a text-only transport| D[Transport-safe text]
 ```
 
 The receiver reverses the applicable operations in the opposite order: Base64-decode, authenticate and decrypt, then interpret the encoded structure.
@@ -71,5 +67,14 @@ photo bytes -> Base64 text -> email transport -> photo bytes
 ```
 
 Anyone who obtains the Base64 text can decode the photo. Encoding makes the data compatible with the transport; it does not keep the photo secret.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why doesn't Base64 provide confidentiality, even though the output looks unreadable?
+> - How would you explain the difference between encoding, encryption, and hashing to someone who conflates them?
+> - In a pipeline that encodes, encrypts, and then Base64-encodes a message, in what order would the receiver reverse those steps?
+> - Why is it a mistake to "encode" a secret like a private key instead of protecting it properly?
+> - What's the difference between encoding and compression?
 
 Return to [Engineering Foundations](./README.md).

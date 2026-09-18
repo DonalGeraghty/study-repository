@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/frameworks
+---
+
 # Flask
 
 Flask is a Python web framework built around explicit route handlers and a small application core. It is useful for HTTP APIs and compact web services, but production quality still depends on deliberate validation, authentication, persistence, observability, and deployment choices.
@@ -89,6 +94,15 @@ def test_missing_result_returns_404():
 ## Project Connections
 
 The Janus API repositories use Flask and Flask-CORS with Pydantic models, JWT authentication, Firestore, AI-provider SDKs, and Google Cloud deployment.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why should route functions stay focused on HTTP concerns instead of holding business rules directly?
+> - Why is Flask's development server or debugger dangerous to leave enabled in production?
+> - Why doesn't validating a JWT's signature alone prove a request is authorised?
+> - What's the risk of relying on module-level mutable state across requests?
+> - Why would you use Flask's test client instead of testing only against a deployed server?
 
 ## Related Guides
 

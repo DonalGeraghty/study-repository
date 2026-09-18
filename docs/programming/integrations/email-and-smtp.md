@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/integrations
+---
+
 # Email and SMTP
 
 SMTP transfers email between clients and mail servers. Application code usually authenticates to a provider, submits a message, and lets the provider handle onward delivery.
@@ -54,6 +59,26 @@ def send_report(recipient, report_date):
         raise RuntimeError(f"recipients refused: {list(refused)}")
 ```
 
+```mermaid
+sequenceDiagram
+    participant App
+    participant Srv as SMTP Server
+    App->>Srv: EHLO
+    Srv-->>App: capabilities
+    App->>Srv: STARTTLS
+    App->>Srv: EHLO (again, over TLS)
+    Srv-->>App: capabilities
+    App->>Srv: LOGIN (username, password)
+    Srv-->>App: authenticated
+    App->>Srv: SEND message
+    alt Recipient refused
+        Srv-->>App: refused recipients
+        App->>App: raise error
+    else Accepted
+        Srv-->>App: accepted
+    end
+```
+
 The example uses the email library to encode headers and the body, upgrades the authenticated connection with certificate verification, and checks for recipients refused during the transaction. It does not prove inbox placement or user receipt.
 
 For user-controlled display names, subjects, and links, validate against the product contract and render from trusted templates. Do not let an arbitrary user choose the envelope sender or turn the service into an open relay.
@@ -74,6 +99,15 @@ Unit-test message composition and recipient selection without sending real mail.
 ## Project Connections
 
 The Playwright CEX crawler builds a text email with Python's standard email library and submits it through `smtplib` using credentials loaded from environment configuration.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why doesn't SMTP acceptance prove the email actually reached an inbox?
+> - Why is retrying an email send after an ambiguous timeout risky, and how would you avoid sending a duplicate?
+> - Why must user-controlled display names and subjects be validated before going into a message?
+> - What makes an SMTP relay "open," and why is that dangerous?
+> - Why would you unit-test message composition separately from actually sending mail?
 
 ## Related Guides
 

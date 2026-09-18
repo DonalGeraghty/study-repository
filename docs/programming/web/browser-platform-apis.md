@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/web
+---
+
 # Browser Storage, Canvas, and Push
 
 Browser applications can use platform APIs directly without adding a framework. The projects use local storage, canvas rendering, audio, pointer input, web application manifests, and server-triggered push capabilities.
@@ -61,6 +66,20 @@ Browsers commonly require a user gesture before audio starts. Provide mute contr
 
 Web Push uses a service worker, a browser push subscription, and a server that sends encrypted push messages using VAPID credentials. Store subscriptions per user, validate their shape, delete expired endpoints, and avoid placing sensitive details in notification content.
 
+```mermaid
+sequenceDiagram
+    participant B as Browser
+    participant SW as Service Worker
+    participant Srv as Server
+    B->>SW: register service worker
+    SW->>B: subscribe to push
+    B-->>Srv: send subscription (endpoint + keys)
+    Srv->>Srv: store subscription
+    Note over Srv: Later, triggered by an event
+    Srv->>SW: send encrypted push (VAPID)
+    SW->>SW: receive push, show notification
+```
+
 A web application manifest supplies install metadata but does not by itself make an application offline-capable or prove that a service worker is registered.
 
 ## Common Failure Modes
@@ -76,6 +95,15 @@ A web application manifest supplies install metadata but does not by itself make
 ## Project Connections
 
 FlappyAI uses Canvas, pointer events, Web Audio, and `localStorage`. Aether and Nyx use `localStorage`; Nyx includes manifest assets but intentionally has no active offline/PWA layer. The Janus APIs store push subscriptions and send VAPID-backed reminders.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why can't `localStorage` be assumed safe from any script running on the same origin, including a bearer token stored there?
+> - Why would you version a `localStorage` key, and what happens if you don't when the stored shape changes?
+> - Why does canvas movement need to be time-based rather than a fixed amount per frame?
+> - Why doesn't having a web app manifest by itself make a site an installable, offline-capable PWA?
+> - Why should push notification content avoid putting sensitive details in the payload shown on a lock screen?
 
 ## Related Guides
 

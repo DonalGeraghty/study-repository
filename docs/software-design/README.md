@@ -1,3 +1,9 @@
+---
+tags:
+  - software-design
+  - moc
+---
+
 # Software Design
 
 Software design is the work of arranging code and responsibilities so that a system is correct today and can change safely tomorrow. Good design is not measured by the number of patterns it uses. It is measured by how clearly the code expresses its purpose, protects its rules, and supports likely changes.

@@ -1,3 +1,9 @@
+---
+tags:
+  - programming/languages/java
+  - moc
+---
+
 # Java Study Guide
 
 This pathway covers the Java language and core library knowledge expected in application development, test automation, code review, and technical interviews. Examples use modern Java while distinguishing language guarantees from common HotSpot JVM implementation details.

@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/languages
+---
+
 # R
 
 R is a language and environment for statistical computing, data analysis, and visualisation. Effective R work treats analysis as software: source data is preserved, transformations are explicit, results are reproducible, and important assumptions are tested.
@@ -95,17 +100,14 @@ plot(results$duration, results$score,
 
 Test reusable functions with representative, boundary, missing, and invalid inputs. Add data-quality assertions for schema, uniqueness, allowed ranges, and join cardinality. For numerical results, compare with an appropriate tolerance rather than assuming exact floating-point equality.
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- explain vectors, recycling, coercion, missing values, and factors;
-- select and transform tabular data without losing row-level meaning;
-- write functions without hidden global dependencies;
-- validate joins, aggregations, statistical assumptions, and outputs;
-- create accessible visualisations that answer a defined question;
-- reproduce an analysis in a clean environment;
-- distinguish statistical significance from practical importance.
+> [!question] Interview Questions
+> - What's vector recycling, and why can it silently produce a wrong-length result instead of an error?
+> - How does R's handling of missing values (`NA`) change the result of a straightforward aggregation?
+> - Why would you validate join cardinality before trusting the row count of a merged data frame?
+> - How would you reproduce an analysis result in a clean environment months later?
+> - What's the difference between a statistically significant result and a practically important one?
 
 ## Official References
 

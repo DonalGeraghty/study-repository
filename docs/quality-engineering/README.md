@@ -1,3 +1,9 @@
+---
+tags:
+  - quality-engineering
+  - moc
+---
+
 # Quality Engineering
 
 These guides cover quality strategy and the technical interfaces commonly exercised by modern test systems.

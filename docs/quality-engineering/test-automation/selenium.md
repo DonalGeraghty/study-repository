@@ -1,11 +1,22 @@
+---
+tags:
+  - quality-engineering/test-automation
+---
+
 # Selenium
 
 Selenium is a browser-automation ecosystem built around the W3C WebDriver standard. Language bindings send commands through a browser driver to a local or remote browser. Selenium provides automation primitives; the project must supply its test runner, assertions, data management, reporting, and framework conventions.
 
 ## WebDriver Architecture
 
-```text
-test code -> Selenium binding -> WebDriver endpoint -> browser
+```mermaid
+flowchart LR
+    A[Test code] --> B[Selenium binding]
+    B --> C[WebDriver endpoint]
+    C --> D[Local driver]
+    C --> E[Remote Grid node]
+    D --> F[Browser]
+    E --> F[Browser]
 ```
 
 The endpoint may be a local driver or a remote Grid. Capabilities describe the requested browser session. Keep browser and driver management reproducible through Selenium Manager, containers, or a controlled grid image rather than relying on undocumented machine state.
@@ -91,17 +102,15 @@ On failure, retain:
 
 Retries should classify flakes, not hide them. Distinguish product defects, test defects, environment failures, and capacity problems.
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- explain the WebDriver client, endpoint, session, and browser relationship;
-- switch windows, frames, and alerts without losing context;
-- select stable locators and explicit wait conditions;
-- design cohesive page and component objects;
-- isolate drivers, accounts, and server data under parallel execution;
-- operate local and Grid-based browser sessions;
-- diagnose failures with browser, driver, and environment evidence.
+> [!question] Interview Questions
+> - What's the relationship between the WebDriver client, the endpoint, and the browser session?
+> - How do you avoid losing context after switching to a new window, tab, or frame?
+> - Why are fixed sleeps worse than explicit waits, and what's the risk of mixing wait strategies?
+> - How would you design a page object so it hides locator mechanics but keeps test intent visible?
+> - What changes about isolation and capacity planning when you move from local execution to a Grid?
+> - How would you tell a product defect apart from a test defect, environment failure, or capacity problem when a test fails?
 
 ## Official References
 

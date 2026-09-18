@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/languages/java
+---
+
 # Java Concurrency
 
 Concurrency allows tasks to make progress during overlapping periods. Correct concurrent code requires explicit reasoning about shared state, visibility, atomicity, ordering, cancellation, and resource limits.
@@ -48,6 +53,17 @@ A **happens-before** relationship establishes visibility and ordering guarantees
 - actions before starting a thread and actions in that thread;
 - actions in a thread and successful detection of its termination;
 - concurrency-utility contracts.
+
+```mermaid
+sequenceDiagram
+    participant T1 as Thread 1
+    participant V as volatile field
+    participant T2 as Thread 2
+    T1->>V: write stopRequested = true
+    Note over V: Happens-before edge
+    T2->>V: read stopRequested
+    V-->>T2: sees true (guaranteed visible)
+```
 
 “It usually works on my machine” is not a memory-visibility guarantee.
 
@@ -308,19 +324,15 @@ One passing test cannot prove absence of a race. Design and memory-model reasoni
 - Assuming virtual threads eliminate resource limits.
 - Testing concurrency with fixed sleeps.
 
-## Interview Checklist
+## Interview Questions
 
-You should be able to explain:
-
-- concurrency versus parallelism;
-- races, atomicity, visibility, ordering, and happens-before;
-- `synchronized` versus `volatile`;
-- atomics, locks, and concurrent collections;
-- executor lifecycle and bounded resources;
-- virtual-thread strengths and limitations;
-- interruption and cancellation;
-- deadlock prevention and diagnosis;
-- approaches to testing concurrent behaviour.
+> [!question] Interview Questions
+> - What's the difference between concurrency and parallelism?
+> - Why isn't `count++` atomic, and what would make it so?
+> - What's the difference between `synchronized` and `volatile`, and when does each fall short on its own?
+> - Why do virtual threads help with blocking I/O but not with CPU-bound work?
+> - How would you diagnose a deadlock, and what design choices reduce the risk of one?
+> - Why is testing concurrent code with fixed sleeps unreliable?
 
 ## Further Reading
 

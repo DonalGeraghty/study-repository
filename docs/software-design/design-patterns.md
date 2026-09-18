@@ -1,3 +1,8 @@
+---
+tags:
+  - software-design
+---
+
 # Design Patterns
 
 A design pattern is a named, reusable approach to a recurring design problem. It describes a context, collaborating roles, and trade-offs; it is not code to copy unchanged.
@@ -150,6 +155,26 @@ public final class RetryingPaymentGateway implements PaymentGateway {
 
 Decorators can add logging, caching, metrics, authorisation, or retry behaviour without changing the core implementation. Order matters when several decorators are stacked, and retries are safe only for operations with suitable idempotency guarantees.
 
+```mermaid
+classDiagram
+    class PaymentGateway {
+        <<interface>>
+        +charge(Money, PaymentMethod) PaymentReceipt
+    }
+    class AcmePaymentAdapter {
+        +charge(Money, PaymentMethod) PaymentReceipt
+    }
+    class RetryingPaymentGateway {
+        -delegate PaymentGateway
+        +charge(Money, PaymentMethod) PaymentReceipt
+    }
+    PaymentGateway <|.. AcmePaymentAdapter
+    PaymentGateway <|.. RetryingPaymentGateway
+    RetryingPaymentGateway o-- PaymentGateway : delegate
+```
+
+The adapter and the decorator both implement the same `PaymentGateway` contract; the decorator wraps any implementation of it, including the adapter, without either knowing about the other.
+
 ## Observer and Domain Events
 
 Observer notifies subscribers when something happens. In-process listeners are simple, while messages between processes introduce delivery, ordering, duplication, schema evolution, and observability concerns.
@@ -218,6 +243,17 @@ public final class LoginPage {
 }
 ```
 
+```mermaid
+sequenceDiagram
+    participant T as Test
+    participant L as LoginPage
+    participant H as HomePage
+    T->>L: logInAs(username, secret)
+    L->>L: fill email, password, click submit
+    L-->>T: return HomePage
+    T->>H: assert expected state
+```
+
 ### Page Object Guidance
 
 - Expose user-facing services such as `logInAs`, not every click and field.
@@ -255,26 +291,15 @@ This does not mean all are needed together. Each pattern must earn its place.
 - Building generic repositories that erase domain language.
 - Creating page objects with public locators and assertions for every test.
 
-## Review Checklist
+## Interview Questions
 
-- [ ] Is the problem and expected variation explicit?
-- [ ] Is the simpler design insufficient?
-- [ ] Does the pattern name match its actual structure and intent?
-- [ ] Are lifecycle, error, concurrency, and performance implications understood?
-- [ ] Can a new developer follow the main use case?
-- [ ] Do tests cover the contract and translations at boundaries?
-- [ ] Could the pattern be removed later without rewriting the entire system?
-
-## Practice Exercise
-
-Design checkout support for several payment providers:
-
-1. Define the contract the use case needs.
-2. Adapt one provider's SDK to it.
-3. Add provider selection at the composition boundary.
-4. Add metrics without editing the provider adapter.
-5. Explain retry and idempotency decisions.
-6. Identify one tempting pattern you chose not to use.
+> [!question] Interview Questions
+> - How would you decide whether a design pattern is worth the indirection it adds, versus keeping the simpler design?
+> - Given a checkout that needs to support several payment providers, how would you design the abstraction boundary, and where would you put provider selection?
+> - How would you add metrics or retry behaviour to a payment adapter without editing the adapter itself?
+> - What idempotency and retry decisions would you need to make for a payment charge, and why?
+> - How do you know a pattern's name actually matches its structure and intent, rather than being applied because the name sounds right?
+> - Could the pattern you chose be removed later without rewriting the whole system? What would make that hard?
 
 ## Related Guides
 

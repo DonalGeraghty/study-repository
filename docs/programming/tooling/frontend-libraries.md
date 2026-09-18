@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/tooling
+---
+
 # Frontend Libraries
 
 Frontend projects often combine a UI framework with focused libraries. Select each library for a real capability, keep ownership boundaries clear, and distinguish a dependency that is actively imported from one that is merely present in a manifest.
@@ -32,6 +37,15 @@ Vue CLI projects may use Babel to transform modern JavaScript syntax for configu
 ## Project Connections
 
 Nyx uses React Router, Recharts, Motion, and OGL. The Vue project uses Vue Router and BootstrapVue-related components. The browser games use the Canvas API directly rather than a rendering framework.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why doesn't a client-side route guard ever replace server-side authorisation?
+> - Why should chart data be prepared and validated separately from the rendering code that displays it?
+> - Why can transpiling modern syntax with Babel still leave a missing runtime API unpolyfilled?
+> - Why is a component library not proof of accessibility by itself?
+> - How would you decide it's time to remove a dependency that's declared but no longer imported?
 
 ## Related Guides
 

@@ -1,3 +1,8 @@
+---
+tags:
+  - platform-engineering
+---
+
 # Amazon SQS
 
 Amazon Simple Queue Service (SQS) is AWS's managed message queue. Producers place messages on a queue, and a worker from a competing-consumer pool processes each delivery. SQS is useful for background work, traffic buffering, and decoupling services that do not need to be available at the same time.
@@ -155,9 +160,14 @@ event producer -> SNS -> inventory SQS -> inventory workers
 - assuming an empty short poll proves the queue has no messages;
 - ignoring per-entry failure in batch operations.
 
-## Practice
+## Interview Questions
 
-Design a queue for generating monthly reports. Reports take between ten seconds and ten minutes. Explain the message body, idempotency key, visibility extension, retry policy, DLQ, large output storage, worker shutdown, and scaling signal.
+> [!question] Interview Questions
+> - For a queue generating monthly reports that take between ten seconds and ten minutes, how would you set the visibility timeout, given that duration range?
+> - How would you extend visibility safely for a report that's still healthy but running long, without losing the underlying idempotency guarantee?
+> - What idempotency key would prevent a redelivered message from generating the same report twice?
+> - Where would large report output live, and why shouldn't it go in the message body itself?
+> - What signal would you scale worker count from — queue depth, backlog age, or something else — and why?
 
 ## Official References
 
@@ -171,6 +181,7 @@ Design a queue for generating monthly reports. Reports take between ten seconds 
 - [Amazon SNS](./amazon-sns.md)
 - [Publish/Subscribe](./pub-sub.md)
 - [RabbitMQ](./rabbitmq.md)
+- [Apache Kafka](./kafka.md)
 - [Amazon Web Services](./cloud/aws.md)
 
 Return to [Platform Engineering](./README.md).

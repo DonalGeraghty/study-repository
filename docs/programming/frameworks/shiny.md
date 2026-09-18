@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/frameworks
+---
+
 # Shiny for R
 
 Shiny is an R framework for interactive web applications. A Shiny application defines a user interface and server logic connected through reactive values and outputs.
@@ -62,6 +67,13 @@ Only the filtered data depends on the input, so unrelated outputs would not need
 stopifnot(nrow(filter_cars(mtcars, 30)) == 4)
 ```
 
+```mermaid
+flowchart LR
+    I["input$minimum_mpg"] --> R[matching_cars reactive]
+    R --> O["output$matching_cars"]
+    N[Unrelated output: not connected, does not recalculate]
+```
+
 For expensive work triggered by a button, use an event-oriented reactive boundary so every intermediate input change does not start the calculation.
 
 ## Testing and Deployment
@@ -80,6 +92,15 @@ Test pure R transformations independently. Add targeted tests for reactive behav
 ## Project Connections
 
 The Shiny repositories use R, Shiny, ggplot2, Leaflet, map libraries, clustering, PCA, uploaded CSV data, and shinyapps.io deployment metadata.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - Why can `input` only be read inside a reactive consumer, not anywhere in server code?
+> - Why is broad reactive dependency a performance problem, and how would you narrow it?
+> - Why is modifying process-global state from one user's session dangerous when Shiny can serve multiple sessions from one R process?
+> - Why shouldn't you trust an uploaded file's extension alone before processing its content?
+> - What would you need before rendering user-controlled HTML safely?
 
 ## Related Guides
 

@@ -1,3 +1,9 @@
+---
+tags:
+  - programming/platforms
+  - moc
+---
+
 # Application Platforms
 
 This section contains application platforms and their development ecosystems. A platform can include runtimes, SDKs, lifecycle rules, packaging, deployment, user-interface systems, and operating-system services.

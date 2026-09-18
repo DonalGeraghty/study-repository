@@ -1,3 +1,9 @@
+---
+tags:
+  - programming/coding-challenges/codewars
+  - moc
+---
+
 # Codewars
 
 This page records Codewars kata after they have been completed as deliberate practice.

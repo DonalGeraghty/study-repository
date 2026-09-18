@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/web
+---
+
 # HTML
 
 HTML gives web content structure and meaning. Browsers parse markup into the Document Object Model (DOM), then combine it with CSS and JavaScript. Good HTML begins with semantics and progressive enhancement rather than treating every element as a generic container.
@@ -109,17 +114,15 @@ Escape untrusted content before inserting it into HTML. Do not build markup thro
 
 Validate markup, inspect the accessibility tree, and test with keyboard navigation, multiple viewport sizes, and at least one screen reader workflow for critical pages. Automated accessibility rules catch useful classes of problems but cannot determine whether content and interaction make sense.
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- build a valid document with meaningful landmarks and headings;
-- choose native semantic elements before custom roles;
-- create labelled, keyboard-usable forms with server-side validation;
-- provide appropriate alternatives for images and media;
-- mark up data tables accurately;
-- explain DOM order, accessible names, and focus behaviour;
-- test structure with validators, developer tools, and assistive technology.
+> [!question] Interview Questions
+> - Why would you choose a native semantic element over a `div` with a custom ARIA role?
+> - What makes a form control's label actually associated with it, versus just visually nearby?
+> - Why does client-side form validation need a server-side check behind it?
+> - How does DOM order affect both keyboard focus order and screen-reader reading order?
+> - What's the difference between an accessible name and visible text, and when do they diverge?
+> - How would you test a page's structure beyond an automated accessibility scanner?
 
 ## Official References
 

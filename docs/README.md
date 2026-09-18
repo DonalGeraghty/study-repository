@@ -1,3 +1,8 @@
+---
+tags:
+  - moc
+---
+
 # Documentation Library
 
 This is the canonical table of contents for the handbook. Use the subject indexes for a guided sequence or bookmark a leaf guide for a focused refresh. The repository [landing page](../README.md) explains the available study-session formats and cross-subject learning paths.
@@ -114,6 +119,7 @@ This is the canonical table of contents for the handbook. Use the subject indexe
 - [Redis](./platform-engineering/redis.md)
 - [Publish/Subscribe](./platform-engineering/pub-sub.md)
 - [RabbitMQ](./platform-engineering/rabbitmq.md)
+- [Apache Kafka](./platform-engineering/kafka.md)
 - [Amazon SNS](./platform-engineering/amazon-sns.md)
 - [Amazon SQS](./platform-engineering/amazon-sqs.md)
 

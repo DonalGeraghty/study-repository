@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/languages/java
+---
+
 # Java Numbers and Precision
 
 Choosing a numeric type requires understanding its range, representation, overflow behaviour, precision, and domain rules. “Decimal-looking” source code does not imply decimal storage.
@@ -234,17 +239,15 @@ Parsing machine interchange and formatting for users are different concerns.
 - Dividing without an explicit rounding policy.
 - Treating `BigDecimal` as a complete money type.
 
-## Interview Checklist
+## Interview Questions
 
-You should be able to explain:
-
-- integer promotion, division, overflow, and exact arithmetic methods;
-- why 0.1 cannot be represented exactly as a finite binary floating-point value;
-- absolute and relative tolerance;
-- NaN, infinity, and signed zero;
-- `BigInteger` versus primitive integers;
-- `BigDecimal` construction, scale, equality, division, and rounding;
-- why numeric choices must follow domain rules.
+> [!question] Interview Questions
+> - Why can't `0.1` be represented exactly as a binary floating-point value, and what does that mean for equality checks?
+> - What's the difference between integer overflow wrapping silently and using `Math.addExact`?
+> - Why does `BigDecimal.equals` treat `1.0` and `1.00` as different values, and what would you use instead to compare them numerically?
+> - When would you reach for `BigInteger` instead of a primitive integer type?
+> - What's the difference between absolute and relative tolerance when comparing floating-point results in a test?
+> - Why must a rounding policy be explicit rather than left to the default, especially for money?
 
 ## Further Reading
 

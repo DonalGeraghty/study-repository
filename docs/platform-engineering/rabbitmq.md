@@ -1,3 +1,8 @@
+---
+tags:
+  - platform-engineering
+---
+
 # RabbitMQ
 
 RabbitMQ is a message broker. Producers publish messages to exchanges, exchanges route them through bindings, and queues retain them for consumers. This separation supports work queues, routing, fan-out, and request decoupling without making the producer know every consumer.
@@ -151,9 +156,14 @@ These mechanisms protect different gaps and cannot substitute for one another.
 - treating message order as globally guaranteed while using parallel consumers;
 - opening a new connection for every message.
 
-## Practice
+## Interview Questions
 
-Sketch a topology for image processing: one command should be handled by one worker, while completion should notify billing and analytics independently. Name the exchanges, routing keys, queues, acknowledgement point, retry path, and idempotency key.
+> [!question] Interview Questions
+> - How would you design an image-processing topology where one command is handled by exactly one worker, but completion must independently notify billing and analytics? Name the exchanges, routing keys, and queues you'd use.
+> - Where would you place the acknowledgement point, and why does that placement matter for redelivery?
+> - How would you handle a message that fails processing repeatedly instead of requeueing it forever?
+> - What idempotency key would protect the worker from processing the same command twice?
+> - Why would sharing one queue between the billing and analytics consumers be a mistake here?
 
 ## Official References
 
@@ -165,6 +175,7 @@ Sketch a topology for image processing: one command should be handled by one wor
 ## Related Guides
 
 - [Publish/Subscribe](./pub-sub.md)
+- [Apache Kafka](./kafka.md)
 - [Amazon SQS](./amazon-sqs.md)
 - [Amazon SNS](./amazon-sns.md)
 - [Docker](./docker.md)

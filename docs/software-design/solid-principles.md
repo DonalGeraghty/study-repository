@@ -1,3 +1,8 @@
+---
+tags:
+  - software-design
+---
+
 # SOLID Principles
 
 SOLID is a set of five design heuristics for assigning responsibilities and managing dependencies in object-oriented code. The principles help a design respond to change, but they are not laws, metrics, or a requirement to create an interface for every class.
@@ -206,6 +211,28 @@ public final class FixedTermAccount implements Account {
 
 The type system now states the difference instead of deferring the surprise until runtime.
 
+```mermaid
+classDiagram
+    class Account {
+        <<interface>>
+        +balance() Money
+    }
+    class WithdrawableAccount {
+        <<interface>>
+        +withdraw(Money) void
+    }
+    class CurrentAccount {
+        +balance() Money
+        +withdraw(Money) void
+    }
+    class FixedTermAccount {
+        +balance() Money
+    }
+    Account <|-- WithdrawableAccount
+    WithdrawableAccount <|.. CurrentAccount
+    Account <|.. FixedTermAccount
+```
+
 ### Contract Tests
 
 When several implementations share a contract, run the same behavioural test suite against all of them. This is especially useful for repositories, storage adapters, and service clients.
@@ -323,38 +350,16 @@ Applying one principle can create tension with another. Splitting responsibiliti
 - Mocking every collaborator and coupling tests to call order.
 - Applying all five principles to trivial data structures.
 
-## Review Checklist
+## Interview Questions
 
-### Responsibilities
-
-- [ ] Can the class's responsibility be described in one cohesive sentence?
-- [ ] Are domain decisions separated from I/O and framework code?
-- [ ] Do collaborators represent different responsibilities rather than arbitrary fragments?
-
-### Extension and Contracts
-
-- [ ] Is an abstraction protecting a real variation?
-- [ ] Can every implementation satisfy the complete contract?
-- [ ] Are preconditions, results, failures, and side effects clear?
-
-### Interfaces and Dependencies
-
-- [ ] Does each client see only the capabilities it needs?
-- [ ] Does business policy avoid direct knowledge of infrastructure?
-- [ ] Are dependencies visible in constructors or method parameters?
-- [ ] Is object construction kept near the application boundary?
-
-## Interview Exercise
-
-Given an order service that calculates a discount, writes directly to a database, and emails a receipt:
-
-1. Identify the reasons it changes.
-2. Refactor only the boundaries that provide value.
-3. State the contracts and likely variations.
-4. Explain how the concrete application is assembled.
-5. Name one abstraction you deliberately did not add.
-
-A strong answer discusses context and trade-offs rather than merely naming each letter.
+> [!question] Interview Questions
+> - Given an order service that calculates a discount, writes directly to a database, and emails a receipt, what are the separate reasons it might change?
+> - Which boundaries would you actually refactor, and which would you leave alone as not worth the indirection?
+> - How would you state the contracts and likely variations for each responsibility you split out?
+> - How is the concrete application assembled once responsibilities are split into abstractions?
+> - Can you name one abstraction you would deliberately not add, and explain why?
+> - How do you tell whether an abstraction is protecting a real variation versus adding cost for nothing?
+> - Why isn't using a dependency-injection framework by itself proof that dependency inversion happened?
 
 ## Related Guides
 

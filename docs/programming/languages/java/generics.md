@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/languages/java
+---
+
 # Java Generics
 
 Generics allow types and methods to express relationships between types while providing compile-time checking and reducing casts.
@@ -260,18 +265,14 @@ Use `@SafeVarargs` only when the method truly does not perform potentially unsaf
 - Performing unchecked casts without validating the underlying structure.
 - Adding `@SafeVarargs` without proving safety.
 
-## Interview Checklist
+## Interview Questions
 
-You should be able to explain:
-
-- generic classes and methods;
-- invariance and the difference from array covariance;
-- upper, lower, and unbounded wildcards;
-- PECS;
-- bounded type parameters;
-- erasure and its restrictions;
-- reifiable types;
-- raw types, unchecked warnings, and heap pollution.
+> [!question] Interview Questions
+> - Why are Java generics invariant while arrays are covariant, and what problem does that difference prevent?
+> - What does PECS ("producer extends, consumer super") actually tell you about choosing a wildcard?
+> - What does type erasure remove at runtime, and what does that make impossible to do with a generic type parameter?
+> - Why is an unchecked cast dangerous even when the compiler only warns instead of failing?
+> - When would `@SafeVarargs` be a lie, and how would you prove it isn't?
 
 ## Further Reading
 

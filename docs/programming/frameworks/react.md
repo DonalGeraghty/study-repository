@@ -1,3 +1,8 @@
+---
+tags:
+  - programming/frameworks
+---
+
 # React
 
 React is a library for building user interfaces from components. A component describes UI for its current props and state; React coordinates rendering and commits the necessary changes to the host environment, commonly the browser DOM.
@@ -33,6 +38,14 @@ const visibleResults = results.filter(result =>
 
 Do not store derived data in state when it can be calculated during rendering. Each independent piece of state should have one clear owner. Lift state to the nearest shared owner when multiple components must coordinate.
 
+```mermaid
+flowchart TD
+    P[Parent component: owns state] --> C1[Child A: receives state + setter as props]
+    P --> C2[Child B: receives state + setter as props]
+    C1 -->|calls setter| P
+    C2 -->|calls setter| P
+```
+
 Keys give list items stable identity. Use a durable domain identifier, not an array index when items can move, be inserted, or be removed.
 
 ## Events and Forms
@@ -65,6 +78,15 @@ useEffect(() => {
   loadResults(controller.signal).then(setResults, handleError);
   return () => controller.abort();
 }, []);
+```
+
+```mermaid
+flowchart LR
+    A[Render] --> B[Commit to DOM]
+    B --> C[Run effect]
+    C --> D[Dependencies change or unmount]
+    D --> E[Run cleanup]
+    E --> A
 ```
 
 Dependencies describe which reactive values the effect reads. Do not suppress dependency analysis to force a lifecycle shape. Ensure cleanup mirrors setup and guard against stale or out-of-order asynchronous results.
@@ -107,17 +129,15 @@ A balanced strategy includes:
 - inaccessible custom controls;
 - premature memoisation hiding a data-flow problem.
 
-## Readiness Checklist
+## Interview Questions
 
-You should be able to:
-
-- explain component purity, render, commit, props, state, and identity;
-- place state with one clear owner and avoid redundant state;
-- distinguish event handling from external-system synchronisation;
-- design effects with correct dependencies and cleanup;
-- build accessible forms and interaction patterns;
-- select a state-management approach from ownership and lifecycle;
-- test observable behaviour and profile before optimising.
+> [!question] Interview Questions
+> - Why must a component's render stay pure, and what breaks if it mutates external state?
+> - How would you decide which component owns a piece of state, and when to lift it up?
+> - Why are effects the wrong place for ordinary data transformation or event handling?
+> - What's the risk of using an array index as a list key when items can be reordered?
+> - Why should you measure before reaching for `memo`, `useMemo`, or `useCallback`?
+> - How would you test a component the way a user encounters it rather than asserting on internal state?
 
 ## Official References
 

@@ -1,3 +1,9 @@
+---
+tags:
+  - quality-engineering/test-automation
+  - moc
+---
+
 # Test Automation Tools
 
 This section covers browser and application test-automation tools. Tool mechanics matter, but reliability depends equally on test scope, data ownership, environment control, diagnosability, and alignment with product risk.
