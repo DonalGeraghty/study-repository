@@ -10,9 +10,9 @@ This section covers the foundational technologies used to structure and style we
 
 ## Guides
 
-- [HTML](./html.md) — document structure, semantics, forms, and accessibility.
-- [CSS](./css.md) — layout, responsive design, visual styling, and maintainability.
-- [Browser Storage, Canvas, and Push](./browser-platform-apis.md) — local data, rendering, audio, manifests, and push-notification architecture.
+- [HTML](./web-html.md) — document structure, semantics, forms, and accessibility.
+- [CSS](./web-css.md) — layout, responsive design, visual styling, and maintainability.
+- [Browser Storage, Canvas, and Push](./web-browser-platform-apis.md) — local data, rendering, audio, manifests, and push-notification architecture.
 
 ## Suggested Learning Order
 
@@ -24,7 +24,7 @@ This section covers the foundational technologies used to structure and style we
 
 Related material:
 
-- [JavaScript and TypeScript](../languages/javascript-typescript.md)
-- [React](../frameworks/react.md)
+- [JavaScript and TypeScript](../languages/languages-javascript-typescript.md)
+- [React](../frameworks/frameworks-react.md)
 
 Return to [Programming](../README.md).

@@ -10,9 +10,9 @@ This section covers browser and application test-automation tools. Tool mechanic
 
 ## Guides
 
-- [Playwright](./playwright.md) — modern browser automation, fixtures, isolation, diagnostics, and cross-browser testing.
-- [Selenium](./selenium.md) — WebDriver-based browser automation across languages and browser implementations.
-- [Cypress](./cypress.md) — browser-focused testing, command chains, network control, and debugging.
+- [Playwright](./test-automation-playwright.md) — modern browser automation, fixtures, isolation, diagnostics, and cross-browser testing.
+- [Selenium](./test-automation-selenium.md) — WebDriver-based browser automation across languages and browser implementations.
+- [Cypress](./test-automation-cypress.md) — browser-focused testing, command chains, network control, and debugging.
 
 ## Selection Dimensions
 

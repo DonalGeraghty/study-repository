@@ -10,13 +10,13 @@ These guides cover everyday engineering practices and the decisions that support
 
 ## Guides
 
-- [Git](./git.md) — commits, branches, integration strategies, recovery, and collaboration.
-- [Code Review](./code-review.md) — correctness, maintainability, security, testing, and constructive feedback.
-- [Technology Stack](./technology-stack.md) — selecting languages, frameworks, test tools, delivery systems, and operational capabilities.
-- [Project Technology Inventory](./project-technology-inventory.md) — evidence-based mapping from the coding repositories to their learning guides.
-- [Encoding](./encoding.md) — representing data consistently for storage, processing, and transport.
-- [Encryption](./encryption.md) — confidentiality, symmetric and asymmetric cryptography, key management, and digital signatures.
-- [Hashing](./hashing.md) — fingerprints, integrity checking, password storage, salts, and MACs.
+- [Git](./engineering-foundations-git.md) — commits, branches, integration strategies, recovery, and collaboration.
+- [Code Review](./engineering-foundations-code-review.md) — correctness, maintainability, security, testing, and constructive feedback.
+- [Technology Stack](./engineering-foundations-technology-stack.md) — selecting languages, frameworks, test tools, delivery systems, and operational capabilities.
+- [Project Technology Inventory](./engineering-foundations-project-technology-inventory.md) — evidence-based mapping from the coding repositories to their learning guides.
+- [Encoding](./engineering-foundations-encoding.md) — representing data consistently for storage, processing, and transport.
+- [Encryption](./engineering-foundations-encryption.md) — confidentiality, symmetric and asymmetric cryptography, key management, and digital signatures.
+- [Hashing](./engineering-foundations-hashing.md) — fingerprints, integrity checking, password storage, salts, and MACs.
 
 ## Suggested Use
 

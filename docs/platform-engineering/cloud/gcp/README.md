@@ -10,13 +10,13 @@ Google Cloud Platform provides infrastructure and managed services organised aro
 
 ## Service Guides
 
-- [Cloud Run](./cloud-run.md) — managed container services and jobs, revisions, scaling, identity, networking, and delivery.
-- [App Engine](./app-engine.md) — managed application versions, runtimes, scaling, identity, traffic, and operations.
-- [Cloud Build](./cloud-build.md) — containerised build steps, triggers, artifacts, service accounts, and supply-chain security.
-- [Cloud Storage](./cloud-storage.md) — buckets, objects, locations, storage classes, lifecycle rules, access, and recovery.
-- [Firestore](./firestore.md) — document modelling, queries, indexes, transactions, security, and operational trade-offs.
-- [Identity and Access Management](./iam.md) — principals, roles, policies, inheritance, service accounts, and least privilege.
-- [Application Services](./application-services.md) — Artifact Registry, Cloud KMS, Cloud Scheduler, and Firebase Admin responsibilities.
+- [Cloud Run](./gcp-cloud-run.md) — managed container services and jobs, revisions, scaling, identity, networking, and delivery.
+- [App Engine](./gcp-app-engine.md) — managed application versions, runtimes, scaling, identity, traffic, and operations.
+- [Cloud Build](./gcp-cloud-build.md) — containerised build steps, triggers, artifacts, service accounts, and supply-chain security.
+- [Cloud Storage](./gcp-cloud-storage.md) — buckets, objects, locations, storage classes, lifecycle rules, access, and recovery.
+- [Firestore](./gcp-firestore.md) — document modelling, queries, indexes, transactions, security, and operational trade-offs.
+- [Identity and Access Management](./gcp-iam.md) — principals, roles, policies, inheritance, service accounts, and least privilege.
+- [Application Services](./gcp-application-services.md) — Artifact Registry, Cloud KMS, Cloud Scheduler, and Firebase Admin responsibilities.
 
 ## Resource Hierarchy
 
@@ -56,7 +56,7 @@ Prefer:
 
 Service accounts represent workloads, not people. Protect who may attach, impersonate, or mint credentials for them.
 
-See the dedicated [IAM guide](./iam.md) for policy evaluation, role design, conditions, service-account use, and access review.
+See the dedicated [IAM guide](./gcp-iam.md) for policy evaluation, role design, conditions, service-account use, and access review.
 
 ## Networking
 
@@ -90,7 +90,7 @@ GCP offers virtual machines, managed instance groups, managed containers, Kubern
 
 Keep durable state outside replaceable compute. Define resource requests, limits, scaling bounds, and shutdown behaviour.
 
-See [Cloud Run](./cloud-run.md) for a managed container platform suited to request-driven services and run-to-completion jobs.
+See [Cloud Run](./gcp-cloud-run.md) for a managed container platform suited to request-driven services and run-to-completion jobs.
 
 ## Storage and Data
 
@@ -98,7 +98,7 @@ Object storage, persistent disks, file services, relational databases, globally 
 
 For each store define classification, schema, access, encryption, retention, backup, restore, replication, deletion, performance, and cost. Test restore procedures and confirm whether recovery protects against regional failure, logical corruption, operator error, and credential compromise.
 
-See [Cloud Storage](./cloud-storage.md) for object storage and [Firestore](./firestore.md) for a managed document database.
+See [Cloud Storage](./gcp-cloud-storage.md) for object storage and [Firestore](./gcp-firestore.md) for a managed document database.
 
 ## Infrastructure as Code
 
@@ -122,7 +122,7 @@ Attribute cost with projects, labels, billing exports, budgets, and ownership. R
 
 Validate infrastructure code, policies, images, permissions, and configuration in CI. Exercise deployments, rollback, secret rotation, quota failure, zone disruption, and restore procedures according to business impact. Use representative environments without copying sensitive production data carelessly.
 
-See [Cloud Build](./cloud-build.md) for managed build execution, triggers, artifacts, and software-supply-chain controls.
+See [Cloud Build](./gcp-cloud-build.md) for managed build execution, triggers, artifacts, and software-supply-chain controls.
 
 ## Readiness Checklist
 

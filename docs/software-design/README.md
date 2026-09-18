@@ -12,10 +12,10 @@ Software design is the work of arranging code and responsibilities so that a sys
 
 | Guide | Main question |
 | --- | --- |
-| [Object-Oriented Programming](./object-oriented-programming.md) | How should state and behaviour be grouped? |
-| [SOLID Principles](./solid-principles.md) | How should responsibilities and dependencies be arranged? |
-| [Design Patterns](./design-patterns.md) | Which established structures fit a recurring design problem? |
-| [Domain-Driven Design](./domain-driven-design.md) | How should software model a complex business domain? |
+| [Object-Oriented Programming](./software-design-object-oriented-programming.md) | How should state and behaviour be grouped? |
+| [SOLID Principles](./software-design-solid-principles.md) | How should responsibilities and dependencies be arranged? |
+| [Design Patterns](./software-design-design-patterns.md) | Which established structures fit a recurring design problem? |
+| [Domain-Driven Design](./software-design-domain-driven-design.md) | How should software model a complex business domain? |
 
 These subjects overlap, but they operate at different levels:
 
@@ -133,7 +133,7 @@ The quality of the explanation matters more than the number of boxes in the diag
 ## Related Guides
 
 - [Java](../programming/languages/java/README.md)
-- [Testing](../quality-engineering/testing.md)
-- [Code Review](../engineering-foundations/code-review.md)
-- [REST API](../quality-engineering/rest-api.md)
+- [Testing](../quality-engineering/quality-engineering-testing.md)
+- [Code Review](../engineering-foundations/engineering-foundations-code-review.md)
+- [REST API](../quality-engineering/quality-engineering-rest-api.md)
 - [Documentation Library](../README.md)

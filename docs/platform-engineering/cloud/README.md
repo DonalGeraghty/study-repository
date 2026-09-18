@@ -10,7 +10,7 @@ This section covers public-cloud infrastructure, managed services, identity, net
 
 ## Guides
 
-- [Amazon Web Services](./aws.md) — AWS infrastructure, identity, networking, compute, storage, observability, and delivery services.
+- [Amazon Web Services](./cloud-aws.md) — AWS infrastructure, identity, networking, compute, storage, observability, and delivery services.
 - [Google Cloud Platform](./gcp/README.md) — GCP projects, identity, networking, compute, storage, observability, and delivery services.
 
 ## Comparison Dimensions

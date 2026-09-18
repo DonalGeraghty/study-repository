@@ -10,23 +10,23 @@ This pathway covers the Java language and core library knowledge expected in app
 
 ## Topics
 
-1. [Memory Management](./memory-management.md)
-2. [Variables and Data Types](./variables.md)
-3. [Numbers and Precision](./numbers.md)
-4. [Math and Randomness](./math.md)
-5. [Strings and Text](./strings.md)
-6. [Collections Framework](./collections.md)
-7. [Exceptions and Resources](./exceptions-and-resources.md)
-8. [Generics](./generics.md)
-9. [Streams and Lambdas](./streams-and-lambdas.md)
-10. [Concurrency](./concurrency.md)
+1. [Memory Management](./java-memory-management.md)
+2. [Variables and Data Types](./java-variables.md)
+3. [Numbers and Precision](./java-numbers.md)
+4. [Math and Randomness](./java-math.md)
+5. [Strings and Text](./java-strings.md)
+6. [Collections Framework](./java-collections.md)
+7. [Exceptions and Resources](./java-exceptions-and-resources.md)
+8. [Generics](./java-generics.md)
+9. [Streams and Lambdas](./java-streams-and-lambdas.md)
+10. [Concurrency](./java-concurrency.md)
 11. [Modern Java](./modern-java.md)
 
 Object-oriented design, SOLID, and design patterns are covered in the [Software Design](../../../software-design/README.md) subject.
 
 ## Frameworks
 
-- [Spring](../../frameworks/spring.md) — dependency injection, Spring Boot, web APIs, data access, configuration, and testing.
+- [Spring](../../frameworks/frameworks-spring.md) — dependency injection, Spring Boot, web APIs, data access, configuration, and testing.
 
 ## Language, Runtime, and Platform
 

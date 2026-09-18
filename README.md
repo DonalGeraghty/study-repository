@@ -61,23 +61,23 @@ Active recall matters more than rereading. A useful session ends with an explana
 
 ### Core engineering path
 
-1. [Git](./docs/engineering-foundations/git.md)
+1. [Git](./docs/engineering-foundations/engineering-foundations-git.md)
 2. [Programming Languages](./docs/programming/languages/README.md)
 3. [Software Design](./docs/software-design/README.md)
-4. [Software Testing](./docs/quality-engineering/testing.md)
-5. [REST APIs](./docs/quality-engineering/rest-api.md)
-6. [Code Review](./docs/engineering-foundations/code-review.md)
-7. [Technology Stack](./docs/engineering-foundations/technology-stack.md)
+4. [Software Testing](./docs/quality-engineering/quality-engineering-testing.md)
+5. [REST APIs](./docs/quality-engineering/quality-engineering-rest-api.md)
+6. [Code Review](./docs/engineering-foundations/engineering-foundations-code-review.md)
+7. [Technology Stack](./docs/engineering-foundations/engineering-foundations-technology-stack.md)
 
 ### Delivery and platform path
 
-1. [Node.js and npm](./docs/programming/tooling/nodejs-and-npm.md) or [Maven and Gradle](./docs/programming/tooling/jvm-build-tools.md)
-2. [Docker](./docs/platform-engineering/docker.md)
+1. [Node.js and npm](./docs/programming/tooling/tooling-nodejs-and-npm.md) or [Maven and Gradle](./docs/programming/tooling/tooling-jvm-build-tools.md)
+2. [Docker](./docs/platform-engineering/platform-engineering-docker.md)
 3. [Continuous Integration and Delivery](./docs/platform-engineering/ci-cd/README.md)
-4. [Caching](./docs/platform-engineering/caching.md)
-5. [Publish/Subscribe](./docs/platform-engineering/pub-sub.md)
+4. [Caching](./docs/platform-engineering/platform-engineering-caching.md)
+5. [Publish/Subscribe](./docs/platform-engineering/platform-engineering-pub-sub.md)
 6. [Cloud Platforms](./docs/platform-engineering/cloud/README.md)
-7. [Kubernetes](./docs/platform-engineering/kubernetes.md)
+7. [Kubernetes](./docs/platform-engineering/platform-engineering-kubernetes.md)
 
 ## Reading Conventions
 
