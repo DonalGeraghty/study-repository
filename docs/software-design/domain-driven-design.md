@@ -58,7 +58,7 @@ A context map records important relationships between bounded contexts:
 An **anti-corruption layer** translates an external model into local concepts so that provider terminology and assumptions do not spread through the domain.
 
 ```mermaid
-flowchart LR
+flowchart TD
     subgraph Upstream Context
         A[Upstream model]
     end

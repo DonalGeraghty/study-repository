@@ -23,14 +23,12 @@ Installing an Agent does not automatically provide complete application traces o
 A typical setup has several routes into the platform:
 
 ```mermaid
-flowchart LR
-    H[Hosts and containers] --> A[Agent]
-    S[Instrumented application] --> A
-    C[Cloud services] --> I[Cloud integration]
+flowchart TD
+    H[Hosts and instrumented apps] --> A[Agent and APM]
+    C[Cloud services] --> I[Integrations]
     A --> D[Datadog]
     I --> D
-    D --> V[Dashboards and investigation]
-    D --> M[Monitors and notifications]
+    D --> O[Dashboards, investigation and monitors]
 ```
 
 ## Worked Example: Investigating a Release Regression

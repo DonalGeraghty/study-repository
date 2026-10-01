@@ -79,7 +79,7 @@ If the purpose cannot be understood from the pull-request description and linked
 Each pass has a different focus, and skipping ahead to implementation detail before scope and design are understood is a common source of wasted review effort.
 
 ```mermaid
-flowchart LR
+flowchart TD
     A[Pass 1: Scope and Shape] --> B[Pass 2: Behaviour and Design]
     B --> C[Pass 3: Implementation and Tests]
     C --> D[Pass 4: Delivery and Operations]
@@ -373,7 +373,7 @@ Avoid comments such as “This is wrong,” “Why would you do this?”, or “
 ## Handling Disagreement
 
 ```mermaid
-flowchart LR
+flowchart TD
     A[Clarify the issue type] --> B[Cite requirements or evidence]
     B --> C[Compare trade-offs]
     C --> D[Move to a conversation]

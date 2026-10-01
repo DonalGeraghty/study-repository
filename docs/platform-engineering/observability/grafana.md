@@ -22,13 +22,8 @@ Grafana OSS can be self-hosted. Grafana Cloud is a managed platform that also pr
 In one possible setup, separate backends supply the signals used during an investigation:
 
 ```mermaid
-flowchart LR
-    A[Application metrics] --> P[Prometheus]
-    B[Application logs] --> L[Loki]
-    C[Application traces] --> T[Tempo]
-    P --> G[Grafana]
-    L --> G
-    T --> G
+flowchart TD
+    A["Metrics → Prometheus<br/>Logs → Loki<br/>Traces → Tempo"] --> G[Grafana]
     G --> D[Dashboards and investigation]
 ```
 

@@ -47,6 +47,7 @@ Pick the Mermaid type from the content's actual shape:
 - **New diagram**: add a `mermaid` code block alongside existing prose where content has a genuine shape (a lifecycle, a multi-party exchange, an interface hierarchy, a branch, a multi-stage pipeline) and has no diagram today. Insert it after the section's intro sentence, don't remove any surrounding text.
 - **Upgrade**: replace an existing ASCII `text` diagram with an equivalent `mermaid` one only when it's a genuine like-for-like improvement — mainly diagrams that already branch, fork, or converge, which ASCII renders awkwardly. Leave a simple one-line chain (`A -> B -> C`) as ASCII; converting it is diagram-for-diagram's-sake, not a real improvement.
 - **No diagram**: leave pure reference/syntax/table files alone. Not every guide needs one, and a forced diagram for content with no real shape (a flat command table, a syntax cheat sheet) adds noise, not clarity.
+- **Keep diagrams narrow and readable**: prefer a top-to-bottom (`TD`) flow when the steps or relationships remain clear that way. Use short node labels, combine closely related branches or outcomes where this does not hide a meaningful distinction, and avoid spreading several long labels across the same row. Keep left-to-right or other layouts when the shape itself requires them, such as a Git history or a participant sequence. Consider the rendered width as well as the source text before adding branches.
 
 ## Interview Questions
 

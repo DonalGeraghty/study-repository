@@ -12,13 +12,11 @@ Cloud Build executes build steps on managed Google Cloud infrastructure. It can 
 A build consists of ordered or explicitly dependent steps. Each step runs in a container image and shares the build workspace with other steps.
 
 ```mermaid
-flowchart LR
+flowchart TD
     A[Source event] --> B[Build trigger]
     B --> C[Ephemeral build environment]
-    C --> D[Compile]
-    C --> E[Test]
-    C --> F[Scan]
-    C --> G[Publish artifact]
+    C --> D[Build, test and scan]
+    D --> G[Publish artifact]
 ```
 
 Build configuration is commonly stored as YAML or JSON in source control. Keep meaningful build logic reviewable and reproducible rather than configuring release behaviour only through the console.

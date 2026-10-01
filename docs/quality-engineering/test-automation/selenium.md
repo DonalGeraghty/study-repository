@@ -10,7 +10,7 @@ Selenium is a browser-automation ecosystem built around the W3C WebDriver standa
 ## WebDriver Architecture
 
 ```mermaid
-flowchart LR
+flowchart TD
     A[Test code] --> B[Selenium binding]
     B --> C[WebDriver endpoint]
     C --> D[Local driver]

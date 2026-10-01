@@ -248,7 +248,7 @@ gitGraph
 One default branch stays deployable; every change is a short-lived branch that rejoins it through a reviewed pull request.
 
 ```mermaid
-flowchart LR
+flowchart TD
     A[Update main] --> B[Create short-lived branch]
     B --> C[Make focused commits]
     C --> D[Open pull request]
@@ -275,7 +275,7 @@ Typical steps are:
 Trunk-based development keeps integration intervals very short. Developers either commit small changes directly to a protected trunk through an agreed process or use short-lived branches that return to trunk quickly.
 
 ```mermaid
-flowchart LR
+flowchart TD
     A[Trunk] --> B[Small change]
     B --> C[Fast review and checks]
     C --> D[Integrate into trunk]
@@ -325,7 +325,7 @@ gitGraph
 Four branch roles interact over time: `develop` absorbs finished features, `release/*` stabilises a cut without blocking new feature work, and `hotfix/*` patches production without waiting for the next release.
 
 ```mermaid
-flowchart LR
+flowchart TD
     D[develop] --> F[feature branch]
     F --> D
     D --> R[release branch]

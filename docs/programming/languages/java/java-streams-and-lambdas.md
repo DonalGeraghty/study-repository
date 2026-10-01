@@ -88,7 +88,7 @@ A pipeline has:
 3. a terminal operation.
 
 ```mermaid
-flowchart LR
+flowchart TD
     A[Source] --> B[Intermediate op 1: lazy]
     B --> C[Intermediate op 2: lazy]
     C --> D[Terminal operation]

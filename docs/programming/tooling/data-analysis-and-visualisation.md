@@ -52,7 +52,7 @@ def revenue_by_category(orders, products):
 ```
 
 ```mermaid
-flowchart LR
+flowchart TD
     A[orders] --> C[merge on product_id]
     B[products] --> C
     C --> D[assign revenue = quantity * unit_price]

@@ -18,7 +18,7 @@ Get-ChildItem -File |
 ```
 
 ```mermaid
-flowchart LR
+flowchart TD
     A["Get-ChildItem -File"] --> B["Where-Object Extension -eq '.csv'"]
     B --> C["Select-Object Name, Length"]
 ```

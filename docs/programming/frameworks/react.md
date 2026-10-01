@@ -81,7 +81,7 @@ useEffect(() => {
 ```
 
 ```mermaid
-flowchart LR
+flowchart TD
     A[Render] --> B[Commit to DOM]
     B --> C[Run effect]
     C --> D[Dependencies change or unmount]

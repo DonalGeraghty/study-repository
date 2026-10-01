@@ -71,7 +71,7 @@ Mobile and web clients can connect directly through Firebase SDKs. Security Rule
 Server client libraries use IAM and bypass Firestore Security Rules. A trusted server must implement application-level authorisation itself.
 
 ```mermaid
-flowchart LR
+flowchart TD
     A[Mobile or web client] -->|Firebase authentication + Security Rules| C[Firestore]
     B[Trusted server] -->|IAM service identity + application checks| C
 ```

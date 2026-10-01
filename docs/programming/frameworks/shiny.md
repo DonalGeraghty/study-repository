@@ -65,7 +65,7 @@ stopifnot(nrow(filter_cars(mtcars, 30)) == 4)
 ```
 
 ```mermaid
-flowchart LR
+flowchart TD
     I["input$minimum_mpg"] --> R[matching_cars reactive]
     R --> O["output$matching_cars"]
     N[Unrelated output: not connected, does not recalculate]

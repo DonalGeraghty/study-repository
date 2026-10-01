@@ -280,7 +280,7 @@ ENTRYPOINT ["java", "-jar", "/app/app.jar"]
 ```
 
 ```mermaid
-flowchart LR
+flowchart TD
     subgraph Build Stage
         A[Maven + JDK + source] --> B[mvn verify]
         B --> C[target/application.jar]
@@ -552,7 +552,7 @@ If a Compose project declares named volumes, `docker compose down` preserves the
 This separate local exercise connects an API to PostgreSQL and proves that database data survives container replacement. Keep it in a new `docker-db-study/` folder so it does not change the earlier `hello-docker` example.
 
 ```mermaid
-flowchart LR
+flowchart TD
     B[Browser on host] -->|localhost:8082| A[API container:8080]
     A -->|db:5432 on Compose network| D[PostgreSQL container]
     D --> V[Named volume: db-data]

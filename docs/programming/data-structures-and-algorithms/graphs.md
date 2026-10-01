@@ -25,7 +25,7 @@ Breadth-first search (BFS) uses a queue to explore by distance in edges. Depth-f
 The graph below is directed and contains a cycle. Every edge counts as one step:
 
 ```mermaid
-flowchart LR
+flowchart TD
     A --> B
     A --> C
     B --> D

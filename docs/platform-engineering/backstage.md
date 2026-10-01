@@ -22,14 +22,10 @@ The catalog can describe services, websites, libraries, APIs and infrastructure 
 Backstage connects a developer's view of a service to the systems that build and operate it:
 
 ```mermaid
-flowchart LR
+flowchart TD
     D[Developer] --> B[Backstage portal]
-    B --> C[Catalog and ownership]
-    B --> T[Templates and documentation]
-    B --> I[Configured tool integrations]
-    I --> P[CI/CD system]
-    I --> K[Kubernetes]
-    I --> O[Observability tools]
+    B --> C["Catalog and ownership<br/>Templates and documentation"]
+    B --> I["Configured integrations<br/>CI/CD · Kubernetes<br/>Observability tools"]
 ```
 
 CI/CD still executes builds and releases, Kubernetes runs workloads, and observability tools collect and analyse telemetry. Links and plugins bring their information or actions into the portal; those systems retain their own responsibilities and access controls.

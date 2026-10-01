@@ -52,7 +52,7 @@ Declarative Pipeline provides a structured model with directives for agents, sta
 A pipeline should make feedback and promotion visible:
 
 ```mermaid
-flowchart LR
+flowchart TD
     A[Checkout] --> B[Compile]
     B --> C[Fast tests]
     C --> D[Package]
