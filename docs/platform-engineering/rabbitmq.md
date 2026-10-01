@@ -162,8 +162,17 @@ These mechanisms protect different gaps and cannot substitute for one another.
 > - How would you design an image-processing topology with competing workers for commands and independent billing and analytics subscriptions for completion events, and which exchanges, routing keys, and queues would you use?
 > - Where would you place the acknowledgement point, and why does that placement matter for redelivery?
 > - How would you handle a message that fails processing repeatedly instead of requeueing it forever?
-> - What idempotency key would protect the worker from processing the same command twice?
 > - Why would sharing one queue between the billing and analytics consumers be a mistake here?
+
+## Answer Notes
+
+1. Route image commands to a work queue with competing workers, using a direct exchange and an appropriate command routing key. Publish completion events to an exchange with separate billing and analytics queues, using topic routing when subscribers need selective event types.
+
+2. Acknowledge only after the required effect is durably successful. A crash before acknowledgement can cause redelivery even if the effect already happened, so idempotency is needed; acknowledging first risks losing work.
+
+3. Use bounded retries with backoff and a dead-letter or parking queue containing failure context. Avoid immediate endless requeue loops, and provide an observable route for diagnosis and controlled replay.
+
+4. Consumers on one queue compete for deliveries, so billing and analytics would each see only part of the events. Separate queues bound to the event exchange give each independent subscription a copy.
 
 ## Official References
 

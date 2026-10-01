@@ -127,8 +127,16 @@ Change the server response to a controlled 500 and assert the intended error sta
 > - How would you choose a locator strategy, and when would a test ID be more appropriate than a role-based locator?
 > - Why should you rely on Playwright's web-first assertions instead of fixed sleeps?
 > - How would you isolate authentication and server-side data when tests run in parallel?
-> - What would make you reach for network interception instead of testing against a real API?
-> - How would you use trace-viewer output to diagnose a failure, and why does a passed retry still need investigation?
+
+## Answer Notes
+
+1. A browser is the running browser instance; a context is an isolated session with its own cookies and storage; a page is a tab within that context. Fresh contexts isolate browser state, but do not isolate shared backend data.
+
+2. Prefer user-facing roles, accessible names and labels when they express the behaviour under test. Use an agreed test ID where there is no stable meaningful user-facing locator, avoiding brittle DOM structure selectors.
+
+3. Web-first assertions repeatedly check the expected condition within a timeout. Fixed sleeps guess at timing, wasting time when the app is fast and failing when it is slower; wait for meaningful state instead.
+
+4. Use appropriately scoped authentication state and unique accounts or records when tests mutate shared data. Set up and clean up through controlled APIs or fixtures, and ensure workers do not reuse conflicting resources.
 
 ## Official References
 

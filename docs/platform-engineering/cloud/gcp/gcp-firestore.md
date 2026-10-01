@@ -123,7 +123,16 @@ Test two concurrent reservations for the last item, repeated delivery of notific
 > - What's the risk of an unbounded document or collection, and how would you avoid it?
 > - How do Firestore Security Rules differ from server-side IAM access, and when does each apply?
 > - What's a hot-document risk, and how would you design around it?
-> - How would you test authorisation rules against unauthorised, missing, and cross-tenant requests?
+
+## Answer Notes
+
+1. List required queries and access patterns first, then choose document boundaries, indexed fields and any deliberate denormalisation. Account for read cost and update consistency rather than assuming relational joins or arbitrary queries will be cheap.
+
+2. Growing arrays or maps can hit document size and contention limits; unrestricted collection reads can become expensive. Use separate documents or subcollections for growing sets, bound queries with pagination, and define retention where appropriate.
+
+3. Client SDK requests are checked against Security Rules, while privileged server access relies on IAM and server credentials. Server code must enforce application-level and tenant permissions rather than assuming client rules protect those requests.
+
+4. Frequent writes to the same document concentrate contention and can limit throughput. Distribute independent writes across documents or use sharded counters where suitable, balancing extra aggregation work against the need for immediate consistency.
 
 ## Official References
 

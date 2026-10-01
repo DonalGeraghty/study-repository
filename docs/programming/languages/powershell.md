@@ -130,9 +130,18 @@ The array wrappers preserve a predictable collection when the CSV has zero or on
 > [!question] Interview Questions
 > - Why is it a mistake to parse a command's formatted console text instead of using its object properties directly?
 > - Why can a one-row pipeline result silently stop being an array, and how would you guard against that?
-> - Why would you resolve paths with `$PSScriptRoot` instead of the current working directory?
 > - What's the risk of letting a non-terminating error pass through a CI step unnoticed?
 > - Why does parsing dates or decimals with the current machine's culture make a script unreliable across environments?
+
+## Answer Notes
+
+1. PowerShell pipelines carry objects with typed properties, while formatted text is presentation that can change with width, culture or formatting. Select and transform the properties directly, and apply formatting only at the display boundary.
+
+2. Pipeline assignment can produce no value, a single scalar or an array depending on result count. Wrap the expression in @() when subsequent code requires array semantics, including zero- and one-row cases.
+
+3. A non-terminating error may be reported while the script continues and exits successfully, giving CI a false pass. Use terminating errors where required, handle failures deliberately and return a non-zero exit code when the operation fails.
+
+4. The same text can mean different dates or numbers under different cultures. Define the input format explicitly and use appropriate exact or invariant-culture parsing, validating failures rather than silently accepting environment-dependent values.
 
 ## Related Guides
 

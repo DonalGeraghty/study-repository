@@ -117,7 +117,16 @@ Now consider overlapping revisions during deployment, jobs, and administrative c
 > - How would you tune concurrency and instance limits from load characteristics rather than guesswork?
 > - Why should deployment, invocation, and runtime identities be separated?
 > - How would you deliver a new revision progressively and roll back safely if it's unhealthy?
-> - What causes a cold start, and how would you diagnose one versus a genuine resource limit?
+
+## Answer Notes
+
+1. Use a service for request-driven work through an endpoint, a job for finite work that exits, and a worker pool for continuous pull-based processing. Choose from how work starts, its lifetime and completion semantics.
+
+2. Load-test representative requests and measure latency, CPU, memory, connection waits and downstream saturation. Tune concurrency and instance bounds together with connection pools; more instances can increase pressure on a bottlenecked database.
+
+3. Deployers change the workload, invokers call it, and the runtime identity accesses its dependencies. Distinct permissions prevent calling a service from implying control of it or grant of its downstream access.
+
+4. Deploy a new immutable revision with no or limited traffic, validate health and user outcomes, then increase traffic gradually. Redirect traffic to a known-good revision if needed, ensuring shared data and migrations remain compatible.
 
 ## Official References
 

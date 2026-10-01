@@ -104,8 +104,17 @@ Finally, set a category to a missing value. A matched product ID alone does not 
 > - Why would a join silently multiply rows, and how would `validate="many_to_one"` catch that before it ships?
 > - Why is replacing missing data with zero often worse than leaving it missing?
 > - Why can correlation, clusters, or principal components be misleading if presented as causal explanations?
-> - Why does mutating a raw data frame in place make an analysis harder to trust or reproduce?
 > - Why is testing a chart's screenshot not the same as testing the calculation behind it?
+
+## Answer Notes
+
+1. Duplicate join keys on the right give a left row multiple matches; duplicates on both sides can multiply them further. many_to_one validation rejects a right side that is not unique on the join keys, exposing a violated assumption before totals are trusted.
+
+2. Zero is a measured value, while missing means unknown, absent or not collected. Replacing missing values with zero can distort averages, rates and comparisons; choose and document an imputation policy based on the data's meaning.
+
+3. These methods describe associations or structure in the observed data. Confounding, selection effects, scaling and modelling choices can explain patterns without causation; causal claims need an appropriate study design and assumptions.
+
+4. A screenshot can verify presentation while displaying incorrectly calculated data. Test joins, filters, groupings and expected numeric results separately, then check that the chart labels, units and encoding communicate them accurately.
 
 ## Related Guides
 

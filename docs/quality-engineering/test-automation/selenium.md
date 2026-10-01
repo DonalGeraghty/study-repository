@@ -124,8 +124,16 @@ This condition re-queries by locator. It still needs a meaningful application co
 > - How do you avoid losing context after switching to a new window, tab, or frame?
 > - Why are fixed sleeps worse than explicit waits, and what's the risk of mixing wait strategies?
 > - How would you design a page object so it hides locator mechanics but keeps test intent visible?
-> - What changes about isolation and capacity planning when you move from local execution to a Grid?
-> - How would you tell a product defect apart from a test defect, environment failure, or capacity problem when a test fails?
+
+## Answer Notes
+
+1. The language client sends WebDriver commands to an endpoint that manages a browser session, locally or through a remote service such as Grid. The session carries browser state and the current window or frame context.
+
+2. Save the original window handle, wait for the new handle and switch explicitly. Switch into the required frame, then return with defaultContent or a parent-frame operation; restore the original window when done.
+
+3. Explicit waits poll for a relevant condition and stop when it is satisfied. Sleeps always wait a fixed duration; mixing implicit and explicit waits can produce confusing combined delays and make failures harder to diagnose.
+
+4. Expose meaningful operations such as submitOrder while hiding locators and low-level waits. Keep scenario intent and business assertions visible in tests, and avoid a giant page object that mixes unrelated responsibilities.
 
 ## Official References
 

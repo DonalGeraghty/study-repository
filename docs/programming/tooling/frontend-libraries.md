@@ -53,7 +53,16 @@ A useful test observes the report title, values, error recovery, and focus behav
 > - Why should chart data be prepared and validated separately from the rendering code that displays it?
 > - Why can transpiling modern syntax with Babel still leave a missing runtime API unpolyfilled?
 > - Why is a component library not proof of accessibility by itself?
-> - How would you decide it's time to remove a dependency that's declared but no longer imported?
+
+## Answer Notes
+
+1. The browser is controlled by the caller and its navigation rules can be bypassed with direct requests. Server-side checks must independently enforce permissions for each protected operation and resource.
+
+2. Separate calculations expose errors in grouping, missing values and units before rendering and make them straightforward to test. The chart component can then focus on presenting a well-defined dataset accurately.
+
+3. Transpilation rewrites language syntax, but an absent browser API still needs a runtime implementation. Check the supported browser targets and deliberately include a suitable polyfill or alternative for required APIs.
+
+4. Accessibility depends on how components are assembled, labelled and operated in the actual app. Verify keyboard use, focus, contrast and assistive-technology behaviour; incorrect configuration can undermine accessible library defaults.
 
 ## Related Guides
 

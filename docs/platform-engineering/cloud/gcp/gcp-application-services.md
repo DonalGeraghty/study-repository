@@ -81,7 +81,16 @@ Nyx and Aether publish images to Artifact Registry. The Janus APIs use Cloud KMS
 > - What does Cloud KMS actually protect, and what can it not protect once data leaves it as plaintext?
 > - Why must a Cloud Scheduler-triggered endpoint be idempotent, and how would you design the operation key for a daily job?
 > - Why can server code using the Firebase Admin SDK bypass client security rules, and what does that mean for where authorisation must be enforced?
-> - What goes wrong if the runtime service account is also granted deployment permissions?
+
+## Answer Notes
+
+1. Build code needs artifact-producing access, deployment needs configuration-changing access, and runtime needs only application dependencies. Separation limits the damage when any one stage is compromised.
+
+2. Cloud KMS manages cryptographic keys and controls cryptographic operations. It cannot stop an authorised application or compromised process from exposing plaintext after decryption; application access control and logging discipline still matter.
+
+3. Delivery or execution can be retried, so the same scheduled occurrence may run more than once. Use a key such as job name plus the intended business date and timezone, record it durably, and make retries reuse that occurrence key.
+
+4. Privileged server access uses server credentials and IAM rather than relying on client Security Rules. Server code must authenticate callers and enforce application and tenant authorisation itself, with narrowly scoped service permissions.
 
 ## Related Guides
 

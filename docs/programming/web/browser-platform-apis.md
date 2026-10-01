@@ -107,7 +107,16 @@ FlappyAI uses Canvas, pointer events, Web Audio, and `localStorage`. Aether and 
 > - Why would you version a `localStorage` key, and what happens if you don't when the stored shape changes?
 > - Why does canvas movement need to be time-based rather than a fixed amount per frame?
 > - Why doesn't having a web app manifest by itself make a site an installable, offline-capable PWA?
-> - Why should push notification content avoid putting sensitive details in the payload shown on a lock screen?
+
+## Answer Notes
+
+1. Scripts executing with the origin's privileges can read its localStorage, including malicious injected scripts. A stored bearer token can therefore be stolen through an XSS flaw; storage choice does not replace preventing script injection.
+
+2. A version identifies the stored schema so new code can migrate, discard or replace incompatible data deliberately. Without validation and version handling, old browser data can break new code even when a fresh install works.
+
+3. Frame rates vary by device, load and display. Multiply velocity by elapsed time so motion depends on time rather than frame count, and handle long pauses to avoid large jumps.
+
+4. A manifest supplies application metadata, not an offline strategy. Offline behaviour requires suitable caching and request handling, commonly through a service worker; installation eligibility also depends on browser and platform requirements.
 
 ## Official References
 

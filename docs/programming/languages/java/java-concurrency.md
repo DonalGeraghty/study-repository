@@ -346,8 +346,16 @@ Change the invariant to transferring stock between two counters while preserving
 > - Why isn't `count++` atomic, and what would make it so?
 > - What's the difference between `synchronized` and `volatile`, and when does each fall short on its own?
 > - Why do virtual threads help with blocking I/O but not with CPU-bound work?
-> - How would you diagnose a deadlock, and what design choices reduce the risk of one?
-> - Why is testing concurrent code with fixed sleeps unreliable?
+
+## Answer Notes
+
+1. Concurrency means managing overlapping tasks; parallelism means executing tasks at the same time. A single thread can interleave concurrent work without parallel execution, while multiple cores can execute work in parallel.
+
+2. Increment is a read-modify-write sequence, so competing threads can overwrite each other's updates. Protect the operation with a shared lock or use an atomic increment; declaring the field volatile alone is insufficient.
+
+3. synchronized provides mutual exclusion and visibility through the same monitor. volatile provides visibility and ordering for accesses to that field but does not make compound operations or multi-field invariants atomic; synchronisation works only when all relevant access follows the protocol.
+
+4. Virtual threads let many blocking tasks wait without dedicating a platform thread to each wait. They do not add CPU cores, so CPU-bound throughput remains constrained by processor capacity and can suffer from excessive concurrency.
 
 ## Further Reading
 

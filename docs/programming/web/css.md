@@ -141,9 +141,17 @@ Now consider `.notice { color: blue; }` followed by `p { color: red; }` on `<p c
 > - What determines which declaration wins when two rules target the same element?
 > - Why does `box-sizing: border-box` change how you reason about an element's declared width?
 > - How would you decide between Flexbox and Grid for a given layout?
-> - Why does escalating specificity or reaching for `!important` usually make a stylesheet harder to maintain?
-> - How would you verify a component still works with zoom, high contrast, and reduced motion?
 > - How would you diagnose why a rule you wrote isn't winning, using the browser's computed styles?
+
+## Answer Notes
+
+1. The cascade considers applicability, origin and importance, cascade layers, specificity and finally ordering among otherwise competing declarations. A more specific selector does not automatically beat a declaration in a higher-priority part of the cascade.
+
+2. With border-box, the declared width includes content, padding and border. With content-box, padding and border are added outside that width; margins remain outside both models.
+
+3. Flexbox is usually a good fit for distributing items along one main axis; Grid coordinates rows and columns in a two-dimensional layout. Choose from the alignment relationships needed, and combine them when a page and its components have different needs.
+
+4. Inspect the element's matched and computed styles, identify the winning declaration and why others are crossed out, and check inheritance and media conditions. Also check whether layout constraints, rather than the declaration itself, explain the visible result.
 
 ## Official References
 

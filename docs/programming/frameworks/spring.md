@@ -180,8 +180,16 @@ Move the transactional operation behind a separate injected service, or put the 
 > - Why doesn't singleton-scoped mean thread-safe, and what's the risk of shared mutable state in a service bean?
 > - Why does self-invocation bypass a `@Transactional` proxy, and what breaks as a result?
 > - How would you choose the narrowest test scope for a given behaviour instead of always loading the full Spring context?
-> - Why shouldn't Actuator endpoints be exposed without restriction?
-> - How would you diagnose unexpected auto-configuration behaviour in a running application?
+
+## Answer Notes
+
+1. Constructor injection makes required dependencies explicit and supports immutable fields and straightforward unit construction. The object cannot be created without its required collaborators, unlike hidden field injection.
+
+2. Singleton scope means an instance is shared within its container, not that its methods are synchronised. Concurrent requests can race on mutable fields; prefer stateless services or deliberately protected shared state.
+
+3. A call from one method to another on the same object does not pass through the external proxy, so the inner method's transactional advice is not applied. An existing outer transaction may still be active; put the boundary on an appropriate externally invoked service method.
+
+4. Use plain unit tests for independent logic, a focused slice for a web or persistence boundary, and a full context when configuration or cross-component integration is the behaviour under test. Avoid loading unrelated infrastructure for a narrow assertion.
 
 ## Official References
 

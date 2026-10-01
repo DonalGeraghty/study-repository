@@ -335,12 +335,20 @@ Hash collisions, resizing, cache locality, allocation, comparator cost, and work
 ## Interview Questions
 
 > [!question] Interview Questions
-> - Why is `Map` not part of the `Collection` hierarchy, even though it's a core collection type?
 > - How would you choose between `ArrayList` and `LinkedList` for a given access pattern?
 > - Why must `hashCode` be consistent with `equals`, and what breaks if it isn't?
 > - What's the risk of a check-then-act sequence on a concurrent collection, even one that's individually thread-safe?
-> - Why is returning a mutable internal collection directly a design mistake?
 > - When would an unmodifiable view or copy matter more than raw performance?
+
+## Answer Notes
+
+1. ArrayList is usually a good default for indexed access and iteration because of its contiguous backing array. LinkedList has linear indexed access and node overhead; insertion or removal is cheap only once the position is already known, so measure the actual access pattern rather than assuming it wins for all mutations.
+
+2. Equal objects must have equal hash codes so hash-based collections search the same bucket for equivalent keys. Unequal objects may share a hash code; inconsistent implementations or mutation of key fields can make lookups and duplicate detection fail.
+
+3. Individual thread-safe operations do not make a sequence atomic: another thread can change the collection between containsKey and put. Use an atomic operation such as putIfAbsent or compute where its contract matches the required action.
+
+4. An unmodifiable view prevents mutation through that reference but can still reflect changes to its backing collection. A copy separates structural changes, though referenced elements may still be mutable; choose the required ownership and snapshot semantics before optimising.
 
 ## Further Reading
 

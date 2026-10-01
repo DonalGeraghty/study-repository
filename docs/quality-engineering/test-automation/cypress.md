@@ -128,7 +128,16 @@ The guide's `cy.findByRole` examples require Cypress Testing Library commands to
 > - What's the difference between a query, an action, and an assertion in Cypress's retry model?
 > - How would you isolate browser and server state so tests can run independently and in parallel?
 > - When would you use `cy.intercept()` to observe traffic versus stub it, and what's the risk of over-stubbing?
-> - How would you diagnose a flaky Cypress test using the command log and CI artifacts?
+
+## Answer Notes
+
+1. Commands are queued and execute later, so assigning a command to a variable does not capture its eventual result. Use chained assertions, aliases or then callbacks to work with yielded values.
+
+2. Linked queries and assertions can be retried until their conditions hold. Actions wait for actionability but are not repeatedly performed like assertions; distinguish retrying a lookup from repeating a side effect.
+
+3. Give each test controlled initial browser state and unique or reset server data. Avoid test-order dependencies and shared mutable records; separate accounts or namespaces let parallel workers avoid interfering with each other.
+
+4. Observe real traffic when verifying integration; stub when controlling a rare response or isolating UI behaviour. Over-stubbing can hide broken API contracts, so retain suitable tests against the real service.
 
 ## Official References
 

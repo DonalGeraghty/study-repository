@@ -915,11 +915,17 @@ Despite its name, `kubectl get all` does not return every resource type. Query i
 > - Why do startup, readiness, and liveness probes each protect against a different failure, and what happens if you conflate them?
 > - How would you decide resource requests and limits for a workload you don't have production data for yet?
 > - Why doesn't two replicas guarantee high availability, and what would you add to actually get it?
-> - What's the difference between a PodDisruptionBudget and a rolling-update strategy, and what does neither protect against?
-> - How would you diagnose a Deployment stuck in a rollout that never completes?
-> - Why should an HPA and a GitOps controller not both own `spec.replicas`?
-> - What's the blast radius of deleting a Namespace, and how would you avoid it in a shared environment?
 > - You doubled an API's replica count, but latency and database timeouts increased. What would you measure before deciding whether to add Pods, add nodes, change Pod resources or address the database?
+
+## Answer Notes
+
+1. Startup probes allow initialisation before other probes run; readiness controls eligibility for service traffic; liveness can trigger a container restart. Treating a dependency outage as liveness failure can restart healthy processes and amplify the outage.
+
+2. Begin with representative load tests and conservative estimates, then measure CPU, memory, throttling and out-of-memory events. Requests affect scheduling and capacity planning; limits constrain usage, so revise both as evidence improves.
+
+3. Replicas can share a failing node or zone, depend on one database, or all receive a bad rollout. Use appropriate placement, readiness, capacity and disruption controls, and address shared dependencies and recovery as well as replica count.
+
+4. Measure per-Pod CPU, memory and throttling, node capacity and pending Pods, request queues, connection pools, database connections, query latency and locks. Extra replicas can multiply database connections; identify the saturated layer before choosing the scaling or query fix.
 
 ## Official Documentation
 
@@ -938,6 +944,8 @@ Despite its name, `kubectl get all` does not return every resource type. Query i
 
 ## Related Guides
 
+- [Grafana](./observability/grafana.md) — dashboards and alerts for workload and service behaviour.
+- [Datadog](./observability/datadog.md) — correlate infrastructure signals with application evidence.
 - [Docker](./docker.md)
 - [Technology Stack](../engineering-foundations/technology-stack.md)
 - [Testing](../quality-engineering/testing.md)

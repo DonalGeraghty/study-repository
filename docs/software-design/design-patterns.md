@@ -306,8 +306,16 @@ For payment operations, first establish whether repetition is safe and how the p
 > - Given a checkout that needs to support several payment providers, how would you design the abstraction boundary, and where would you put provider selection?
 > - How would you add metrics or retry behaviour to a payment adapter without editing the adapter itself?
 > - What idempotency and retry decisions would you need to make for a payment charge, and why?
-> - How do you know a pattern's name actually matches its structure and intent, rather than being applied because the name sounds right?
-> - Could the pattern you chose be removed later without rewriting the whole system? What would make that hard?
+
+## Answer Notes
+
+1. Identify a concrete source of variation or coupling and show how the pattern reduces the cost of change. If the extra interfaces and indirection have no current benefit, keep the simpler design.
+
+2. Define a payment interface in the application's terms and implement one adapter per provider. Select and assemble the provider at a composition or configuration boundary so checkout logic does not depend on provider-specific APIs.
+
+3. Wrap the adapter with a decorator that implements the same interface and delegates calls while recording metrics or applying a retry policy. Preserve the contract; retries need explicit transient-failure and idempotency rules.
+
+4. Use a stable idempotency key for the same logical charge and account for timeouts after a provider may already have accepted it. Retry only suitable failures with limits and backoff, and reconcile uncertain outcomes to avoid duplicate charges.
 
 ## Related Guides
 

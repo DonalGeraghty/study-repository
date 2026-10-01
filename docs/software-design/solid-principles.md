@@ -363,11 +363,18 @@ Run the same contract checks against each implementation: success, failure, dupl
 > [!question] Interview Questions
 > - Given an order service that calculates a discount, writes directly to a database, and emails a receipt, what are the separate reasons it might change?
 > - Which boundaries would you actually refactor, and which would you leave alone as not worth the indirection?
-> - How would you state the contracts and likely variations for each responsibility you split out?
 > - How is the concrete application assembled once responsibilities are split into abstractions?
-> - Can you name one abstraction you would deliberately not add, and explain why?
-> - How do you tell whether an abstraction is protecting a real variation versus adding cost for nothing?
 > - Why isn't using a dependency-injection framework by itself proof that dependency inversion happened?
+
+## Answer Notes
+
+1. Discount policy changes for business reasons, persistence changes for storage reasons, and receipt delivery changes for communication reasons. These are separate reasons to change even if one use case coordinates all three.
+
+2. Separate real policy and external-system boundaries where independent change or testing justifies it. Keep simple, stable local logic together; an interface for every method creates indirection without necessarily reducing coupling.
+
+3. A composition root constructs concrete adapters and injects them into application services. The use case depends on contracts, while configuration or startup code chooses the database, notifier and policy implementations.
+
+4. A DI framework only constructs and connects objects. Dependency inversion concerns the direction of source dependencies: high-level policy should depend on suitable abstractions rather than concrete infrastructure details.
 
 ## Related Guides
 

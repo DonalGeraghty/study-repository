@@ -149,8 +149,17 @@ The earlier loader calls this validator instead of asserting the type. Test `nul
 > - Why doesn't `await` block the JavaScript event loop, and what happens while a promise is pending?
 > - What's the difference between JavaScript's runtime behaviour and what TypeScript's type system checks?
 > - Why is `unknown` safer than `any` for untrusted values, and how would you narrow it?
-> - Why don't TypeScript's static types protect you from malformed JSON or DOM input at runtime?
 > - What's the difference between a shallow copy from spread syntax and a deep copy, and when does that distinction bite you?
+
+## Answer Notes
+
+1. await suspends the async function and schedules its continuation when the promise settles. The event loop can run other work meanwhile, but synchronous CPU-heavy code still blocks its thread.
+
+2. JavaScript executes at runtime; TypeScript checks code statically and its type annotations are erased. A successful type check does not validate external data or change JavaScript's underlying execution behaviour.
+
+3. unknown requires a type check or other narrowing before operations are allowed; any disables those checks. Validate primitives and object structure with runtime checks or a schema, then use the narrowed value.
+
+4. Spread copies only the outer object or array, leaving nested references shared. Mutating a nested object through the copy also changes what the original observes; copy the required nested structure or use an appropriate cloning strategy.
 
 ## Frameworks and Libraries
 

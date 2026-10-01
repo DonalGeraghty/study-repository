@@ -133,8 +133,17 @@ Test service logic directly, exercise the HTTP boundary with a representative se
 > - Why does middleware order matter, and what breaks if error middleware is installed before the routes?
 > - How does Express 5 handle a returned rejected promise, and why do detached promises or callback errors still need explicit handling?
 > - Why isn't CORS a substitute for authentication?
-> - What's the risk of accepting an unbounded JSON request body?
 > - How would you shut an Express server down cleanly without dropping in-flight requests or leaving pools open?
+
+## Answer Notes
+
+1. Express traverses middleware in registration order. Body parsing and other prerequisites must run before handlers that need them, and error middleware belongs after routes because later failures cannot travel backwards to an earlier handler.
+
+2. A returned rejected promise from an Express 5 handler is forwarded to error handling. A detached promise or asynchronous callback sits outside that returned chain, so its failure must be caught and passed to the appropriate error boundary explicitly.
+
+3. CORS controls whether browsers expose certain cross-origin responses to scripts. It does not identify a caller or prevent non-browser clients from making requests; authentication and authorisation must be enforced by the server.
+
+4. Stop accepting new work, allow in-flight requests a bounded drain period, then close database pools and other resources. Handle termination signals and set a deadline so stuck requests cannot prevent shutdown indefinitely.
 
 ## Official References
 

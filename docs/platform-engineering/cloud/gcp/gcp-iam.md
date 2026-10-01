@@ -132,8 +132,17 @@ Test that the runtime can read its required bucket and cannot read another tenan
 > - How does access inherited through the resource hierarchy affect what you see in a single resource's local policy?
 > - When would you choose a predefined role over a custom one, and what's the maintenance cost of custom roles?
 > - Why would you use impersonation or workload identity federation instead of a long-lived service-account key?
-> - How could a combination of roles create an indirect privilege-escalation path that no single grant looks dangerous on its own?
 > - How would you diagnose an access denial without immediately granting a broader role to make the error go away?
+
+## Answer Notes
+
+1. A resource's local allow policy is only part of its effective access: grants on ancestors can apply too. Inspect the hierarchy and relevant conditions or deny controls before concluding that a missing local grant means no access.
+
+2. Prefer a predefined role when its permissions fit the task. A custom role can narrow access further but requires tracking required permissions and service changes over time so it does not become stale or excessively broad.
+
+3. They obtain short-lived credentials without distributing a persistent private key. Restrict who can impersonate the identity or which external identities can federate, because those trust bindings determine who gains its permissions.
+
+4. Identify the caller, requested permission, resource and failing operation, then inspect effective roles, conditions and policy constraints using logs and diagnostic tools. Fix the specific missing or incorrect grant instead of adding a broad role by trial and error.
 
 ## Official References
 

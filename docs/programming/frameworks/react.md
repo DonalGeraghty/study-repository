@@ -156,8 +156,16 @@ For a second test, let a search for `a` start before a search for `ab`, but retu
 > - How would you decide which component owns a piece of state, and when to lift it up?
 > - Why are effects the wrong place for ordinary data transformation or event handling?
 > - What's the risk of using an array index as a list key when items can be reordered?
-> - Why should you measure before reaching for `memo`, `useMemo`, or `useCallback`?
-> - How would you test a component the way a user encounters it rather than asserting on internal state?
+
+## Answer Notes
+
+1. React may render a component more than once or discard a render, so rendering must calculate UI from inputs without externally visible side effects. Mutating external state during render can duplicate work and make output depend on execution timing.
+
+2. Keep state at the lowest component that owns it; lift it to the nearest shared parent when siblings must coordinate. Derive values where possible and avoid duplicating the same source of truth.
+
+3. Calculate derived data during rendering and handle user actions in event handlers. Effects synchronise with external systems; using them for ordinary transformations adds extra renders and opportunities for stale or looping state.
+
+4. Keys identify items across renders. An index can identify a different item after insertion or reordering, causing local state, focus or input values to attach to the wrong row; use a stable item identity.
 
 ## Official References
 

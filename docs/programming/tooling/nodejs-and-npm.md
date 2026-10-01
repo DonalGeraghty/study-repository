@@ -97,8 +97,17 @@ Nyx and Aether use npm to build React applications with Vite. `shtormscsgo` uses
 > - Why can CPU-heavy synchronous code block every concurrent request in a Node.js process, even though I/O is asynchronous?
 > - Why does `npm ci` behave differently from `npm install` in a CI pipeline?
 > - Why is it dangerous to put a server secret in a frontend build variable?
-> - What happens to an unhandled rejected promise that no request, job, or shutdown boundary observes?
 > - Why should a runtime dependency never end up in `devDependencies`?
+
+## Answer Notes
+
+1. JavaScript callbacks normally share the process's event-loop thread, so a long synchronous computation prevents it from serving other work. Move substantial CPU work to worker threads or another process, or split it where appropriate; asynchronous I/O does not make CPU code parallel.
+
+2. npm ci uses the committed lockfile, requires it to agree with package.json, and performs a clean installation without updating those manifests. npm install can resolve changes and update the lockfile, making it appropriate for dependency development rather than an identical CI contract.
+
+3. Frontend build variables can be embedded in JavaScript delivered to users, who can inspect those bytes. Keep server secrets on the server and expose only intended public configuration to the browser.
+
+4. A package required by the deployed server must remain available when development dependencies are omitted. Classify by the production installation and execution model; build-only tools can be development dependencies if their output is what actually ships.
 
 ## Related Guides
 

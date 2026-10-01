@@ -122,7 +122,16 @@ Removing missing observations changes the denominator. In the `pass_rate` exampl
 > - How does R's handling of missing values (`NA`) change the result of a straightforward aggregation?
 > - Why would you validate join cardinality before trusting the row count of a merged data frame?
 > - How would you reproduce an analysis result in a clean environment months later?
-> - What's the difference between a statistically significant result and a practically important one?
+
+## Answer Notes
+
+1. R reuses shorter vectors to match longer ones in vectorised operations. An exact multiple may produce no warning even when the pairing is logically wrong, so validate lengths and alignment instead of trusting the output shape.
+
+2. Many aggregations return NA when inputs include missing values unless an explicit policy such as na.rm = TRUE is used. Removing all values can still produce a special result, such as NaN for the mean, so define an all-missing policy too.
+
+3. Repeated keys on both sides create multiple matches and can multiply rows and totals. Check uniqueness and the intended one-to-one or many-to-one relationship, then inspect unmatched keys and row counts.
+
+4. Preserve source data or its provenance, scripts, package and R versions, parameters and random seeds where relevant. Run from a clean session with a reproducible dependency environment and explicit paths and input formats.
 
 ## Official References
 

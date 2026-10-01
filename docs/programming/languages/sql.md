@@ -163,7 +163,16 @@ Create cases with zero, one, and multiple critical failures, plus only non-criti
 > - How would you predict what a `LEFT JOIN` does to your row count compared to an `INNER JOIN` on the same tables?
 > - What's the difference between an aggregate function and a window function?
 > - How would you read an execution plan to decide whether a new index would actually help a slow query?
-> - Why should an application connect with a least-privilege database account rather than an administrative one?
+
+## Answer Notes
+
+1. Concatenation lets data become SQL syntax and depends on every caller and transformation remaining trustworthy. Use parameterised values and explicitly allowlist any dynamic identifiers that cannot be bound as parameters.
+
+2. An INNER JOIN keeps matching row pairs; a LEFT JOIN also retains unmatched left rows with nulls on the right. Multiple matches can multiply left rows in either join, and a WHERE filter on right-side columns can remove the unmatched rows.
+
+3. An aggregate normally collapses each group into a result row. A window function computes over a related set of rows while retaining individual rows, enabling rankings or group totals alongside row details.
+
+4. Inspect access paths, estimated versus actual row counts where available, joins, sorts and the costly stages. Choose an index that fits filtering, joining or ordering, then verify the resulting plan and runtime against its write and storage cost.
 
 ## Official References
 

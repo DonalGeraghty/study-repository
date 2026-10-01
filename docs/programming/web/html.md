@@ -129,8 +129,16 @@ Test by submitting with the keyboard, inspecting the request's form data, and ch
 > - What makes a form control's label actually associated with it, versus just visually nearby?
 > - Why does client-side form validation need a server-side check behind it?
 > - How does DOM order affect both keyboard focus order and screen-reader reading order?
-> - What's the difference between an accessible name and visible text, and when do they diverge?
-> - How would you test a page's structure beyond an automated accessibility scanner?
+
+## Answer Notes
+
+1. Native elements provide built-in semantics, keyboard behaviour and browser integration. Adding an ARIA role changes exposed semantics but does not automatically implement the behaviour a custom widget needs.
+
+2. Associate a label's for attribute with the control's matching id, or nest the control inside its label where appropriate. Nearby text or a placeholder alone is not equivalent to a properly associated label.
+
+3. A caller can bypass the browser and send arbitrary requests. Client validation improves feedback, while the server must independently validate input and enforce business and security rules.
+
+4. The DOM provides the default reading sequence and much of the keyboard focus sequence. Visual reordering can create a mismatch for keyboard and screen-reader users; keep a logical source order and avoid using positive tabindex to patch it.
 
 ## Official References
 

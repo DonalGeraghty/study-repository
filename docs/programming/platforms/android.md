@@ -149,10 +149,18 @@ Test recreation and process death separately: an activity-recreation test alone 
 > [!question] Interview Questions
 > - Why can an Activity be destroyed and recreated even when the user hasn't left the screen?
 > - What state should survive process death, and where would you put it — Composable state, a `ViewModel`, or saved instance state?
-> - Why is an in-memory singleton not durable storage on Android?
 > - How would you separate UI, business rules, and data sources so a configuration change doesn't lose in-flight work?
-> - Why should an app request the narrowest permission and exported-surface scope it actually needs?
 > - How would you test a screen across lifecycle recreation, not just its happy-path rendering?
+
+## Answer Notes
+
+1. Configuration changes such as rotation can recreate an Activity so resources and layout reflect the new configuration. Code must restore appropriate state instead of assuming one Activity instance lasts for the whole user session.
+
+2. A ViewModel survives ordinary configuration recreation but not process death. Use saved instance state or saved-state APIs for small restorable UI state, and durable storage for business data; ordinary remembered Composable state alone does not survive recreation.
+
+3. Keep rendering and UI events in the screen, screen-level work in an appropriately scoped ViewModel, and data access behind repositories. Use a durable work mechanism for tasks that must outlive the process; configuration survival alone is not durability.
+
+4. Recreate the Activity and check that input, selection and displayed results restore correctly without duplicate side effects. Also test process-restoration paths separately, plus background/foreground transitions and cancellation of obsolete work.
 
 ## Related Languages
 

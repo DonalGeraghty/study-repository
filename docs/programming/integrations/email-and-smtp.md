@@ -106,8 +106,17 @@ The Playwright CEX crawler builds a text email with Python's standard email libr
 > - Why doesn't SMTP acceptance prove the email actually reached an inbox?
 > - Why is retrying an email send after an ambiguous timeout risky, and how would you avoid sending a duplicate?
 > - Why must user-controlled display names and subjects be validated before going into a message?
-> - What makes an SMTP relay "open," and why is that dangerous?
 > - Why would you unit-test message composition separately from actually sending mail?
+
+## Answer Notes
+
+1. SMTP acceptance means a server accepted responsibility for that delivery step. Later relays, mailbox rules, spam filtering or bounces can prevent inbox delivery; track downstream delivery events where available.
+
+2. The server may have accepted the message before the connection timed out, making a blind retry a duplicate send. Record a stable logical send operation and provider outcome where possible, using provider idempotency or reconciliation when supported; a Message-ID alone does not guarantee deduplication.
+
+3. Untrusted header values can contain invalid characters or attempted header injection. Use a mail library's structured fields and validate values rather than constructing raw headers through string concatenation.
+
+4. Composition tests can assert recipients, headers and body deterministically without network access or accidental delivery. Separate transport tests verify the sending adapter and delivery integration under controlled conditions.
 
 ## Related Guides
 

@@ -88,8 +88,17 @@ The `shtormscsgo` project uses Vue 3, Vue Router, Vue CLI, Babel, ESLint, and Bo
 > - Why should a derived value like a filtered list be `computed` rather than maintained by a watcher?
 > - Why is mutating a prop directly a mistake, and what should a component do instead?
 > - Why do array indexes make unstable keys for a reorderable list?
-> - What's the risk of putting server state and unrelated page state into one global store?
 > - Why isn't a client-side route guard a substitute for server-side authorisation?
+
+## Answer Notes
+
+1. A computed value expresses a derivation from reactive dependencies and is cached until those dependencies change. A watcher-maintained copy creates duplicate state and update-order risks; watchers are better suited to side effects.
+
+2. Props are owned by the parent, so direct mutation breaks the intended data flow and may be overwritten. Emit an event or use the component's agreed model contract so the parent updates its state.
+
+3. An index describes position rather than identity. Reordering can make Vue reuse a component instance for a different item, attaching state or input values to the wrong row; use a stable item key.
+
+4. Route guards only affect the browser UI and can be bypassed by calling the API directly. The server must authenticate requests and enforce resource and action permissions independently.
 
 ## Related Guides
 

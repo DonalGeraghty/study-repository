@@ -98,7 +98,16 @@ To create only when no live object exists, use the documented generation-match v
 > - How would you prevent two concurrent writers from silently overwriting each other's object?
 > - What's the difference between versioning, soft delete, and a lifecycle rule, and when would you rely on each?
 > - Why must an event handler that processes storage notifications be idempotent?
-> - How would you estimate and monitor the cost drivers for a storage-heavy workload before they dominate the bill?
+
+## Answer Notes
+
+1. Object storage addresses whole objects by names and metadata rather than exposing a normal mutable filesystem or disk blocks. Design uploads, downloads and replacements around that model; do not assume local filesystem update or rename semantics.
+
+2. Use an object-generation precondition so a write succeeds only if the stored generation matches the one observed. A create-only precondition can prevent overwriting an existing object; handle conflicts rather than silently applying last-writer-wins.
+
+3. Versioning retains previous object generations; soft delete provides a recovery window after deletion; lifecycle rules automate actions such as deletion or storage-class changes. Choose recovery and retention requirements first, accounting for retained-data cost and eventual lifecycle actions.
+
+4. Notifications may be duplicated or retried, so processing the same change twice must not duplicate effects. Identify the relevant object generation and event or operation, and record processing durably rather than using only the object name.
 
 ## Official References
 

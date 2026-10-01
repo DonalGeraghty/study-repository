@@ -315,8 +315,17 @@ Avoid asserting an entire incidental stack trace or message that is not contract
 > - What's the practical difference between a checked and an unchecked exception, and how do you decide which to use for a new API?
 > - Why does wrapping an exception without preserving its cause make debugging harder?
 > - Why does try-with-resources close resources in reverse declaration order, and what happens to a suppressed exception when both the body and `close` throw?
-> - Why shouldn't you return from inside a `finally` block?
 > - How would you handle `InterruptedException` correctly instead of swallowing it?
+
+## Answer Notes
+
+1. Checked exceptions must be caught or declared; unchecked exceptions do not impose that compiler requirement. Choose based on the API contract and whether callers are expected to recover explicitly, preserving meaningful failure types rather than wrapping everything indiscriminately.
+
+2. The cause preserves the original failure type, stack trace and diagnostic chain. Add useful higher-level context when translating an exception, but pass the original cause so investigation can still reach the underlying failure.
+
+3. Reverse order releases later-created resources before the earlier resources they may depend on. If the body throws and closing also fails, the body's exception remains primary and close failures are attached as suppressed exceptions.
+
+4. Propagate interruption when the method contract permits. If it cannot be propagated, normally restore the interrupt status with Thread.currentThread().interrupt() and stop or unwind the work appropriately instead of continuing as though cancellation never happened.
 
 ## Further Reading
 

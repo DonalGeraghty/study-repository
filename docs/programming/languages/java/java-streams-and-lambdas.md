@@ -324,12 +324,20 @@ Test:
 ## Interview Questions
 
 > [!question] Interview Questions
-> - Why can a lambda only capture local variables that are final or effectively final?
 > - Why don't intermediate stream operations do any work until a terminal operation runs?
 > - What's the difference between `map` and `flatMap`, and when do you need the second one?
 > - Why is mutating shared state from inside a stream pipeline dangerous, especially with `parallelStream`?
 > - Why does `orElse` evaluate its argument eagerly, and when does that matter?
-> - When would a parallel stream actually help, and when would it just add overhead or risk?
+
+## Answer Notes
+
+1. Intermediate operations describe a lazy pipeline; a terminal operation triggers traversal as needed. Short-circuiting can stop early, and implementation optimisations may omit unnecessary work, so do not rely on intermediate side effects.
+
+2. map transforms each element into one result, even if that result is itself a collection or stream. flatMap transforms each element into a stream and flattens those streams, such as turning orders into one stream of their line items.
+
+3. External mutation makes results depend on execution order and can introduce races in a parallel pipeline. Prefer stateless transformations and suitable reductions or collectors; a synchronised container alone does not fix every ordering or logic problem.
+
+4. Java evaluates method arguments before the call, so an expression passed to orElse runs even when the Optional has a value. orElseGet invokes its supplier only when empty, avoiding unnecessary expensive work or side effects.
 
 ## Further Reading
 

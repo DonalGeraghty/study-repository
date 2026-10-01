@@ -264,9 +264,17 @@ This reduces one retention risk but does not guarantee that no copies exist in i
 > - Why does string immutability make the string pool safe to share across the JVM?
 > - What's the difference between `==` and `.equals()` for strings, and why does the pool make this a common source of confusion?
 > - Why is `StringBuilder` preferred over repeated `+` concatenation in a loop?
-> - Why isn't `StringBuffer` a general concurrency solution just because it's synchronized?
 > - Why can splitting a string at a fixed character index corrupt a surrogate pair or emoji?
-> - Why is recompiling the same regex repeatedly wasteful, and how would you avoid it?
+
+## Answer Notes
+
+1. A shared String's contents cannot be changed through another reference, so pooling does not let one user of the value corrupt another's value. Variables can still be reassigned; immutability applies to the String object itself.
+
+2. == compares references, whereas equals compares string content. Interned literals may share a reference and make == appear to work, but independently constructed equal strings need not be the same object.
+
+3. Repeatedly concatenating a growing immutable string in a loop can repeatedly copy its accumulated contents. StringBuilder accumulates changes in a mutable buffer and produces the final String once; this is different from a small fixed concatenation expression.
+
+4. String indexes refer to UTF-16 code units, and a supplementary code point occupies a surrogate pair. Splitting between those units breaks the code point; even code-point boundaries can split a user-perceived character composed of multiple code points.
 
 ## Further Reading
 

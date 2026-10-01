@@ -270,12 +270,19 @@ Observability assertions can be valuable, but avoid tests coupled to incidental 
 
 > [!question] Interview Questions
 > - How would you explain a stack decision in an interview, from product context down to supporting evidence?
-> - Can you name a stack choice you'd defend, and one alternative you deliberately rejected — why?
 > - How do you know whether local and CI execution are actually reproducible?
 > - Why should fast feedback be kept separate from expensive coverage in a delivery pipeline?
 > - How would you justify operational complexity, such as choosing Kubernetes for a given workload?
-> - What evidence would convince you a stack decision was correct after the fact?
-> - How do you keep dependency, runtime, and image upgrades from being ignored until something breaks?
+
+## Answer Notes
+
+1. Start with product needs and constraints, identify the important quality attributes, then explain the chosen components and alternatives. Support the decision with measured results or concrete project evidence, including its costs.
+
+2. Pin the relevant runtime, dependencies and build inputs, then run the documented commands from a clean checkout locally and in CI. Compare artifacts and results, accounting for configuration and external services; a lockfile alone is not complete reproducibility.
+
+3. Fast checks give useful feedback on each change while slower integration or end-to-end checks cover broader risks. Stage them so expensive work does not delay obvious failures, while keeping required coverage in the release path.
+
+4. Name the workload or organisational need it solves, such as scheduling many services or controlled rollouts, then weigh staffing, maintenance and failure complexity. A simpler managed service may be the better choice if those needs are absent.
 
 ## Official Starting Points
 

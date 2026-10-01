@@ -123,7 +123,16 @@ For a timeout, inspect reachability and dependency health. For an access-denied 
 > - Why would you put production and non-production workloads in separate accounts rather than one shared account?
 > - How would you choose between compute options for a given workload's operational needs?
 > - How do you detect drift between deployed infrastructure and the reviewed infrastructure-as-code that describes it?
-> - Why is cost itself an architectural signal, not just a finance concern?
+
+## Answer Notes
+
+1. Use federated human access and workload roles that obtain short-lived credentials, scoped to the resources required. This reduces stored secrets and exposure duration, but a compromised active session can still misuse its granted permissions.
+
+2. Separate accounts create stronger administrative, policy and billing boundaries and reduce accidental cross-environment access. They limit production blast radius, while still requiring explicit controls for shared services and cross-account roles.
+
+3. Match execution duration, traffic, scaling, state and control requirements to a managed function, container service or virtual machine. Include operational ownership, dependencies, cost and failure recovery rather than choosing solely by familiarity.
+
+4. Compare refreshed infrastructure-as-code plans and configuration history with deployed resources, and investigate changes outside the reviewed workflow. Decide whether to restore the declared state or intentionally update the code; avoid blindly applying a surprising plan.
 
 ## Official References
 

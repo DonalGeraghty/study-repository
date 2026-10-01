@@ -176,8 +176,17 @@ Test crashes before producing output, after producing output but before recordin
 > - For a queue generating monthly reports that take between ten seconds and ten minutes, how would you set the visibility timeout, given that duration range?
 > - How would you extend visibility safely for a report that's still healthy but running long, without losing the underlying idempotency guarantee?
 > - What idempotency key would prevent a redelivered message from generating the same report twice?
-> - Where would large report output live, and why shouldn't it go in the message body itself?
 > - What signal would you scale worker count from — queue depth, backlog age, or something else — and why?
+
+## Answer Notes
+
+1. Choose an initial timeout with processing headroom, then extend visibility for healthy long-running work using a heartbeat. A very short timeout invites concurrent duplicate processing; an unnecessarily long timeout delays recovery after a crash.
+
+2. Renew before the current timeout expires and only while the worker is making progress, with an upper bound for stuck work. Visibility is a temporary lease, not an exactly-once guarantee; durable idempotency must still protect report creation.
+
+3. Use a stable logical report key, such as tenant plus reporting month and report type or version. Atomically claim or record completion for that key so a redelivery resumes or returns the existing result instead of creating another report.
+
+4. Backlog age shows whether waiting-time objectives are being missed; queue depth relative to processing rate estimates work remaining. Also monitor in-flight work, processing duration and downstream limits so scaling workers does not overload storage or databases.
 
 ## Official References
 

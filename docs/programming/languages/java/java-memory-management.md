@@ -240,10 +240,18 @@ Flag availability and syntax can vary by JDK; verify against the runtime in use.
 > [!question] Interview Questions
 > - Why can a reachable object still represent a memory leak?
 > - What are GC roots, and how do they determine what survives a collection?
-> - Why doesn't calling `System.gc()` guarantee anything happens?
 > - Why is try-with-resources unrelated to garbage collection?
-> - What's the difference between a throughput-oriented and a pause-time-oriented garbage collector, and how would you choose?
 > - How would you gather evidence for a suspected memory leak in production?
+
+## Answer Notes
+
+1. Garbage collection reclaims unreachable objects, not objects the application no longer needs. A cache, listener or static collection that retains obsolete objects can therefore leak memory while every object remains reachable.
+
+2. Roots are live references from places such as thread stacks, static fields of live classes and native handles. Objects reachable through reference paths from those roots remain live under ordinary strong-reference tracing; special reference types have additional rules.
+
+3. Try-with-resources deterministically calls close when leaving a scope. Garbage collection manages memory and does not provide timely release of external resources such as files, sockets or database connections.
+
+4. Compare heap usage after collections over time, inspect allocation and GC evidence, and analyse a heap dump's retained objects and paths to roots. Distinguish temporary allocation pressure from retained growth, and check native memory too when process usage exceeds what the heap explains.
 
 ## Further Reading
 

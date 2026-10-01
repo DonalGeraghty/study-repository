@@ -288,7 +288,16 @@ target.add(3);
 > - What does PECS ("producer extends, consumer super") actually tell you about choosing a wildcard?
 > - What does type erasure remove at runtime, and what does that make impossible to do with a generic type parameter?
 > - Why is an unchecked cast dangerous even when the compiler only warns instead of failing?
-> - When would `@SafeVarargs` be a lie, and how would you prove it isn't?
+
+## Answer Notes
+
+1. List<Dog> cannot be used as List<Animal>, because that would allow adding a Cat to a dog list. Arrays permit the analogous assignment but check incompatible stores at runtime; generic invariance rejects the unsafe assignment at compile time.
+
+2. Use ? extends T when reading values as T from a producer, and ? super T when adding T values to a consumer. An extends collection cannot safely accept arbitrary T values, while values read from a super collection are only known as Object.
+
+3. Erasure removes reified generic type arguments from ordinary runtime instances, with type variables represented by their bounds. You cannot directly create new T(), create a T array, or test instanceof List<String>; some declaration metadata remains available through reflection.
+
+4. The runtime may only check the raw type, leaving incorrect element-type assumptions undetected until later use. Avoid unchecked casts where possible; if unavoidable at a controlled boundary, validate the data and keep the unsafe operation narrowly scoped.
 
 ## Further Reading
 

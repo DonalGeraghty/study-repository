@@ -124,8 +124,17 @@ For coroutines, compare two consecutive suspending calls with two `async` childr
 > - Why doesn't `val` make a referenced object immutable, only the reference itself?
 > - What's the risk of using `!!` instead of a safe call or explicit null check?
 > - How does structured concurrency tie a coroutine's cancellation to its parent scope?
-> - Why are Kotlin collection operations eager by default, and when would a sequence change that?
 > - What's a platform type, and why can't Kotlin prove its nullability when calling into Java?
+
+## Answer Notes
+
+1. val prevents reassigning that variable, but methods can still mutate the object it refers to. Immutability requires an immutable value and controlled nested references, not merely a fixed reference.
+
+2. The non-null assertion throws if the value is null, replacing compiler guidance with a runtime failure. Use safe calls, explicit checks or a clear fallback, reserving assertions for a genuinely established invariant.
+
+3. A scope owns its child coroutines and normally waits for their completion; cancelling the parent cancels its children. Cancellation is cooperative, so long CPU loops and blocking operations need suitable cancellation handling.
+
+4. A Java declaration without usable nullability information appears as a platform type, leaving Kotlin unable to prove whether null is possible. Validate at the boundary or introduce reliable annotations instead of assuming the value is non-null.
 
 ## Related Guides
 

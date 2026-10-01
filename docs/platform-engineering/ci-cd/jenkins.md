@@ -149,8 +149,17 @@ Separate a test failure from a build that never produced tests: both deserve evi
 > - Why shouldn't ordinary builds run on the Jenkins controller itself?
 > - How would you isolate an untrusted pull-request pipeline from privileged credentials and production agents?
 > - Why doesn't credential masking in logs count as a complete security boundary?
-> - What risk does a trusted shared library introduce, and how would you govern changes to it?
 > - How would you separate a queue delay, an agent failure, a pipeline defect, and a genuine product failure when a build goes red?
+
+## Answer Notes
+
+1. Builds execute project-controlled code and consume resources, which threatens controller availability and access to Jenkins state. Run them on suitably isolated agents with limited permissions.
+
+2. Use separate unprivileged agents and credentials scopes for untrusted changes. Restrict who can alter privileged pipeline definitions and keep deployment credentials and production execution behind a trusted path.
+
+3. Masking only reduces accidental log disclosure; code holding a credential can send it elsewhere or transform it to avoid masking. Isolation, least privilege and controlling which code receives secrets provide the actual boundary.
+
+4. Check queue and executor availability first, then agent connectivity and environment, then pipeline steps and test evidence. Use timestamps, logs and artifacts to distinguish infrastructure failures from a reproducible application defect.
 
 ## Official References
 

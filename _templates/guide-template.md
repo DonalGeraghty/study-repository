@@ -43,7 +43,19 @@ Give a concrete input, constraint, or failure scenario. Ask the reader to predic
 > - What happens when the main dependency or assumption fails?
 > - When would you choose an alternative, and what trade-off would change your decision?
 
-Replace these prompts with 4–8 specific questions answered by this guide. Keep exactly one Interview Questions section, after the main content and before references.
+Replace these prompts with four specific, high-value questions answered by this guide. Keep exactly one Interview Questions section, after the main content and before the answer notes and references.
+
+## Answer Notes
+
+Replace these instructions with four concise answers in matching question order. Give enough substance to self-mark without repeating the full lesson.
+
+1. State the core mechanism and its important guarantee or limitation.
+
+2. Give the expected result and the steps that explain it; use exact values where the example has a definite outcome.
+
+3. Identify the failure, its observable effect, and an appropriate response or verification step.
+
+4. State the assumptions and trade-off that favour an alternative. Treat a design answer as one defensible approach, not the only correct solution.
 
 ## Official References
 

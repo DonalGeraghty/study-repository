@@ -133,7 +133,16 @@ Monitor publish failures, delivery latency, oldest unprocessed age, retry count,
 > - Who owns each subscription's backlog, and what happens if one consumer falls behind or goes offline?
 > - What idempotency key would you use, and why does at-least-once delivery make it necessary?
 > - Does this event need ordering relative to other events for the same invoice — and if so, how would you achieve it without serialising unrelated invoices?
-> - How would you replay this event for one consumer after a bug fix, without affecting the others?
+
+## Answer Notes
+
+1. Include a stable event ID, type or version, occurrence time and the invoice identifiers and facts consumers need. Avoid secrets and unnecessary personal data; define ownership and compatible schema evolution instead of publishing the entire internal record.
+
+2. Each independent consumer should own its subscription and processing backlog. A slow consumer then accumulates its own outstanding work without blocking others, subject to the broker's retention and delivery limits.
+
+3. Use a stable event ID, often scoped to the consumer's operation, and durably record or atomically apply its effect. Acknowledgement loss or retries can redeliver an event, so processing must be safe when the same ID arrives again.
+
+4. Order only where a business rule requires it, using invoice ID as the ordering key or partition key. Keep unrelated invoices independent and consider retries and consumer concurrency; broker ordering alone does not guarantee correctly ordered side effects.
 
 ## Related Guides
 

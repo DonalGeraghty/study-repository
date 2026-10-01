@@ -157,7 +157,16 @@ For a checkout, cached display prices can improve browsing, while the accepted p
 > - How would you decide the acceptable staleness for each of those values?
 > - How would the cache key and invalidation event differ for stock versus a product description?
 > - What should happen to a request if the cache is unavailable — and does that answer change per value?
-> - What would tell you that caching actually helped, beyond a raw hit ratio?
+
+## Answer Notes
+
+1. No: descriptions often tolerate longer caching, while stock and price need stricter freshness. Personalised discounts need user or eligibility context in the key and careful privacy controls; checkout should verify authoritative values where correctness matters.
+
+2. Start with the consequence of serving an old value and the frequency of changes. Define a freshness budget per value, then choose TTLs, invalidation and any authoritative recheck needed to meet it.
+
+3. Both need stable product identity, but stock may also depend on location or fulfilment context. Inventory changes should invalidate or update affected stock entries promptly; description edits target their product and locale entries and can often tolerate longer TTLs.
+
+4. Choose per use case: bypass a nonessential cache if the origin can handle the load, serve permitted stale data, or fail safely when required correctness cannot be checked. Bound fallback traffic to prevent a cache outage from taking down the origin.
 
 ## Related Guides
 

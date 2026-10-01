@@ -51,4 +51,14 @@ Repeat this check when projects are added or substantially reworked. Prefer evid
 > - How would you decide between adding a section to an existing guide and creating a brand-new one for a technology?
 > - Why is a technology inventory a point-in-time snapshot rather than a permanent record, and how would you keep it trustworthy over time?
 
+## Answer Notes
+
+1. Look for direct declarations plus actual use: imports, source code, configuration, build steps or deployment files. A lockfile entry alone may be transitive, and a README mention may be historical; record the evidence and uncertainty.
+
+2. Exclude repositories outside the defined scope, such as archives, generated copies or unrelated projects. State the exclusion criteria so the inventory describes the intended workspace rather than everything found on disk.
+
+3. Extend an existing guide when the technology fits its conceptual scope and needs only a small explanation. Create a separate guide when it has a distinct model and enough material to study independently, then link it from the parent and catalogue.
+
+4. Dependencies, usage and deployment choices change. Record what was inspected, revisit evidence after meaningful project changes, and remove or qualify stale claims rather than treating discovery as permanent proof.
+
 Return to [Engineering Foundations](./README.md).

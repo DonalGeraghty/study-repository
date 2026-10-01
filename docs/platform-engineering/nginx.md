@@ -107,7 +107,16 @@ Aether builds React assets in a Node stage and serves them from Nginx on Cloud R
 > - Why would you cache fingerprinted asset files aggressively but keep the HTML entry point short-lived or revalidated?
 > - Why does a multi-stage build matter for an Nginx image serving a frontend app?
 > - What would a lightweight health endpoint need to avoid depending on, and why?
-> - Why is it risky to assume a copied Nginx configuration's headers are correct for a new application?
+
+## Answer Notes
+
+1. Returning HTML with a successful status for a missing script or stylesheet hides the missing asset and causes parsing or MIME-type failures. Restrict the SPA fallback to application routes and let absent assets return 404.
+
+2. A fingerprinted filename changes when its content changes, so old versions can be cached for a long time. The HTML selects current asset names and must update promptly; revalidation avoids keeping clients on an old release.
+
+3. Build frontend assets in a stage containing Node and build tools, then copy the output into the Nginx runtime image. The deployed server needs the generated files, not the entire build toolchain or source tree.
+
+4. A lightweight server-health endpoint should avoid fragile downstream calls or expensive work. It can prove Nginx is responding, but does not establish that the API or every user journey is healthy; monitor those separately.
 
 ## Official References
 

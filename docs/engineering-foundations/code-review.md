@@ -468,12 +468,19 @@ The correct redesign depends on the surrounding API contract. The reviewer shoul
 
 > [!question] Interview Questions
 > - Before listing defects, how would you structure your review process end-to-end?
-> - In `loadUser` above, what would you flag first, and why?
 > - Why does returning `null` here lose more information than a more specific exception would preserve?
-> - What's the risk of catching `Exception` instead of a narrower, specific type?
 > - How do you decide whether a review comment is blocking, a suggestion, or a question?
 > - How would you check whether the tests actually prove meaningful behaviour rather than just asserting no exception was thrown?
-> - What would make you escalate a disagreement instead of resolving it through review comments alone?
+
+## Answer Notes
+
+1. Start with the change's purpose and risk, then trace the main path and failure paths. Check contracts, security, tests and operational impact; prioritise concrete defects and explain their effect before suggesting a fix.
+
+2. A single null result conflates outcomes such as a missing user and a failed lookup. A specific failure preserves context and lets callers choose an appropriate response instead of guessing.
+
+3. Block a demonstrated correctness, security or agreed-contract problem. Mark optional improvements as suggestions and use questions where context is missing; explain the consequence and keep preferences distinct from requirements.
+
+4. Check that tests assert observable results, important side effects and failure behaviour. Ask whether a plausible broken implementation would still pass; a test that only runs without throwing often proves too little.
 
 ## Further Reading
 

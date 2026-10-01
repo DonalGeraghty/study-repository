@@ -141,8 +141,17 @@ The Janus APIs use the OpenAI, Mistral AI, and Anthropic Python SDKs and validat
 > - Why should provider-specific clients and exceptions stay behind an adapter instead of leaking into domain code?
 > - Why is validating a model's output against a strict schema not enough on its own — what else must the application still enforce?
 > - Why is it dangerous to let generated text become a SQL query, shell command, or authorisation decision directly?
-> - Why does switching providers silently risk more than just a different response format?
 > - Why shouldn't your normal test suite call live, billable models?
+
+## Answer Notes
+
+1. An adapter translates application-level requests and outcomes to provider-specific formats and failures. It limits coupling, allows deterministic test doubles and gives one place to handle timeouts, errors and provider changes.
+
+2. A schema validates shape and types, not truth, business validity or permission. Enforce domain constraints, authorisation and any required verification before generated output can change application state.
+
+3. Generated text is untrusted input and may contain harmful or incorrect instructions. Map it to constrained, validated operations and enforce permissions at execution time; do not grant it direct authority over commands or access decisions.
+
+4. Live calls add cost, latency and nondeterminism and depend on external availability. Use fixtures and adapter doubles for normal tests, with a separate controlled evaluation or integration suite for real model behaviour.
 
 ## Related Guides
 

@@ -127,8 +127,17 @@ Now worker A's lock expires, worker B acquires the same key, and A finally finis
 > - How would you design Redis keys for a login session, a five-minute product cache, a per-user rate limit, and a leaderboard?
 > - Which data type and TTL would you choose for each, and why?
 > - Which of those four would be genuinely dangerous to lose, versus just inconvenient?
-> - Why is `KEYS *` unsafe against a busy production instance, and what would you use instead?
 > - What makes a distributed lock unsafe if you don't handle ownership on release?
+
+## Answer Notes
+
+1. Namespace keys by purpose and stable identity, for example session:<id>, product:<id>, rate:<user>:<window> and leaderboard:<season>. Include tenant or version dimensions when required and avoid placing secrets in visible key names.
+
+2. A session can be a string or hash with expiry aligned to the session policy; a product cache can use a string or hash with a 300-second TTL. Use atomic counter-and-expiry logic for a rate-limit window and a sorted set for ranked scores, expiring it according to the leaderboard's lifetime.
+
+3. Loss of cached products is usually a miss; loss of sessions may log users out; loss of rate-limit state may weaken protection. Leaderboard loss depends on whether scores can be rebuilt from durable data, so explicitly decide which values are authoritative.
+
+4. A worker's lease can expire and another worker can acquire the lock before the first releases it. Use a unique ownership token and atomic compare-and-delete on release; fencing or equivalent protection may also be needed to stop an expired owner performing writes.
 
 ## Official References
 

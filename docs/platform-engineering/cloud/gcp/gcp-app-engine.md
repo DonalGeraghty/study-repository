@@ -78,7 +78,16 @@ Test runtime-version compatibility, request limits, timeouts, health, permission
 > - How would you release a new version without immediately sending it production traffic?
 > - Why doesn't a traffic rollback undo an incompatible database migration, and how would you plan around that?
 > - Where should secrets live instead of `app.yaml`, and why?
-> - Why would you keep the previous version available for a while after promoting a new one?
+
+## Answer Notes
+
+1. Instances can restart, scale down or be replaced, so memory and local writable storage are not durable shared state. Put persistent data in an external database or object store and design instances to be replaceable.
+
+2. Deploy a new version without promoting it to normal production traffic, then verify it through a suitable version-specific route. Shift traffic only after checking behaviour, configuration and dependencies.
+
+3. Routing requests back to old code does not reverse data or schema changes. Use backward-compatible staged migrations, such as expand then contract, so old and new versions can coexist during rollout and rollback.
+
+4. Use a controlled secret store and grant the runtime identity only the necessary access. Keeping secrets out of app.yaml avoids distributing them through source control and deployment configuration history.
 
 ## Official References
 

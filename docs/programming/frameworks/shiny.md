@@ -100,7 +100,16 @@ The Shiny repositories use R, Shiny, ggplot2, Leaflet, map libraries, clustering
 > - Why is broad reactive dependency a performance problem, and how would you narrow it?
 > - Why is modifying process-global state from one user's session dangerous when Shiny can serve multiple sessions from one R process?
 > - Why shouldn't you trust an uploaded file's extension alone before processing its content?
-> - What would you need before rendering user-controlled HTML safely?
+
+## Answer Notes
+
+1. Reading input establishes a reactive dependency, which needs an active reactive context such as render, reactive or observe. Read values within the consumer that needs them so Shiny can track invalidation and recomputation.
+
+2. A consumer that reads many unrelated inputs reruns when any of them change. Split computations by dependency and use event-driven boundaries or isolation deliberately where changes should not trigger recomputation.
+
+3. Process-global mutable state is shared by sessions in that process, so one user can overwrite or observe another user's data. Keep user-specific state within the server session and use controlled shared storage only for intentionally shared data.
+
+4. A filename extension is supplied by the uploader and can misrepresent the contents. Check size, parse with the expected format, validate the resulting schema and handle malformed data safely before using it.
 
 ## Related Guides
 

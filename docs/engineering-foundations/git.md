@@ -620,12 +620,18 @@ For recovery practice, distinguish a local unpushed mistake from a commit teamma
 > [!question] Interview Questions
 > - What's the difference between the working tree, staging area, local history, and remote-tracking references?
 > - When would you choose rebase instead of merge, and what changes about the resulting history?
-> - How would you resolve a merge conflict where two branches edited the same line — and how would you abort if it goes wrong?
 > - What's the difference between `restore`, `revert`, `reset`, and `commit --amend`, and when is each safe on shared history?
 > - How would you recover a commit after an accidental `git reset --hard`?
-> - How would you use `git bisect` to find the commit that introduced a regression?
-> - How do GitHub Flow, trunk-based development, and GitFlow differ, and when would you choose each?
-> - Why is `--force-with-lease` safer than `--force` when rewriting a branch someone else may have pulled?
+
+## Answer Notes
+
+1. The working tree holds checked-out files; the staging area is the proposed next snapshot; local commits form history. Remote-tracking references such as origin/main are local records updated by fetch, not a live view of the server.
+
+2. Rebase replays commits onto another base, producing new commit identities and a linear history. Merge preserves the existing branch history and may add a merge commit; avoid rewriting history others depend on without coordination.
+
+3. restore replaces file content; revert creates a new commit undoing a change; reset moves a branch and can change the index and working tree; amend replaces the latest commit. Prefer revert for published history; reset and amend can disrupt collaborators, and destructive file restoration can lose uncommitted work.
+
+4. Inspect git reflog to find the previous commit, then create a recovery branch at that commit before deciding how to restore the original branch. Reflogs are local and eventually expire; uncommitted changes are not necessarily recoverable.
 
 ## Further Reading
 

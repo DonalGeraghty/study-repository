@@ -137,9 +137,17 @@ Repeat the successful request with the same `request_id`. The unique constraint 
 > - Why should you use `SELECT ... FOR UPDATE` instead of a plain `SELECT` when reserving stock inside a transaction?
 > - Why is a `CHECK` constraint on the database a stronger guarantee than validating stock in the application layer alone?
 > - Why can two individually correct transactions still deadlock, and how would you reduce that risk?
-> - Why would you avoid a floating-point column for exact money values?
 > - How would you decide whether a new index is worth its cost to inserts and updates?
-> - What's the risk of holding a database transaction open during an outbound HTTP call?
+
+## Answer Notes
+
+1. A locking read inside the transaction prevents competing writers from independently acting on the same stock row before the reservation completes. Keep the transaction short; a conditional atomic UPDATE can also enforce an appropriate stock rule.
+
+2. A database constraint is checked for writes regardless of which application path performs them. Application validation improves feedback but can be bypassed or race with another writer; enforce critical invariants at the data boundary too.
+
+3. Transactions can acquire overlapping locks in opposite orders and wait on one another. Use consistent access order, suitable indexes and short transactions, and retry a rolled-back deadlock victim as a complete transaction when safe.
+
+4. Use actual query patterns and execution plans to assess reduced scanning and latency, then weigh storage and write-maintenance overhead. Verify under representative data and load; an index is not useful merely because a column appears in a query.
 
 ## Related Guides
 

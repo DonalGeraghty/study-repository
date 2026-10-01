@@ -118,7 +118,16 @@ An SNS dead-letter queue captures a failure to deliver to the subscribed endpoin
 > - What data should never enter the message body or attributes for this topic?
 > - How would you use a filter policy so fraud analysis only receives the alert types it cares about?
 > - What's the difference between an SNS dead-letter queue and an SQS redrive policy here, and which failure does each catch?
-> - How would you verify that every expected subscription still exists after an infrastructure change?
+
+## Answer Notes
+
+1. Use separate SQS queues for audit and fraud analysis when each needs a durable backlog, retries and independent processing. A direct email destination may suit human notification if its delivery and processing guarantees are sufficient; critical automated email work can also use a queue-backed worker.
+
+2. Exclude passwords, tokens, private keys and unnecessary personal or financial details. Publish the minimum event data consumers need, with controlled references to sensitive records where appropriate; attributes also reach routing and operational systems.
+
+3. Define stable alert-type values and configure the subscription filter against the corresponding message attributes or message-body fields. Test matching, non-matching and missing values so irrelevant alerts are excluded without silently dropping required ones.
+
+4. An SNS subscription DLQ captures messages SNS could not deliver to that subscription endpoint after its delivery policy. An SQS redrive policy handles messages successfully queued but repeatedly received without successful processing and deletion.
 
 ## Official References
 

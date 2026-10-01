@@ -124,7 +124,15 @@ The website can verify that you entered the same password without recovering it 
 > - Why is SHA-256 a poor choice for hashing passwords, even though it's a secure general-purpose hash?
 > - What problem does a salt actually solve, and why doesn't it need to be secret?
 > - How does a MAC like HMAC differ from a plain hash, and what does it protect against that a plain hash doesn't?
-> - If collisions must exist mathematically for any hash function, why do we still call SHA-256 "collision-resistant"?
-> - Why are MD5 and SHA-1 no longer acceptable for security-sensitive integrity checks?
+
+## Answer Notes
+
+1. A hash is a many-to-one mapping, so the digest does not uniquely encode the input. Attackers can still guess candidate inputs and compare digests; one-way does not mean weak inputs are safe.
+
+2. SHA-256 is deliberately fast, making large numbers of password guesses cheap. Use a purpose-built password hashing scheme with a unique salt and an appropriate configurable work factor, rather than a fast general-purpose digest alone.
+
+3. A unique random salt prevents identical passwords from producing identical stored hashes and defeats reuse of precomputed hashes across accounts. Store it alongside the hash; its value is uniqueness, not secrecy.
+
+4. HMAC uses a secret key to authenticate a message as well as detect changes. An attacker who can replace both a message and an unkeyed hash can recompute that hash, but cannot create a valid HMAC without the key.
 
 Return to [Engineering Foundations](./README.md).

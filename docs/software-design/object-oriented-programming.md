@@ -256,10 +256,17 @@ Testability is usually a consequence of explicit responsibilities, not a reason 
 > - How would you model a library loan — which entities and value objects would you identify, and who owns the borrowing and return rules?
 > - How would composition let you add a second fine-calculation policy without changing existing code?
 > - How do you explain encapsulation as protection of invariants rather than just "private fields"?
-> - What's the practical difference between an interface and an abstract class, and how do you choose?
 > - What's the difference between identity-based and value-based equality, and where does each apply?
-> - How would you recognise low cohesion or excessive coupling in a class you're reviewing?
-> - Can you design an object around behaviour rather than public data — what would that look like for an order?
+
+## Answer Notes
+
+1. Members, copies and loans have identity; concepts such as money or date ranges can be value objects. Put borrowing and return invariants in the domain objects that own the affected state, with a service coordinating the use case.
+
+2. Have the loan or application service depend on a fine-policy interface and delegate calculation to an injected implementation. Add a new policy and choose it at assembly time without editing the existing calculation policies.
+
+3. Encapsulation controls which state transitions are allowed. Private fields help only if methods and exposed references also preserve rules, such as preventing the same copy from being loaned twice.
+
+4. Entities compare by stable identity even when their attributes change. Value objects compare by their constituent values; immutability helps make that equality predictable and safe for use in collections.
 
 ## Related Guides
 

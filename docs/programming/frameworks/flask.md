@@ -118,10 +118,19 @@ Using the factory above, predict each outcome with a fake service:
 
 > [!question] Interview Questions
 > - Why should route functions stay focused on HTTP concerns instead of holding business rules directly?
-> - Why is Flask's development server or debugger dangerous to leave enabled in production?
 > - Why doesn't validating a JWT's signature alone prove a request is authorised?
 > - What's the risk of relying on module-level mutable state across requests?
 > - Why would you use Flask's test client instead of testing only against a deployed server?
+
+## Answer Notes
+
+1. Routes should translate HTTP input into application calls and map results back to responses. Keeping business rules in separate functions or services makes them reusable and testable without requiring an HTTP request.
+
+2. A valid signature only establishes that the token was signed by a trusted key. Validate relevant claims such as expiry, issuer and audience, then separately enforce access to the requested action and resource.
+
+3. Requests may run concurrently, and different worker processes hold different copies of module state. This can produce races and inconsistent results; use request-scoped data or an appropriate shared durable store.
+
+4. The test client exercises routing, validation and response behaviour without starting a network server. It gives fast controlled checks, while deployment, networking and production server behaviour still need suitable integration coverage.
 
 ## Official References
 

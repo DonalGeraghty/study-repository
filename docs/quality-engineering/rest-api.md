@@ -668,12 +668,19 @@ Now change the operation to a create-order POST whose response is lost. An ETag 
 
 > [!question] Interview Questions
 > - How would you approach testing an endpoint you've never seen before, before writing a single test case?
-> - How do you decide which status code is correct when more than one seems plausible?
 > - Why does testing authentication separately from authorisation matter, and what's an example of a bug that slips through if you don't?
 > - How would you test optimistic concurrency using ETags or `If-Match`, and what would a false pass look like?
 > - What's the difference between a safe method and an idempotent one, and why does that distinction matter for retries?
-> - How would you design a risk-based test strategy for an API instead of defaulting to end-to-end tests for everything?
-> - How would you assess whether a schema change is backward compatible before it ships?
+
+## Answer Notes
+
+1. Read the contract and identify callers, inputs, outputs, state changes and the highest-impact failures. Inspect authentication, authorisation, boundaries and dependencies, then choose test levels and data that can expose those risks.
+
+2. Authentication establishes identity; authorisation controls what that identity may do. A valid user token accessing another user's record is an authorisation failure that login-only tests miss.
+
+3. Read a resource and its ETag, update it with If-Match, then attempt another write using the stale ETag. Verify the stale write is rejected and the newer data remains; checking only the status code can miss an unintended mutation.
+
+4. A safe method is defined to be read-only in its requested semantics; an idempotent method has the same intended effect when repeated as when performed once. Retry decisions also depend on the API contract and whether a failed response leaves the outcome unknown.
 
 ## Further Reading
 

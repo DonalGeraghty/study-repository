@@ -125,7 +125,15 @@ Someone monitoring the connection may see that traffic exists, but should not be
 > - Why is authenticated encryption preferred over plain encryption?
 > - If a public key must be shared to be useful, what actually needs to stay secret in asymmetric cryptography?
 > - How does a digital signature differ from encryption, and what does a valid signature actually prove?
-> - What happens to your data's confidentiality if a private key is exposed, and how would you contain the damage?
-> - Why doesn't encrypting a message also guarantee no one tampered with it?
+
+## Answer Notes
+
+1. Symmetric encryption uses a shared secret and is efficient for bulk data. Asymmetric cryptography uses a public/private key pair; TLS uses asymmetric mechanisms for authentication and key establishment, then symmetric authenticated encryption for traffic.
+
+2. Authenticated encryption protects confidentiality and detects changes to ciphertext and authenticated metadata. Encryption alone may hide content while still allowing undetected manipulation; nonce and key requirements still matter.
+
+3. The private key must remain secret. Public keys can be distributed, but their authenticity must be verified so an attacker cannot substitute their own key.
+
+4. A signature authenticates the signed bytes relative to a trusted public key and detects modification; it does not hide the content. A valid signature does not by itself establish who owns that key or whether the message's claims are true.
 
 Return to [Engineering Foundations](./README.md).

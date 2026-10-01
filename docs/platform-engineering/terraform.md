@@ -311,13 +311,19 @@ Use input validation and module tests to check contracts; inspect plans for unex
 
 > [!question] Interview Questions
 > - How do configuration, state, and provider APIs work together to produce a Terraform plan?
-> - What does `terraform validate` check, and what problems can still appear during planning or applying?
 > - What happens when someone manually changes a resource that Terraform manages, and how would you decide whether to restore or adopt that change?
 > - Why might removing an item from a collection cause unexpected changes with `count`, and how can `for_each` help?
-> - How would you rename a resource or move it into a module without recreating the underlying infrastructure?
 > - How would you manage and protect state when several engineers and a CI pipeline work on the same environment?
-> - How would you separate development and production, including state, credentials, and permissions?
-> - What would you investigate if an apply failed after creating some resources, and how would you proceed safely?
+
+## Answer Notes
+
+1. Configuration describes desired resources, state associates Terraform addresses with real objects, and providers read and change those objects through APIs. Planning compares the desired configuration with tracked and refreshed information to propose actions; it does not itself apply them.
+
+2. A refreshed plan can reveal drift and propose restoring the configured value, depending on what the provider can observe. Investigate the reason for the manual change, then either restore the reviewed intent or deliberately update configuration to adopt it and review a new plan.
+
+3. count identifies instances by numeric index, so removing an earlier list item can shift later identities and cause unexpected updates or replacements. for_each uses stable keys, preserving identity when unrelated entries are removed; changing a key still changes identity.
+
+4. Use a remote backend with suitable locking, narrowly scoped access, encryption and recovery/versioning controls. Serialize changes to each state, protect state and plan files as sensitive data, and keep state and credentials out of Git; marking an output sensitive does not remove its value from state.
 
 ## Official References
 

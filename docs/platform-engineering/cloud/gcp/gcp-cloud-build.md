@@ -106,8 +106,17 @@ For failures, retain:
 > - Why should the build, deployment, and runtime identities in a CI/CD pipeline be kept separate?
 > - How would you isolate an untrusted pull-request build from privileged credentials?
 > - How would you make a build's artifact provenance traceable back to the exact source and steps that produced it?
-> - What's the risk of caching build steps, and how would you avoid making clean builds impossible?
 > - How would you diagnose a build that fails only in CI but not locally?
+
+## Answer Notes
+
+1. Separate artifact creation, deployment changes and runtime data access into narrowly scoped identities. Otherwise a compromised build can inherit production powers or a compromised application can modify its own deployment.
+
+2. Run untrusted builds with a dedicated restricted identity and no production secrets or deployment permissions. Keep privileged release steps and their configuration on a trusted path, including any artifacts accepted from untrusted jobs.
+
+3. Record the source commit, build identity and configuration, dependency inputs and resulting artifact digest. Deploy that immutable artifact and retain build logs or provenance so the running version can be traced back to its origin.
+
+4. Compare runtime versions, environment, working directories, dependency resolution, permissions and service availability. Reproduce with clean inputs and inspect the failing step's logs; local cached state often conceals a missing dependency or setup step.
 
 ## Official References
 

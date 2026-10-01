@@ -345,12 +345,19 @@ A useful answer names what must be atomic now and what may complete later. An `O
 
 > [!question] Interview Questions
 > - How would you build a ubiquitous language for a lending system involving members, copies, loans, reservations, and fines?
-> - How would you decide which subdomains are core versus supporting versus generic?
 > - What makes an aggregate boundary correct, and what goes wrong when it's too large or too small?
-> - Why must changes to an aggregate go only through its root, and what breaks if that's bypassed?
 > - How would you translate an external model at a bounded-context boundary, and why does that matter?
 > - What transaction and event-delivery decisions would you need to make for a "borrow a copy" use case?
-> - How do you decide when a service boundary is justified independently of a model boundary?
+
+## Answer Notes
+
+1. Work with domain experts on concrete borrowing scenarios and agree on distinctions such as a title versus a physical copy. Use the same terms in conversation, examples and code, and make differing meanings across bounded contexts explicit.
+
+2. An aggregate groups the state whose invariants must hold within one consistency boundary. Too large creates contention and expensive transactions; too small makes rules span boundaries and requires coordination or eventual consistency.
+
+3. Use an explicit translation layer at the boundary, often an anti-corruption layer, to map external concepts and data into the local model. This prevents another context's terminology and assumptions from leaking into local rules.
+
+4. Atomically enforce the relevant borrowing invariants within the chosen transaction boundary. If publishing an event must follow the commit reliably, an outbox can record it in that transaction; delivery and consumers must tolerate retries and duplicates.
 
 ## Related Guides
 

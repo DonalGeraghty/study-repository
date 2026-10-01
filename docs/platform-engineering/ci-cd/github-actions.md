@@ -119,9 +119,18 @@ Now two releases run concurrently. State which may supersede the other and wheth
 > [!question] Interview Questions
 > - Why should a workflow's `permissions` block default to the minimum required rather than broad write access?
 > - What's the risk of exposing deployment credentials to a pull-request-triggered job?
-> - Why is pinning a third-party action to a reviewed commit digest safer than pinning to a mutable version tag?
 > - Why shouldn't a dependency cache be treated as a release artifact?
 > - What's the danger of interpolating untrusted branch names or issue text directly into a shell command?
+
+## Answer Notes
+
+1. Least privilege limits what a compromised workflow or dependency can do with its token. Grant write permissions only to the job that needs them, especially separating validation from deployment.
+
+2. Pull-request code and build steps may be attacker-controlled, so available credentials can be read or exfiltrated. Keep untrusted validation isolated from secrets and privileged deployment execution.
+
+3. A dependency cache is an optional speed optimisation that may be stale or unavailable. A release artifact is the identifiable output that was built and tested; promote that exact artifact rather than reconstructing it from a cache.
+
+4. Direct interpolation can turn user-controlled text into executable shell syntax. Pass values as data through appropriately quoted arguments or environment variables, and avoid evaluating the resulting text as code.
 
 ## Official References
 
@@ -131,6 +140,7 @@ Now two releases run concurrently. State which may supersede the other and wheth
 
 ## Related Guides
 
+- [Backstage](../backstage.md) — expose delivery workflows alongside service ownership and documentation in a developer portal.
 - [Continuous Integration and Delivery](./README.md)
 - [Terraform](../terraform.md) — infrastructure plans, protected state, and controlled applies in CI.
 - [Docker](../docker.md)

@@ -98,9 +98,18 @@ Next, imagine a session-scoped fixture returns one mutable list. Test A appends 
 > [!question] Interview Questions
 > - Why shouldn't you casually mix lifecycle models between test runners in one suite?
 > - How would you design a parameterised test so boundary cases are visible instead of hidden inside a loop?
-> - Why does asserting an entire response object often make a test more fragile than asserting the fields that matter?
 > - How would you make a suite's setup safe for parallel execution when tests currently depend on running in a fixed order?
 > - What's wrong with treating retries as a way to make an unreliable test "pass," and how would you tell a flaky test from a real regression?
+
+## Answer Notes
+
+1. Runners own discovery, fixtures, hooks, scheduling and reporting. Mixing assumptions about those lifecycles can leave setup unexecuted, state shared incorrectly or tests undiscovered; use one clear execution model per suite.
+
+2. Make each boundary input and expected outcome a separately named parameterised case. Independent reporting shows exactly which case failed and allows the runner to execute and manage cases individually.
+
+3. Remove dependencies on earlier tests, create uniquely scoped data, and make setup and cleanup own their resources. Use per-test or per-worker fixtures according to mutation needs, and verify tests work alone and in different orders.
+
+4. A successful retry does not explain the first failure and can conceal timing or isolation problems. Preserve failure evidence, look for reproducibility and environmental patterns, and fix the cause rather than counting retries as reliability.
 
 ## Related Guides
 

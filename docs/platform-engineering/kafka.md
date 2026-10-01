@@ -179,9 +179,18 @@ For a second attempt, let the side effect for record `40` commit but crash befor
 > [!question] Interview Questions
 > - For order events consumed independently by inventory, billing, and analytics, what partition key would you choose to give inventory strict per-order ordering?
 > - How would consumer group boundaries let inventory and analytics process the same topic at completely different paces?
-> - What replication factor and `acks` setting would you choose, and what failure would each guard against?
 > - How would analytics replay the last 30 days of events after a bug fix, without affecting inventory's live processing?
 > - How would you design a retry/dead-letter topic for a consumer, given Kafka has no built-in negative acknowledgement?
+
+## Answer Notes
+
+1. Use a stable order ID as the key so events for one order reach the same partition. Ordering is per partition, not across the topic; preserve processing order in the consumer and plan carefully for partition-count changes.
+
+2. Give inventory and analytics different consumer group IDs so each tracks its own committed offsets. Members within one group share partitions; separate groups each consume the topic independently and can build different lag.
+
+3. Confirm the events are still retained, then use a separate replay group or carefully reset only the stopped analytics group's offsets to the desired time. Make analytics effects replay-safe; inventory's group offsets remain independent.
+
+4. Define bounded retries, backoff, failure metadata and a dead-letter destination. Coordinate writing the failure record with advancing the source offset to avoid loss, tolerate duplicate transfer, and decide whether skipping a failed event would violate ordering.
 
 ## Official References
 

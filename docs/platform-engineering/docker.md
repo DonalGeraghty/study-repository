@@ -866,14 +866,20 @@ Do not use `localhost` to reach another container: inside a container, `localhos
 ## Interview Questions
 
 > [!question] Interview Questions
-> - How would you make sure a build context never leaks credentials into an image layer?
-> - Why does a multi-stage build produce a safer, smaller final image than a single-stage one?
-> - Why should a container run as a non-root user, and what does that actually protect against?
-> - How would you decide between a volume, a bind mount, and a `tmpfs` mount for a given piece of data?
-> - What's the difference between a health check reporting unhealthy and Docker actually restarting the container?
-> - How would you diagnose a container that exits immediately after starting?
-> - Why is a mutable tag like `latest` risky for a production deployment, and what would you use instead?
 > - How would you explain Docker, images and containers to a colleague, and how do containers differ from virtual machines?
+> - Why does a multi-stage build produce a safer, smaller final image than a single-stage one?
+> - How would you decide between a volume, a bind mount, and a `tmpfs` mount for a given piece of data?
+> - How would you diagnose a container that exits immediately after starting?
+
+## Answer Notes
+
+1. Docker builds and runs containerised applications. An image is a packaged filesystem and configuration; a container is a running instance with isolated processes and a writable layer. Containers share the host kernel, whereas virtual machines run a guest OS and kernel.
+
+2. Build in a stage containing compilers and development dependencies, then copy only required runtime artifacts into the final stage. This reduces size and exposed tooling, provided secrets and unnecessary files are not copied into the final image.
+
+3. Use a volume for Docker-managed persistent data, a bind mount for an explicit host path, and tmpfs for disposable in-memory files. Choose based on lifetime, portability and host coupling; none substitutes for a backup strategy.
+
+4. Inspect the exit code and logs, then check the command, entrypoint, configuration, permissions and dependencies. The main process must keep running for the container to remain alive; starting a background process and exiting the entrypoint stops it.
 
 ### Short Answers to Practise Aloud
 

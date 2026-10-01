@@ -266,9 +266,17 @@ Generic collections are usually safer and more expressive for variable-size appl
 > - What's the difference between a primitive value and a reference value in Java?
 > - Why do local variables need definite assignment while fields get default values?
 > - Why is Java "pass-by-value" even when you pass an object — what's actually being copied?
-> - What's the risk of an implicit narrowing conversion versus an explicit one?
-> - Why is "primitives on the stack, objects on the heap" an oversimplification of how Java actually manages memory?
 > - Why is a `static` mutable field a form of hidden global state?
+
+## Answer Notes
+
+1. A primitive value directly represents a value such as an int or boolean. A reference value is null or refers to an object; copying that reference creates another way to reach the same object rather than copying the object.
+
+2. Fields and array elements receive language-defined default values. The compiler requires local variables to be definitely assigned before use, preventing a method from reading an uninitialised local.
+
+3. Java copies the argument value into the parameter, including when that value is an object reference. Mutating the shared object is visible to the caller, but assigning a different object to the parameter does not reassign the caller's variable.
+
+4. A mutable static field is shared across instances using that class and can couple otherwise unrelated code or tests. It complicates ownership, concurrency and test isolation; prefer explicit dependencies and appropriately scoped state.
 
 ## Further Reading
 

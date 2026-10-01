@@ -92,7 +92,16 @@ If the receiver interprets the UTF-8 bytes as Latin-1, it gets corrupted-looking
 > - Why doesn't Base64 provide confidentiality, even though the output looks unreadable?
 > - How would you explain the difference between encoding, encryption, and hashing to someone who conflates them?
 > - In a pipeline that encodes, encrypts, and then Base64-encodes a message, in what order would the receiver reverse those steps?
-> - Why is it a mistake to "encode" a secret like a private key instead of protecting it properly?
 > - What's the difference between encoding and compression?
+
+## Answer Notes
+
+1. Base64 is a reversible representation with a public decoding algorithm and no secret key. Anyone who has the output can decode it.
+
+2. Encoding changes representation for storage or transport; encryption protects confidentiality using keys; hashing produces a fixed-size digest and is not designed to be reversed.
+
+3. Base64-decode first, then decrypt using the required key and parameters, then decode the recovered bytes using the original character encoding. Reverse the transformations in the opposite order.
+
+4. Encoding changes representation; compression exploits redundancy to reduce size. Neither inherently provides confidentiality, and Base64 usually makes binary data larger.
 
 Return to [Engineering Foundations](./README.md).

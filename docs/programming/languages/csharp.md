@@ -135,7 +135,16 @@ Change the elements to mutable objects and update a property after `ToList()`. E
 > - What does LINQ's deferred execution actually defer, and when does a query get materialised?
 > - Why is sync-over-async a problem, and how would you write a cancellable asynchronous operation instead?
 > - How would you manage a disposable resource so it's released even when an exception is thrown?
-> - How do nullable reference types change what the compiler can catch versus what still needs a runtime check?
+
+## Answer Notes
+
+1. Assignment copies a value type's value, while assigning a reference type copies a reference to the same object. Shared object mutation is visible through aliases; value types can also contain shared references. Equality depends on the type's defined semantics, not only this storage distinction.
+
+2. Many LINQ queries defer enumeration and transformation until their results are consumed. ToList or ToArray materialises a snapshot; enumerating again may rerun work or observe changed data, depending on the source.
+
+3. Blocking on asynchronous work wastes threads and can deadlock in some synchronisation contexts. Return Task-based results, await operations, pass CancellationToken through supported calls and ensure cleanup still runs on cancellation.
+
+4. Use using or a using declaration for IDisposable, and await using for IAsyncDisposable where appropriate. Disposal runs when control leaves the scope, including exceptional exits; ensure ownership is clear so shared resources are not disposed prematurely.
 
 ## Official References
 

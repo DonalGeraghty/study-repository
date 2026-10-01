@@ -259,9 +259,17 @@ Now compare `new BigDecimal("1.0")` with `new BigDecimal("1.00")`. `equals` is f
 > - Why can't `0.1` be represented exactly as a binary floating-point value, and what does that mean for equality checks?
 > - What's the difference between integer overflow wrapping silently and using `Math.addExact`?
 > - Why does `BigDecimal.equals` treat `1.0` and `1.00` as different values, and what would you use instead to compare them numerically?
-> - When would you reach for `BigInteger` instead of a primitive integer type?
 > - What's the difference between absolute and relative tolerance when comparing floating-point results in a test?
-> - Why must a rounding policy be explicit rather than left to the default, especially for money?
+
+## Answer Notes
+
+1. A finite binary fraction cannot represent one tenth exactly, so operations can accumulate rounding differences. Choose a tolerance appropriate to the calculation for approximate values, or use a suitable exact decimal representation when decimal precision is part of the contract.
+
+2. Primitive integer addition wraps on overflow without reporting it. Math.addExact checks the operation and throws ArithmeticException on overflow, allowing the caller to reject or otherwise handle an out-of-range result.
+
+3. BigDecimal.equals compares both numeric value and scale, so 1.0 and 1.00 differ. compareTo returns zero for numerical equality; choose consistent semantics when using these values in collections.
+
+4. Absolute tolerance bounds the raw difference, while relative tolerance scales with the values' magnitude. A combined policy works across ranges and near zero, with explicit handling of NaN and infinities where relevant.
 
 ## Further Reading
 

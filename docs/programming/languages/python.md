@@ -138,7 +138,16 @@ In a conventional GIL-enabled CPython build, only one thread executes Python byt
 > - Why does a mutable default argument cause a common and hard-to-spot bug?
 > - How does a context manager guarantee a resource is released, even if the block raises?
 > - What's the difference between a thread, a process, and asynchronous I/O in Python, and how does the GIL affect that choice?
-> - How would you isolate a project's dependencies to make a build reproducible across machines?
+
+## Answer Notes
+
+1. is compares identity; == compares values according to the type's equality behaviour. Use is for singleton checks such as None and == for ordinary value comparisons, rather than relying on incidental interning.
+
+2. Default argument values are created once when the function is defined, so a list or dictionary default is shared by later calls. Use a sentinel such as None and create a fresh container inside the function when needed.
+
+3. The with protocol calls the context manager's exit method when the block leaves normally or raises, allowing cleanup in either case. The manager must implement cleanup correctly; it may also deliberately suppress an exception, and abrupt process termination is outside that guarantee.
+
+4. Threads share memory and suit overlapping blocking I/O; processes provide separate memory and can run CPU work in parallel; async I/O cooperatively schedules tasks. In conventional GIL-enabled CPython, CPU-bound Python threads do not execute bytecode in parallel; free-threaded builds and native extensions need separate consideration.
 
 ## Official References
 

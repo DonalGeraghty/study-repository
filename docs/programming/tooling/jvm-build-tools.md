@@ -119,7 +119,16 @@ The Java puzzle and API-test repositories use Maven. The Spring API uses the Mav
 > - Why should a project commit the Maven or Gradle wrapper instead of relying on a globally installed version?
 > - What's the risk of allowing dynamic dependency versions in a build that's supposed to be reproducible?
 > - Why should the same artifact be built once and promoted, rather than rebuilt for each environment?
-> - Why is caching build outputs without a key based on their real inputs dangerous?
+
+## Answer Notes
+
+1. Maven runs the lifecycle through the requested phase: verify includes later phases than test. Configured integration tests and verification checks may therefore run during verify but not test; this depends on the project's plugin bindings.
+
+2. The wrapper records the intended build-tool distribution so developers and CI can invoke a consistent version. The JDK, dependencies and other build inputs must also be controlled; a wrapper alone does not make the build reproducible.
+
+3. A dynamic version can resolve to a different dependency on a later build with unchanged source. Pin or lock dependency resolution and manage updates deliberately so failures and deployed artifacts are traceable.
+
+4. Promoting the same tested artifact preserves the relationship between test evidence and the deployed bytes. Rebuilding per environment can change dependencies or outputs; inject environment-specific runtime configuration separately where suitable.
 
 ## Related Guides
 

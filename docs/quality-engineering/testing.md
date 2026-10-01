@@ -781,12 +781,18 @@ For a second attempt, make the threshold apply after another discount. Explain w
 > [!question] Interview Questions
 > - How would you approach testing a feature you've just been handed, before writing a single test case?
 > - How do you decide what to automate versus what stays exploratory or manual?
-> - How would you build a decision table for discounts based on customer type, basket value, and promotion eligibility?
-> - How would you draw a state model for an order that includes cancellation, payment failure, and refund?
 > - How would you diagnose a test suite that only fails during parallel CI execution?
-> - What's the difference between verification and validation, and why does it matter?
-> - Why do "tests wear out," and how would you refresh a regression suite that's stopped finding new defects?
 > - How would you write a risk-based release report from incomplete or conflicting test evidence?
+
+## Answer Notes
+
+1. Clarify the intended behaviour, users and risks, then identify boundaries, states and dependencies. Choose representative examples and failure cases, decide what evidence would demonstrate success, and place tests at suitable levels.
+
+2. Automate repeatable checks with stable expectations and worthwhile feedback value. Use exploratory or manual work for learning, usability and ambiguous behaviour; reassess as the product and risks change.
+
+3. Look for shared accounts or data, fixed ports, order dependence, clock assumptions and resource contention. Compare isolated and parallel runs, inspect artifacts, then give tests ownership of their state rather than hiding the issue with retries.
+
+4. Describe what was tested, what failed, what remains untested and how reliable the evidence is. Relate gaps and defects to user impact and release risk, making assumptions and any proposed mitigations explicit.
 
 ## Related Guides
 

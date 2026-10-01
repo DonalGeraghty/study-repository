@@ -93,7 +93,16 @@ Changing a container environment variable after a static Vite build does not rew
 > - Why must `VITE_*` variables never contain a secret?
 > - What breaks if the deployed `base` path doesn't match the one the build was configured with?
 > - Why should the HTML entry point be revalidated while fingerprinted assets are cached long-term?
-> - Why should the production build run in CI rather than only locally before merging?
+
+## Answer Notes
+
+1. Development and production use different serving and bundling paths. Production can expose asset-path, module-resolution, environment or routing problems absent in development, so build and test the generated output.
+
+2. Vite exposes these variables to client code and can embed their values in the built assets. Treat them as public configuration and keep credentials in a server-side secret system.
+
+3. Generated asset URLs may point to the wrong root or subdirectory, producing missing scripts, styles or images. Align the build's base path with its hosting location and verify nested routes as well as the entry page.
+
+4. The HTML points to the current release's asset filenames and should refresh promptly. Content-fingerprinted assets can be cached long-term because a change produces a new URL; revalidating HTML prevents stale entry points from holding clients on old releases.
 
 ## Related Guides
 

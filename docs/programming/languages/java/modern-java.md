@@ -330,8 +330,16 @@ Never copy a preview example into a project without checking the exact JDK relea
 > - What does an exhaustive sealed hierarchy let the compiler catch that a plain interface can't?
 > - Why is `var` not the same thing as dynamic typing?
 > - Why shouldn't you store an `Instant` in a `LocalDateTime` when the domain needs an unambiguous moment in time?
-> - Why is calling `Optional.get()` without checking presence just as risky as a null-pointer dereference?
-> - Why would you hesitate to enable a preview feature in production code?
+
+## Answer Notes
+
+1. Record component fields are final, but an array, list or other referenced object can still change. Defensive copies or suitably immutable components prevent callers from changing the record's apparent value through shared references.
+
+2. A sealed hierarchy restricts the permitted subtypes, allowing supported exhaustive switches to detect missing cases at compile time. A plain open interface can acquire unknown implementations, so the compiler cannot assume the same closed set.
+
+3. var asks the compiler to infer a local variable's static type from its initializer. The type remains fixed and checked at compile time; the variable cannot later hold an unrelated type just because the type name was omitted.
+
+4. Instant identifies a point on the timeline, while LocalDateTime has no offset or time zone and may be ambiguous during clock changes. Preserve the instant when the domain needs one, and convert to a local representation using an explicit zone for display.
 
 ## Further Reading
 

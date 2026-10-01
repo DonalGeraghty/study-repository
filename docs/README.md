@@ -127,6 +127,15 @@ This is the canonical table of contents for the handbook. Use the subject indexe
 
 - [Terraform](./platform-engineering/terraform.md)
 
+#### Developer Portals
+
+- [Backstage](./platform-engineering/backstage.md)
+
+#### [Observability](./platform-engineering/observability/README.md)
+
+- [Grafana](./platform-engineering/observability/grafana.md)
+- [Datadog](./platform-engineering/observability/datadog.md)
+
 #### [Cloud Platforms](./platform-engineering/cloud/README.md)
 
 - [Amazon Web Services](./platform-engineering/cloud/aws.md)

@@ -208,9 +208,17 @@ Property-based testing is useful for invariants such as commutativity, bounds, r
 > - What's the difference between wrapping arithmetic and `Math.*Exact`, and when would you want an exception instead of silent overflow?
 > - Why do `Math.floorDiv`/`Math.floorMod` behave differently from plain division and `%` for negative numbers?
 > - What are `NaN`, infinity, and signed zero, and why does `NaN == NaN` return false?
-> - Why do many random-range APIs use an inclusive origin and exclusive bound, and why does that matter for boundary testing?
 > - Why is `java.util.Random` unsuitable for anything security-sensitive?
-> - When would you reach for `BigDecimal` instead of `Math` operations on primitives?
+
+## Answer Notes
+
+1. Ordinary fixed-width integer arithmetic can wrap when the result exceeds its range. Methods such as Math.addExact throw ArithmeticException instead, which is useful when overflow would silently corrupt counts, sizes or financial calculations.
+
+2. Integer / truncates toward zero, while floorDiv rounds the quotient toward negative infinity. For example, -7 / 3 is -2 with remainder -1, whereas floorDiv(-7, 3) is -3 and floorMod(-7, 3) is 2.
+
+3. NaN represents an undefined floating-point result, infinities represent values beyond finite range or certain divisions, and positive and negative zero carry a sign bit. NaN compares unequal even to itself; use Double.isNaN, and remember that signed zeros can behave differently in operations such as reciprocals.
+
+4. java.util.Random is designed for simulation and general use, not resistance to predicting future output from its state. Use SecureRandom for security-sensitive random values, with an appropriate protocol and sufficient output length.
 
 ## Further Reading
 
