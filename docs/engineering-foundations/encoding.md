@@ -52,9 +52,9 @@ The receiver reverses the applicable operations in the opposite order: Base64-de
 
 ## Common Misconceptions
 
-- **“It looks unreadable, so it is encrypted.”** Encoded data is often unreadable to a person but remains publicly reversible.
-- **“Base64 protects secrets.”** Base64 only changes the representation; anyone can decode it.
-- **“Encoding and compression are the same.”** Encoding changes representation, while compression aims to reduce size. A format may use both.
+Unreadable-looking output is not evidence of encryption. Encoded data remains publicly reversible: Base64 changes its representation, and anyone can decode it.
+
+Encoding and compression also have different purposes. Encoding changes representation, while compression aims to reduce size; a format may use both.
 
 The reliable mental model is simple: **encoding preserves meaning across representations**.
 

@@ -228,12 +228,11 @@ Flag availability and syntax can vary by JDK; verify against the runtime in use.
 
 ## Common Misconceptions
 
-- **“Calling `null` frees the object.”** It removes one reference; reachability and collection timing determine reclamation.
-- **“GC prevents memory leaks.”** It prevents manual deallocation errors but cannot infer that a reachable object is no longer useful.
-- **“More heap always fixes memory problems.”** It may delay failure, increase pause costs, or hide unbounded retention.
-- **“Objects are deleted immediately when a method returns.”** Lifetime follows reachability, not lexical scope alone.
-- **“Static values live in Metaspace.”** Metaspace holds HotSpot class metadata; static references can retain ordinary objects.
-- **“ZGC or G1 eliminates all pauses.”** Concurrent collectors reduce specific pauses but cannot remove every safepoint or latency source.
+Assigning `null` removes one reference; it does not immediately free the object. Reclamation follows reachability and collection timing, so a method returning does not necessarily end an object's lifetime either.
+
+Garbage collection prevents manual deallocation errors, but cannot infer that a reachable object is no longer useful. Adding more heap may only delay failure, increase pause costs or hide unbounded retention.
+
+In HotSpot, Metaspace holds class metadata, while static references can retain ordinary objects. Concurrent collectors such as ZGC and G1 reduce specific pauses, but do not remove every safepoint or source of latency.
 
 ## Interview Questions
 

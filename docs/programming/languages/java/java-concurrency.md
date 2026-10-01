@@ -271,10 +271,9 @@ Thread dumps are useful evidence when diagnosing deadlock.
 
 ## Other Liveness Problems
 
-- **Starvation**: a task repeatedly fails to obtain resources or execution time.
-- **Livelock**: tasks keep reacting to each other without making progress.
-- **Priority inversion**: higher-priority work waits indirectly on lower-priority work.
-- **Overload collapse**: excessive concurrency increases queueing and reduces useful throughput.
+Starvation occurs when a task repeatedly fails to obtain resources or execution time. In livelock, tasks keep reacting to each other without making progress.
+
+Priority inversion makes higher-priority work wait indirectly on lower-priority work. Overload collapse happens when excessive concurrency increases queueing and reduces useful throughput.
 
 Correctness includes liveness, not only freedom from data races.
 

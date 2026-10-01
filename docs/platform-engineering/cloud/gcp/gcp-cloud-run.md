@@ -31,14 +31,9 @@ A service container must listen on `0.0.0.0` using the injected `PORT` value. A 
 
 The writable container filesystem is disposable and consumes instance memory. Store durable data in Cloud Storage, Firestore, a database, or another external service.
 
-Applications should:
+Applications should start quickly, expose a startup probe when appropriate, and handle concurrent requests safely. Set timeouts for application work and downstream calls so requests do not wait indefinitely.
 
-- start quickly and expose a startup probe when appropriate;
-- handle concurrent requests safely;
-- set application and downstream timeouts;
-- handle `SIGTERM` and stop cleanly;
-- avoid assuming an instance will remain alive;
-- make retries safe through idempotency where required.
+Handle `SIGTERM` and stop cleanly, without assuming the instance will remain alive. Make retries safe through idempotency wherever required.
 
 ## Scaling and Concurrency
 

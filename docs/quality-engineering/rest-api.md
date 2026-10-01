@@ -11,14 +11,11 @@ Many APIs described as “REST APIs” are more precisely HTTP APIs that exchang
 
 ## REST Concepts
 
-REST describes constraints including:
+REST separates client and server concerns so the user interface and data storage can evolve independently. Requests are stateless: each carries the information needed to understand it. Responses identify whether and how they can be cached.
 
-- **client-server separation**: user-interface concerns and data-storage concerns can evolve independently;
-- **stateless requests**: each request contains the information required to understand it;
-- **cacheable responses**: responses identify whether and how they may be reused;
-- **uniform interface**: resources are identified consistently and manipulated through representations with self-descriptive messages;
-- **layered system**: clients do not need to know whether they communicate with the origin server, a gateway, or another intermediary;
-- **code on demand**, optionally: a server may extend client behaviour by transferring executable code.
+A uniform interface gives resources consistent identities and manipulates them through representations and self-descriptive messages. A layered system lets clients communicate without needing to know whether they are reaching the origin server, a gateway or another intermediary.
+
+Code on demand is optional: a server may extend client behaviour by transferring executable code.
 
 A strict REST interpretation also includes hypermedia-driven state transitions. Many production JSON APIs adopt only part of this model, so clarify what “REST” means in the system being discussed.
 
@@ -44,14 +41,9 @@ DELETE /orders/42
 GET    /orders/42/items
 ```
 
-Common guidelines are:
+Use nouns for resources where resource semantics fit, with consistent pluralisation and naming. Put resource identity and hierarchy in the path, and filtering, sorting, pagination and projection controls in the query component.
 
-- use nouns for resources rather than RPC-style verb paths where resource semantics fit;
-- use consistent pluralisation and naming;
-- put resource identity and hierarchy in the path;
-- put filtering, sorting, pagination, and projection controls in the query component;
-- avoid exposing database table structure directly;
-- do not place credentials or other sensitive values in a URI because URIs commonly appear in logs, browser history, and monitoring systems.
+Avoid exposing the database's table structure directly. Keep credentials and other sensitive values out of URIs, which commonly appear in logs, browser history and monitoring systems.
 
 Actions that do not map naturally to CRUD may still be modelled explicitly. For example, `POST /orders/42/cancellations` can create a cancellation request and preserve domain meaning better than a generic `/cancelOrder` endpoint.
 
@@ -459,26 +451,17 @@ Keep claims minimal because bearer tokens can appear in clients and operational 
 
 Clients should retry only when method semantics and the application contract make repetition safe.
 
-- Safe and idempotent methods are generally better retry candidates.
-- A network timeout does not reveal whether a non-idempotent operation was applied.
-- Respect `Retry-After` when the contract uses it.
-- Use bounded attempts, backoff, jitter, and an overall deadline.
-- Avoid synchronised retry storms.
-- Test dependency timeouts, malformed upstream responses, partial failures, and recovery.
+Safe and idempotent methods are generally better retry candidates. A network timeout leaves the outcome of a non-idempotent operation uncertain: the server may already have applied it.
+
+Respect `Retry-After` where the contract uses it, and bound attempts with backoff, jitter and an overall deadline to avoid synchronised retry storms. Test dependency timeouts, malformed upstream responses, partial failures and recovery.
 
 An idempotent method can still consume resources or trigger incidental effects, so retries must remain bounded.
 
 ## API Evolution and Versioning
 
-Prefer compatible evolution when practical:
+Prefer compatible evolution where practical. Add optional fields rather than changing existing meanings, define defaults for omitted request fields, and have clients tolerate unknown response fields.
 
-- add optional fields rather than changing existing meanings;
-- tolerate unknown response fields in clients;
-- define defaults for omitted request fields;
-- avoid changing field types or enum behaviour unexpectedly;
-- coordinate schema, client, and server rollout;
-- publish deprecation and removal timelines;
-- monitor usage before removing an operation or version.
+Avoid unexpected changes to field types or enum behaviour. Coordinate schema, client and server rollout, publish deprecation and removal timelines, and monitor usage before removing an operation or version.
 
 Common versioning approaches include URI versions such as `/v1/orders`, media-type versions, and header-based negotiation. Each has trade-offs; consistency and a documented compatibility policy matter more than selecting a universally “correct” style.
 

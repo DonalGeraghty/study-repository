@@ -81,9 +81,7 @@ A `Set` contains no pair of elements considered equal by its contract.
 
 ### TreeSet
 
-- Keeps elements ordered by natural ordering or a supplied `Comparator`.
-- Basic operations are logarithmic.
-- Equality for set membership follows comparison result, so a comparator inconsistent with `equals` can surprise callers.
+`TreeSet` keeps elements ordered by natural ordering or a supplied `Comparator`, with logarithmic basic operations. Set membership follows the comparison result, so a comparator inconsistent with `equals` can surprise callers.
 
 ### EnumSet
 

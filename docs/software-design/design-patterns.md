@@ -256,14 +256,11 @@ sequenceDiagram
 
 ### Page Object Guidance
 
-- Expose user-facing services such as `logInAs`, not every click and field.
-- Keep locators and waiting details inside the page or component.
-- Return the next page or component when navigation has a known result.
-- Model repeated widgets as component objects.
-- Keep test assertions in tests; a page object may verify that it loaded correctly.
-- Inject the driver or browser session instead of storing it globally.
-- Prefer composition of components over a deep base-page hierarchy.
-- Do not create a page object for a trivial page when it adds no clarity.
+Expose user-facing services such as `logInAs`, keeping locators and waiting details inside the page or component. When navigation has a known result, return the next page or component to make that transition clear.
+
+Model repeated widgets as component objects and prefer composition over a deep base-page hierarchy. Inject the driver or browser session instead of storing it globally.
+
+Keep test assertions in tests, although a page object may verify that it loaded correctly. A trivial page does not need a page object if the extra abstraction adds no clarity.
 
 A page object is a test design pattern, not a copy of the page's HTML structure.
 

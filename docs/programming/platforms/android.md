@@ -23,12 +23,9 @@ The manifest declares application components, permissions, intent filters, and s
 
 ## Components and Intents
 
-Core component types include:
+An Activity hosts a user-facing interaction surface. A Service performs work that may continue without a visible UI, subject to Android's background restrictions.
 
-- **Activity:** hosts a user-facing interaction surface.
-- **Service:** performs work that may continue without a visible UI, subject to background restrictions.
-- **Broadcast receiver:** responds to broadcast events.
-- **Content provider:** exposes structured data through a defined interface.
+A Broadcast receiver responds to broadcast events, while a Content provider exposes structured data through a defined interface.
 
 Intents request an action from a component. Explicit intents identify the target; implicit intents allow the system to select a matching component. Treat incoming intent data as untrusted input and validate both content and authorisation.
 

@@ -61,12 +61,9 @@ The workflow grants read-only repository contents, cancels superseded work on th
 
 ## Security
 
-- Pin third-party actions to trusted versions and review their permissions.
-- Set the workflow or job `permissions` block to the minimum required.
-- Treat pull-request source, issue text, branch names, and generated outputs as untrusted input.
-- Prefer short-lived cloud federation to long-lived service-account keys.
-- Protect deployment environments with reviewers or branch rules where risk requires it.
-- Do not print secrets or pass them through artifacts and untrusted commands.
+Pin third-party actions to trusted versions and review their permissions. Give the workflow or job only the access it needs through its `permissions` block, and prefer short-lived cloud federation to long-lived service-account keys.
+
+Treat pull-request source, issue text, branch names and generated outputs as untrusted input. Keep secrets out of logs, artifacts and untrusted commands, and protect deployment environments with reviewers or branch rules where the risk requires it.
 
 Repository secrets are not general configuration storage. Use non-secret variables for public identifiers and environment-specific values that do not require confidentiality.
 

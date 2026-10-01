@@ -46,11 +46,11 @@ The same approach can help after a pipeline deploys a new artifact: identify the
 
 ## Common Failure Modes
 
-- **Inconsistent tags:** `checkout` in traces and `checkout-api` in metrics make investigation harder. Agree on service identity and environment naming.
-- **Missing instrumentation:** host CPU charts cannot explain every slow application operation.
-- **No data mistaken for recovery:** a monitor's missing-data behaviour depends on its type and configuration. Check collection delays and query scope before concluding the incident ended. [Monitor configuration](https://docs.datadoghq.com/monitors/configuration/).
-- **Uncontrolled telemetry:** review collection volume, retention, sampling and custom-metric cardinality. Do not send passwords, tokens or unnecessary personal data; costs and visibility depend on what you enable and retain.
-- **Alerts without ownership:** notifications need a responsible team and a useful next action, not just a threshold.
+Consistent service identity and environment naming make investigation easier. If traces use `checkout` while metrics use `checkout-api`, related evidence is harder to find. Missing instrumentation creates another gap: host CPU charts cannot explain every slow application operation.
+
+A monitor with no data has not necessarily recovered. Missing-data behaviour depends on the monitor's type and configuration, so check collection delays and query scope before concluding the incident ended. [Monitor configuration](https://docs.datadoghq.com/monitors/configuration/).
+
+Review collection volume, retention, sampling and custom-metric cardinality; costs and visibility depend on what you enable and retain. Keep passwords, tokens and unnecessary personal data out of telemetry, and give alerts a responsible team and a useful next action.
 
 ## Worked Prediction
 

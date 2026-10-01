@@ -727,10 +727,9 @@ Do not place registry passwords in shell history, Dockerfiles, or source control
 
 ### `CMD` and `ENTRYPOINT`
 
-- `CMD` supplies the default command or default arguments. Arguments after the image name in `docker run` replace it.
-- `ENTRYPOINT` defines the executable when the image should behave like a command.
-- Exec-form arrays avoid an intermediate shell and preserve argument and signal behaviour.
-- A wrapper script should finish with `exec "$@"` so the application becomes the main process.
+`CMD` supplies the default command or default arguments; arguments after the image name in `docker run` replace it. `ENTRYPOINT` defines the executable when the image should behave like a command.
+
+Exec-form arrays avoid an intermediate shell and preserve argument and signal behaviour. A wrapper script should finish with `exec "$@"` so the application becomes the main process.
 
 Use environment-variable expansion in a wrapper or application configuration; JSON exec form does not invoke a shell to expand `$VARIABLE`.
 

@@ -58,10 +58,9 @@ const visibleResults = computed(() => {
 
 ## Application Structure
 
-- Use small components with clear ownership rather than one page-sized state container.
-- Keep server calls and domain transformations outside presentation-heavy components.
-- Use Vue Router for route-to-view mapping and define navigation failure and not-found behaviour.
-- Preserve semantic HTML, keyboard access, labels, focus handling, and reduced-motion preferences.
+Use small components with clear ownership, keeping server calls and domain transformations outside presentation-heavy components. Avoid making one page-sized state container responsible for everything.
+
+Use Vue Router for route-to-view mapping, including navigation failures and not-found behaviour. Preserve semantic HTML, keyboard access, labels, focus handling and reduced-motion preferences as you assemble the interface.
 
 Vue CLI projects use a webpack-based toolchain. Newer projects may use Vite, but the source component model is independent of the selected build tool. Understand the actual repository before applying migration advice.
 

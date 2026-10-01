@@ -60,11 +60,11 @@ The `HTTPException` branch preserves framework-generated responses such as 404 a
 
 ## API Boundaries
 
-- Parse untrusted JSON defensively and reject unknown or invalid states consistently.
-- Return intentional HTTP status codes and stable error representations.
-- Treat CORS as a browser access-control policy, not authentication.
-- Verify bearer tokens, ownership, and authorisation at every protected boundary.
-- Add request identifiers and structured logs without recording credentials or sensitive payloads.
+Parse untrusted JSON defensively, reject unknown or invalid states consistently, and return intentional HTTP status codes with stable error representations.
+
+Treat CORS as a browser access-control policy rather than authentication. Verify bearer tokens, ownership and authorisation at every protected boundary.
+
+Request identifiers and structured logs help explain failures, but should not record credentials or sensitive payloads.
 
 Schema libraries such as Pydantic can validate transport data, but transport models should not become the only place where domain rules live.
 

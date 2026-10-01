@@ -17,11 +17,9 @@ Never construct SQL by concatenating untrusted values. Parameterisation protects
 
 ## Data Integrity
 
-- Use primary keys, foreign keys, unique constraints, nullability, and checks to enforce durable invariants.
-- Select column types from the domain, including precision, ranges, time-zone handling, and text encoding.
-- Group related changes in transactions and define what concurrent updates should do.
-- Add indexes from observed query patterns and inspect execution plans.
-- Apply schema migrations as versioned, reviewed delivery steps.
+Enforce durable invariants with primary keys, foreign keys, unique constraints, nullability and checks. Choose column types from the domain's precision, range, time-zone and text-encoding requirements.
+
+Group related changes in transactions and define how concurrent updates should behave. Add indexes based on observed query patterns and execution plans, and apply schema migrations as versioned, reviewed delivery steps.
 
 ## Connections and Failure
 

@@ -463,13 +463,13 @@ HPA changes the desired number of replicas. A configured node autoscaler can pro
 
 #### Check Whether More Replicas Are Safe
 
-Before increasing the count, examine what an additional instance will do:
+Before increasing the count, examine what an additional instance will do. Sessions held only in one replica's memory may be unavailable when the next request reaches another replica. Use an appropriate shared session store or a design that does not require local session state.
 
-- **Sessions:** state held only in one replica's memory may be unavailable when the next request reaches another replica. Use an appropriate shared session store or a design that does not require local session state.
-- **Files:** uploads written only to a Pod's local filesystem are not shared with other replicas and can disappear on replacement. Choose storage that supports the application's access pattern.
-- **Scheduled work:** a timer inside every application replica may run the same job multiple times. Give scheduled work an explicit owner, and make processing safe to retry.
-- **Shared dependencies:** each replica can add database connections, outbound requests and concurrent writes. Budget those resources across the whole workload.
-- **Long-lived connections:** new replicas may not immediately relieve existing connections. Measure how traffic is actually distributed.
+Uploads written only to a Pod's local filesystem are not shared with other replicas and can disappear on replacement. Choose storage that supports the application's access pattern.
+
+A timer inside every application replica may run the same job multiple times. Give scheduled work an explicit owner and make processing safe to retry.
+
+Each replica can also add database connections, outbound requests and concurrent writes, so budget those resources across the whole workload. New replicas may not immediately relieve existing long-lived connections; measure how traffic is actually distributed.
 
 Kubernetes can create additional instances; the application design determines whether those instances safely add useful capacity.
 

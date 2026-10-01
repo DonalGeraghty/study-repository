@@ -25,9 +25,7 @@ Minimal example that demonstrates the core mechanism. State required setup and m
 
 ## Common Failure Modes
 
-- 
-- 
-- 
+Explain the most useful mistakes and their consequences in short, connected paragraphs. Group related points around one idea, and use a list only when the reader benefits from checking separate items.
 
 ## Worked Prediction
 

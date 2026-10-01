@@ -60,12 +60,9 @@ Parameterisation makes the boundary cases visible without hiding the assertion i
 
 ## Isolation and Fixtures
 
-- Each test must be able to run alone and in any order.
-- Keep setup near the scope that owns it: test, class/module, worker, or suite.
-- Reset external state explicitly; a fresh browser context does not reset a database.
-- Do not hide the scenario inside a large fixture graph.
-- Make clocks, randomness, environment, and network dependencies controllable.
-- Use parallel execution only when data and resource ownership support it.
+Each test should run alone and in any order. Keep setup close to the scope that owns it—test, class or module, worker, or suite—and avoid hiding the scenario inside a large fixture graph.
+
+Reset external state explicitly: a fresh browser context does not reset a database. Make clocks, randomness, environment and network dependencies controllable, and enable parallel execution only when data and resource ownership support it.
 
 ## CI Behaviour
 

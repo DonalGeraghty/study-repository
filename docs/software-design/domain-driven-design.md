@@ -11,10 +11,9 @@ DDD is most valuable when rules, terminology, and competing business needs creat
 
 ## Domain and Model
 
-- **Domain:** the problem area the software supports, such as lending, insurance, or fulfilment.
-- **Domain model:** a deliberately simplified representation of relevant concepts and rules.
-- **Domain expert:** someone with deep knowledge of the business process; expertise may be distributed across several roles.
-- **Invariant:** a rule that must always be true within a consistency boundary.
+The domain is the problem area the software supports, such as lending, insurance or fulfilment. A domain model deliberately simplifies that area into the concepts and rules relevant to the software.
+
+Domain experts understand the business process, and that expertise may be spread across several roles. An invariant is a rule that must always hold within a consistency boundary.
 
 A model is not a mirror of every real-world detail. It is designed for a specific purpose.
 

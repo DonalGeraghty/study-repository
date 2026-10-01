@@ -27,6 +27,7 @@ Every folder under `docs/` has a `README.md`. When adding a new subfolder, add o
    ```
    The tag is the path from `docs/` to the file's folder, slash-separated (e.g. `docs/platform-engineering/kafka.md` → `platform-engineering`; `docs/programming/languages/java/java-generics.md` → `programming/languages/java`). If the new file is a `README.md`, add a second tag, `moc`, alongside the folder tag.
 7. **Verify links after any bulk edit.** There is no committed link-checker script (a one-off was used and discarded during the Obsidian migration) — if you touch many files at once, re-derive one rather than assuming links still resolve.
+8. **Balance prose and lists for easier focus.** Prefer short, connected paragraphs for explanations and related failure modes, with one main idea per paragraph. Keep lists for navigation, genuine checklists, sequential steps and the interview-question callout. Avoid long runs of bullets, but do not replace useful lists with dense paragraphs.
 
 ## Diagrams
 

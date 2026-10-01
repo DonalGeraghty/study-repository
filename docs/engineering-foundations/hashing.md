@@ -99,10 +99,11 @@ Hashing may participate inside a digital signature, message authentication schem
 
 ## Common Misconceptions
 
-- **“A hash can be decrypted.”** Hashes are one-way. Attackers instead guess inputs and compare their hashes.
-- **“Any hash is suitable for passwords.”** Password storage requires a slow, configurable password-hashing function and a unique salt.
-- **“A checksum proves a download is safe.”** A digest detects differences only relative to a trusted expected value; it does not establish that the publisher is trustworthy.
-- **“Different input can never produce the same hash.”** Collisions exist, but a secure cryptographic hash makes them impractical to find.
+Hashes cannot be decrypted; attackers instead guess inputs and compare the resulting hashes. Password storage therefore needs a slow, configurable password-hashing function and a unique salt, rather than just any hash.
+
+A digest detects differences relative to a trusted expected value. It does not establish that a download's publisher is trustworthy or that the content is safe.
+
+Different inputs can produce the same hash. Collisions exist, but a secure cryptographic hash makes them impractical to find.
 
 The reliable mental model is simple: **hashing produces a stable, one-way fingerprint of data**.
 

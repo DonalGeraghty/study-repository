@@ -227,27 +227,19 @@ Use only the directories relevant to the project. A single-language service shou
 
 ## Dependency and Version Management
 
-- Commit reproducible dependency manifests and lockfiles.
-- Pin CI actions and container bases according to the organisation's security policy.
-- Use supported runtime release lines and document the upgrade policy.
-- Automate dependency-update proposals, but review release notes and test the result.
-- Remove unused dependencies and plugins.
-- Keep credentials outside source control.
-- Generate a software bill of materials when supply-chain or compliance needs justify it.
-- Rebuild artifacts regularly so operating-system and runtime fixes are incorporated.
+Commit reproducible dependency manifests and lockfiles, pin CI actions and container bases according to the organisation's security policy, and use supported runtime release lines with a documented upgrade policy.
+
+Automate dependency-update proposals, then review release notes and test the result. Remove unused dependencies and plugins, and rebuild artifacts regularly so operating-system and runtime fixes are incorporated.
+
+Keep credentials outside source control. Generate a software bill of materials when supply-chain or compliance needs justify it.
 
 Avoid `latest` tags and unbounded version ranges in reproducible delivery paths.
 
 ## Observability for Testing
 
-Testability includes being able to understand failures. A useful stack provides:
+Testability includes being able to understand failures. Structured logs with correlation identifiers, metrics for traffic, errors, latency and saturation, and distributed traces across service boundaries help explain what happened.
 
-- structured logs with correlation identifiers;
-- metrics for traffic, errors, latency, and saturation;
-- distributed traces across service boundaries;
-- health and readiness signals;
-- build artifacts such as screenshots, traces, logs, and reports;
-- safe mechanisms to inspect test data and asynchronous processing.
+Health and readiness signals provide operational context. Preserve useful build artifacts such as screenshots, traces, logs and reports, and provide safe ways to inspect test data and asynchronous processing.
 
 Observability assertions can be valuable, but avoid tests coupled to incidental log wording.
 

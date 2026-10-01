@@ -11,11 +11,9 @@ The projects use focused Python and R libraries to clean tabular data, calculate
 
 NumPy provides typed multidimensional arrays and vectorised numerical operations. pandas provides labelled tables, indexing, joins, grouping, missing-value handling, and CSV-oriented workflows.
 
-- Define expected columns, types, units, uniqueness, and missing-value policy before transformation.
-- Avoid accidental chained mutation and unclear implicit type conversion.
-- Inspect join cardinality so duplicate keys do not multiply rows unexpectedly.
-- Keep raw input separate from cleaned and derived data.
-- Test empty inputs, malformed rows, duplicate records, locale-sensitive values, and date boundaries.
+Define the expected columns, types, units, uniqueness and missing-value policy before transforming data. Keep raw input separate from cleaned and derived data, and avoid accidental chained mutation or unclear implicit type conversion.
+
+Inspect join cardinality so duplicate keys do not unexpectedly multiply rows. Test empty inputs, malformed rows, duplicate records, locale-sensitive values and date boundaries.
 
 ### Worked pandas Transformation
 

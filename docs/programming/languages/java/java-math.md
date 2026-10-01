@@ -53,10 +53,9 @@ System.out.println((int) -3.9);       // -3: truncates toward zero
 System.out.println(Math.floor(-3.9)); // -4.0
 ```
 
-- `round(float)` returns `int`; `round(double)` returns `long`.
-- `ceil` returns the smallest mathematical integer not less than the input.
-- `floor` returns the largest mathematical integer not greater than the input.
-- A cast truncates toward zero and is not the same as floor for negative values.
+`round(float)` returns an `int`, while `round(double)` returns a `long`. `ceil` returns the smallest mathematical integer not less than the input, and `floor` returns the largest mathematical integer not greater than it.
+
+A cast truncates toward zero, so it differs from floor for negative values.
 
 For decimal business rules, use `BigDecimal` with an explicit `RoundingMode`.
 

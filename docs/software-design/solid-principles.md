@@ -321,9 +321,9 @@ PlaceOrder placeOrder = new PlaceOrder(repository);
 
 ### Dependency Inversion vs Dependency Injection
 
-- **Dependency inversion** is the design choice that policy depends on an abstraction.
-- **Dependency injection** is a technique for supplying a dependency from outside.
-- An IoC container can perform injection, but constructor calls often suffice.
+Dependency inversion is the design choice that policy depends on an abstraction. Dependency injection is a technique for supplying a dependency from outside.
+
+An IoC container can perform injection, but ordinary constructor calls often suffice.
 
 Injecting a concrete low-level type improves test setup but does not by itself invert the dependency.
 

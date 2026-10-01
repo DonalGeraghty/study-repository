@@ -17,12 +17,9 @@ The target is not perfect code. A change should be approved when it safely fulfi
 
 ### Review the Change, Not the Person
 
-- Discuss observable code behaviour and engineering trade-offs.
-- Assume positive intent.
-- Explain why a concern matters.
-- Ask questions when context may be missing.
-- Praise effective solutions as well as identifying problems.
-- Move prolonged or sensitive disagreement into a direct conversation, then record the conclusion in the review.
+Discuss observable code behaviour and engineering trade-offs, assuming positive intent. Explain why a concern matters, ask questions when context may be missing, and recognise effective solutions as well as identifying problems.
+
+If disagreement becomes prolonged or sensitive, move it into a direct conversation and record the conclusion in the review.
 
 ### Match Depth to Risk
 
@@ -46,30 +43,19 @@ There is no universal maximum line count. If a reviewer cannot explain the purpo
 
 ### The Author
 
-The author is responsible for making the change reviewable:
+The author makes the change reviewable by understanding and self-reviewing the complete diff, keeping its scope focused, and removing debugging code, generated noise and unrelated changes.
 
-- understand and self-review the complete diff;
-- explain the problem, approach, risks, and alternatives;
-- link the relevant requirement, incident, or decision;
-- keep the scope focused;
-- include suitable tests and verification evidence;
-- identify migrations, flags, compatibility concerns, and rollback steps;
-- remove debugging code, generated noise, and unrelated changes;
-- respond to every actionable comment;
-- request reviewers with the necessary code ownership or domain expertise.
+Explain the problem, approach, risks and alternatives, and link the relevant requirement, incident or decision. Include suitable tests and verification evidence, together with any migrations, flags, compatibility concerns and rollback steps.
+
+Request reviewers with the necessary code ownership or domain expertise, and respond to every actionable comment.
 
 ### The Reviewer
 
-The reviewer is responsible for providing an independent, timely assessment:
+The reviewer provides an independent, timely assessment. Understand the intended outcome and inspect enough surrounding code to judge the change in context, prioritising correctness, security, design and operational risk.
 
-- understand the intended outcome before judging implementation details;
-- inspect enough surrounding code to understand the change in context;
-- prioritise correctness, security, design, and operational risk;
-- verify important claims rather than relying only on the description;
-- make blocking concerns explicit;
-- separate required changes from optional improvements;
-- avoid expanding the change with unrelated work;
-- approve when remaining concerns are non-blocking and the change improves code health.
+Verify important claims rather than relying only on the description. Make blocking concerns explicit, separate required changes from optional improvements, and avoid expanding the change with unrelated work.
+
+Approve when the remaining concerns are non-blocking and the change improves code health.
 
 Approval means the reviewer is willing to share responsibility for the change entering the codebase. It does not guarantee that the change is defect-free.
 
@@ -101,33 +87,27 @@ flowchart LR
 
 ### Pass 1: Understand Scope and Shape
 
-- Read the title, description, linked requirements, and test evidence.
-- Inspect the file list and overall diff size.
-- Identify generated files, dependency changes, migrations, or infrastructure modifications.
-- Look at the architecture and data flow before individual expressions.
-- Decide whether specialist review is required for security, database, accessibility, or platform concerns.
+Read the title, description, linked requirements and test evidence, then inspect the file list and overall diff size. Identify generated files, dependency changes, migrations and infrastructure modifications so you know where the risk lies.
+
+Look at the architecture and data flow before individual expressions. Decide whether security, database, accessibility or platform concerns require specialist review.
 
 ### Pass 2: Review Behaviour and Design
 
-- Trace the main success path.
-- Trace important failure, boundary, retry, cancellation, and recovery paths.
-- Check interfaces and dependency direction.
-- Evaluate state changes and externally visible behaviour.
-- Confirm that the design fits existing conventions or documents a justified departure.
+Trace the main success path, then the important failure, boundary, retry, cancellation and recovery paths. Check interfaces and dependency direction alongside state changes and externally visible behaviour.
+
+Confirm that the design fits existing conventions or documents a justified departure.
 
 ### Pass 3: Review Implementation and Tests
 
-- Examine names, control flow, data structures, resource ownership, and error handling.
-- Read tests as specifications and check what they actually prove.
-- Compare implementation behaviour with the requirement and test assertions.
-- Inspect the surrounding unchanged code where assumptions or contracts matter.
+Examine names, control flow, data structures, resource ownership and error handling. Read tests as specifications and compare what their assertions actually prove with the requirement and implementation.
+
+Inspect surrounding unchanged code wherever the change relies on an existing assumption or contract.
 
 ### Pass 4: Consider Delivery and Operations
 
-- Confirm configuration, migrations, compatibility, telemetry, rollout, and rollback.
-- Check CI results and any manual verification evidence.
-- Re-read the complete diff for accidental files, debug output, secrets, or unrelated edits.
-- Summarise blocking concerns and the overall review outcome.
+Confirm configuration, migrations, compatibility, telemetry, rollout and rollback, using CI results and any manual verification evidence.
+
+Re-read the complete diff for accidental files, debug output, secrets and unrelated edits. Finish by summarising blocking concerns and the overall review outcome.
 
 ## What to Review
 

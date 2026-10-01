@@ -129,9 +129,9 @@ Track attempt count in a record header or an external store, since replaying the
 
 ## Delivery Semantics and Exactly-Once
 
-- **At-most-once:** commit the offset before processing; a crash loses unprocessed records.
-- **At-least-once:** commit after processing; a crash causes redelivery and possible duplicates.
-- **Exactly-once (EOS):** transactional producers and `read_committed` consumers can make a read-process-write cycle atomic within Kafka, but this does not extend automatically to an external side effect such as a database write or an outbound call unless that side effect participates in the same transactional boundary or uses an idempotency key.
+With at-most-once processing, committing the offset before processing can lose unprocessed records if the consumer crashes. Committing after processing provides at-least-once behaviour: a crash can cause redelivery and duplicate work.
+
+Kafka's exactly-once semantics use transactional producers and `read_committed` consumers to make a read-process-write cycle atomic within Kafka. That guarantee does not automatically cover an external database write or outbound call. The external effect needs to participate in an appropriate transactional boundary or be protected by idempotency.
 
 Idempotent consumers remain the practical default. Record the record's topic, partition, and offset (or an application event ID) under a uniqueness constraint alongside the business change, the same pattern used for other brokers.
 

@@ -52,9 +52,9 @@ Do not publish an entire internal database row simply because it is available. I
 
 ## Delivery Semantics
 
-- **At-most-once:** a message may be lost but is not deliberately redelivered.
-- **At-least-once:** a message is retried until acknowledged or exhausted, so duplicates are possible.
-- **Exactly-once:** a narrow platform guarantee whose boundary must be examined carefully; it rarely makes every external side effect exactly once.
+At-most-once delivery allows a message to be lost without deliberately redelivering it. At-least-once delivery retries until acknowledgement or exhaustion, so consumers must expect possible duplicates.
+
+An exactly-once claim needs a clearly defined boundary. A platform's guarantee rarely makes every external side effect happen exactly once.
 
 Design consumers as idempotent wherever practical. For example, record the event ID under a uniqueness constraint in the same database transaction as the business change:
 

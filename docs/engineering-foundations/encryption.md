@@ -102,9 +102,9 @@ Use mature libraries with secure defaults. Algorithm choice is only one part of 
 
 ## Common Misconceptions
 
-- **“Encryption proves who sent the data.”** Confidentiality alone does not authenticate a sender; use authenticated encryption, a message authentication code, or a signature as appropriate.
-- **“A public key must be secret.”** Public keys are designed to be shared. Private keys and symmetric keys require protection.
-- **“Encrypted data cannot be changed.”** Encryption alone may not detect tampering. Authenticated encryption also verifies integrity.
+Confidentiality alone does not authenticate the sender or necessarily detect tampering. Use authenticated encryption, a message authentication code or a signature as appropriate; authenticated encryption also verifies integrity.
+
+Public keys are designed to be shared. Private keys and symmetric keys require protection.
 
 The reliable mental model is simple: **encryption protects secrecy by making data readable only with the correct key**.
 

@@ -59,11 +59,11 @@ Read the action symbols: `+` means create, `~` update in place, `-` destroy, and
 
 HCL uses blocks, arguments, expressions, and references. All top-level `.tf` files in a directory form one module; splitting a directory into `main.tf`, `variables.tf`, and `outputs.tf` aids reading but does not impose execution order.
 
-- **Variables** are a module's inputs. Declare types such as `string`, `number`, `bool`, `list(string)`, or `map(object({...}))`, and validate meaningful constraints.
-- **Locals** name derived expressions or repeated values. They are not independently supplied inputs.
-- **Outputs** expose selected results. A caller accesses a child module output through `module.<name>.<output>`.
-- **References** connect values and normally infer dependencies. A bucket policy referring to a bucket ID establishes an ordering relationship.
-- **`depends_on`** expresses a hidden dependency that value references cannot describe. Broad dependencies can postpone reads and make plans less precise.
+Variables supply a module's inputs. Declare types such as `string`, `number`, `bool`, `list(string)` or `map(object({...}))`, and validate meaningful constraints. Locals name derived expressions or repeated values; they are not independently supplied inputs.
+
+Outputs expose selected results to callers. A parent accesses a child module's output through `module.<name>.<output>`.
+
+References connect values and normally infer dependencies: a bucket policy referring to a bucket ID establishes an ordering relationship. Use `depends_on` for a hidden dependency that value references cannot describe, because broad dependencies can postpone reads and make plans less precise.
 
 A `.tfvars` file supplies variable values, while variable blocks declare their contracts. Terraform loads `terraform.tfvars` and `*.auto.tfvars` automatically; explicitly named files such as `dev.tfvars` need `-var-file=dev.tfvars`. Keep secrets out of committed variable files.
 

@@ -47,10 +47,11 @@ The dashboard should help answer a question such as "which dependency became slo
 
 A dashboard is for investigation; an alert rule evaluates a defined condition. Configure its query, evaluation behaviour, missing-data handling and notification route deliberately. Grafana Alerting uses contact points and notification policies to direct notifications. [Alerting fundamentals](https://grafana.com/docs/grafana/latest/alerting/fundamentals/).
 
-- **Wrong scope:** a staging filter or a long time range can hide a production incident.
-- **No data treated as zero:** broken collection or a failed query can look reassuring if missing values are hidden.
-- **Noisy alerts:** a momentary spike without meaningful user impact may not justify waking someone up. Give actionable alerts an owner and a response procedure.
-- **Dashboard permissions mistaken for data isolation:** review data-source credentials and access controls too; a saved view is not the entire security boundary.
+Check the dashboard's scope before interpreting it. A staging filter or an overly long time range can hide a production incident, while broken collection or a failed query can look reassuring if missing values are presented as zero.
+
+A momentary spike without meaningful user impact may not justify waking someone up. Give actionable alerts an owner and a response procedure so the notification leads to useful work.
+
+Review data-source credentials and access controls as well as dashboard permissions. A saved view is not the entire security boundary.
 
 ## Worked Prediction
 

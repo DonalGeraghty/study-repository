@@ -17,12 +17,9 @@ Use reactive expressions for reusable derived data, observers for side effects, 
 
 ## Application Design
 
-- Validate uploaded files, column names, types, ranges, and missing values.
-- Keep expensive calculations behind the narrowest reactive dependency graph.
-- Separate data preparation and statistical logic from UI wiring.
-- Avoid shared mutable global state because multiple sessions may use one R process.
-- Provide useful empty, loading, validation, and failure states.
-- Treat generated HTML and user-supplied labels as untrusted content.
+Validate uploaded files, column names, types, ranges and missing values before using the data. Keep data preparation and statistical logic separate from UI wiring, and place expensive calculations behind the narrowest reactive dependency graph.
+
+Avoid shared mutable global state because multiple sessions may use one R process. Provide useful empty, loading, validation and failure states, and treat generated HTML and user-supplied labels as untrusted content.
 
 For data visualisation, construct a stable data frame first and let plotting code express the selected view. Clustering, PCA, and maps also require domain checks; a reactive UI does not make an invalid analysis correct.
 

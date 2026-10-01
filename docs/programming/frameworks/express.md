@@ -18,12 +18,11 @@ Middleware order is part of application behaviour. Apply parsing, correlation, a
 
 ## Service Design
 
-- Keep route handlers thin and move business rules into testable modules.
-- Validate path, query, header, and body data before it reaches persistence.
-- Use parameterised database operations and a connection pool.
-- Set timeouts and size limits for incoming requests and downstream calls.
-- Return a response once; asynchronous failures must reach the error boundary.
-- Shut down cleanly by refusing new work and closing servers and pools.
+Keep route handlers focused on HTTP concerns and put business rules in testable modules. Validate path, query, header and body data before it reaches persistence, and use parameterised database operations with a connection pool.
+
+Set timeouts and size limits for incoming requests and downstream calls. Each request should receive one response, and asynchronous failures must reach the error boundary.
+
+During shutdown, refuse new work and close servers and pools cleanly.
 
 Express does not define the application's architecture, validation strategy, database model, or authentication policy. The team must make those choices explicit.
 

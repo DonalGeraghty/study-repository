@@ -9,10 +9,9 @@ C# is a statically typed language for the .NET platform. It supports object-orie
 
 ## Language, Runtime, and Tooling
 
-- **C#** defines language syntax and semantics.
-- **.NET runtime** executes managed code and provides garbage collection, type loading, and runtime services.
-- **Base Class Library** supplies collections, I/O, networking, tasks, reflection, and other common APIs.
-- **SDK** provides the compiler, CLI, project system, package tooling, and build infrastructure.
+C# defines the language's syntax and semantics. The .NET runtime executes managed code and provides garbage collection, type loading and other runtime services.
+
+The Base Class Library supplies common APIs for collections, I/O, networking, tasks and reflection. The SDK provides the compiler, CLI, project system, package tooling and build infrastructure used to develop the application.
 
 ```bash
 dotnet new console --name StudyApp

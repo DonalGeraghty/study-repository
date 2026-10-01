@@ -91,9 +91,9 @@ Record direct and transitive dependencies reproducibly with the project’s sele
 
 ## Concurrency
 
-- Threads can suit blocking I/O, but shared mutable state still requires coordination.
-- `asyncio` supports cooperative concurrency when libraries expose asynchronous APIs.
-- Processes can provide parallelism and isolation for CPU-bound work.
+Threads can suit blocking I/O, but shared mutable state still requires coordination. `asyncio` provides cooperative concurrency when the libraries being called expose asynchronous APIs.
+
+Processes can provide parallelism and isolation for CPU-bound work.
 
 Do not add concurrency until measurement identifies a need. Set timeouts, bound concurrency, propagate cancellation, and test failure paths.
 

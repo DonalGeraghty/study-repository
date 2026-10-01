@@ -13,14 +13,9 @@ Testing can show evidence about quality, but it cannot guarantee that a system i
 
 Quality is created throughout product development rather than inspected in at the end. Developers, testers, product specialists, designers, security specialists, operations teams, and users contribute different knowledge.
 
-An SDET or tester provides specialist testing and engineering skills, including:
+An SDET or tester contributes specialist skills by identifying product risks and testability problems, selecting effective approaches, and building fast, trustworthy feedback systems.
 
-- identifying product risks and testability problems;
-- selecting effective test approaches;
-- building fast and trustworthy feedback systems;
-- investigating unexpected behaviour;
-- making quality and residual risk visible;
-- helping the team prevent defects.
+Investigating unexpected behaviour makes quality and residual risk visible. The role also helps the team prevent defects, rather than only finding them after implementation.
 
 Testing independence can provide a valuable alternative perspective, but handing all responsibility to an independent test team usually delays feedback and weakens ownership.
 
@@ -77,14 +72,9 @@ Finding and fixing many defects does not make a product successful if it solves 
 
 Static testing evaluates work products without executing the software.
 
-Examples include:
+Static testing includes reviewing requirements, acceptance criteria, architecture, threat models and code. Static analysis, linting, and schema or configuration validation provide additional checks without executing the application.
 
-- requirement and acceptance-criteria reviews;
-- architecture and threat-model reviews;
-- code review;
-- static analysis and linting;
-- schema and configuration validation;
-- reviewing test cases and operational runbooks.
+Test cases and operational runbooks can also be reviewed before they are used.
 
 Static testing can find ambiguity, inconsistency, unreachable code, unsafe dependencies, and design defects early.
 
@@ -118,18 +108,9 @@ Test levels group testing by scope and the object under test. Names vary between
 
 Evaluates a small unit of behaviour, usually in process and without real external infrastructure.
 
-Strengths:
+Unit tests provide very fast feedback and precise failure localisation. They make it practical to explore many boundaries and branches during development.
 
-- very fast feedback;
-- precise failure localisation;
-- broad boundary and branch exploration;
-- easy execution during development.
-
-Risks:
-
-- excessive mocking can prove interactions with doubles rather than real behaviour;
-- implementation-coupled tests make refactoring expensive;
-- isolated correctness does not prove integration correctness.
+Excessive mocking can prove interactions with test doubles rather than real behaviour, while implementation-coupled tests make refactoring expensive. Even well-isolated unit tests do not establish that the components integrate correctly.
 
 ### Component or Service Testing
 
@@ -157,26 +138,13 @@ Evaluates whether a system is acceptable to stakeholders or users. Acceptance ma
 
 ### Functional Testing
 
-Evaluates what the system does:
-
-- business rules and calculations;
-- state transitions and workflows;
-- API and UI behaviour;
-- validation and error handling;
-- persistence and side effects;
-- permissions and domain constraints.
+Functional testing evaluates what the system does: its business rules, calculations, state transitions and workflows. It covers API and UI behaviour, validation and error handling, persistence and side effects, and the permissions and domain constraints governing those operations.
 
 ### Non-Functional Testing
 
-Evaluates how well the system operates under relevant conditions:
+Non-functional testing evaluates how well the system operates under relevant conditions. Performance and capacity sit alongside reliability, recovery, resilience, security and privacy.
 
-- performance and capacity;
-- reliability, recovery, and resilience;
-- security and privacy;
-- accessibility and usability;
-- compatibility and portability;
-- maintainability and operability;
-- installation, upgrade, and migration behaviour.
+Accessibility, usability, compatibility and portability affect how people can use the system. Maintainability, operability, installation, upgrades and migrations affect how it can be supported over time.
 
 ### Change-Related Testing
 
@@ -432,14 +400,7 @@ A common strategy uses many fast, focused tests and fewer broad, expensive tests
 
 This is an economic guideline, not a required ratio. The right shape depends on architecture and risk. A UI-heavy product, data pipeline, embedded system, and API platform need different portfolios.
 
-Optimise for:
-
-- fast feedback;
-- meaningful confidence;
-- deterministic execution;
-- useful failure localisation;
-- realistic integration evidence;
-- sustainable maintenance cost.
+Aim for fast, deterministic feedback that provides meaningful confidence and makes failures easy to locate. Balance that with realistic integration evidence and a maintenance cost the team can sustain.
 
 Do not count tests as if every test has equal value.
 

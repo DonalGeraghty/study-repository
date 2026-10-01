@@ -235,9 +235,9 @@ This mutates shared non-thread-safe state and can corrupt the result. Collect th
 
 Some sources have a defined encounter order, such as a `List`. Others may not.
 
-- `forEach` does not promise encounter order in a parallel stream.
-- `forEachOrdered` preserves encounter order but can reduce parallel benefit.
-- `findFirst` respects encounter order; `findAny` permits more freedom.
+In a parallel stream, `forEach` does not promise encounter order. `forEachOrdered` preserves it, but can reduce the benefit of parallel execution.
+
+The same distinction matters when choosing a result: `findFirst` respects encounter order, while `findAny` permits more freedom.
 
 Do not rely on incidental `HashSet` or `HashMap` iteration order.
 

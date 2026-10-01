@@ -27,11 +27,11 @@ The central question is not “can this be cached?” It is “how stale may thi
 browser -> CDN or proxy -> application cache -> database or external service
 ```
 
-- A **browser or HTTP cache** reuses responses according to HTTP caching rules.
-- A **CDN** stores content near users and reduces origin traffic.
-- An **in-process cache** is fast but private to one process and disappears with it.
-- A **distributed cache** such as Redis is shared by application instances but adds a network dependency.
-- A **database buffer cache** avoids repeated disk reads and is normally managed by the database.
+A browser or HTTP cache reuses responses according to HTTP caching rules. A CDN moves cached content closer to users, reducing the traffic that reaches the origin.
+
+Inside an application, an in-process cache is fast but private to that process and disappears with it. A distributed cache such as Redis shares data between application instances, at the cost of an additional network dependency.
+
+A database buffer cache avoids repeated disk reads and is normally managed by the database itself.
 
 Each layer has different ownership and invalidation rules. Adding several cache layers can make it difficult to know which copy produced a stale response.
 

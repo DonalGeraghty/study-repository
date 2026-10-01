@@ -64,11 +64,13 @@ A maintained template can provide a recommended route with sensible defaults, of
 
 ## Common Failure Modes
 
-- **Stale ownership:** a catalog is only useful if teams maintain its metadata and discovery failures are visible.
-- **Assuming generation is ongoing management:** updating a starter template does not automatically update every repository previously created from it. Existing services need an explicit upgrade process.
-- **Confusing sign-in with permission:** identifying a user does not establish which actions they may perform. Configure authorisation and limit the credentials used by integrations and template actions. [Permission framework](https://backstage.io/docs/permissions/overview/).
-- **Treating plugins as maintenance-free:** the portal needs an owner for upgrades, integration compatibility, credentials and availability.
-- **Building a portal before defining the problem:** start with a concrete need, such as finding ownership or standardising onboarding, and check whether the portal improves that task.
+A catalog stays useful only when teams maintain ownership metadata and make discovery failures visible. The portal also needs an owner for plugin upgrades, integration compatibility, credentials and availability.
+
+Generating a service is different from maintaining it. Updating a starter template does not automatically update repositories already created from it; those services need an explicit upgrade process.
+
+Signing in establishes identity, not permission to perform every action. Configure authorisation and limit the credentials used by integrations and template actions. [Permission framework](https://backstage.io/docs/permissions/overview/).
+
+Start with a concrete problem, such as finding ownership or standardising onboarding, and check whether the portal improves that task.
 
 ## Worked Prediction
 
