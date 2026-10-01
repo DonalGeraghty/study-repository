@@ -16,6 +16,7 @@ This subject separates programming languages from frameworks, application platfo
 - [Web Foundations and Browser APIs](./web/README.md) — semantic structure, CSS, accessibility, browser storage, canvas, audio, and push.
 - [Development Tooling](./tooling/README.md) — Node.js/npm, Vite, JVM build tools, frontend libraries, and data tooling.
 - [External Integrations](./integrations/README.md) — provider-neutral boundaries for external services such as generative AI APIs.
+- [Data Structures and Algorithms](./data-structures-and-algorithms/README.md) — complexity, core structures, searching, sorting, traversal and problem-solving techniques.
 - [Coding Challenges](./coding-challenges/README.md) — LeetCode problems, Codewars kata, solution reasoning, and complexity analysis.
 
 Test-automation tools such as Playwright, Selenium, and Cypress are organised under [Quality Engineering](../quality-engineering/test-automation/README.md).

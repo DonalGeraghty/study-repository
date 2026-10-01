@@ -84,6 +84,20 @@ This is the canonical table of contents for the handbook. Use the subject indexe
 - [Generative AI APIs](./programming/integrations/generative-ai-apis.md)
 - [Email and SMTP](./programming/integrations/email-and-smtp.md)
 
+#### [Data Structures and Algorithms](./programming/data-structures-and-algorithms/README.md)
+
+- [Complexity and Problem Solving](./programming/data-structures-and-algorithms/complexity-and-problem-solving.md)
+- [Arrays and Strings](./programming/data-structures-and-algorithms/arrays-and-strings.md)
+- [Linked Lists](./programming/data-structures-and-algorithms/linked-lists.md)
+- [Stacks and Queues](./programming/data-structures-and-algorithms/stacks-and-queues.md)
+- [Hash Tables and Sets](./programming/data-structures-and-algorithms/hash-tables-and-sets.md)
+- [Searching and Sorting](./programming/data-structures-and-algorithms/searching-and-sorting.md)
+- [Recursion and Backtracking](./programming/data-structures-and-algorithms/recursion-and-backtracking.md)
+- [Trees and Heaps](./programming/data-structures-and-algorithms/trees-and-heaps.md)
+- [Graphs](./programming/data-structures-and-algorithms/graphs.md)
+- [Problem-Solving Techniques](./programming/data-structures-and-algorithms/problem-solving-techniques.md)
+- [Greedy Algorithms and Dynamic Programming](./programming/data-structures-and-algorithms/greedy-and-dynamic-programming.md)
+
 #### Coding Practice
 
 - [Coding Challenges and Entry Template](./programming/coding-challenges/README.md)

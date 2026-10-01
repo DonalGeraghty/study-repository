@@ -13,7 +13,7 @@ Patterns are useful because they give teams a shared vocabulary. “Use a strate
 
 | Category | Purpose | Examples |
 | --- | --- | --- |
-| Creational | Control or clarify object construction | Factory Method, Abstract Factory, Builder |
+| Creational | Control or clarify object construction | Factory Method, Abstract Factory, Builder, Singleton |
 | Structural | Compose objects or adapt boundaries | Adapter, Decorator, Facade, Composite |
 | Behavioural | Organise algorithms and collaboration | Strategy, Observer, Command, State |
 | Architectural or domain | Shape larger boundaries and models | Repository, Ports and Adapters, CQRS |
@@ -74,6 +74,60 @@ TestUser user = TestUser.builder()
 Builders are especially useful for test data. A constructor or named factory is clearer when only a few required arguments exist.
 
 Ensure `build()` validates the final object. A builder should not make invalid combinations silently possible.
+
+## Singleton
+
+Singleton is a creational pattern that controls construction so callers share one instance within a defined scope, usually through a global access point. It can fit an application-wide object with one deliberate lifetime, such as an immutable configuration snapshot. The design question is whether that shared lifetime is required, rather than whether global access is convenient.
+
+### Example: One Configuration Instance
+
+This Java example uses a private constructor and a static instance. The fixed value keeps the example focused on object identity; a real application's configuration needs a separate loading and validation policy.
+
+```java
+public final class AppSettings {
+    private static final AppSettings INSTANCE = new AppSettings();
+
+    private final int maxBatchSize;
+
+    private AppSettings() {
+        this.maxBatchSize = 100;
+    }
+
+    public static AppSettings getInstance() {
+        return INSTANCE;
+    }
+
+    public int maxBatchSize() {
+        return maxBatchSize;
+    }
+}
+```
+
+Ordinary callers cannot construct `AppSettings` themselves. Every call to `getInstance()` for this loaded class returns the same object. The instance is created during class initialisation, which Java coordinates safely across threads. This avoids the race in an unsynchronised lazy implementation that checks whether an instance is null before constructing it. [Java class initialisation](https://docs.oracle.com/javase/specs/jls/se25/html/jls-12.html#jls-12.4.2).
+
+### Scope, State and Testing
+
+One instance does not make arbitrary methods thread-safe. This example exposes only immutable state; adding a mutable counter, collection or setter would require its own concurrency design. `static final` fixes the reference, not the mutability of the referenced object.
+
+The scope also matters. Separate JVM processes have separate instances, and separate defining class loaders can load distinct copies of the class. A Singleton does not coordinate several Kubernetes replicas or provide a distributed lock.
+
+Global calls hide a dependency inside the caller and make it harder to substitute configuration in a test. Shared mutable state can also leak between tests and create order dependence. Often the simpler design is to construct a normal object once at application startup and inject it into its consumers, keeping both ownership and dependencies explicit.
+
+A dependency-injection framework's singleton scope is a related lifetime policy, not necessarily this class-level pattern. In Spring it means one instance per bean definition per container; it does not guarantee one instance across all containers or make the bean thread-safe. [Spring bean scopes](https://docs.spring.io/spring-framework/reference/core/beans/factory-scopes.html).
+
+### Worked Prediction: Same Instance or Same Value?
+
+Inside a method, evaluate:
+
+```java
+AppSettings first = AppSettings.getInstance();
+AppSettings second = AppSettings.getInstance();
+
+System.out.println(first == second);
+System.out.println(first.maxBatchSize());
+```
+
+**Check your reasoning:** The output is `true`, then `100`. Both variables refer to the same object, rather than two objects with matching values. If the application starts a second JVM, that process creates its own instance. Changing this class to hold mutable state would not change the identity result, but would introduce shared-state concerns.
 
 ## Strategy
 
@@ -302,7 +356,7 @@ For payment operations, first establish whether repetition is safe and how the p
 > - How would you decide whether a design pattern is worth the indirection it adds, versus keeping the simpler design?
 > - Given a checkout that needs to support several payment providers, how would you design the abstraction boundary, and where would you put provider selection?
 > - How would you add metrics or retry behaviour to a payment adapter without editing the adapter itself?
-> - What idempotency and retry decisions would you need to make for a payment charge, and why?
+> - What does Singleton guarantee, and why might constructing one object and injecting it be easier to test?
 
 ## Answer Notes
 
@@ -312,7 +366,7 @@ For payment operations, first establish whether repetition is safe and how the p
 
 3. Wrap the adapter with a decorator that implements the same interface and delegates calls while recording metrics or applying a retry policy. Preserve the contract; retries need explicit transient-failure and idempotency rules.
 
-4. Use a stable idempotency key for the same logical charge and account for timeouts after a provider may already have accepted it. Retry only suitable failures with limits and backoff, and reconcile uncertain outcomes to avoid duplicate charges.
+4. Singleton controls access to one instance within a defined scope. It does not automatically make mutable state thread-safe or share an instance across processes. Constructing a normal object once and injecting it exposes dependencies and lets tests supply independent instances or substitutes.
 
 ## Related Guides
 
@@ -320,5 +374,7 @@ For payment operations, first establish whether repetition is safe and how the p
 - [SOLID Principles](./solid-principles.md)
 - [Domain-Driven Design](./domain-driven-design.md)
 - [Testing](../quality-engineering/testing.md)
+- [Java Concurrency](../programming/languages/java/java-concurrency.md) — shared identity does not make compound operations atomic.
+- [Spring](../programming/frameworks/spring.md) — container-managed lifetimes and constructor injection.
 
 Return to [Software Design](./README.md).

@@ -105,7 +105,7 @@ Do not introduce an interface, layer, or service only because a diagram appears 
 
 1. Learn encapsulation, composition, interfaces, and polymorphism.
 2. Use SOLID to critique responsibilities and dependency direction.
-3. Study patterns as trade-off vocabulary, not recipes.
+3. Study patterns as trade-off vocabulary, not recipes. Use [Singleton](./design-patterns.md#singleton) to explore shared lifetimes, global access and testing trade-offs.
 4. Apply DDD when business language, rules, and boundaries are genuinely complex.
 5. Practise by improving real code in small, testable steps.
 

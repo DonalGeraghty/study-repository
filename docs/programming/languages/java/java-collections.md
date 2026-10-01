@@ -355,4 +355,11 @@ Hash collisions, resizing, cache locality, allocation, comparator cost, and work
 - [`Map` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html)
 - [Concurrent collections](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/package-summary.html)
 
+## Related Guides
+
+- [Data Structures and Algorithms](../../data-structures-and-algorithms/README.md) — language-independent reasoning behind collection choices.
+- [Arrays and Strings](../../data-structures-and-algorithms/arrays-and-strings.md) — indexed storage and dynamic-array costs.
+- [Linked Lists](../../data-structures-and-algorithms/linked-lists.md) — node references, traversal and mutation.
+- [Hash Tables and Sets](../../data-structures-and-algorithms/hash-tables-and-sets.md) — collisions, equality and lookup assumptions.
+
 Return to the [Java Study Guide](./README.md).

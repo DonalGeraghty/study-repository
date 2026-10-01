@@ -8,6 +8,8 @@ tags:
 
 This section records solved programming problems, reasoning approaches, complexity analysis, and lessons that transfer beyond an individual exercise.
 
+Use [Data Structures and Algorithms](../data-structures-and-algorithms/README.md) for the underlying concepts and worked examples. Start with [complexity and problem solving](../data-structures-and-algorithms/complexity-and-problem-solving.md), then use the relevant structure or technique guide before attempting a challenge. Keep problem-specific solutions and reattempt notes here.
+
 ## Platforms
 
 - [LeetCode](./leetcode/README.md) — algorithm and data-structure problems from LeetCode.

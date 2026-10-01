@@ -19,6 +19,7 @@ The material is organised by subject rather than by a single fixed curriculum. E
 | Find a particular technology | [Complete documentation catalogue](./docs/README.md#complete-catalogue) |
 | Rebuild core engineering knowledge | [Engineering Foundations](./docs/engineering-foundations/README.md) |
 | Refresh a language or framework | [Programming](./docs/programming/README.md) |
+| Learn data structures and problem-solving techniques | [Data Structures and Algorithms](./docs/programming/data-structures-and-algorithms/README.md) |
 | Review testing strategy and tools | [Quality Engineering](./docs/quality-engineering/README.md) |
 | Review delivery and runtime systems | [Platform Engineering](./docs/platform-engineering/README.md) |
 
