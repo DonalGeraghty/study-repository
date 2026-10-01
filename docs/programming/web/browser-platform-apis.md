@@ -25,10 +25,11 @@ IndexedDB supports larger asynchronous structured storage, indexes, and transact
 const preferenceKey = "study-app:preferences:v1";
 const defaults = { theme: "system", reducedEffects: false };
 
-export function loadPreferences(storage = localStorage) {
+export function loadPreferences(storage) {
   try {
+    storage ??= globalThis.localStorage;
     const raw = storage.getItem(preferenceKey);
-    if (raw === null) return defaults;
+    if (raw === null) return { ...defaults };
 
     const value = JSON.parse(raw);
     return {
@@ -38,12 +39,13 @@ export function loadPreferences(storage = localStorage) {
       reducedEffects: value.reducedEffects === true
     };
   } catch {
-    return defaults;
+    return { ...defaults };
   }
 }
 
-export function savePreferences(preferences, storage = localStorage) {
+export function savePreferences(preferences, storage) {
   try {
+    storage ??= globalThis.localStorage;
     storage.setItem(preferenceKey, JSON.stringify(preferences));
     return true;
   } catch {
@@ -53,6 +55,8 @@ export function savePreferences(preferences, storage = localStorage) {
 ```
 
 The wrapper handles missing, malformed, or unavailable storage and accepts a replacement storage object in tests. The stored value remains user-controlled input; validation is required even when this application originally wrote it.
+
+Access to `localStorage` itself can throw. Resolve it inside `try`, not in a default argument evaluated before the function body. Return a fresh fallback object so one caller cannot mutate defaults for future calls.
 
 ## Canvas, WebGL, and Audio
 
@@ -104,6 +108,11 @@ FlappyAI uses Canvas, pointer events, Web Audio, and `localStorage`. Aether and 
 > - Why does canvas movement need to be time-based rather than a fixed amount per frame?
 > - Why doesn't having a web app manifest by itself make a site an installable, offline-capable PWA?
 > - Why should push notification content avoid putting sensitive details in the payload shown on a lock screen?
+
+## Official References
+
+- [Web Storage and access exceptions](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+- [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API)
 
 ## Related Guides
 

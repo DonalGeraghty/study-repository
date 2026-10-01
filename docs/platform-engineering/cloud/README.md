@@ -13,6 +13,8 @@ This section covers public-cloud infrastructure, managed services, identity, net
 - [Amazon Web Services](./aws.md) — AWS infrastructure, identity, networking, compute, storage, observability, and delivery services.
 - [Google Cloud Platform](./gcp/README.md) — GCP projects, identity, networking, compute, storage, observability, and delivery services.
 
+For provisioning and changing cloud resources through reviewed configuration, see [Terraform](../terraform.md), including state, modules, drift, and environment isolation.
+
 ## Comparison Dimensions
 
 - Account, organisation, project, and resource hierarchy

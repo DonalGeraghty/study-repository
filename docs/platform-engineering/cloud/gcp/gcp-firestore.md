@@ -108,6 +108,14 @@ Monitor:
 
 Use the emulator for rapid local tests where appropriate, but retain integration coverage against the selected production edition and configuration. Test queries and indexes, transactions under contention, rules, offline behaviour, schema migration, retry safety, and restore.
 
+## Worked Scenario: Retried Transaction
+
+A transaction reads available stock, decrements it, and sends a confirmation email inside its callback. Another writer changes the stock before commit. Predict the risk when Firestore retries the transaction function.
+
+**Check your reasoning:** The callback can run again, but an email already sent cannot be rolled back. Keep the callback's work inside the database transaction: validate stock, update it, and create a notification-work document with a stable operation identity. A separate sender processes that record with its own retry and duplicate-handling policy. Moving email just after commit still leaves a crash gap unless delivery intent is durable.
+
+Test two concurrent reservations for the last item, repeated delivery of notification work, and a server request for another user's order. Client Security Rules do not authorise server SDK operations for the application; the trusted server must enforce ownership itself.
+
 ## Interview Questions
 
 > [!question] Interview Questions

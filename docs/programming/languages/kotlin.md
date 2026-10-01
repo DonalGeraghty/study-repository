@@ -101,6 +101,23 @@ Useful build tasks vary by project but commonly include:
 
 Use compiler warnings, static analysis, formatting, IDE inspections, stack traces, and debugger state as complementary feedback.
 
+## Worked Prediction: Read-Only Is Not Immutable
+
+Predict the printed list:
+
+```kotlin
+val backing = mutableListOf("api")
+val view: List<String> = backing
+val snapshot = backing.toList()
+backing.add("ui")
+println(view)
+println(snapshot)
+```
+
+**Check your reasoning:** `view` prints `[api, ui]`; `snapshot` prints `[api]`. `val` prevents rebinding, and `List` removes mutation operations from that reference, but another reference can still mutate the underlying list. The copy is shallow.
+
+For coroutines, compare two consecutive suspending calls with two `async` children inside `coroutineScope`. Consecutive calls remain sequential; starting both children before awaiting their results allows overlap. A good design also states what happens when either child fails and which dispatcher is appropriate for blocking work. Adding `suspend` alone supplies none of those decisions.
+
 ## Interview Questions
 
 > [!question] Interview Questions

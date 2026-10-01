@@ -25,6 +25,7 @@ Do not enable development debugging in production. Validate required configurati
 
 ```python
 from flask import Flask, jsonify
+from werkzeug.exceptions import HTTPException
 
 
 def create_app(result_service):
@@ -42,6 +43,8 @@ def create_app(result_service):
 
     @app.errorhandler(Exception)
     def handle_unexpected_error(error):
+        if isinstance(error, HTTPException):
+            return error
         app.logger.exception("request failed")
         return jsonify(
             type="internal-error",
@@ -52,6 +55,8 @@ def create_app(result_service):
 ```
 
 Injecting the service keeps persistence and provider setup outside the route. Register more routes through blueprints as the application grows rather than turning one factory into the whole system.
+
+The `HTTPException` branch preserves framework-generated responses such as 404 and 405. Without it, the broad handler would turn an unknown route or wrong HTTP method into a misleading 500. These pass-through responses retain Flask's default representation; register a specific HTTP-error formatter if the API requires JSON throughout.
 
 ## API Boundaries
 
@@ -95,6 +100,20 @@ def test_missing_result_returns_404():
 
 The Janus API repositories use Flask and Flask-CORS with Pydantic models, JWT authentication, Firestore, AI-provider SDKs, and Google Cloud deployment.
 
+## Worked Prediction: Error Boundaries
+
+Using the factory above, predict each outcome with a fake service:
+
+| Request or dependency behaviour | Expected result |
+| --- | --- |
+| Valid result ID; service returns a record | 200 with that record |
+| Valid result ID; service returns `None` | 404 with `result-not-found` |
+| Unknown URL or non-integer route segment | Framework 404, preserved by the handler |
+| POST to the GET-only route | 405, preserving the method contract |
+| Service raises an unexpected exception | Generic 500; details remain in server logs |
+
+**Check your reasoning:** Routing failure, missing domain data, and infrastructure failure are different outcomes. A blanket catch that maps all of them to 500 hides that distinction. Extend the test-client example to check those status codes and verify that a private exception message never appears in the body. Also assert that invalid routes never call the service.
+
 ## Interview Questions
 
 > [!question] Interview Questions
@@ -103,6 +122,11 @@ The Janus API repositories use Flask and Flask-CORS with Pydantic models, JWT au
 > - Why doesn't validating a JWT's signature alone prove a request is authorised?
 > - What's the risk of relying on module-level mutable state across requests?
 > - Why would you use Flask's test client instead of testing only against a deployed server?
+
+## Official References
+
+- [Flask error handling](https://flask.palletsprojects.com/en/stable/errorhandling/)
+- [Flask testing](https://flask.palletsprojects.com/en/stable/testing/)
 
 ## Related Guides
 

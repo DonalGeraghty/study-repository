@@ -28,6 +28,10 @@ These guides cover application packaging, container orchestration, cloud platfor
 - [Amazon SNS](./amazon-sns.md) — AWS's managed pub/sub service and how it differs from SQS and EventBridge.
 - [Amazon SQS](./amazon-sqs.md) — AWS's managed message queue service for durable asynchronous work, buffering, and decoupling services.
 
+## Infrastructure as Code
+
+- [Terraform](./terraform.md) — declarative infrastructure, providers, state, plans, modules, environment isolation, and safe changes.
+
 ## Cloud and Delivery
 
 - [Cloud Platforms](./cloud/README.md) — AWS and GCP infrastructure, managed services, security, reliability, and operations.
@@ -36,5 +40,7 @@ These guides cover application packaging, container orchestration, cloud platfor
 ## Suggested Use
 
 Learn Docker first so images, container processes, storage, and networks are familiar before studying how Kubernetes schedules and reconciles containerised workloads. Use the caching and messaging guides to understand how services share data and communicate asynchronously, the cloud guides to record where those workloads run, and the CI/CD guides to capture how software is built, tested, and delivered.
+
+After learning a cloud platform's resource and identity model, use Terraform to practise provisioning and changing that infrastructure through reviewed code. Connect its plan/apply workflow to the CI/CD guides for team delivery.
 
 Return to the [documentation library](../README.md).

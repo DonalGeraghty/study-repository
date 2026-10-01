@@ -590,17 +590,13 @@ A tag identifies a specific commit. A hosted-platform release may add notes and 
 - Use `git bisect` with a reliable automated test to locate regressions efficiently.
 - Protect release branches and require appropriate review and status checks.
 
-## Interview Questions
+## Worked Prediction: What Will Be Committed?
 
-> [!question] Interview Questions
-> - What's the difference between the working tree, staging area, local history, and remote-tracking references?
-> - When would you choose rebase instead of merge, and what changes about the resulting history?
-> - How would you resolve a merge conflict where two branches edited the same line — and how would you abort if it goes wrong?
-> - What's the difference between `restore`, `revert`, `reset`, and `commit --amend`, and when is each safe on shared history?
-> - How would you recover a commit after an accidental `git reset --hard`?
-> - How would you use `git bisect` to find the commit that introduced a regression?
-> - How do GitHub Flow, trunk-based development, and GitFlow differ, and when would you choose each?
-> - Why is `--force-with-lease` safer than `--force` when rewriting a branch someone else may have pulled?
+A tracked file initially contains A. You edit it to B, run `git add`, then edit it again to C without staging. Predict an ordinary `git commit`, `git diff`, and `git diff --staged` before running them in a scratch repository.
+
+**Check your reasoning:** The commit records B from the index. Before committing, `git diff` shows B-to-C, while `git diff --staged` shows A-to-B. After committing, C remains as an unstaged change. Staging is a snapshot operation, not a promise to include the latest version at commit time.
+
+For recovery practice, distinguish a local unpushed mistake from a commit teammates already use. A revert records a new inverse change on shared history; a reset moves a reference and can also alter the index and working tree depending on mode. State which of those three areas you intend to change before selecting an undo command.
 
 ## Quick Command Reference
 
@@ -618,6 +614,18 @@ A tag identifies a specific commit. A hosted-platform release may add notes and 
 | Find previous local states | `git reflog` |
 | Abort a merge | `git merge --abort` |
 | Abort a rebase | `git rebase --abort` |
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - What's the difference between the working tree, staging area, local history, and remote-tracking references?
+> - When would you choose rebase instead of merge, and what changes about the resulting history?
+> - How would you resolve a merge conflict where two branches edited the same line — and how would you abort if it goes wrong?
+> - What's the difference between `restore`, `revert`, `reset`, and `commit --amend`, and when is each safe on shared history?
+> - How would you recover a commit after an accidental `git reset --hard`?
+> - How would you use `git bisect` to find the commit that introduced a regression?
+> - How do GitHub Flow, trunk-based development, and GitFlow differ, and when would you choose each?
+> - Why is `--force-with-lease` safer than `--force` when rewriting a branch someone else may have pulled?
 
 ## Further Reading
 

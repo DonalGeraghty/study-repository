@@ -98,6 +98,28 @@ npx playwright show-report
 
 Pin Playwright and browser versions through the dependency and container strategy. Start the application before the suite, use a readiness signal, and terminate it after execution.
 
+## Worked Example: Observe the Request and the Outcome
+
+Inside a Playwright Test using its `page` fixture and `expect`, assume an isolated checkout already has an item and the application returns 201 from `POST /api/orders`:
+
+```typescript
+const created = page.waitForResponse(response =>
+  new URL(response.url()).pathname === "/api/orders" &&
+  response.request().method() === "POST"
+);
+await page.getByRole("button", { name: "Place order" }).click();
+const response = await created;
+expect(response.status()).toBe(201);
+await expect(page.getByRole("heading", { name: "Order confirmed" }))
+  .toBeVisible();
+```
+
+**Predict before reading on:** Why install the wait before clicking, and why check both the status and the heading?
+
+**Check your reasoning:** A fast response could arrive before a later listener is installed. The response establishes the API outcome, while the heading checks that the UI presents it. Matching only successful responses can turn an actual 500 into an opaque timeout, so this predicate matches the relevant operation and checks its status separately. If only the UI contract matters, the retried heading assertion may suffice.
+
+Change the server response to a controlled 500 and assert the intended error state without creating an order. A stubbed failure tests UI handling; a separate real integration check establishes server behaviour.
+
 ## Interview Questions
 
 > [!question] Interview Questions

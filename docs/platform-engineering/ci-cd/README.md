@@ -13,6 +13,8 @@ This section contains delivery-automation platforms and the practices used to bu
 - [Jenkins](./jenkins.md) — pipelines, agents, credentials, plugins, testing, artifacts, deployment, and operations.
 - [GitHub Actions](./github-actions.md) — workflow execution, permissions, identity, artifacts, CI checks, and deployments.
 
+Infrastructure delivery adds state ownership and plan approval to the pipeline. See [Terraform](../terraform.md) for saved plans, locking, partial failures, and safe automated applies.
+
 ## Topics to Capture Across Tools
 
 - Pipeline stages, quality gates, and promotion models

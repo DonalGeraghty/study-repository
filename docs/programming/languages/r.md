@@ -100,10 +100,25 @@ plot(results$duration, results$score,
 
 Test reusable functions with representative, boundary, missing, and invalid inputs. Add data-quality assertions for schema, uniqueness, allowed ranges, and join cardinality. For numerical results, compare with an appropriate tolerance rather than assuming exact floating-point equality.
 
+## Worked Prediction: Recycling and Missing Values
+
+Predict each result before using the R console:
+
+```r
+c(10, 20, 30, 40) + c(1, 2)
+mean(c(10, NA, 30))
+mean(c(10, NA, 30), na.rm = TRUE)
+mean(numeric(0))
+```
+
+**Check your reasoning:** The results are `11 22 31 42`, `NA`, `20`, and `NaN`. The shorter vector repeats to match the longer vector; exact-multiple recycling can happen without a warning. A non-multiple length normally warns but still computes, so warnings deserve attention.
+
+Removing missing observations changes the denominator. In the `pass_rate` example, all-missing input leaves no observations and produces `NaN`, not a zero pass rate. Decide whether the contract should return `NA_real_` or reject an empty valid sample, then test that choice. For vectors meant to pair row-for-row, assert equal lengths before arithmetic rather than relying on recycling.
+
 ## Interview Questions
 
 > [!question] Interview Questions
-> - What's vector recycling, and why can it silently produce a wrong-length result instead of an error?
+> - What's vector recycling, and why can incompatible assumptions about vector lengths silently produce incorrect values?
 > - How does R's handling of missing values (`NA`) change the result of a straightforward aggregation?
 > - Why would you validate join cardinality before trusting the row count of a merged data frame?
 > - How would you reproduce an analysis result in a clean environment months later?

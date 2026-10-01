@@ -106,6 +106,14 @@ Use a separate deployment job with `needs` so quality gates are explicit. Attach
 
 The repositories use GitHub Actions to test and deploy Flask and React services to Cloud Run, build and sign Android artifacts, and validate health-data CSV storage with PowerShell.
 
+## Worked Scenario: A Green Build With the Wrong Evidence
+
+A pull request passes tests, but the deployment job builds again from a moving branch. Predict why the green check may not describe what reaches production.
+
+**Check your reasoning:** Source or resolved inputs may have changed between runs. Identify the tested commit and immutable artifact, then promote that artifact through an explicitly dependent deployment job. Keep untrusted pull-request execution separate from identities allowed to publish or deploy.
+
+Now two releases run concurrently. State which may supersede the other and whether cancellation is safe for the actual operation. Cancelling a test job differs from interrupting a database migration or Terraform apply. Verify the deployed artifact identifier and a meaningful smoke check rather than treating a successful job exit as proof of healthy user behaviour.
+
 ## Interview Questions
 
 > [!question] Interview Questions
@@ -124,6 +132,7 @@ The repositories use GitHub Actions to test and deploy Flask and React services 
 ## Related Guides
 
 - [Continuous Integration and Delivery](./README.md)
+- [Terraform](../terraform.md) — infrastructure plans, protected state, and controlled applies in CI.
 - [Docker](../docker.md)
 - [Cloud Run](../cloud/gcp/gcp-cloud-run.md)
 - [IAM](../cloud/gcp/gcp-iam.md)

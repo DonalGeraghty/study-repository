@@ -90,6 +90,8 @@ Manage repeatable environments through reviewed infrastructure code. AWS-native 
 
 Plan changes, review destructive replacements, apply through controlled roles, detect drift, and avoid manual production changes except through documented emergency procedures. Separate reusable modules from environment-specific composition without hiding every service setting behind abstraction.
 
+See [Terraform](../terraform.md) for a worked S3 example and the state, planning, import, and refactoring mechanisms behind this workflow.
+
 ## Observability and Reliability
 
 Collect application and platform metrics, structured logs, traces, events, configuration changes, and audit activity. Define service-level indicators around user outcomes, then alert on actionable symptoms rather than every resource fluctuation.
@@ -106,6 +108,14 @@ Cost is an architectural signal. Tag or otherwise attribute ownership, set budge
 
 Validate infrastructure code, policy, configuration, and deployment behaviour before production. Use ephemeral or representative environments where possible, test permission failures, and exercise rollback and regional or zonal failure scenarios proportional to risk.
 
+## Worked Scenario: Trace a Private Application Request
+
+Design an API that reads a private object and writes an order record. Sketch the caller, application workload, object store, and database, then state which identity and network path each hop uses.
+
+**Check your reasoning:** The application needs a workload role with the required object actions on the intended resources; making a bucket public is not a solution to an application access denial. Database connectivity additionally depends on routing, security controls, authentication, and database privileges. A private subnet alone proves none of those permissions.
+
+For a timeout, inspect reachability and dependency health. For an access-denied response, inspect the actual principal, requested action, resource policy, and applicable denies. A useful answer distinguishes these evidence paths and explains how to test that another customer's data remains inaccessible. Finally, describe what remains available during a zone failure and how you would restore deleted data; availability and recovery are different requirements.
+
 ## Interview Questions
 
 > [!question] Interview Questions
@@ -121,5 +131,9 @@ Validate infrastructure code, policy, configuration, and deployment behaviour be
 - [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html)
 - [IAM best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)
 - [AWS Architecture Center](https://aws.amazon.com/architecture/)
+
+## Related Guides
+
+- [Terraform](../terraform.md) — provisioning AWS resources and reviewing infrastructure changes.
 
 Return to [Cloud Platforms](./README.md).

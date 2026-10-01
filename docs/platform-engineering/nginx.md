@@ -36,6 +36,66 @@ Compression, media types, character encoding, and security headers must match th
 - Disable unnecessary server information and writable paths.
 - Send access and error logs to the container logging stream where operationally useful.
 
+## Worked Example: Static UI and an API
+
+This `server` block belongs inside Nginx's `http` context, commonly through an included file. Assume built frontend files are under `/usr/share/nginx/html`, fingerprinted assets are under `/assets/`, and `backend:3000` resolves to a reachable application server. The HTTP configuration must load its normal MIME-type mappings.
+
+```nginx
+server {
+    listen 8080;
+    root /usr/share/nginx/html;
+
+    location = /healthz {
+        default_type text/plain;
+        return 200 "ok\n";
+    }
+
+    location = /index.html {
+        add_header Cache-Control "no-cache";
+    }
+
+    location /assets/ {
+        try_files $uri =404;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+    }
+
+    location /api/ {
+        proxy_pass http://backend:3000;
+        proxy_connect_timeout 5s;
+        proxy_read_timeout 30s;
+    }
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+```
+
+Requests branch according to the configured locations:
+
+```mermaid
+flowchart TD
+    R[Incoming request] --> L{Matching location}
+    L -->|/healthz| H[Return health response]
+    L -->|/api/| P[Proxy to backend]
+    L -->|/assets/| F{File exists?}
+    F -->|Yes| A[Serve asset]
+    F -->|No| N[404]
+    L -->|Application route| I[Serve file or index.html]
+```
+
+The `proxy_pass` above has no URI component, so `/api/orders` is forwarded with that path. Adding a trailing `/` supplies a replacement URI and, in this ordinary prefix location, forwards `/orders` instead. Match the backend's routing contract. A reverse proxy forwards requests; the application still owns authorisation.
+
+`no-cache` permits storing HTML but requires revalidation before reuse; it does not mean `no-store`. Only immutable, fingerprinted assets belong under the long-cache policy. Route other static files explicitly if the build emits them elsewhere. The health endpoint proves Nginx can respond, not that the API or every asset works. `proxy_read_timeout` limits inactivity between reads, not the complete business operation's duration. Select or generate configuration matching the host platform's expected port; this example uses a fixed 8080.
+
+## Worked Prediction: Three Requests
+
+Predict `/reports/730`, `/assets/missing.js`, and `/api/orders` when the frontend entry file exists but the backend is unavailable.
+
+**Check your reasoning:** The report route serves the SPA entry point, the missing asset returns 404, and the API request produces an upstream error rather than HTML fallback. Connection failure commonly yields 502; an upstream timeout can yield 504. Inspect the error log to distinguish them.
+
+Validate with `nginx -t` in the intended environment, then inspect responses with `curl -i`. Check status, content type, cache headers, and body, not just whether the root page appears to load.
+
 ## Project Connections
 
 Aether builds React assets in a Node stage and serves them from Nginx on Cloud Run. Nyx's deployment workflow creates a similar Nginx image dynamically.
@@ -48,6 +108,12 @@ Aether builds React assets in a Node stage and serves them from Nginx on Cloud R
 > - Why does a multi-stage build matter for an Nginx image serving a frontend app?
 > - What would a lightweight health endpoint need to avoid depending on, and why?
 > - Why is it risky to assume a copied Nginx configuration's headers are correct for a new application?
+
+## Official References
+
+- [Nginx beginner's guide](https://nginx.org/en/docs/beginners_guide.html)
+- [Core HTTP directives and try_files](https://nginx.org/en/docs/http/ngx_http_core_module.html)
+- [HTTP proxy directives](https://nginx.org/en/docs/http/ngx_http_proxy_module.html)
 
 ## Related Guides
 

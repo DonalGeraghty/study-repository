@@ -27,4 +27,12 @@ For each problem, capture:
 
 Avoid copying full copyrighted problem statements. Link to the original problem and summarise only the details needed to understand the solution.
 
+## Reattempts and Transfer
+
+Before viewing an existing solution, restate its invariant and work a tiny example by hand. Write the simplest correct approach, then justify the optimisation and its complexity. After checking the result, record the exact misconception rather than just whether the platform accepted it.
+
+Reattempt the problem in a later session without opening the solution. Change one constraint, such as duplicate inputs, an empty collection, bounded memory, or streamed input, and explain whether the same approach still works. The worked entries in the platform indexes demonstrate format; they are not evidence that you personally solved the problem.
+
+For example, trace Two Sum on `[3, 3]` with target `6`: checking for a previous complement before inserting the current index yields two distinct positions. Inserting first can mistakenly match an element with itself. Being able to explain that order is stronger evidence of learning than remembering the map-based code.
+
 Return to [Programming](../README.md).

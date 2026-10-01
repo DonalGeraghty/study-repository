@@ -113,6 +113,14 @@ Avoid broad key scans in application request paths. Prefer `SCAN` for controlled
 - sharing one Redis deployment between unrelated workloads with incompatible eviction or latency needs;
 - retrying non-idempotent operations without understanding whether they ran.
 
+## Worked Prediction: A Lost Increment
+
+A counter starts at `5`. Two clients both `GET` it, calculate `6`, then both `SET` it. Predict the final result and compare with two `INCR` commands.
+
+**Check your reasoning:** Read-modify-write can finish at `6`, losing one increment. Two successful `INCR` operations produce `7`. Atomicity of each command does not make a sequence atomic. If the reply to an `INCR` is lost, retrying it can still increment twice; atomic and idempotent mean different things.
+
+Now worker A's lock expires, worker B acquires the same key, and A finally finishes. An unconditional `DEL` by A would remove B's lock. Compare the unique ownership token and delete atomically, and protect consequential writes against a worker that outlives its lease. Being able to acquire a Redis key is only one part of a coordination design.
+
 ## Interview Questions
 
 > [!question] Interview Questions

@@ -135,6 +135,21 @@ A high hit ratio is not success if stale data is harming users or one miss takes
 - assuming deletion and a database write are one atomic operation;
 - letting a cache outage become a database outage through unrestricted fallback.
 
+## Worked Timeline: A Stale Value Returns
+
+Predict the final cache value when a read overlaps a write:
+
+| Step | Reader | Writer |
+| --- | --- | --- |
+| 1 | Cache miss; starts reading price `10` | |
+| 2 | Holds the old result | Commits price `12` to the database |
+| 3 | | Deletes the cache entry |
+| 4 | Stores price `10` in the cache | |
+
+**Check your reasoning:** Invalidating after commit avoids some failure windows but does not prevent an older in-flight reader from repopulating stale data. A TTL limits how long that particular entry remains, not whether every read is current. Choose tolerable staleness explicitly; stronger requirements may need version-aware writes, coordinated updates, or reading the source of truth for the consequential decision.
+
+For a checkout, cached display prices can improve browsing, while the accepted purchase price must follow the checkout's authoritative pricing contract. Test this interleaving with controlled barriers rather than sleeps, and assert both the cached result and the final business decision.
+
 ## Interview Questions
 
 > [!question] Interview Questions

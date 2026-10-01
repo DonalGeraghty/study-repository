@@ -136,23 +136,7 @@ For each topic:
 5. Compare two reasonable implementations and describe their trade-offs.
 6. Use JDK documentation to verify library contracts.
 
-## Readiness Checklist
-
-You should be able to:
-
-- explain primitive values, object references, scope, `final`, and `static`;
-- distinguish identity, logical equality, and ordering;
-- select numeric types and rounding policies safely;
-- reason about immutable strings and Unicode;
-- choose collection interfaces and implementations from requirements;
-- write and consume generic APIs without raw types;
-- model expected and exceptional outcomes clearly;
-- use try-with-resources for deterministic cleanup;
-- build stream pipelines without hidden side effects;
-- identify shared mutable state and use concurrency utilities appropriately;
-- use records, sealed types, pattern matching, and `java.time` where they improve the model;
-- explain reachability, garbage collection, and common memory-retention problems;
-- diagnose a failure using compiler output, exceptions, logs, tests, and JDK tools.
+For self-testing, use the interview questions in each linked topic rather than marking a concept familiar. Start with [values and references](./java-variables.md#interview-questions), then [collections](./java-collections.md#interview-questions) and [generics](./java-generics.md#interview-questions). Add [numeric predictions](./java-numbers.md#worked-prediction-promotion-comes-too-late), [concurrency interleavings](./java-concurrency.md#worked-interleaving-visibility-is-not-atomicity), and [memory diagnosis](./java-memory-management.md#interview-questions) as the foundations become reliable. Explain both the result and the language or library rule behind it.
 
 ## Official References
 

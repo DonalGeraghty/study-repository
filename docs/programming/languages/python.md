@@ -110,6 +110,27 @@ python -m unittest
 
 Projects commonly add `pytest`, a formatter, a linter, and a type checker. Pin their configuration in the repository so local and CI results agree.
 
+## Worked Prediction: Shared Defaults and Equality
+
+Predict the output before running this intentionally faulty function:
+
+```python
+def remember(value, seen=[]):
+    seen.append(value)
+    return seen
+
+first = remember("api")
+second = remember("ui")
+print(first, second, first is second)
+print(first == list(first), first is list(first))
+```
+
+**Check your reasoning:** Both names refer to `['api', 'ui']`, so the first identity test is `True`. The second line prints `True False`: a fresh list has equal contents but a different identity. A default argument is created when the function is defined, not for every call. Reconstruct the `None`-default solution above and verify that two calls no longer share a list. A shallow copy still shares nested mutable objects.
+
+### The GIL and Workload Choice
+
+In a conventional GIL-enabled CPython build, only one thread executes Python bytecode at a time. Threads can still overlap I/O, and extensions may release the GIL. Free-threaded CPython builds change that restriction; check the actual build and extension support instead of treating it as a universal Python rule. Neither model makes multi-step shared-state operations safe automatically. A blocking call inside an `asyncio` coroutine can still stall the event loop.
+
 ## Interview Questions
 
 > [!question] Interview Questions
@@ -125,5 +146,6 @@ Projects commonly add `pytest`, a formatter, a linter, and a type checker. Pin t
 - [Python standard library](https://docs.python.org/3/library/)
 - [Python typing documentation](https://docs.python.org/3/library/typing.html)
 - [Python packaging guide](https://packaging.python.org/)
+- [Free-threaded CPython](https://docs.python.org/3/howto/free-threading-python.html)
 
 Return to [Programming Languages](./README.md).

@@ -102,6 +102,14 @@ Test the container locally and in a representative Cloud Run environment. Verify
 
 For jobs, test retry safety, task partitioning, partial failure, exit codes, and resumability.
 
+## Worked Calculation: Downstream Capacity
+
+Assume ten active instances each have a database pool capped at eight connections. What connection demand should the database budget allow before considering other services?
+
+**Check your reasoning:** Up to `10 × 8 = 80` connections from those instances. Request concurrency is a different limit: 40 requests per instance do not imply 40 database connections if a bounded pool queues acquisition. Higher concurrency may increase queue time rather than throughput.
+
+Now consider overlapping revisions during deployment, jobs, and administrative connections. Reserve headroom and measure real connection counts; an instance cap alone is not a universal hard database safeguard. Test pool-acquisition timeouts and graceful overload responses. To distinguish cold starts from exhausted pools, compare startup logs, instance changes, request latency, and connection-wait metrics instead of changing scaling settings blindly.
+
 ## Interview Questions
 
 > [!question] Interview Questions

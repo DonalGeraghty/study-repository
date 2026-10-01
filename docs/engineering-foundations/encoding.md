@@ -68,6 +68,24 @@ photo bytes -> Base64 text -> email transport -> photo bytes
 
 Anyone who obtains the Base64 text can decode the photo. Encoding makes the data compatible with the transport; it does not keep the photo secret.
 
+## Worked Prediction: Characters Are Not Bytes
+
+Predict the lengths and the final value before running this Python example:
+
+```python
+import base64
+
+text = "café"
+raw = text.encode("utf-8")
+encoded = base64.b64encode(raw)
+print(len(text), len(raw))
+print(base64.b64decode(encoded).decode("utf-8"))
+```
+
+**Check your reasoning:** The lengths are `4` and `5`; UTF-8 uses two bytes for `é`. Decoding returns `café`. Base64 transforms bytes into a transport representation; it does not identify the original character encoding or protect the text.
+
+If the receiver interprets the UTF-8 bytes as Latin-1, it gets corrupted-looking text instead of the original characters. Agree the encoding at the boundary and preserve it through storage and transport. For a second attempt, explain why character count, byte count, and user-perceived symbol count can all differ for emoji or combining accents.
+
 ## Interview Questions
 
 > [!question] Interview Questions

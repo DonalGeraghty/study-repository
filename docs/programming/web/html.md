@@ -114,6 +114,14 @@ Escape untrusted content before inserting it into HTML. Do not build markup thro
 
 Validate markup, inspect the accessibility tree, and test with keyboard navigation, multiple viewport sizes, and at least one screen reader workflow for critical pages. Automated accessibility rules catch useful classes of problems but cannot determine whether content and interaction make sense.
 
+## Worked Prediction: A Form That Looks Correct
+
+A form has a visible label beside `<input id="email" type="email" required>` and a button labelled Preview with no `type`. Predict two failures before changing the markup.
+
+**Check your reasoning:** An `id` alone does not supply a submitted field name; the input needs `name="email"`. A normal button inside a form defaults to submitting it, so a Preview action needs `type="button"`. The label must wrap the input or use `for="email"`; visual proximity is insufficient.
+
+Test by submitting with the keyboard, inspecting the request's form data, and checking the input's accessible name. Native validation can prevent an ordinary invalid submission but does not protect the server from a direct HTTP request. A complete answer connects document semantics, browser behaviour, and server validation.
+
 ## Interview Questions
 
 > [!question] Interview Questions

@@ -35,11 +35,11 @@ pipeline {
             steps {
                 sh './gradlew clean check'
             }
-        }
-    }
-    post {
-        always {
-            junit 'build/test-results/**/*.xml'
+            post {
+                always {
+                    junit 'build/test-results/**/*.xml'
+                }
+            }
         }
     }
 }
@@ -134,6 +134,14 @@ Separate product failure, test failure, pipeline defect, agent capacity, depende
 Authenticate users through an organisational identity provider and grant least privilege. Protect the controller, restrict administrative APIs, isolate agent networks, use CSRF and browser protections, and audit configuration and credential access.
 
 Monitor queue time, executor utilisation, agent provisioning, build duration, controller resource use, disk growth, failed jobs, and plugin health. Capacity problems are often visible first as queue delays or widespread timeouts.
+
+## Worked Scenario: Missing Test Reports
+
+A build fails and the pipeline's report-publishing step also fails because no workspace is available. Explain why placement matters when the pipeline uses `agent none` and allocates agents per stage.
+
+**Check your reasoning:** File-reading steps need the workspace where the files exist. Put test-report publication in the producing stage's `post` block, or explicitly transfer files and allocate a suitable agent. A top-level post block does not inherit a stage's node automatically.
+
+Separate a test failure from a build that never produced tests: both deserve evidence, but an empty report must not become a false green result. For a build stuck before any shell step, inspect queue/executor allocation and agent provisioning before debugging application code. The stage timing tells you which boundary to investigate.
 
 ## Interview Questions
 

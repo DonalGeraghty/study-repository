@@ -102,6 +102,21 @@ On failure, retain:
 
 Retries should classify flakes, not hide them. Distinguish product defects, test defects, environment failures, and capacity problems.
 
+## Worked Scenario: The Element Was Replaced
+
+A result panel re-renders after a search. A test saves a `WebElement` before searching, then reads it afterwards and receives a stale-element exception. Explain why increasing a sleep does not repair that reference.
+
+**Check your reasoning:** The stored reference identifies the old DOM node. Re-locate using a stable locator while waiting for the intended new state. For example, with Selenium's Java bindings and an existing driver:
+
+```java
+By status = By.cssSelector("[data-testid='search-status']");
+WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+wait.until(ExpectedConditions.textToBePresentInElementLocated(
+        status, "Search complete"));
+```
+
+This condition re-queries by locator. It still needs a meaningful application contract: if the old panel already says `Search complete`, the condition could pass before the new search finishes. Use query-specific results or a state transition that identifies the current operation. Test this with delayed responses, and use the resulting DOM, request, and screenshot evidence to decide whether the failure belongs to the test or product.
+
 ## Interview Questions
 
 > [!question] Interview Questions

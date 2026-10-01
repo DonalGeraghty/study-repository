@@ -83,6 +83,14 @@ Major cost drivers include stored bytes, storage class, operation volume, retrie
 
 Test permissions, signed URL expiry, uploads, checksum failure, concurrent updates, lifecycle rules, retention, object restore, and regional dependencies. A backup bucket in the same administrative and credential boundary may not protect against account compromise or mistaken policy changes.
 
+## Worked Prediction: Two Writers
+
+Writers A and B both read generation `100` of one object. Each attempts a replacement conditioned on the current generation still being `100`. Predict the result if A succeeds first.
+
+**Check your reasoning:** A creates a new generation. B's generation-match precondition fails, so it must re-read and decide whether to merge, retry against the new generation, or report a conflict. Retrying without the condition silently changes the operation into an overwrite.
+
+To create only when no live object exists, use the documented generation-match value `0`. A delayed event handler should identify the object generation as well as its name, since the name may now refer to different bytes. Test duplicate notifications and replacement between notification and read. Versioning can preserve old data; it does not itself decide which concurrent writer should win.
+
 ## Interview Questions
 
 > [!question] Interview Questions
@@ -95,6 +103,7 @@ Test permissions, signed URL expiry, uploads, checksum failure, concurrent updat
 ## Official References
 
 - [Cloud Storage overview](https://cloud.google.com/storage/docs/introduction)
+- [Request preconditions](https://cloud.google.com/storage/docs/request-preconditions)
 - [Storage classes](https://cloud.google.com/storage/docs/storage-classes)
 - [Access control overview](https://cloud.google.com/storage/docs/access-control)
 - [Data protection and recovery](https://cloud.google.com/storage/docs/protection-backup-recovery-overview)

@@ -324,6 +324,21 @@ One passing test cannot prove absence of a race. Design and memory-model reasoni
 - Assuming virtual threads eliminate resource limits.
 - Testing concurrency with fixed sleeps.
 
+## Worked Interleaving: Visibility Is Not Atomicity
+
+Two threads increment a shared counter initially equal to `0`. Predict the final value in this allowed read-modify-write interleaving:
+
+| Step | Thread A | Thread B |
+| --- | --- | --- |
+| 1 | Reads `0` | |
+| 2 | | Reads `0` |
+| 3 | Writes `1` | |
+| 4 | | Writes `1` |
+
+**Check your reasoning:** The result is `1`, although two increments were requested. Making the field volatile does not combine those steps into one operation. `AtomicInteger.incrementAndGet()` or a correctly shared lock protects this counter update.
+
+Change the invariant to transferring stock between two counters while preserving their sum. Two individually atomic increments are no longer enough to make the whole transfer atomic. Choose a boundary protecting the combined invariant and test it with controlled coordination. A thousand successful stress-test runs do not prove the absence of an untested interleaving.
+
 ## Interview Questions
 
 > [!question] Interview Questions

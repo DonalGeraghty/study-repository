@@ -111,6 +111,23 @@ dotnet test --configuration Release
 
 Use structured logs, exception stack traces, the debugger, dumps, traces, and runtime counters according to the failure being investigated.
 
+## Worked Prediction: Deferred Queries
+
+With `System.Linq` and generic collections available, predict both lines:
+
+```csharp
+var scores = new List<int> { 40, 80 };
+var passing = scores.Where(score => score >= 70);
+var snapshot = passing.ToList();
+scores.Add(90);
+Console.WriteLine(string.Join(",", passing));
+Console.WriteLine(string.Join(",", snapshot));
+```
+
+**Check your reasoning:** The first line is `80,90`; the second is `80`. The query enumerates the current source when used, while `ToList()` captured the earlier matching values. Enumerating twice can repeat work or observe different data. Materialisation copies the sequence, not every mutable object inside it.
+
+Change the elements to mutable objects and update a property after `ToList()`. Explain why that snapshot may still reflect the mutation. Likewise, a record provides value-oriented equality but does not automatically make referenced collections deeply immutable.
+
 ## Interview Questions
 
 > [!question] Interview Questions

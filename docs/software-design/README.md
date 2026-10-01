@@ -109,26 +109,7 @@ Do not introduce an interface, layer, or service only because a diagram appears 
 4. Apply DDD when business language, rules, and boundaries are genuinely complex.
 5. Practise by improving real code in small, testable steps.
 
-## Practice Exercise
-
-Design an order checkout flow. Include pricing, payment, persistence, and customer notification.
-
-- First, sketch the simplest working design.
-- Mark the domain rules and infrastructure details.
-- Identify which behaviour is likely to vary.
-- Apply only the principles or patterns that solve those pressures.
-- Explain one alternative and why you rejected it.
-
-The quality of the explanation matters more than the number of boxes in the diagram.
-
-## Completion Checklist
-
-- [ ] I can distinguish a principle, pattern, and domain model.
-- [ ] I can explain cohesion and coupling with examples.
-- [ ] I can justify composition or inheritance for a given relationship.
-- [ ] I can locate business rules and infrastructure boundaries.
-- [ ] I can discuss the cost as well as the benefit of an abstraction.
-- [ ] I can evolve a design from evidence instead of guessing every future need.
+Use the checkout scenario in the [SOLID interview questions](./solid-principles.md#interview-questions) to connect these topics: sketch pricing, payment, persistence, and notification; mark domain rules and infrastructure boundaries; then justify each abstraction from likely change. Follow with the [pattern-ordering scenario](./design-patterns.md#worked-scenario-decorator-order-changes-meaning) and [aggregate-boundary scenario](./domain-driven-design.md#worked-scenario-choose-the-consistency-boundary). Assess the explanation, contract, and trade-off rather than the number of patterns used.
 
 ## Related Guides
 

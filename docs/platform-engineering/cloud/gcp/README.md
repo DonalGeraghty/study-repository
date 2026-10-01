@@ -106,6 +106,8 @@ Represent projects, APIs, IAM, networks, services, and policies as reviewed code
 
 Use reusable modules for stable organisational patterns while keeping service-specific behaviour visible. Detect drift and route exceptional manual changes back into code.
 
+See [Terraform](../../terraform.md) for provider-independent concepts covering state, modules, drift, and safe infrastructure changes.
+
 ## Observability and Reliability
 
 Combine application logs, metrics, traces, error reporting, audit logs, configuration events, and service health. Define service-level indicators from user outcomes and attach alerts to actions an operator can take.
@@ -124,17 +126,7 @@ Validate infrastructure code, policies, images, permissions, and configuration i
 
 See [Cloud Build](./gcp-cloud-build.md) for managed build execution, triggers, artifacts, and software-supply-chain controls.
 
-## Readiness Checklist
-
-You should be able to:
-
-- explain organisations, folders, projects, regions, zones, and policy inheritance;
-- design workforce and workload identity without long-lived keys;
-- trace VPC, firewall, ingress, egress, DNS, and hybrid paths;
-- choose compute and data services from workload characteristics;
-- manage infrastructure and IAM as reviewed code;
-- define telemetry, reliability, backup, restore, and disaster recovery;
-- connect service selection to shared responsibility and cost.
+For a study session, trace one application request through [IAM](./gcp-iam.md), [Cloud Run](./gcp-cloud-run.md), and its [Firestore](./gcp-firestore.md) or [Cloud Storage](./gcp-cloud-storage.md) data boundary. Answer each guide's interview questions and worked scenario before checking the explanation. Then use [Terraform](../../terraform.md) and [Cloud Build](./gcp-cloud-build.md) to explain how that system changes safely. Include identity, location, failure, recovery, and cost in your reasoning.
 
 ## Official References
 

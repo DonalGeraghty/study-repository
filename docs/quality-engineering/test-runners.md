@@ -85,6 +85,14 @@ Pin runner and plugin versions, emit machine-readable results where the CI platf
 
 The repositories use every runner in the table: Java puzzle and browser projects use JUnit, an older API suite uses TestNG, the Flask APIs use `unittest`, Python browser suites use pytest, Nyx uses Vitest and Testing Library, and Aether uses Node's test runner.
 
+## Worked Prediction: Would This Test Catch a Bug?
+
+Change the shipping implementation from `order_total >= 50` to `order_total > 50`. Predict which existing case fails before running the suite.
+
+**Check your reasoning:** The `at-boundary` case must fail because exactly 50 now costs 5. If every test passes, investigate whether the changed code was imported, the test was discovered, or the expected value copied the same faulty condition. Deliberately perturbing a rule in a scratch copy can reveal a weak test without treating line coverage as proof.
+
+Next, imagine a session-scoped fixture returns one mutable list. Test A appends to it and test B expects it empty. Fresh assertion objects do not isolate the shared fixture; use appropriate fixture scope or reset owned state. Confirm each test independently and in a different order before enabling parallel execution. Check discovered test counts as well as the process exit status.
+
 ## Interview Questions
 
 > [!question] Interview Questions

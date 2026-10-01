@@ -656,6 +656,14 @@ Test at the lowest level that proves the behaviour reliably. A small number of e
 - Generating random data without recording it in failure output.
 - Running destructive tests against an uncontrolled environment.
 
+## Worked Timeline: Lost Update or Duplicate Request?
+
+Two clients read an order with strong ETag `"v3"`. Client A sends a valid update with `If-Match: "v3"`, creating version `v4`. Client B then sends its own update with the old tag. Predict the response.
+
+**Check your reasoning:** The stale precondition fails with 412, preventing B from silently overwriting A. B must fetch current state and resolve the conflict; retrying with a fresh tag without reconsidering the change defeats the protection.
+
+Now change the operation to a create-order POST whose response is lost. An ETag on an existing resource does not by itself deduplicate that request. A server-supported idempotency key can associate retries with the same business operation, but its payload matching, retention, concurrency, and failure semantics must be explicit. Test timeout after commit, simultaneous retries, and reuse of a key with different content. Status codes alone are insufficient: assert the number and ownership of durable orders too.
+
 ## Interview Questions
 
 > [!question] Interview Questions

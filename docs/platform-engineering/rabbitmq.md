@@ -159,7 +159,7 @@ These mechanisms protect different gaps and cannot substitute for one another.
 ## Interview Questions
 
 > [!question] Interview Questions
-> - How would you design an image-processing topology where one command is handled by exactly one worker, but completion must independently notify billing and analytics? Name the exchanges, routing keys, and queues you'd use.
+> - How would you design an image-processing topology with competing workers for commands and independent billing and analytics subscriptions for completion events, and which exchanges, routing keys, and queues would you use?
 > - Where would you place the acknowledgement point, and why does that placement matter for redelivery?
 > - How would you handle a message that fails processing repeatedly instead of requeueing it forever?
 > - What idempotency key would protect the worker from processing the same command twice?

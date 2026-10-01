@@ -49,9 +49,22 @@ Spring Boot can read configuration from files, environment variables, system pro
 @ConfigurationProperties("clients.catalogue")
 @Validated
 public record CatalogueProperties(
-        @NotBlank URI baseUrl,
-        @Positive Duration timeout) {}
+        @NotNull URI baseUrl,
+        @NotNull Duration timeout) {
+    public CatalogueProperties {
+        if (baseUrl != null && (!baseUrl.isAbsolute()
+                || !"https".equalsIgnoreCase(baseUrl.getScheme())
+                || baseUrl.getHost() == null)) {
+            throw new IllegalArgumentException("Use an absolute HTTPS base URL");
+        }
+        if (timeout != null && (timeout.isZero() || timeout.isNegative())) {
+            throw new IllegalArgumentException("Timeout must be positive");
+        }
+    }
+}
 ```
+
+This example assumes Jakarta Bean Validation is available and the properties type is registered through configuration-properties scanning or explicit enablement. `@NotBlank` validates character sequences, not `URI`; numeric `@Positive` is not a portable `Duration` constraint. Use supported constraints and explicit domain checks so invalid startup configuration fails for the intended reason.
 
 Use profiles sparingly for cohesive environment differences. Do not store credentials in ordinary configuration files; inject them through an appropriate secret system and prevent them from appearing in logs or actuator output.
 
@@ -63,6 +76,12 @@ Spring MVC uses a servlet-based execution model; WebFlux supports reactive, non-
 @RestController
 @RequestMapping("/results")
 class ResultController {
+    private final ResultService service;
+
+    ResultController(ResultService service) {
+        this.service = service;
+    }
+
     @GetMapping("/{id}")
     ResultResponse get(@PathVariable long id) {
         return service.find(id);
@@ -104,8 +123,8 @@ sequenceDiagram
     Bean-->>Proxy: result
     Proxy->>Proxy: commit/rollback
     Proxy-->>Caller: result
-    Note over Bean: Self-invocation bypasses the proxy
-    Bean->>Bean: this.transactionalMethod() (no proxy, no transaction)
+    Note over Bean: Self-invocation bypasses new transaction advice
+    Bean->>Bean: this.transactionalMethod() (existing transaction may remain)
 ```
 
 `@Transactional` is commonly applied through proxies. Self-invocation and calls outside the managed proxy can therefore bypass advice. Keep transactions short, avoid remote calls inside them, and verify rollback rules for checked and unchecked failures.
@@ -146,6 +165,14 @@ Context caching makes repeated compatible configurations cheaper. Excessive mock
 - loading the full context for every test;
 - retrying non-idempotent operations without a safety model.
 
+## Worked Scenario: A Transaction That Never Started
+
+An unannotated method `checkout()` calls `this.reserve()` on the same bean. Only `reserve()` has `@Transactional`. With ordinary proxy-based transaction management and no existing transaction, predict whether the annotation starts one.
+
+**Check your reasoning:** The internal call never crosses the proxy, so the annotation is not applied. If the outer call already had a transaction, the inner work could still participate in it; self-invocation means no new advice, not that a transaction can never exist.
+
+Move the transactional operation behind a separate injected service, or put the intended boundary on an externally invoked method. Verify rollback through the real Spring proxy and a representative database: perform one write, trigger the intended failure, and assert the durable state. A plain unit test calling `new Service()` cannot prove proxy behaviour, and a test-managed transaction can conceal a missing application boundary.
+
 ## Interview Questions
 
 > [!question] Interview Questions
@@ -159,6 +186,7 @@ Context caching makes repeated compatible configurations cheaper. Excessive mock
 ## Official References
 
 - [Spring Framework reference](https://docs.spring.io/spring-framework/reference/)
+- [Jakarta Bean Validation constraint contracts](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html)
 - [Spring Boot reference](https://docs.spring.io/spring-boot/reference/)
 - [Spring Data](https://spring.io/projects/spring-data)
 - [Testing Spring Boot applications](https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html)

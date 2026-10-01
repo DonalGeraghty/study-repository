@@ -291,6 +291,14 @@ This does not mean all are needed together. Each pattern must earn its place.
 - Building generic repositories that erase domain language.
 - Creating page objects with public locators and assertions for every test.
 
+## Worked Scenario: Decorator Order Changes Meaning
+
+Compare a metrics decorator around a retry decorator with a retry decorator around a metrics decorator. The underlying operation fails transiently twice and succeeds on its third attempt. Predict how many calls the metrics layer observes.
+
+**Check your reasoning:** Metrics outside retry observes one logical operation including its retries; metrics inside retry observes three attempts. Both can be useful, but labels and latency meaning must be explicit. A design that reports attempts as customer operations can mislead incident analysis.
+
+For payment operations, first establish whether repetition is safe and how the provider recognises the same operation. A generic retry wrapper cannot invent that contract. Explain why the provider-specific translation belongs in an adapter, while reusable timing behaviour can live in a decorator. The pattern names should follow those responsibilities, not replace their explanation.
+
 ## Interview Questions
 
 > [!question] Interview Questions

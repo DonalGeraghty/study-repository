@@ -129,6 +129,26 @@ A balanced strategy includes:
 - inaccessible custom controls;
 - premature memoisation hiding a data-flow problem.
 
+## Worked Prediction: State Updates
+
+Assume `count` is `0` and one click handler executes:
+
+```tsx
+setCount(count + 1);
+setCount(count + 1);
+```
+
+Predict the next rendered count, then compare with:
+
+```tsx
+setCount(current => current + 1);
+setCount(current => current + 1);
+```
+
+**Check your reasoning:** The first handler produces `1`: both expressions read the same render's snapshot and request the same replacement. The second produces `2`: each updater consumes the pending result of the previous update. Neither form changes the `count` variable inside the running handler. Keep updater functions pure. See [React's state-update queue](https://react.dev/learn/queueing-a-series-of-state-updates).
+
+For a second test, let a search for `a` start before a search for `ab`, but return afterwards. Explain why showing the last response received can display stale results. Cancel obsolete work where supported and guard result ownership so only the current request can update the visible state; test this by controlling response order.
+
 ## Interview Questions
 
 > [!question] Interview Questions

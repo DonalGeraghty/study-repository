@@ -32,7 +32,7 @@ A partition is Kafka's unit of order and parallelism. Order is guaranteed within
 
 ## Producers and Partitioning
 
-A producer chooses a partition directly, by key hash, or by round robin when no key is supplied:
+A producer chooses a partition explicitly or through its configured partitioner. Keys commonly determine partition placement; keyless distribution depends on the client and configuration and may use sticky batching rather than round robin:
 
 ```python
 from confluent_kafka import Producer
@@ -67,7 +67,8 @@ Keying by `order_id` sends every event for that order to the same partition, whi
 ## Consumers and Consumer Groups
 
 ```python
-from confluent_kafka import Consumer
+import json
+from confluent_kafka import Consumer, KafkaException
 
 consumer = Consumer({
     "bootstrap.servers": "kafka-1:9092,kafka-2:9092",
@@ -77,19 +78,24 @@ consumer = Consumer({
 })
 consumer.subscribe(["orders"])
 
-while True:
-    msg = consumer.poll(1.0)
-    if msg is None or msg.error():
-        continue
+try:
+    while True:
+        msg = consumer.poll(1.0)
+        if msg is None:
+            continue
+        if msg.error():
+            raise KafkaException(msg.error())
 
-    event = json.loads(msg.value())
-    try:
+        event = json.loads(msg.value())
         reserve_inventory_idempotently(event)
-    except TemporaryDependencyError:
-        continue  # do not commit; redelivered on next poll cycle
-
-    consumer.commit(msg, asynchronous=False)
+        consumer.commit(message=msg, asynchronous=False)
+finally:
+    consumer.close()
 ```
+
+This sketch assumes the application provides `reserve_inventory_idempotently`. An unhandled processing failure stops the loop without committing that record. Restart then resumes from the last committed position, subject to retention. A production supervisor needs bounded restart/backoff and a poison-message policy; stopping is deliberately simpler here than implementing a partition-aware retry scheduler.
+
+**Polling position and committed offset are different.** Polling advances the current position even when processing fails. Merely skipping a commit and calling `poll()` again does not request the same record. Committing a later record in that partition can skip the failed work on restart. A continuing consumer must explicitly coordinate retry, pause/seek behaviour, and contiguous completed offsets.
 
 Kafka assigns each partition to exactly one consumer within a group, so a group's parallelism is bounded by its partition count; a fourth consumer in a three-partition group sits idle. Two groups reading the same topic each maintain their own offsets and never compete with each other, which is how `inventory` and `analytics` can consume the same events independently, including at different retention-bound starting points.
 
@@ -160,6 +166,14 @@ A replication factor of three with `min.insync.replicas=2` tolerates one broker 
 - running with `acks=1` or no `min.insync.replicas` floor and calling the result durable;
 - letting an incompatible schema change reach consumers without a compatibility check.
 
+## Worked Prediction: The Offset Gap
+
+A partition's committed offset is `40`, meaning the next record to resume is record `40`. The consumer polls record `40`, processing fails, then incorrectly continues and successfully processes record `41`. What happens if it commits record `41`?
+
+**Check your reasoning:** In this client, committing that message stores the next offset, `42`. A restarted consumer resumes there; record `40` has been skipped for the group even though its processing never succeeded. Not committing a failed record is insufficient when later commits pass it. Track contiguous completion within each partition, or stop/pause that partition until the failure has been handled deliberately.
+
+For a second attempt, let the side effect for record `40` commit but crash before the offset commit. Replay can repeat the side effect, so the operation needs a durable idempotency key. Explain why Kafka transactions alone cannot make an unrelated email or database write exactly once.
+
 ## Interview Questions
 
 > [!question] Interview Questions
@@ -172,6 +186,8 @@ A replication factor of three with `min.insync.replicas=2` tolerates one broker 
 ## Official References
 
 - [Kafka documentation](https://kafka.apache.org/documentation/)
+- [Consumer positions and committed offsets](https://docs.confluent.io/kafka/design/consumer-design.html)
+- [Confluent Python client API](https://docs.confluent.io/platform/current/clients/confluent-kafka-python/html/index.html)
 - [Consumer groups and rebalancing](https://kafka.apache.org/documentation/#intro_consumers)
 - [Replication](https://kafka.apache.org/documentation/#replication)
 - [Exactly-once semantics](https://kafka.apache.org/documentation/#semantics)

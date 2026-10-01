@@ -56,7 +56,7 @@ A promise represents a future completion or failure. `async` functions return pr
 async function loadUser(id: string, signal: AbortSignal): Promise<User> {
   const response = await fetch(`/api/users/${id}`, { signal });
   if (!response.ok) throw new Error(`Request failed: ${response.status}`);
-  return response.json() as Promise<User>;
+  return parseUser(await response.json());
 }
 ```
 
@@ -72,7 +72,7 @@ sequenceDiagram
     EL->>EL: run other work
     Net-->>Fn: response resolves
     EL->>Fn: resume after await
-    Fn-->>Caller: return parsed User
+    Fn-->>Caller: return validated User or reject
 ```
 
 Start independent work before awaiting it when concurrency is intended, but bound large fan-out. Handle rejection, cancellation, timeouts, and cleanup. A successful HTTP request still needs application-level status and data validation.
@@ -113,6 +113,35 @@ npm run typecheck
 npm test
 npm run build
 ```
+
+## Worked Prediction: Ordering and Runtime Validation
+
+Predict the log order in a normal browser or Node.js execution:
+
+```javascript
+console.log("start");
+setTimeout(() => console.log("timer"), 0);
+Promise.resolve().then(() => console.log("promise"));
+console.log("end");
+```
+
+**Check your reasoning:** `start`, `end`, `promise`, `timer`. Synchronous code finishes before queued promise reactions run; the timer callback runs afterwards. Zero milliseconds is not a promise of immediate execution. A long synchronous loop would delay both callbacks.
+
+Now suppose an API returns `{ "name": 42 }`. A TypeScript assertion such as `as User` does not turn `42` into text or verify the response. A small boundary can establish an actual runtime contract:
+
+```typescript
+type User = { name: string };
+
+function parseUser(value: unknown): User {
+  if (typeof value !== "object" || value === null ||
+      !("name" in value) || typeof value.name !== "string") {
+    throw new Error("Invalid user response");
+  }
+  return { name: value.name };
+}
+```
+
+The earlier loader calls this validator instead of asserting the type. Test `null`, a missing name, a numeric name, and valid text. Validation establishes shape; ownership and authorisation still need their own checks.
 
 ## Interview Questions
 

@@ -103,6 +103,24 @@ npx cypress run
 
 Start the application outside the Cypress test process, wait for a readiness endpoint, and stop it after the run. Pin the Cypress binary and dependencies through the project’s package and CI image strategy.
 
+## Worked Prediction: One Check Versus Retried Assertion
+
+The total starts as `Calculating` and later becomes `€42.00`. Compare:
+
+```typescript
+cy.get("[data-cy='total']").invoke("text").then(text => {
+  expect(text.trim()).to.equal("€42.00");
+});
+```
+
+```typescript
+cy.get("[data-cy='total']").should("have.text", "€42.00");
+```
+
+**Check your reasoning:** A `.then()` callback is not retried, so it can assert the intermediate text. The linked query and `.should()` assertion retry until the expected state or timeout. This is condition-based synchronisation, not a longer arbitrary delay. Keep callbacks used for retried assertions free of side effects so a retry does not submit another order.
+
+The guide's `cy.findByRole` examples require Cypress Testing Library commands to be installed and registered; they are not built-in Cypress commands. The examples here use core selectors. Register `cy.intercept()` before the action and distinguish observing the real server from stubbing it when describing what a passing test proves.
+
 ## Interview Questions
 
 > [!question] Interview Questions

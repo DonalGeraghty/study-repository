@@ -90,6 +90,14 @@ Interactive PCA, clustering, and regression controls should constrain invalid va
 
 The crawler uses pandas for daily CSV comparison. Weathercraft's asset-cleaning helper uses Pillow and NumPy. The R Shiny projects use ggplot2 and a set of Leaflet and spatial mapping packages.
 
+## Worked Prediction: A Plausible Wrong Total
+
+Use orders `(product_id=1, quantity=2, unit_price=10)` and `(product_id=2, quantity=1, unit_price=5)`. Products map IDs `1` and `2` to category `Books`. Predict the example's result before running it: `Books` has revenue `25`.
+
+Now duplicate product `1` in the products table. Without join validation, the first order can appear twice and the total becomes `45`. With `validate="many_to_one"`, the operation should fail instead. Remove product `2`: the merge indicator should reject the unknown reference.
+
+Finally, set a category to a missing value. A matched product ID alone does not establish a valid category, and grouping can omit missing keys. Decide whether to reject missing categories or retain an explicit unknown group, then test the row counts and totals. Also validate positive quantities and the intended numeric representation before trusting the arithmetic. A polished chart cannot reveal these contracts on its own.
+
 ## Interview Questions
 
 > [!question] Interview Questions

@@ -350,6 +350,14 @@ Applying one principle can create tension with another. Splitting responsibiliti
 - Mocking every collaborator and coupling tests to call order.
 - Applying all five principles to trivial data structures.
 
+## Worked Scenario: A Contract, Not Just an Interface
+
+An `OrderStore.save()` contract promises that a successful return means the order is durably stored. A new implementation returns immediately after placing the order in an in-memory queue. Does matching the method signature make it substitutable?
+
+**Check your reasoning:** No. The implementation weakens the success guarantee: a crash can lose a supposedly saved order. This is a behavioural substitution problem. Either fulfil the existing contract or expose a different asynchronous acceptance/completion contract and update clients deliberately.
+
+Run the same contract checks against each implementation: success, failure, duplicate request, and the documented visibility/durability boundary. Dependency injection makes replacement convenient but cannot make incompatible behaviour correct. Also challenge the abstraction itself: if clients only need a query, they should not depend on a broad storage-management interface.
+
 ## Interview Questions
 
 > [!question] Interview Questions

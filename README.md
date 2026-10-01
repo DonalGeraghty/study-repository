@@ -28,7 +28,7 @@ The material is organised by subject rather than by a single fixed curriculum. E
 
 1. Read the guide's opening definition and mental model.
 2. Explain the topic aloud without looking at the page.
-3. Check the common failure modes or readiness checklist.
+3. Answer one interview question before checking the relevant explanation.
 4. Write down one fact that did not come back immediately.
 
 ### Fifteen-minute refresh
@@ -42,10 +42,32 @@ The material is organised by subject rather than by a single fixed curriculum. E
 
 1. Read one guide in order.
 2. Run or re-create an example in a scratch project.
-3. Complete a practice exercise without copying the solution.
+3. Complete a worked prediction or reconstruct an example without copying the solution.
 4. Compare the result with the guide and record what changed in your understanding.
 
 Active recall matters more than rereading. A useful session ends with an explanation, prediction, small implementation, or decision—not merely a completed page.
+
+## Learn, Remember, and Test Yourself
+
+Use each guide as a cycle rather than a page to finish:
+
+1. **Learn:** explain the opening mental model, trace an example, and identify the rule that makes it work.
+2. **Remember:** close the guide and reconstruct the key distinctions or diagram from memory. Prefer a concrete contrast, such as a queue acknowledgement versus a database commit, to memorising a definition alone.
+3. **Test:** predict a worked example's result before reading its explanation, then answer the interview questions aloud. Change one constraint and check whether your answer still holds.
+4. **Correct:** compare with the guide, record the specific missed rule, and try a different example. Recognising the answer after reading it is not yet independent recall.
+
+Use this simple self-marking scale for an answer:
+
+| Score | Evidence |
+| --- | --- |
+| 0 | Could not answer, or the explanation was incorrect |
+| 1 | Remembered a definition but needed hints to apply it |
+| 2 | Explained the mechanism and solved the example independently |
+| 3 | Also explained a failure case, trade-off, and way to verify the claim |
+
+For design questions, compare reasoning and constraints rather than looking for one prescribed architecture. Revisit missed questions in your next session, then after a few days and again after a longer gap; adjust the interval from what you can actually recall. Mix a previous topic into a new session instead of rereading one guide until its wording feels familiar.
+
+A scratch note can be as small as `topic | question missed | corrected rule | next attempt`. No plugin or additional frontmatter is needed. Keep personal answers separate from the guide so the next attempt remains a real test.
 
 ## Browse by Subject
 
@@ -77,14 +99,16 @@ Active recall matters more than rereading. A useful session ends with an explana
 4. [Caching](./docs/platform-engineering/caching.md)
 5. [Publish/Subscribe](./docs/platform-engineering/pub-sub.md)
 6. [Cloud Platforms](./docs/platform-engineering/cloud/README.md)
-7. [Kubernetes](./docs/platform-engineering/kubernetes.md)
+7. [Terraform](./docs/platform-engineering/terraform.md)
+8. [Kubernetes](./docs/platform-engineering/kubernetes.md)
 
 ## Reading Conventions
 
 - Code blocks are examples to inspect, run, and alter; they are not production-ready templates for every context.
 - Diagrams show a mental model, not every implementation detail.
 - **Common failure modes** explain where an apparently correct approach breaks down.
-- **Practice** and **readiness** sections turn recognition into recall.
+- **Worked predictions** provide an expected result and reasoning; attempt them before reading the explanation.
+- **Interview Questions** test whether you can explain mechanisms, apply them, and discuss failure cases without hints.
 - **Related guides** connect a topic to its language, design, testing, and operational context.
 
 For the full table of contents, go to the [Documentation Library](./docs/README.md).

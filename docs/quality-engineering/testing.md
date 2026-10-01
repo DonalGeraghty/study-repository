@@ -759,6 +759,23 @@ This risk-to-evidence mapping is more useful than listing tools before understan
 - Reporting findings without impact, context, or reproduction evidence.
 - Keeping obsolete tests because they once found a defect.
 
+## Worked Self-Test: Derive the Cases
+
+A promotion gives 10% off only when the customer is a member, the pre-discount basket is at least EUR 50, and no other promotion is active. Assume amounts are non-negative integer cents. Write a decision table and boundary cases before reading the answer.
+
+**Check your reasoning:** A compact table can combine conditions that do not affect an outcome:
+
+| Member? | Basket at least 5000 cents? | Other promotion? | Discount |
+| --- | --- | --- | --- |
+| No | Any | Any | None |
+| Yes | No | Any | None |
+| Yes | Yes | Yes | None |
+| Yes | Yes | No | 10% |
+
+For an eligible member without another promotion, use 4999, 5000, and 5001 cents to challenge the boundary. Specify rounding separately before calculating expected totals. Test the rule cheaply below the UI, then add integration checks for trusted membership and promotion data, plus a small user journey proving the displayed price matches the accepted order.
+
+For a second attempt, make the threshold apply after another discount. Explain which requirement changed and which tests must change. A useful answer states its assumptions and expected outcomes instead of merely listing test categories.
+
 ## Interview Questions
 
 > [!question] Interview Questions

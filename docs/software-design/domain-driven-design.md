@@ -333,6 +333,14 @@ Bounded contexts can inform later service boundaries because they clarify owners
 - Wrapping every primitive without adding meaning.
 - Splitting contexts into network services by default.
 
+## Worked Scenario: Choose the Consistency Boundary
+
+An order's total must equal its accepted lines, and submitted orders cannot gain new lines. Inventory spans thousands of products used by many orders. Decide which rules belong inside the order aggregate and whether all inventory should join it.
+
+**Check your reasoning:** The order owns line changes, total calculation, and submission rules. Loading all inventory into that aggregate creates excessive contention and unrelated lifecycle coupling. Model stock reservation through a separate boundary with explicit success, rejection, timeout, and compensation outcomes.
+
+A useful answer names what must be atomic now and what may complete later. An `OrderSubmitted` event cannot by itself prove payment or stock reservation succeeded. Test prohibited line edits, mixed currencies, duplicate reservation messages, and compensation after a later step fails. Different aggregate designs are valid when their consistency requirements differ; explain the invariant that justifies yours.
+
 ## Interview Questions
 
 > [!question] Interview Questions

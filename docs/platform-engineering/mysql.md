@@ -123,6 +123,14 @@ The leading index columns should support filtering and ordering used by the quer
 
 `tododos-express-api` uses the Node.js `mysql` and `promise-mysql` packages behind an Express API.
 
+## Worked Prediction: Two Buyers, One Item
+
+Start with stock `1`. Two transactions each try to reserve one item using the example. Predict the outcome when both follow the row-lock and affected-row checks.
+
+**Check your reasoning:** One transaction locks the product first. If it commits, the second locking read observes the updated stock and must reject the reservation. There should be one reservation and stock `0`. An application that ignores an update count of zero could incorrectly insert a second reservation even though the stock constraint still holds.
+
+Repeat the successful request with the same `request_id`. The unique constraint detects the duplicate; roll back the whole new attempt, including any stock change, then return or reconcile the original outcome. Verify that the original request payload matches before calling it the same operation. The `?` placeholders require a parameter-binding client, and these transaction examples assume a transactional engine such as InnoDB.
+
 ## Interview Questions
 
 > [!question] Interview Questions

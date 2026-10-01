@@ -265,6 +265,22 @@ Use `@SafeVarargs` only when the method truly does not perform potentially unsaf
 - Performing unchecked casts without validating the underlying structure.
 - Adding `@SafeVarargs` without proving safety.
 
+## Worked Prediction: What Can Be Written?
+
+For each commented line, decide whether it compiles before using an IDE:
+
+```java
+List<Integer> integers = new ArrayList<>(List.of(1, 2));
+List<? extends Number> source = integers;
+List<? super Integer> target = new ArrayList<Number>();
+Number first = source.get(0);
+target.add(3);
+// source.add(3);
+// Integer value = target.get(0);
+```
+
+**Check your reasoning:** Both commented lines fail. The exact subtype behind `source` is unknown, so adding an arbitrary `Integer` is unsafe. Reading from `target` only guarantees `Object`, since it could be a list containing other number types or objects. `extends` supports typed reading; `super` supports the intended writes. These are type permissions, not promises that an underlying list supports mutation: an unmodifiable implementation may still reject an allowed call at runtime.
+
 ## Interview Questions
 
 > [!question] Interview Questions

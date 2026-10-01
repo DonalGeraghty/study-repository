@@ -9,7 +9,7 @@ SQL is a declarative language for defining, querying, and changing relational da
 
 ## Tables, Keys, and Constraints
 
-A table represents a relation with named columns and rows. Constraints keep invalid states out of the database:
+A table represents a relation with named columns and rows. Constraints keep invalid states out of the database. This study schema uses PostgreSQL-style identity syntax; adapt it to your engine:
 
 ```sql
 CREATE TABLE test_run (
@@ -18,11 +18,20 @@ CREATE TABLE test_run (
     status      VARCHAR(20) NOT NULL
                 CHECK (status IN ('passed', 'failed', 'cancelled')),
     started_at  TIMESTAMP NOT NULL,
+    duration_ms BIGINT CHECK (duration_ms >= 0),
     UNIQUE (suite_name, started_at)
 );
 ```
 
-Primary keys identify rows. Foreign keys enforce relationships. `NOT NULL`, `UNIQUE`, and `CHECK` constraints express invariants nearer to the data than application validation alone.
+Primary keys identify rows. Foreign keys enforce relationships. `NOT NULL`, `UNIQUE`, and `CHECK` constraints express invariants nearer to the data than application validation alone. The join examples use this child table:
+
+```sql
+CREATE TABLE test_failure (
+    id       BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    run_id   BIGINT NOT NULL REFERENCES test_run(id),
+    severity VARCHAR(20) NOT NULL
+);
+```
 
 ## Query Processing
 
@@ -127,6 +136,25 @@ Inspect the database’s execution plan and measure with representative data. Co
 Always bind untrusted values as parameters. String concatenation creates injection risk and can break quoting rules.
 
 Test migrations forward and, where supported, recovery or rollback procedures. Verify constraints, transaction behaviour, permissions, indexes, and queries against the actual database engine because SQL dialects and concurrency semantics differ.
+
+## Worked Prediction: Where a Filter Belongs
+
+Assume runs have IDs `1`, `2`, and `3`. The failure table has two rows for run `1`, one for run `2`, and none for run `3`. Predict the earlier `LEFT JOIN` aggregation: the counts are `2`, `1`, and `0` because `COUNT(f.id)` ignores the null placeholder.
+
+Now count only critical failures while retaining every run:
+
+```sql
+SELECT r.id, COUNT(f.id) AS critical_count
+FROM test_run AS r
+LEFT JOIN test_failure AS f
+  ON f.run_id = r.id AND f.severity = 'critical'
+GROUP BY r.id
+ORDER BY r.id;
+```
+
+**Check your reasoning:** The `ON` predicate decides which failure rows match while preserving all left-hand runs. Moving `f.severity = 'critical'` into `WHERE` removes null-extended rows and runs without critical matches. Replacing `COUNT(f.id)` with `COUNT(*)` incorrectly counts the placeholder as one.
+
+Create cases with zero, one, and multiple critical failures, plus only non-critical failures. Predict the complete output table before executing either query. These tests distinguish correct cardinality from a query that merely runs without error.
 
 ## Interview Questions
 

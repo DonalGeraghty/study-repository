@@ -1,6 +1,6 @@
 ---
 tags:
-  - [ ]
+  - replace-with-folder-path-under-docs
 ---
 
 # {{title}}
@@ -20,7 +20,7 @@ producer/caller -> the thing being explained -> result
 ## Worked Example
 
 ```text
-Minimal, runnable-looking example that demonstrates the core mechanism.
+Minimal example that demonstrates the core mechanism. State required setup and mark any pseudocode explicitly.
 ```
 
 ## Common Failure Modes
@@ -29,9 +29,21 @@ Minimal, runnable-looking example that demonstrates the core mechanism.
 - 
 - 
 
-## Practice
+## Worked Prediction
 
-One concrete scenario the reader can design or implement from memory, without copying the worked example.
+Give a concrete input, constraint, or failure scenario. Ask the reader to predict the outcome before continuing.
+
+**Check your reasoning:** Explain the expected result and why it follows. For a design problem, state evaluation criteria and acceptable trade-offs instead of implying one universal answer. Add one changed constraint for a second attempt.
+
+## Interview Questions
+
+> [!question] Interview Questions
+> - How does the core mechanism work, and which guarantees does it actually provide?
+> - How would you trace the worked example from input to outcome?
+> - What happens when the main dependency or assumption fails?
+> - When would you choose an alternative, and what trade-off would change your decision?
+
+Replace these prompts with 4–8 specific questions answered by this guide. Keep exactly one Interview Questions section, after the main content and before references.
 
 ## Official References
 

@@ -127,6 +127,14 @@ Test:
 - long content, empty states, errors, and loading states;
 - zoom and text scaling.
 
+## Worked Prediction: Width and the Cascade
+
+An element has `width: 200px`, `padding: 20px`, and `border: 5px solid`. Predict its outside border width, excluding margin, with `content-box` and with `border-box`.
+
+**Check your reasoning:** `content-box` produces `250px` because horizontal padding and borders add 50 pixels. `border-box` produces `200px`; its content box becomes 150 pixels. A declared width and the space occupied are not always the same quantity.
+
+Now consider `.notice { color: blue; }` followed by `p { color: red; }` on `<p class="notice">`. With the same origin, importance, and layer, blue wins because class specificity beats type specificity. Moving the `p` rule later does not overcome that difference. Use computed styles to identify the winning rule before modifying selectors. Then test the box with a long unbroken word and explain why width arithmetic alone does not guarantee readable overflow behaviour.
+
 ## Interview Questions
 
 > [!question] Interview Questions

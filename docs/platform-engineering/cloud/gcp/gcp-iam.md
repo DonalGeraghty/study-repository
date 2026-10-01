@@ -118,6 +118,14 @@ Manage IAM through reviewed code where practical. Avoid authoritative policy res
 
 Test positive and negative access: prove that required work succeeds and forbidden work fails. Validate policy changes in a non-production hierarchy, inspect the plan for membership removal or privilege expansion, and preserve an emergency recovery path.
 
+## Worked Scenario: The Wrong Identity Gets Permission
+
+A deployment succeeds, but its Cloud Run service receives a permission denial reading a bucket. An engineer grants the deployer more storage permissions. Predict whether that fixes the request.
+
+**Check your reasoning:** The downstream read uses the runtime service account, which can differ from the deployer. Identify the denied principal, operation, and resource in evidence before changing a binding. Evaluate inherited grants, conditions, and deny policies, then grant only the runtime access needed at the appropriate scope.
+
+Test that the runtime can read its required bucket and cannot read another tenant's bucket or write when only reading is required. Also inspect who can deploy code as, attach, or impersonate that identity: indirect access can matter as much as a visible storage role. Successful deployment and authorised runtime data access are separate proofs.
+
 ## Interview Questions
 
 > [!question] Interview Questions

@@ -38,6 +38,14 @@ Vue CLI projects may use Babel to transform modern JavaScript syntax for configu
 
 Nyx uses React Router, Recharts, Motion, and OGL. The Vue project uses Vue Router and BootstrapVue-related components. The browser games use the Canvas API directly rather than a rendering framework.
 
+## Worked Scenario: A Routed Chart Page
+
+A report page uses a client router, chart library, and animated loading panel. Design checks for a bookmarked URL, no data, a failed API request, keyboard navigation, and reduced motion before choosing another package.
+
+**Check your reasoning:** The server must deliver the application at the deep link; the router selects the view and handles unknown paths. The data boundary validates units and values before the chart sees them. Empty data needs an explicit explanation rather than an invented zero. Errors need a recoverable state; important chart values need a text or tabular equivalent. Animation must not delay access, and leaving the page must release listeners and graphics resources.
+
+A useful test observes the report title, values, error recovery, and focus behaviour. Asserting that a particular library component was instantiated proves little about the user's task. Remove a library only after checking source imports, configuration, and build-time use.
+
 ## Interview Questions
 
 > [!question] Interview Questions

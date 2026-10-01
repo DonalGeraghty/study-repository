@@ -61,6 +61,13 @@ export function createApp(resultService) {
   });
 
   app.use((error, request, response, next) => {
+    if (response.headersSent) return next(error);
+    if (error.type === "entity.parse.failed") {
+      return response.status(400).json({ type: "invalid-json" });
+    }
+    if (error.type === "entity.too.large") {
+      return response.status(413).json({ type: "body-too-large" });
+    }
     request.log?.error({ error }, "request failed");
     response.status(500).json({
       type: "internal-error",
@@ -100,6 +107,8 @@ sequenceDiagram
 
 The route translates HTTP input and output while `resultService` owns application behaviour. The response does not expose the caught exception. A real service would add central schema validation, correlation, authentication, and an intentional error vocabulary.
 
+Express 5 automatically forwards rejected promises returned by route handlers to error middleware. Explicit `try`/`catch` and `next(error)` also work and are needed for comparable Express 4 handlers without an async wrapper. Detached promises and callback failures still need an owner. The example preserves parser errors as 400/413 and delegates errors after headers have been sent instead of attempting a second response.
+
 ## Testing
 
 Test service logic directly, exercise the HTTP boundary with a representative server or request harness, and integration-test real database semantics where queries and constraints carry risk.
@@ -122,10 +131,15 @@ Test service logic directly, exercise the HTTP boundary with a representative se
 
 > [!question] Interview Questions
 > - Why does middleware order matter, and what breaks if error middleware is installed before the routes?
-> - Why must a rejected promise inside a route handler be passed to `next(error)` instead of left to reject silently?
+> - How does Express 5 handle a returned rejected promise, and why do detached promises or callback errors still need explicit handling?
 > - Why isn't CORS a substitute for authentication?
 > - What's the risk of accepting an unbounded JSON request body?
 > - How would you shut an Express server down cleanly without dropping in-flight requests or leaving pools open?
+
+## Official References
+
+- [Express error handling](https://expressjs.com/en/guide/error-handling.html)
+- [Body-parser errors](https://expressjs.com/en/resources/middleware/body-parser.html#errors)
 
 ## Related Guides
 

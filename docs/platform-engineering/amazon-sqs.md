@@ -52,7 +52,7 @@ queue_url = "https://sqs.eu-west-1.amazonaws.com/123456789012/image-jobs"
 def poll_once():
     response = sqs.receive_message(
         QueueUrl=queue_url,
-        MaxNumberOfMessages=10,
+        MaxNumberOfMessages=1,
         WaitTimeSeconds=20,
         VisibilityTimeout=60,
         MessageSystemAttributeNames=["ApproximateReceiveCount"],
@@ -79,6 +79,8 @@ def poll_once():
 Production code must also validate the payload, distinguish permanent failures, handle shutdown, expose metrics, and decide what to do when processing succeeds but deletion fails. Because that last case can cause redelivery, `jobId` protects the application side effect.
 
 Use batch receive and batch delete where volume justifies it, but inspect failures per entry because a batch request can partially succeed.
+
+The example receives one message because processing is sequential. With a batch of ten, visibility starts for all ten at receipt, so the last message may become visible again before its processing even starts. Batch consumers must budget queueing time inside the worker, extend visibility for waiting work, or use bounded parallel processing.
 
 ## Visibility Timeout
 
@@ -159,6 +161,14 @@ event producer -> SNS -> inventory SQS -> inventory workers
 - creating a DLQ without alarms or a redrive procedure;
 - assuming an empty short poll proves the queue has no messages;
 - ignoring per-entry failure in batch operations.
+
+## Worked Timeline: Successful Work, Failed Acknowledgement
+
+A worker receives job `report-730`, writes its report to object storage, then crashes before deleting the message. Predict the next delivery after visibility expires.
+
+**Check your reasoning:** Another worker may receive the same job with a new receipt handle. The report must not be treated as a new business operation simply because the delivery is new. Use the stable job identity and a durable completion/concurrency strategy; the receipt handle identifies the delivery, not the report.
+
+Test crashes before producing output, after producing output but before recording completion, and after completion but before deletion. Each gap needs an explicit recovery result. A database flag alone cannot atomically cover an unrelated storage write, so use deterministic output ownership, conditional writes, or reconciliation as appropriate. Extending visibility reduces duplicate overlap but cannot replace this design.
 
 ## Interview Questions
 

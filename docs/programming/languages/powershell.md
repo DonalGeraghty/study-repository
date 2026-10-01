@@ -49,6 +49,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $requiredColumns = @('Date', 'Category', 'Value')
+$culture = [System.Globalization.CultureInfo]::InvariantCulture
 
 try {
     $resolvedPath = (Resolve-Path -LiteralPath $Path).Path
@@ -69,19 +70,27 @@ try {
     for ($index = 0; $index -lt $rows.Count; $index++) {
         $parsedDate = [datetime]::MinValue
         $parsedValue = 0.0
-        $csvLine = $index + 2
+        $recordNumber = $index + 1
 
-        if (-not [datetime]::TryParse($rows[$index].Date, [ref] $parsedDate)) {
-            throw "Invalid Date at CSV line $csvLine"
+        if (-not [datetime]::TryParseExact(
+            $rows[$index].Date, 'yyyy-MM-dd', $culture,
+            [System.Globalization.DateTimeStyles]::None, [ref] $parsedDate)) {
+            throw "Invalid Date at data record $recordNumber"
         }
 
-        if (-not [double]::TryParse($rows[$index].Value, [ref] $parsedValue)) {
-            throw "Invalid Value at CSV line $csvLine"
+        if (-not [double]::TryParse(
+            $rows[$index].Value, [System.Globalization.NumberStyles]::Float,
+            $culture, [ref] $parsedValue) -or
+            [double]::IsNaN($parsedValue) -or [double]::IsInfinity($parsedValue)) {
+            throw "Invalid Value at data record $recordNumber"
+        }
+        if ([string]::IsNullOrWhiteSpace($rows[$index].Category)) {
+            throw "Missing Category at data record $recordNumber"
         }
     }
 }
 catch {
-    Write-Error $_
+    Write-Error $_ -ErrorAction Continue
     exit 1
 }
 ```
@@ -101,7 +110,7 @@ flowchart TD
     D --> H[Validation passed]
 ```
 
-The array wrappers preserve a predictable collection when the CSV has zero or one row. Diagnostics report CSV line numbers rather than zero-based indexes. For portable data, parse dates and decimals with an explicit invariant format rather than the current machine's culture.
+The array wrappers preserve a predictable collection when the CSV has zero or one row. Dates must use `yyyy-MM-dd`; numeric values use an invariant decimal point and must be finite. Diagnostics identify data records rather than physical lines because quoted CSV fields can span lines. The catch block reports the error without terminating before the explicit non-zero exit.
 
 ## Common Failure Modes
 

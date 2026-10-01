@@ -136,6 +136,14 @@ Android App Bundles allow a store to generate optimised APKs for device configur
 ./gradlew bundleRelease
 ```
 
+## Worked Scenario: Rotation Versus Process Death
+
+A user enters a search query, receives results, then rotates the device. Later, the app is backgrounded and its process is killed. Decide where the query, loaded results, and a confirmed purchase should live.
+
+**Check your reasoning:** A `ViewModel` can retain screen state across configuration recreation but does not survive process death. Save a small query or identifier through an appropriate saved-state mechanism, then reload results from a repository. Persist a confirmed purchase durably, normally with the server as the authority. Saving an entire large response in the instance-state bundle is not a substitute for a data model.
+
+Test recreation and process death separately: an activity-recreation test alone proves less than both. The lifecycle diagram shows ordinary callbacks; process termination is not guaranteed to deliver `onDestroy()`, so correctness must not depend on cleanup there. Reopening the app should restore an intentional loading/recovery state without repeating a consequential purchase.
+
 ## Interview Questions
 
 > [!question] Interview Questions

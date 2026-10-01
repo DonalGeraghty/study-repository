@@ -78,6 +78,14 @@ npm run preview -- --host 127.0.0.1
 
 Nyx and Aether use Vite with React plugins. Nyx integrates Vitest and Testing Library; Aether uses ESLint and Node's built-in test runner. Both produce static frontend assets, while Aether serves them from Nginx in a multi-stage Docker image.
 
+## Worked Scenario: It Works in Development
+
+A deployed page loads at `/`, but reloading `/reports/730` returns 404. After a deployment, another user sees a JavaScript syntax error saying the response starts with `<`. Explain both before looking at the server configuration.
+
+**Check your reasoning:** The deep link needs the intended SPA route fallback. The script request may instead be receiving `index.html`, often because a missing old asset was routed through the same fallback. Check URL, status, content type, and response body in the network panel. Keep missing assets as 404 and revalidate HTML that selects fingerprinted assets.
+
+Changing a container environment variable after a static Vite build does not rewrite already compiled `VITE_*` values. Rebuild with the intended public values or design an explicit runtime configuration document. Smoke-test a deep link, an existing asset, and a deliberately missing asset through the production server.
+
 ## Interview Questions
 
 > [!question] Interview Questions

@@ -239,6 +239,20 @@ Parsing machine interchange and formatting for users are different concerns.
 - Dividing without an explicit rounding policy.
 - Treating `BigDecimal` as a complete money type.
 
+## Worked Prediction: Promotion Comes Too Late
+
+Predict both results:
+
+```java
+int amount = 50_000;
+long first = amount * amount;
+long second = (long) amount * amount;
+```
+
+**Check your reasoning:** `first` is `-1794967296`; the multiplication overflowed as an `int` before assignment widened it. `second` is `2500000000` because an operand was widened before multiplication. The destination type does not determine the earlier expression's arithmetic.
+
+Now compare `new BigDecimal("1.0")` with `new BigDecimal("1.00")`. `equals` is false, while `compareTo` returns zero. Explain whether your domain cares about numeric equality, scale, or both before choosing a comparison or map key. Add boundary tests near overflow and an explicit rounding test rather than relying on representative small values.
+
 ## Interview Questions
 
 > [!question] Interview Questions

@@ -123,6 +123,10 @@ This is the canonical table of contents for the handbook. Use the subject indexe
 - [Amazon SNS](./platform-engineering/amazon-sns.md)
 - [Amazon SQS](./platform-engineering/amazon-sqs.md)
 
+#### Infrastructure as Code
+
+- [Terraform](./platform-engineering/terraform.md)
+
 #### [Cloud Platforms](./platform-engineering/cloud/README.md)
 
 - [Amazon Web Services](./platform-engineering/cloud/aws.md)
