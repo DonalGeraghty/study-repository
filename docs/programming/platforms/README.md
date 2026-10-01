@@ -10,6 +10,6 @@ This section contains application platforms and their development ecosystems. A 
 
 ## Guides
 
-- [Android](./platforms-android.md) — Android applications, components, lifecycle, UI, data, testing, packaging, and delivery.
+- [Android](./android.md) — Android applications, components, lifecycle, UI, data, testing, packaging, and delivery.
 
 Return to [Programming](../README.md).

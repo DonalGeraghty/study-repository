@@ -87,9 +87,9 @@ Test runtime-version compatibility, request limits, timeouts, health, permission
 
 ## Related Guides
 
-- [Spring](../../../programming/frameworks/frameworks-spring.md)
+- [Spring](../../../programming/frameworks/spring.md)
 - [Google Cloud Platform](./README.md)
-- [Publish/Subscribe](../../platform-engineering-pub-sub.md)
+- [Publish/Subscribe](../../pub-sub.md)
 - [IAM](./gcp-iam.md)
 
 Return to [Google Cloud Platform](./README.md).

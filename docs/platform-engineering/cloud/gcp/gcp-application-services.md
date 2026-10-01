@@ -88,6 +88,6 @@ Nyx and Aether publish images to Artifact Registry. The Janus APIs use Cloud KMS
 - [Cloud Run](./gcp-cloud-run.md)
 - [Firestore](./gcp-firestore.md)
 - [IAM](./gcp-iam.md)
-- [Encryption](../../../engineering-foundations/engineering-foundations-encryption.md)
+- [Encryption](../../../engineering-foundations/encryption.md)
 
 Return to [Google Cloud Platform](./README.md).
