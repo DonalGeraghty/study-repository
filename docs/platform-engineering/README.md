@@ -17,6 +17,7 @@ These guides cover application packaging, container orchestration, cloud platfor
 ## Data Platforms
 
 - [MySQL](./mysql.md) — relational integrity, parameterised access, transactions, indexing, connections, and recovery.
+- [Apache Flink](./flink.md) — stateful stream processing with event-time windows, watermarks, checkpoints, and exactly-once sinks.
 
 ## Caching and Messaging
 

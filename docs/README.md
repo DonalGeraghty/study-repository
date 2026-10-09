@@ -129,6 +129,7 @@ This is the canonical table of contents for the handbook. Use the subject indexe
 - [Kubernetes](./platform-engineering/kubernetes.md)
 - [Nginx](./platform-engineering/nginx.md)
 - [MySQL](./platform-engineering/mysql.md)
+- [Apache Flink](./platform-engineering/flink.md)
 - [Caching](./platform-engineering/caching.md)
 - [Redis](./platform-engineering/redis.md)
 - [Publish/Subscribe](./platform-engineering/pub-sub.md)

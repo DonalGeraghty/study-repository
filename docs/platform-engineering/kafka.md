@@ -207,5 +207,6 @@ For a second attempt, let the side effect for record `40` commit but crash befor
 - [RabbitMQ](./rabbitmq.md)
 - [Amazon SNS](./amazon-sns.md)
 - [Amazon SQS](./amazon-sqs.md)
+- [Apache Flink](./flink.md)
 
 Return to [Platform Engineering](./README.md).
