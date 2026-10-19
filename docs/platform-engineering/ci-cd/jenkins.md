@@ -169,4 +169,8 @@ Separate a test failure from a build that never produced tests: both deserve evi
 - [Securing Jenkins](https://www.jenkins.io/doc/book/security/)
 - [Shared Libraries](https://www.jenkins.io/doc/book/pipeline/shared-libraries/)
 
+## Related Guides
+
+- [SonarQube](../../quality-engineering/sonarqube.md) — distinguish successful analysis submission from the final quality-gate decision.
+
 Return to [Continuous Integration and Delivery](./README.md).

@@ -137,6 +137,7 @@ Now two releases run concurrently. State which may supersede the other and wheth
 
 ## Related Guides
 
+- [SonarQube](../../quality-engineering/sonarqube.md) — import coverage and require the processed quality-gate result before delivery.
 - [Backstage](../backstage.md) — expose delivery workflows alongside service ownership and documentation in a developer portal.
 - [Continuous Integration and Delivery](./README.md)
 - [Terraform](../terraform.md) — infrastructure plans, protected state, and controlled applies in CI.

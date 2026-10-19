@@ -757,6 +757,7 @@ For a second attempt, make the threshold apply after another discount. Explain w
 
 ## Related Guides
 
+- [SonarQube](./sonarqube.md) — combine static analysis and quality gates with behavioural test evidence.
 - [Code Review](../engineering-foundations/code-review.md)
 - [REST APIs and HTTP Testing](./rest-api.md)
 - [Java](../programming/languages/java/README.md)
