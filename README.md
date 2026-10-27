@@ -21,6 +21,7 @@ The material is organised by subject rather than by a single fixed curriculum. E
 | Refresh a language or framework | [Programming](./docs/programming/README.md) |
 | Learn data structures and problem-solving techniques | [Data Structures and Algorithms](./docs/programming/data-structures-and-algorithms/README.md) |
 | Review testing strategy and tools | [Quality Engineering](./docs/quality-engineering/README.md) |
+| Learn how scalable systems are designed | [System Design](./docs/system-design/README.md) |
 | Review delivery and runtime systems | [Platform Engineering](./docs/platform-engineering/README.md) |
 
 ## Choose a Study Session
@@ -80,6 +81,7 @@ A scratch note can be as small as `topic | question missed | corrected rule | ne
 | [Programming](./docs/programming/README.md) | Languages, frameworks, platforms, browser foundations, tooling, integrations, and coding practice |
 | [Software Design](./docs/software-design/README.md) | OOP, SOLID, design patterns, and Domain-Driven Design |
 | [Quality Engineering](./docs/quality-engineering/README.md) | Testing strategy, REST APIs, test runners, and browser automation |
+| [System Design](./docs/system-design/README.md) | Requirements, scale estimation, architecture, reliability, and distributed-system trade-offs |
 | [Platform Engineering](./docs/platform-engineering/README.md) | Containers, orchestration, data platforms, messaging, cloud, and CI/CD |
 
 ## Suggested Learning Paths
@@ -104,6 +106,15 @@ A scratch note can be as small as `topic | question missed | corrected rule | ne
 6. [Cloud Platforms](./docs/platform-engineering/cloud/README.md)
 7. [Terraform](./docs/platform-engineering/terraform.md)
 8. [Kubernetes](./docs/platform-engineering/kubernetes.md)
+
+### System design path
+
+1. [REST APIs](./docs/quality-engineering/rest-api.md)
+2. [MySQL](./docs/platform-engineering/mysql.md)
+3. [Caching](./docs/platform-engineering/caching.md)
+4. [Publish/Subscribe](./docs/platform-engineering/pub-sub.md)
+5. [System Design](./docs/system-design/README.md)
+6. Practise the URL shortener, rate limiter, notification service, and chat application exercises
 
 ## Reading Conventions
 
